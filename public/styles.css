@@ -254,34 +254,11 @@ body.dark-theme .theme-option:hover {
 }
 
 @media (max-width: 900px) {
-    .nav-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-        padding: 0 1.25rem;
-    }
-
-    .nav-links {
-        width: 100%;
-        flex-wrap: wrap;
-        gap: 0.75rem 1.5rem;
-    }
-
     .logo-text-image {
         transform: none;
         margin-left: 0;
         margin-top: 0;
         height: 28px;
-    }
-
-    .nav-search-item {
-        width: 100%;
-    }
-
-    .site-search {
-        width: 100%;
-        max-width: none;
-        margin: 0.5rem 0 0;
     }
 }
 
@@ -605,13 +582,21 @@ body.dark-theme .motion-band {
     .showcase-card {
         position: relative;
         width: 100%;
-        height: 220px;
+        height: 200px;
         inset: auto;
         animation: none;
     }
 
+    .showcase-card.large {
+        height: 240px;
+    }
+
     .showcase-card.small {
-        display: none;
+        display: block;
+        height: 180px;
+        right: auto;
+        top: auto;
+        bottom: auto;
     }
 }
 
@@ -1540,27 +1525,66 @@ body.dark-theme .signin-card {
 
 /* Responsive */
 @media (max-width: 768px) {
+    /* Hide theme toggle on mobile */
+    .theme-switcher,
+    .theme-dropdown {
+        display: none !important;
+    }
+
     /* Navigation */
+    .navbar {
+        padding: 0.5rem 0;
+    }
+
     .nav-container {
-        padding: 1rem;
+        padding: 0 0.75rem;
+        gap: 0.5rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
     }
 
     .logo {
         font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .logo-text-image {
+        height: 20px;
     }
 
     .logo-image {
-        width: 35px;
-        height: 35px;
+        width: 28px;
+        height: 28px;
     }
 
     .nav-links {
-        gap: 1rem;
-        font-size: 0.85rem;
+        gap: 0.4rem 0.6rem;
+        flex-wrap: wrap;
+        align-items: center;
+        font-size: 0.8rem;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        font-weight: 700;
     }
 
     .nav-links li a {
-        padding: 0.4rem 0;
+        padding: 0.2rem 0;
+    }
+
+    .cart-icon {
+        width: 30px;
+        height: 30px;
+        border-width: 1.5px;
+    }
+
+    .cart-icon svg {
+        width: 16px;
+        height: 16px;
     }
 
     /* Hero & Banners */
@@ -1597,21 +1621,30 @@ body.dark-theme .signin-card {
     }
 
     .showcase-media {
-        min-height: 320px;
+        min-height: auto;
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .showcase-card {
+        position: relative;
+        width: 100%;
+        inset: auto;
+        animation: none;
     }
 
     .showcase-card.large {
-        position: relative;
-        width: 100%;
-        height: 320px;
+        height: 220px;
     }
 
     .showcase-card.small {
-        display: none;
+        display: block;
+        height: 160px;
+        width: 100%;
     }
 
     .showcase-copy h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .scroll-head h2 {
@@ -1766,32 +1799,35 @@ body.dark-theme .signin-card {
 
 @media (max-width: 480px) {
     /* Navigation */
-    .nav-container {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
+    .navbar {
+        padding: 0.4rem 0;
     }
 
-    .logo {
-        font-size: 1.2rem;
+    .nav-container {
+        padding: 0 0.5rem;
+        gap: 0.35rem;
+    }
+
+    .logo-text-image {
+        height: 16px;
     }
 
     .nav-links {
-        width: 100%;
-        justify-content: space-around;
-        gap: 0.5rem;
-        font-size: 0.8rem;
+        gap: 0.3rem 0.45rem;
+    }
+
+    .nav-links a {
+        font-size: 0.65rem;
     }
 
     .cart-icon {
-        width: 35px;
-        height: 35px;
-        padding: 0.5rem;
+        width: 26px;
+        height: 26px;
     }
 
     .cart-icon svg {
-        width: 18px;
-        height: 18px;
+        width: 13px;
+        height: 13px;
     }
 
     /* Hero & Banner */
@@ -3428,9 +3464,38 @@ body:not(.dark-theme) .crypto-status.error {
     width: 18px;
     height: 18px;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .site-search {
-        --search-width: 100%;
+        --search-width: 120px;
+        height: 30px;
+        margin: 0;
+        padding: 0 0.35rem;
+        border-width: 1.5px;
+    }
+
+    .site-search-input {
+        font-size: 0.75rem;
+    }
+
+    .site-search svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-search {
+        --search-width: 90px;
+        height: 26px;
+    }
+
+    .site-search-input {
+        font-size: 0.7rem;
+    }
+
+    .site-search svg {
+        width: 12px;
+        height: 12px;
     }
 }
 
