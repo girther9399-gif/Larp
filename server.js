@@ -550,7 +550,7 @@ app.get('/api/crypto/order/:orderId/:coin/status', async (req, res) => {
 });
 
 // Start server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`EmotoHI server running on http://localhost:${PORT}`);
 });
