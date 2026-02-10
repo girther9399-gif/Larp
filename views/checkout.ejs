@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - EmotoHI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/images/top%20icon.png" type="image/png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="logo" href="/">
+                <img src="/images/2nd%20brand.png" alt="EmotoHI" class="logo-text-image">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/checkout" class="active">Checkout</a></li>
+                <li><a href="/contact">Sign In</a></li>
+                <div class="theme-switcher">
+                    <button class="theme-toggle" onclick="toggleThemeDropdown()" aria-label="Theme" data-tooltip="Theme">
+                        <span class="theme-icon" id="themeIcon"></span>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <button class="theme-option" data-theme="system" data-tooltip="System" aria-label="System" onclick="setTheme('system')">
+                            <span class="theme-option-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+                                    <path d="M8 20h8"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="theme-option" data-theme="light" data-tooltip="Light" aria-label="Light" onclick="setTheme('light')">
+                            <span class="theme-option-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="theme-option" data-theme="dark" data-tooltip="Dark" aria-label="Dark" onclick="setTheme('dark')">
+                            <span class="theme-option-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M21 14.5A9 9 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z"></path>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="checkout-hero">
+        <div class="checkout-hero-inner">
+            <div>
+                <p class="checkout-kicker">Checkout</p>
+                <h1>Choose your payment method</h1>
+                <p class="checkout-subtitle">Select a payment option below to complete your order.</p>
+            </div>
+            <div class="checkout-total">
+                <span>Total</span>
+                <strong id="checkoutTotal">$0.00</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="checkout-content">
+        <div class="checkout-container">
+            <div class="checkout-options">
+                <div class="payment-card checkout-steps">
+                    <div class="payment-card-header">
+                        <h3>How to checkout</h3>
+                    </div>
+                    <ol class="checkout-steps-list">
+                        <li>Add your email and address.</li>
+                        <li>Press <strong>Save details</strong>.</li>
+                        <li>Choose a payment method.</li>
+                    </ol>
+                    <p class="payment-text">Right now we only deliver for ZIP codes 96706 and 96707. For all other areas, you will need to wait until we start shipping.</p>
+                </div>
+                <div class="payment-card checkout-email">
+                    <div class="payment-card-header">
+                        <h3>Contact email</h3>
+                        <span class="payment-badge">Required</span>
+                    </div>
+                    <p class="payment-text">We use this to send payment updates and order info.</p>
+                    <div class="form-group">
+                        <label for="checkoutEmail">Email</label>
+                        <input type="email" id="checkoutEmail" name="checkoutEmail" placeholder="you@email.com" required>
+                    </div>
+                </div>
+                <div class="payment-card checkout-address">
+                    <div class="payment-card-header">
+                        <h3>Shipping details</h3>
+                        <span class="payment-badge">Required</span>
+                    </div>
+                    <p class="payment-text">Enter your delivery or meetup address before paying.</p>
+                    <div class="checkout-grid">
+                        <div class="form-group">
+                            <label for="checkoutName">Full name</label>
+                            <input type="text" id="checkoutName" name="checkoutName" placeholder="Full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutPhone">Phone</label>
+                            <input type="tel" id="checkoutPhone" name="checkoutPhone" placeholder="(555) 555-5555" required>
+                        </div>
+                        <div class="form-group checkout-span">
+                            <label for="checkoutAddress1">Address line 1</label>
+                            <input type="text" id="checkoutAddress1" name="checkoutAddress1" placeholder="Street address" required>
+                        </div>
+                        <div class="form-group checkout-span">
+                            <label for="checkoutAddress2">Address line 2</label>
+                            <input type="text" id="checkoutAddress2" name="checkoutAddress2" placeholder="Apartment, suite, etc (optional)">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutCity">City</label>
+                            <input type="text" id="checkoutCity" name="checkoutCity" placeholder="City" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutState">State</label>
+                            <input type="text" id="checkoutState" name="checkoutState" placeholder="State" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutZip">ZIP</label>
+                            <input type="text" id="checkoutZip" name="checkoutZip" placeholder="ZIP" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutCountry">Country</label>
+                            <input type="text" id="checkoutCountry" name="checkoutCountry" placeholder="Country" required>
+                        </div>
+                        <div class="form-group checkout-span">
+                            <label for="checkoutNotes">Delivery notes</label>
+                            <input type="text" id="checkoutNotes" name="checkoutNotes" placeholder="Optional notes">
+                        </div>
+                    </div>
+                    <button type="button" id="checkoutSaveBtn" class="payment-cta">Save details</button>
+                    <p id="checkoutSaveStatus" class="payment-text" style="display:none;">Details saved. You can proceed to payment.</p>
+                    <p id="checkoutSaveHint" class="payment-text">Add your details, then press save to continue.</p>
+                    <p id="shippingStatus" class="payment-text" style="display:none;"></p>
+                </div>
+                <div class="payment-card disabled">
+                    <div class="payment-card-header">
+                        <h3>Card</h3>
+                        <span class="payment-badge muted">Coming soon</span>
+                    </div>
+                    <p class="payment-text">Secure card checkout is on the way. Check back soon.</p>
+                    <button class="payment-cta" disabled>Card payments coming soon</button>
+                </div>
+
+                <div class="payment-card">
+                    <div class="payment-card-header">
+                        <h3>Crypto</h3>
+                        <span class="payment-badge">Instant</span>
+                    </div>
+                    <p class="payment-text">Pay with BTC, ETH, or LTC. Confirmation happens automatically.</p>
+                    <button id="cryptoStartBtn" class="payment-cta primary" onclick="startCryptoCheckout()">Pay with crypto</button>
+                </div>
+
+                <div class="payment-card">
+                    <div class="payment-card-header">
+                        <h3>Cash</h3>
+                        <span class="payment-badge">In-person only</span>
+                    </div>
+                    <p class="payment-text">Local meetup or pickup only. We will confirm details after your order.</p>
+                    <button id="cashStartBtn" class="payment-cta">Request cash meetup</button>
+                    <p id="cashStatus" class="payment-text" style="display:none;">Request sent. We will contact you to confirm the meetup.</p>
+                </div>
+
+                <div class="payment-card">
+                    <div class="payment-card-header">
+                        <h3>Gift cards</h3>
+                        <span class="payment-badge">In-person only</span>
+                    </div>
+                    <p class="payment-text">Gift cards are accepted in person at meetup or pickup.</p>
+                    <button id="giftStartBtn" class="payment-cta">Request gift card meetup</button>
+                    <p id="giftStatus" class="payment-text" style="display:none;">Request sent. We will contact you to confirm the meetup.</p>
+                </div>
+            </div>
+
+            <aside class="checkout-summary">
+                <div class="summary-header">
+                    <h3>Your order</h3>
+                    <a class="summary-link" href="/products">Edit cart</a>
+                </div>
+                <div class="promo-box">
+                    <label for="promoCode">Promo code</label>
+                    <div class="promo-row">
+                        <input type="text" id="promoCode" name="promoCode" placeholder="Enter code">
+                        <button type="button" id="promoApplyBtn" class="promo-apply">Apply</button>
+                    </div>
+                    <p id="promoStatus" class="promo-status"></p>
+                </div>
+                <div id="summaryItems" class="summary-items"></div>
+                <div id="summaryEmpty" class="summary-empty">Your cart is empty. <a href="/products">Browse products</a>.</div>
+                <div id="summaryDiscountRow" class="summary-discount" style="display:none;">
+                    <span>Discount</span>
+                    <strong id="summaryDiscount">-$0.00</strong>
+                </div>
+                <div id="summaryShippingRow" class="summary-shipping" style="display:none;">
+                    <span>Shipping</span>
+                    <strong id="summaryShipping">$0.00</strong>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong id="summaryTotal">$0.00</strong>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <div id="globalLoader" class="global-loader" aria-hidden="true">
+        <div class="loader">
+            <svg id="pegtopone" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                <defs>
+                    <filter id="shine">
+                        <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+                    </filter>
+                    <mask id="mask">
+                        <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="white"></path>
+                    </mask>
+                    <radialGradient id="gradient-1" cx="50" cy="66" fx="50" fy="66" r="30" gradientTransform="translate(0 35) scale(1 0.5)" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="black" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="black" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-2" cx="55" cy="20" fx="55" fy="20" r="30" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="white" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="white" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="white" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-3" cx="85" cy="50" fx="85" fy="50" xlink:href="#gradient-2"></radialGradient>
+                    <radialGradient id="gradient-4" cx="50" cy="58" fx="50" fy="58" r="60" gradientTransform="translate(0 47) scale(1 0.2)" xlink:href="#gradient-3"></radialGradient>
+                    <linearGradient id="gradient-5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.2"></stop>
+                        <stop offset="40%" stop-color="black" stop-opacity="0"></stop>
+                    </linearGradient>
+                </defs>
+                <g>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="currentColor"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-1)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="none" stroke="white" opacity="0.3" stroke-width="3" filter="url(#shine)" mask="url(#mask)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-2)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-3)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-4)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
+                </g>
+            </svg>
+            <svg id="pegtoptwo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                <defs>
+                    <filter id="shine">
+                        <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+                    </filter>
+                    <mask id="mask">
+                        <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="white"></path>
+                    </mask>
+                    <radialGradient id="gradient-1" cx="50" cy="66" fx="50" fy="66" r="30" gradientTransform="translate(0 35) scale(1 0.5)" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="black" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="black" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-2" cx="55" cy="20" fx="55" fy="20" r="30" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="white" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="white" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="white" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-3" cx="85" cy="50" fx="85" fy="50" xlink:href="#gradient-2"></radialGradient>
+                    <radialGradient id="gradient-4" cx="50" cy="58" fx="50" fy="58" r="60" gradientTransform="translate(0 47) scale(1 0.2)" xlink:href="#gradient-3"></radialGradient>
+                    <linearGradient id="gradient-5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.2"></stop>
+                        <stop offset="40%" stop-color="black" stop-opacity="0"></stop>
+                    </linearGradient>
+                </defs>
+                <g>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="currentColor"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-1)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="none" stroke="white" opacity="0.3" stroke-width="3" filter="url(#shine)" mask="url(#mask)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-2)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-3)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-4)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
+                </g>
+            </svg>
+            <svg id="pegtopthree" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                <defs>
+                    <filter id="shine">
+                        <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+                    </filter>
+                    <mask id="mask">
+                        <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="white"></path>
+                    </mask>
+                    <radialGradient id="gradient-1" cx="50" cy="66" fx="50" fy="66" r="30" gradientTransform="translate(0 35) scale(1 0.5)" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="black" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="black" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-2" cx="55" cy="20" fx="55" fy="20" r="30" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="white" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="white" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="white" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-3" cx="85" cy="50" fx="85" fy="50" xlink:href="#gradient-2"></radialGradient>
+                    <radialGradient id="gradient-4" cx="50" cy="58" fx="50" fy="58" r="60" gradientTransform="translate(0 47) scale(1 0.2)" xlink:href="#gradient-3"></radialGradient>
+                    <linearGradient id="gradient-5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.2"></stop>
+                        <stop offset="40%" stop-color="black" stop-opacity="0"></stop>
+                    </linearGradient>
+                </defs>
+                <g>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="currentColor"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-1)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="none" stroke="white" opacity="0.3" stroke-width="3" filter="url(#shine)" mask="url(#mask)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-2)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-3)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-4)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <div id="cryptoModal" class="product-modal">
+        <div class="modal-content crypto-modal-content">
+            <button class="modal-close" onclick="closeCryptoModal()">&times;</button>
+            <div class="modal-details crypto-details">
+                <div class="crypto-header">
+                    <h2>Crypto Payment</h2>
+                    <div class="crypto-total">
+                        <span class="crypto-total-label">Total</span>
+                        <span id="cryptoUsdTotal" class="crypto-total-amount">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="crypto-section">
+                    <label class="crypto-label">Select cryptocurrency</label>
+                    <div class="crypto-coins">
+                        <button class="crypto-coin" data-coin="btc" onclick="selectCryptoCoin('btc')">
+                            <span class="coin-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false">
+                                    <path d="M13.2 3.2h2.1v2.1c1.7.3 3 1.4 3 3.2 0 1.5-.9 2.6-2.3 3 1.7.4 2.8 1.6 2.8 3.4 0 2.1-1.4 3.5-3.6 3.9v2.2h-2.1v-2.1h-1.9v2.1H9.1v-2.1H6.9V6.2h2.2V3.2h2.1v2.1h1.9V3.2ZM9.6 7.2v3.6h3.3c1.2 0 2-.7 2-1.8 0-1.2-.8-1.8-2.1-1.8H9.6Zm0 6.3v3.9h3.8c1.4 0 2.3-.7 2.3-2 0-1.3-.9-1.9-2.3-1.9H9.6Z" />
+                                </svg>
+                            </span>
+                            <span class="coin-label">Bitcoin</span>
+                        </button>
+                        <button class="crypto-coin" data-coin="eth" onclick="selectCryptoCoin('eth')">
+                            <span class="coin-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false">
+                                    <path d="M12 2L6.2 12l5.8-2.6 5.8 2.6L12 2Zm0 12.2L6.2 11.6 12 22l5.8-10.4-5.8 2.6Z" />
+                                </svg>
+                            </span>
+                            <span class="coin-label">Ethereum</span>
+                        </button>
+                        <button class="crypto-coin" data-coin="ltc" onclick="selectCryptoCoin('ltc')">
+                            <span class="coin-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false">
+                                    <path d="M13.6 3.2h3l-2.3 6.3 2.2-.6-.8 2.3-2.2.6-2.6 7h8.1l-1 2.6H7.9l2.3-6.4-2 .6.8-2.2 2-.6 2.6-7Z" />
+                                </svg>
+                            </span>
+                            <span class="coin-label">Litecoin</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="crypto-section">
+                    <label class="crypto-label">Payment details</label>
+                    <div class="crypto-payment-info">
+                        <div class="crypto-field">
+                            <span class="crypto-field-label">Send to</span>
+                            <div class="crypto-field-value" id="cryptoAddress">Select a coin</div>
+                        </div>
+                        <div class="crypto-field">
+                            <span class="crypto-field-label">Amount</span>
+                            <div class="crypto-field-value crypto-amount-value" id="cryptoAmount">---</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cryptoProgressContainer" class="crypto-progress-container" style="display:none;">
+                    <div class="crypto-progress-info">
+                        <div class="crypto-progress-header">
+                            <span class="crypto-progress-label">Checking payment</span>
+                            <span id="cryptoProgressText" class="crypto-progress-percent">0%</span>
+                        </div>
+                        <div class="crypto-progress-bar">
+                            <span id="cryptoProgressFill" class="crypto-progress-fill"></span>
+                        </div>
+                        <div id="cryptoReceived" class="crypto-progress-details">Received 0 / 0</div>
+                    </div>
+                </div>
+
+                <div id="cryptoStatus" class="crypto-status"></div>
+                <div id="cryptoPaidMessage" class="crypto-paid-message" style="display:none;">Payment received. It will be reviewed and we will follow up with shipping details. support@emotohi.com will email you further details, or you can email us for help.</div>
+                <button id="cryptoPaidBtn" class="crypto-submit-btn" onclick="checkCryptoPayment()">I have paid</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentOrder = null;
+        let currentCoin = 'btc';
+        let cryptoPollTimer = null;
+        let globalLoaderTimer = null;
+        const CART_STORAGE_KEY = 'emotohi_cart';
+        const EMAIL_STORAGE_KEY = 'emotohi_checkout_email';
+        const RECEIPT_STORAGE_KEY = 'emotohi_receipt_id';
+        const ADDRESS_STORAGE_KEY = 'emotohi_checkout_address';
+        const PAYMENT_SENT_KEY = 'emotohi_payment_confirmed';
+        const PROMO_CODE_KEY = 'emotohi_promo_code';
+        const SHIPPING_STORAGE_KEY = 'emotohi_shipping';
+        const PROMO_CODES = {
+            EMOTO10: { type: 'percent', value: 10 },
+            EMOTOHI10: { type: 'percent', value: 10 },
+            EMO20: { type: 'flat', value: 20 }
+        };
+
+        function showGlobalLoader(autoHideMs) {
+            const overlay = document.getElementById('globalLoader');
+            if (!overlay) return;
+            overlay.classList.add('active');
+            if (globalLoaderTimer) {
+                clearTimeout(globalLoaderTimer);
+                globalLoaderTimer = null;
+            }
+            if (autoHideMs) {
+                globalLoaderTimer = setTimeout(() => {
+                    hideGlobalLoader();
+                }, autoHideMs);
+            }
+        }
+
+        function hideGlobalLoader() {
+            const overlay = document.getElementById('globalLoader');
+            if (!overlay) return;
+            overlay.classList.remove('active');
+        }
+
+        function toggleThemeDropdown() {
+            const dropdown = document.getElementById('themeDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function setTheme(theme) {
+            localStorage.setItem('theme', theme);
+            applyTheme(theme);
+            toggleThemeDropdown();
+            updateThemeOptions();
+        }
+
+        function applyTheme(theme) {
+            let isDark = false;
+
+            if (theme === 'system') {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else if (theme === 'dark') {
+                isDark = true;
+            }
+
+            document.body.classList.toggle('dark-theme', isDark);
+        }
+
+        function updateThemeOptions() {
+            const currentTheme = localStorage.getItem('theme') || 'system';
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.theme === currentTheme) {
+                    option.classList.add('active');
+                }
+            });
+
+            const themeIcon = document.getElementById('themeIcon');
+            if (themeIcon) {
+                const iconMap = {
+                    system: "<svg viewBox='0 0 24 24' aria-hidden='true'><rect x='3' y='4' width='18' height='12' rx='2'></rect><path d='M8 20h8'></path></svg>",
+                    light: "<svg viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='4'></circle><path d='M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'></path></svg>",
+                    dark: "<svg viewBox='0 0 24 24' aria-hidden='true'><path d='M21 14.5A9 9 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z'></path></svg>"
+                };
+                themeIcon.innerHTML = iconMap[currentTheme];
+            }
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            applyTheme(savedTheme);
+            updateThemeOptions();
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.theme-toggle') && !e.target.closest('.theme-switcher')) {
+                const dropdown = document.getElementById('themeDropdown');
+                if (dropdown) dropdown.style.display = 'none';
+            }
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            if (savedTheme === 'system') {
+                applyTheme('system');
+            }
+        });
+
+        function getStoredCart() {
+            const raw = sessionStorage.getItem(CART_STORAGE_KEY);
+            if (!raw) return [];
+            try {
+                const parsed = JSON.parse(raw);
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function getClientInfo() {
+            return {
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                platform: navigator.platform,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown'
+            };
+        }
+
+        function getReceiptId() {
+            let receiptId = sessionStorage.getItem(RECEIPT_STORAGE_KEY);
+            if (!receiptId) {
+                const stamp = Date.now().toString(36).toUpperCase();
+                const rand = Math.random().toString(36).slice(2, 8).toUpperCase();
+                receiptId = `EMO-${stamp}-${rand}`;
+                sessionStorage.setItem(RECEIPT_STORAGE_KEY, receiptId);
+            }
+            return receiptId;
+        }
+
+        function sendCheckoutWebhook(eventType, payload = {}) {
+            const promoCode = getPromoCode();
+            fetch('/api/checkout/webhook', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    event: eventType,
+                    receiptId: getReceiptId(),
+                    promoCode,
+                    client: getClientInfo(),
+                    ...payload
+                }),
+                keepalive: true
+            }).catch(() => {});
+        }
+
+        function isValidEmail(value) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+
+        function getPromoCode() {
+            return sessionStorage.getItem(PROMO_CODE_KEY) || '';
+        }
+
+        function getPromoDiscount(subtotal) {
+            const code = getPromoCode();
+            const promo = PROMO_CODES[code];
+            if (!promo) return 0;
+            let discount = 0;
+            if (promo.type === 'percent') {
+                discount = subtotal * (promo.value / 100);
+            } else {
+                discount = promo.value;
+            }
+            return Math.min(discount, subtotal);
+        }
+
+        function getStoredShipping() {
+            try {
+                const raw = sessionStorage.getItem(SHIPPING_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : null;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function setStoredShipping(shipping) {
+            if (!shipping) {
+                sessionStorage.removeItem(SHIPPING_STORAGE_KEY);
+                return;
+            }
+            sessionStorage.setItem(SHIPPING_STORAGE_KEY, JSON.stringify(shipping));
+        }
+
+        function getTotals(items) {
+            const subtotal = items.reduce((sum, item) => sum + (Number(item.total) || 0), 0);
+            const discount = getPromoDiscount(subtotal);
+            const shipping = getStoredShipping();
+            const shippingAmount = Number(shipping?.amount) || 0;
+            const total = Math.max(0, subtotal - discount + shippingAmount);
+            return { subtotal, discount, total, shippingAmount, shipping };
+        }
+
+        function applyPromoCode() {
+            const input = document.getElementById('promoCode');
+            const status = document.getElementById('promoStatus');
+            if (!input || !status) return;
+
+            const raw = input.value.trim().toUpperCase();
+            if (!raw) {
+                sessionStorage.removeItem(PROMO_CODE_KEY);
+                status.textContent = 'Promo cleared.';
+                renderSummary();
+                return;
+            }
+
+            if (PROMO_CODES[raw]) {
+                sessionStorage.setItem(PROMO_CODE_KEY, raw);
+                status.textContent = `Promo ${raw} applied.`;
+            } else {
+                sessionStorage.removeItem(PROMO_CODE_KEY);
+                status.textContent = 'Invalid promo code.';
+            }
+            renderSummary();
+        }
+
+        function getAddressPayload() {
+            const fields = {
+                name: document.getElementById('checkoutName')?.value.trim() || '',
+                phone: document.getElementById('checkoutPhone')?.value.trim() || '',
+                address1: document.getElementById('checkoutAddress1')?.value.trim() || '',
+                address2: document.getElementById('checkoutAddress2')?.value.trim() || '',
+                city: document.getElementById('checkoutCity')?.value.trim() || '',
+                state: document.getElementById('checkoutState')?.value.trim() || '',
+                zip: document.getElementById('checkoutZip')?.value.trim() || '',
+                country: document.getElementById('checkoutCountry')?.value.trim() || '',
+                notes: document.getElementById('checkoutNotes')?.value.trim() || ''
+            };
+            return fields;
+        }
+
+        function isAddressValid(address) {
+            return !!(address.name && address.phone && address.address1 && address.city && address.state && address.zip && address.country);
+        }
+
+        function loadAddress() {
+            try {
+                const raw = sessionStorage.getItem(ADDRESS_STORAGE_KEY);
+                if (!raw) return null;
+                return JSON.parse(raw);
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function saveAddress(address) {
+            sessionStorage.setItem(ADDRESS_STORAGE_KEY, JSON.stringify(address));
+        }
+
+        function formatMeetupAddress(address) {
+            if (!address) return '';
+            const line1 = address.address1 || '';
+            const line2 = address.address2 ? ` ${address.address2}` : '';
+            const cityLine = [address.city, address.state, address.zip].filter(Boolean).join(', ').replace(', ,', ',');
+            const country = address.country || '';
+            return [line1 + line2, cityLine, country].filter(Boolean).join(', ');
+        }
+
+        function updatePayButtons() {
+            const cryptoBtn = document.getElementById('cryptoStartBtn');
+            const cashBtn = document.getElementById('cashStartBtn');
+            const giftBtn = document.getElementById('giftStartBtn');
+            const hasCart = getStoredCart().length > 0;
+            const email = (document.getElementById('checkoutEmail')?.value || '').trim();
+            const address = loadAddress();
+            const hint = document.getElementById('checkoutSaveHint');
+            const status = document.getElementById('checkoutSaveStatus');
+            const addressDraft = getAddressPayload();
+            const canSave = isValidEmail(email) && isAddressValid(addressDraft);
+            const zip = (address?.zip || '').trim();
+            const canDeliver = zip === '96706' || zip === '96707';
+            const ready = hasCart && isValidEmail(email) && address && isAddressValid(address);
+            if (cryptoBtn) {
+                cryptoBtn.disabled = !ready || !canDeliver;
+            }
+            if (cashBtn) {
+                cashBtn.disabled = !ready;
+            }
+            if (giftBtn) {
+                giftBtn.disabled = !ready;
+            }
+            if (hint) {
+                if (ready) {
+                    hint.style.display = 'none';
+                } else if (canSave) {
+                    hint.textContent = 'Looks good. Press save to continue.';
+                    hint.style.display = 'block';
+                } else {
+                    hint.textContent = 'Add your details, then press save to continue.';
+                    hint.style.display = 'block';
+                }
+            }
+            if (status && !ready) {
+                status.style.display = 'none';
+            }
+        }
+
+        function updateEmailState() {
+            const input = document.getElementById('checkoutEmail');
+            if (!input) return;
+            const email = input.value.trim();
+            if (email) {
+                sessionStorage.setItem(EMAIL_STORAGE_KEY, email);
+            } else {
+                sessionStorage.removeItem(EMAIL_STORAGE_KEY);
+            }
+            updatePayButtons();
+        }
+
+        function renderSummary() {
+            const items = getStoredCart();
+            const itemsContainer = document.getElementById('summaryItems');
+            const emptyState = document.getElementById('summaryEmpty');
+            const totalEl = document.getElementById('summaryTotal');
+            const headerTotal = document.getElementById('checkoutTotal');
+            const cryptoBtn = document.getElementById('cryptoStartBtn');
+            const emailInput = document.getElementById('checkoutEmail');
+            const promoInput = document.getElementById('promoCode');
+            const discountRow = document.getElementById('summaryDiscountRow');
+            const discountValue = document.getElementById('summaryDiscount');
+            const shippingRow = document.getElementById('summaryShippingRow');
+            const shippingValue = document.getElementById('summaryShipping');
+
+            if (!itemsContainer || !totalEl || !headerTotal || !emptyState) return;
+
+            if (items.length === 0) {
+                itemsContainer.innerHTML = '';
+                emptyState.style.display = 'block';
+                totalEl.textContent = '$0.00';
+                headerTotal.textContent = '$0.00';
+                if (cryptoBtn) cryptoBtn.disabled = true;
+                const cashBtn = document.getElementById('cashStartBtn');
+                const giftBtn = document.getElementById('giftStartBtn');
+                if (cashBtn) cashBtn.disabled = true;
+                if (giftBtn) giftBtn.disabled = true;
+                if (discountRow) discountRow.style.display = 'none';
+                if (shippingRow) shippingRow.style.display = 'none';
+                return;
+            }
+
+            let total = 0;
+            itemsContainer.innerHTML = items.map(item => {
+                const itemTotal = Number(item.total) || (Number(item.price) * Number(item.quantity));
+                total += itemTotal;
+                return `
+                    <div class="summary-item">
+                        <div>
+                            <p class="summary-name">${item.name}</p>
+                            <p class="summary-meta">Qty: ${item.quantity} x $${Number(item.price).toFixed(2)}</p>
+                        </div>
+                        <span class="summary-price">$${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+            }).join('');
+
+            emptyState.style.display = 'none';
+            const { discount, total: grandTotal, shippingAmount } = getTotals(items);
+            totalEl.textContent = '$' + grandTotal.toFixed(2);
+            headerTotal.textContent = '$' + grandTotal.toFixed(2);
+            if (discountRow && discountValue) {
+                if (discount > 0) {
+                    discountRow.style.display = 'flex';
+                    discountValue.textContent = '-$' + discount.toFixed(2);
+                } else {
+                    discountRow.style.display = 'none';
+                }
+            }
+            if (shippingRow && shippingValue) {
+                if (shippingAmount > 0) {
+                    shippingRow.style.display = 'flex';
+                    shippingValue.textContent = '$' + shippingAmount.toFixed(2);
+                } else {
+                    shippingRow.style.display = 'none';
+                }
+            }
+            if (promoInput) {
+                promoInput.value = getPromoCode();
+            }
+            if (emailInput) {
+                const savedEmail = sessionStorage.getItem(EMAIL_STORAGE_KEY) || '';
+                emailInput.value = savedEmail;
+            }
+            const savedAddress = loadAddress();
+            if (savedAddress) {
+                document.getElementById('checkoutName').value = savedAddress.name || '';
+                document.getElementById('checkoutPhone').value = savedAddress.phone || '';
+                document.getElementById('checkoutAddress1').value = savedAddress.address1 || '';
+                document.getElementById('checkoutAddress2').value = savedAddress.address2 || '';
+                document.getElementById('checkoutCity').value = savedAddress.city || '';
+                document.getElementById('checkoutState').value = savedAddress.state || '';
+                document.getElementById('checkoutZip').value = savedAddress.zip || '';
+                document.getElementById('checkoutCountry').value = savedAddress.country || '';
+                document.getElementById('checkoutNotes').value = savedAddress.notes || '';
+                const status = document.getElementById('checkoutSaveStatus');
+                if (status) status.style.display = 'block';
+            }
+            updateEmailState();
+        }
+
+        async function fetchJsonSafe(url, options) {
+            const response = await fetch(url, options);
+            const text = await response.text();
+            let data = null;
+            if (text) {
+                try {
+                    data = JSON.parse(text);
+                } catch (error) {
+                    data = null;
+                }
+            }
+            return { response, data, text };
+        }
+
+        async function startCryptoCheckout() {
+            const items = getStoredCart();
+            if (!items.length) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            const emailInput = document.getElementById('checkoutEmail');
+            const email = emailInput ? emailInput.value.trim() : '';
+            if (!isValidEmail(email)) {
+                alert('Please enter a valid email before paying.');
+                if (emailInput) emailInput.focus();
+                return;
+            }
+
+            const address = loadAddress();
+            if (!address || !isAddressValid(address)) {
+                alert('Please save your address details before paying.');
+                return;
+            }
+            const zip = (address.zip || '').trim();
+            if (zip !== '96706' && zip !== '96707') {
+                alert('Delivery is only available for ZIP codes 96706 and 96707 right now. For all other areas, please wait until we start shipping.');
+                return;
+            }
+
+            try {
+                showGlobalLoader();
+                const totals = getTotals(items);
+                const { response, data, text } = await fetchJsonSafe('/api/crypto/create-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        items,
+                        discountUsd: totals.discount,
+                        promoCode: getPromoCode(),
+                        shippingUsd: totals.shippingAmount
+                    })
+                });
+
+                if (!response.ok) {
+                    const htmlHint = text && text.trim().startsWith('<!DOCTYPE')
+                        ? 'Server returned HTML. Is the server running with the /api routes?'
+                        : '';
+                    throw new Error(data?.error || `Unable to start crypto checkout. ${htmlHint}`.trim());
+                }
+
+                if (!data) {
+                    throw new Error('Server did not return JSON.');
+                }
+
+                currentOrder = data;
+                openCryptoModal();
+                selectCryptoCoin('btc');
+                hideGlobalLoader();
+            } catch (error) {
+                hideGlobalLoader();
+                alert(error.message || 'Unable to start crypto checkout.');
+            }
+        }
+
+        function openCryptoModal() {
+            const modal = document.getElementById('cryptoModal');
+            if (!modal || !currentOrder) return;
+
+            document.getElementById('cryptoUsdTotal').textContent = '$' + currentOrder.usdTotal.toFixed(2);
+
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+            requestAnimationFrame(() => {
+                modal.classList.add('open');
+            });
+        }
+
+        function closeCryptoModal() {
+            const modal = document.getElementById('cryptoModal');
+            if (!modal) return;
+            modal.classList.remove('open');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            }, 250);
+
+            if (cryptoPollTimer) {
+                clearInterval(cryptoPollTimer);
+                cryptoPollTimer = null;
+            }
+        }
+
+        function selectCryptoCoin(coin) {
+            if (!currentOrder || !currentOrder.coins || !currentOrder.coins[coin]) return;
+            currentCoin = coin;
+
+            document.querySelectorAll('.crypto-coin').forEach(button => {
+                button.classList.toggle('active', button.dataset.coin === coin);
+            });
+
+            const data = currentOrder.coins[coin];
+            document.getElementById('cryptoAddress').textContent = data.address;
+            document.getElementById('cryptoAmount').textContent = data.amount.toFixed(data.displayDecimals) + ' ' + coin.toUpperCase();
+            document.getElementById('cryptoStatus').textContent = '';
+            document.getElementById('cryptoStatus').classList.remove('success', 'error');
+
+            const progressContainer = document.getElementById('cryptoProgressContainer');
+            if (progressContainer) progressContainer.style.display = 'none';
+
+            const paidBtn = document.getElementById('cryptoPaidBtn');
+            if (paidBtn) {
+                paidBtn.textContent = 'I have paid';
+                paidBtn.disabled = false;
+                paidBtn.classList.remove('loading');
+            }
+
+            if (cryptoPollTimer) {
+                clearInterval(cryptoPollTimer);
+                cryptoPollTimer = null;
+            }
+        }
+
+        function updateCryptoProgress(received, required) {
+            const fill = document.getElementById('cryptoProgressFill');
+            const text = document.getElementById('cryptoProgressText');
+            const meta = document.getElementById('cryptoReceived');
+            if (!fill || !text || !meta) return;
+
+            const percent = required > 0 ? Math.min(100, (received / required) * 100) : 0;
+            fill.style.width = percent.toFixed(2) + '%';
+            text.textContent = Math.round(percent) + '%';
+            meta.textContent = `Received ${received} / ${required}`;
+        }
+
+        async function checkCryptoPayment() {
+            if (!currentOrder) return;
+
+            const statusEl = document.getElementById('cryptoStatus');
+            const paidBtn = document.getElementById('cryptoPaidBtn');
+            const progressContainer = document.getElementById('cryptoProgressContainer');
+            const progressFill = document.getElementById('cryptoProgressFill');
+            let statusData = null;
+
+            progressContainer.style.display = 'flex';
+            paidBtn.classList.add('loading');
+            paidBtn.textContent = 'Checking payment...';
+            paidBtn.disabled = true;
+            statusEl.textContent = '';
+            statusEl.classList.remove('success', 'error');
+            showGlobalLoader();
+
+            if (progressFill) progressFill.classList.add('loading');
+
+            try {
+                const { response, data, text } = await fetchJsonSafe(`/api/crypto/order/${currentOrder.orderId}/${currentCoin}/status`);
+                if (!response.ok) {
+                    const htmlHint = text && text.trim().startsWith('<!DOCTYPE')
+                        ? 'Server returned HTML. Is the server running with the /api routes?'
+                        : '';
+                    throw new Error(data?.error || `Unable to check payment. ${htmlHint}`.trim());
+                }
+
+                if (!data) {
+                    throw new Error('Server did not return JSON.');
+                }
+
+                statusData = data;
+                const received = Number.parseFloat(statusData.received) || 0;
+                const required = Number.parseFloat(statusData.required) || 0;
+                updateCryptoProgress(received, required);
+
+                if (statusData.status === 'paid') {
+                    updateCryptoProgress(required, required);
+                    statusEl.textContent = 'Payment confirmed! Your order has been received.';
+                    statusEl.classList.add('success');
+                    paidBtn.style.display = 'none';
+                    const paidMessage = document.getElementById('cryptoPaidMessage');
+                    if (paidMessage) paidMessage.style.display = 'block';
+                    if (paidMessage) {
+                        paidMessage.textContent = `Payment received. Order ${getReceiptId()}. It will be reviewed and we will follow up with shipping details. support@emotohi.com will email you further details, or you can email us for help.`;
+                    }
+                    if (!sessionStorage.getItem(PAYMENT_SENT_KEY)) {
+                        const email = sessionStorage.getItem(EMAIL_STORAGE_KEY) || '';
+                        const address = loadAddress();
+                        const totals = getTotals(getStoredCart());
+                        sendCheckoutWebhook('payment_confirmed', {
+                            email,
+                            address,
+                            items: getStoredCart(),
+                            total: totals.total,
+                            discountUsd: totals.discount,
+                            shipping: totals.shipping,
+                            paymentMethod: 'Crypto'
+                        });
+                        sessionStorage.setItem(PAYMENT_SENT_KEY, 'true');
+                    }
+                    if (cryptoPollTimer) {
+                        clearInterval(cryptoPollTimer);
+                        cryptoPollTimer = null;
+                    }
+                } else {
+                    statusEl.textContent = `Waiting for payment... ${statusData.received} / ${statusData.required}`;
+                    if (!cryptoPollTimer) {
+                        cryptoPollTimer = setInterval(checkCryptoPayment, 15000);
+                    }
+                }
+            } catch (error) {
+                statusEl.textContent = 'Unable to verify payment. Please try again.';
+                statusEl.classList.add('error');
+                paidBtn.textContent = 'Check again';
+                paidBtn.disabled = false;
+                paidBtn.classList.remove('loading');
+            } finally {
+                hideGlobalLoader();
+                if (progressFill) progressFill.classList.remove('loading');
+                if (statusData && statusData.status !== 'paid') {
+                    paidBtn.textContent = 'Check again';
+                    paidBtn.disabled = false;
+                    paidBtn.classList.remove('loading');
+                }
+            }
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('cryptoModal');
+            if (modal && event.target === modal) {
+                closeCryptoModal();
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            renderSummary();
+            const emailInput = document.getElementById('checkoutEmail');
+            if (emailInput) {
+                emailInput.addEventListener('input', updateEmailState);
+            }
+            const promoBtn = document.getElementById('promoApplyBtn');
+            if (promoBtn) {
+                promoBtn.addEventListener('click', applyPromoCode);
+            }
+            ['checkoutName', 'checkoutPhone', 'checkoutAddress1', 'checkoutAddress2', 'checkoutCity', 'checkoutState', 'checkoutZip', 'checkoutCountry', 'checkoutNotes']
+                .forEach((id) => {
+                    const input = document.getElementById(id);
+                    if (input) {
+                        input.addEventListener('input', updatePayButtons);
+                    }
+                });
+            const saveBtn = document.getElementById('checkoutSaveBtn');
+            if (saveBtn) {
+                saveBtn.addEventListener('click', async () => {
+                    const email = (document.getElementById('checkoutEmail')?.value || '').trim();
+                    if (!isValidEmail(email)) {
+                        alert('Please enter a valid email before saving.');
+                        document.getElementById('checkoutEmail')?.focus();
+                        return;
+                    }
+                    const address = getAddressPayload();
+                    if (!isAddressValid(address)) {
+                        alert('Please complete all required address fields.');
+                        return;
+                    }
+                    saveAddress(address);
+                    await calculateShipping(address);
+                    const totals = getTotals(getStoredCart());
+                    sendCheckoutWebhook('checkout_saved', {
+                        email,
+                        address,
+                        items: getStoredCart(),
+                        total: totals.total,
+                        discountUsd: totals.discount,
+                        shipping: totals.shipping,
+                        paymentMethod: 'Saved details'
+                    });
+                    const status = document.getElementById('checkoutSaveStatus');
+                    if (status) status.style.display = 'block';
+                    updatePayButtons();
+                });
+            }
+            const cashBtn = document.getElementById('cashStartBtn');
+            if (cashBtn) {
+                cashBtn.addEventListener('click', async () => {
+                    const email = (document.getElementById('checkoutEmail')?.value || '').trim();
+                    if (!isValidEmail(email)) {
+                        alert('Please enter a valid email before requesting cash meetup.');
+                        document.getElementById('checkoutEmail')?.focus();
+                        return;
+                    }
+                    const address = loadAddress();
+                    if (!address || !isAddressValid(address)) {
+                        alert('Please save your address details before requesting cash meetup.');
+                        return;
+                    }
+                    const meetupAddress = formatMeetupAddress(address);
+                    const confirmMessage = meetupAddress
+                        ? `Confirm details for cash meetup:\nEmail: ${email}\nAddress: ${meetupAddress}\n\nUse this address as the meetup spot?`
+                        : `Confirm details for cash meetup:\nEmail: ${email}\n\nUse your saved shipping address as the meetup spot?`;
+                    if (!window.confirm(confirmMessage)) {
+                        return;
+                    }
+                    await calculateShipping(address, { requireEligible: false });
+                    const totals = getTotals(getStoredCart());
+                    sendCheckoutWebhook('cash_checkout', {
+                        email,
+                        address,
+                        items: getStoredCart(),
+                        total: totals.total,
+                        discountUsd: totals.discount,
+                        shipping: totals.shipping,
+                        paymentMethod: 'Cash',
+                        mention: '@everyone',
+                        priority: 'URGENT'
+                    });
+                    const status = document.getElementById('cashStatus');
+                    if (status) {
+                        status.style.display = 'block';
+                        status.textContent = meetupAddress
+                            ? `Request sent. Order ${getReceiptId()}. We will contact you to confirm the meetup at ${meetupAddress}. support@emotohi.com will email you further details, or you can email us for help.`
+                            : `Request sent. Order ${getReceiptId()}. We will contact you to confirm the meetup. support@emotohi.com will email you further details, or you can email us for help.`;
+                    }
+                });
+            }
+            const giftBtn = document.getElementById('giftStartBtn');
+            if (giftBtn) {
+                giftBtn.addEventListener('click', async () => {
+                    const email = (document.getElementById('checkoutEmail')?.value || '').trim();
+                    if (!isValidEmail(email)) {
+                        alert('Please enter a valid email before requesting gift card meetup.');
+                        document.getElementById('checkoutEmail')?.focus();
+                        return;
+                    }
+                    const address = loadAddress();
+                    if (!address || !isAddressValid(address)) {
+                        alert('Please save your address details before requesting gift card meetup.');
+                        return;
+                    }
+                    const meetupAddress = formatMeetupAddress(address);
+                    const confirmMessage = meetupAddress
+                        ? `Confirm details for gift card meetup:\nEmail: ${email}\nAddress: ${meetupAddress}\n\nUse this address as the meetup spot?`
+                        : `Confirm details for gift card meetup:\nEmail: ${email}\n\nUse your saved shipping address as the meetup spot?`;
+                    if (!window.confirm(confirmMessage)) {
+                        return;
+                    }
+                    await calculateShipping(address, { requireEligible: false });
+                    const totals = getTotals(getStoredCart());
+                    sendCheckoutWebhook('giftcard_checkout', {
+                        email,
+                        address,
+                        items: getStoredCart(),
+                        total: totals.total,
+                        discountUsd: totals.discount,
+                        shipping: totals.shipping,
+                        paymentMethod: 'Gift card',
+                        mention: '@everyone',
+                        priority: 'URGENT'
+                    });
+                    const status = document.getElementById('giftStatus');
+                    if (status) {
+                        status.style.display = 'block';
+                        status.textContent = meetupAddress
+                            ? `Request sent. Order ${getReceiptId()}. We will contact you to confirm the meetup at ${meetupAddress}. support@emotohi.com will email you further details, or you can email us for help.`
+                            : `Request sent. Order ${getReceiptId()}. We will contact you to confirm the meetup. support@emotohi.com will email you further details, or you can email us for help.`;
+                    }
+                });
+            }
+            showGlobalLoader(400);
+        });
+
+        async function calculateShipping(address, options = {}) {
+            const { requireEligible = true } = options;
+            const status = document.getElementById('shippingStatus');
+            if (status) {
+                status.style.display = 'block';
+                status.textContent = 'Calculating shipping...';
+            }
+            const zip = (address?.zip || '').trim();
+            if (zip !== '96706' && zip !== '96707') {
+                setStoredShipping(null);
+                renderSummary();
+                if (status) {
+                    status.textContent = 'Delivery is only available for ZIP codes 96706 and 96707. For all other areas, please wait until we start shipping.';
+                }
+                return !requireEligible;
+            }
+            try {
+                const { response, data } = await fetchJsonSafe('/api/shipping/quote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(address)
+                });
+                if (!response.ok || !data) {
+                    throw new Error(data?.error || 'Unable to calculate shipping.');
+                }
+                const shipping = {
+                    amount: Number(data.amount) || 0,
+                    distanceMiles: Number(data.distanceMiles) || 0
+                };
+                setStoredShipping(shipping);
+                renderSummary();
+                if (status) {
+                    status.textContent = `Shipping estimate: $${shipping.amount.toFixed(2)} (${shipping.distanceMiles.toFixed(1)} mi)`;
+                }
+                return true;
+            } catch (error) {
+                setStoredShipping(null);
+                renderSummary();
+                if (status) {
+                    status.textContent = 'Shipping estimate unavailable. We will confirm at meetup.';
+                }
+                return !requireEligible;
+            }
+        }
+    </script>
+</body>
+</html>

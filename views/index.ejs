@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmotoHI - Premium Ultrabe Breaks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/images/top%20icon.png" type="image/png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="logo" href="/">
+                <img src="/images/2nd%20brand.png" alt="EmotoHI" class="logo-text-image">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/contact">Sign In</a></li>
+                <li class="nav-search-item">
+                        <form class="site-search" action="/products" method="get">
+                            <button type="submit" aria-label="Search">
+                                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 16 16">
+                                    <path d="M7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm7 2-3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                            <input class="site-search-input" name="q" placeholder="Search" type="text" autocomplete="off">
+                            <button class="site-search-reset" type="reset" aria-label="Clear search">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </li>
+                    <div class="theme-switcher">
+                    <button class="theme-toggle" onclick="toggleThemeDropdown()" aria-label="Theme" data-tooltip="Theme">
+                        <span class="theme-icon" id="themeIcon"></span>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <button class="theme-option" data-theme="system" data-tooltip="System" aria-label="System" onclick="setTheme('system')">
+                            <span class="theme-option-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+                                    <path d="M8 20h8"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="theme-option" data-theme="light" data-tooltip="Light" aria-label="Light" onclick="setTheme('light')">
+                            <span class="theme-option-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="theme-option" data-theme="dark" data-tooltip="Dark" aria-label="Dark" onclick="setTheme('dark')">
+                            <span class="theme-option-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M21 14.5A9 9 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z"></path>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <button class="cart-icon" onclick="openCart()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                </button>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-banner">
+            <img src="/images/banner.png" alt="EmotoHI Banner" class="hero-banner-image">
+            <div class="hero-overlay">
+                <h1>EmotoHI</h1>
+                <p>Premium performance parts for your ride</p>
+                <a href="/products" class="cta-button">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motion Band -->
+    <section class="motion-band reveal">
+        <div class="motion-track">
+            <div class="motion-group">
+                <div class="motion-item">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                    <span>Ultra Breaks</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/rotor.png" alt="Rotor">
+                    <span>Rotor</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/white%20baja.png" alt="Baja Lights">
+                    <span>Baja Lights</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                    <span>OEM Pads</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                    <span>Ultra Breaks</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/rotor.png" alt="Rotor">
+                    <span>Rotor</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/white%20baja.png" alt="Baja Lights">
+                    <span>Baja Lights</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                    <span>OEM Pads</span>
+                </div>
+            </div>
+            <div class="motion-group" aria-hidden="true">
+                <div class="motion-item">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                    <span>Ultra Breaks</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/rotor.png" alt="Rotor">
+                    <span>Rotor</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/white%20baja.png" alt="Baja Lights">
+                    <span>Baja Lights</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                    <span>OEM Pads</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                    <span>Ultra Breaks</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/rotor.png" alt="Rotor">
+                    <span>Rotor</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/white%20baja.png" alt="Baja Lights">
+                    <span>Baja Lights</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                    <span>OEM Pads</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Showcase -->
+    <section class="showcase reveal">
+        <div class="showcase-media">
+            <div class="showcase-card large">
+                <img src="/images/Ultra%20Breaks.jpg" alt="Ultra Bee Brakes">
+            </div>
+            <div class="showcase-card small top">
+                <img src="/images/orange%20%20baja.png" alt="Baja Lights">
+            </div>
+            <div class="showcase-card small bottom">
+                <img src="/images/carbon%20wrap.png" alt="Forged Carbon Wrap">
+            </div>
+        </div>
+        <div class="showcase-copy">
+            <h2>Built for hard riding</h2>
+            <p>Clean lines, precise feel, and real stopping power.</p>
+            <div class="showcase-actions">
+                <a href="/products" class="cta-button alt">Shop the lineup</a>
+                <a href="/products" class="ghost-link">See all parts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll Gallery -->
+    <section class="scroll-gallery reveal">
+        <div class="scroll-head">
+            <h2>Pick your setup</h2>
+            <span class="scroll-hint">Drag</span>
+        </div>
+        <div class="scroll-cards">
+            <div class="scroll-card">
+                <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                <div class="scroll-meta">
+                    <span>Ultra Breaks</span>
+                    <strong>$299.99</strong>
+                </div>
+            </div>
+            <div class="scroll-card">
+                <img src="/images/rotor.png" alt="Rotor">
+                <div class="scroll-meta">
+                    <span>Rotor</span>
+                    <strong>$20</strong>
+                </div>
+            </div>
+            <div class="scroll-card">
+                <img src="/images/white%20baja.png" alt="Baja Lights">
+                <div class="scroll-meta">
+                    <span>Baja Lights</span>
+                    <strong>$20</strong>
+                </div>
+            </div>
+            <div class="scroll-card">
+                <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                <div class="scroll-meta">
+                    <span>OEM Pads</span>
+                    <strong>$20+</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured reveal">
+        <h2>Surron Ultra Bee Breaks</h2>
+        <div class="products-grid">
+            <div class="product-card" onclick="openProductModal()" style="cursor: pointer;">
+                <div class="sale-badge">SALE</div>
+                <div class="product-image">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>Surron Ultra Bee Breaks</h3>
+                    <div class="product-price-section">
+                        <span class="original-price">$350.00</span>
+                        <span class="sale-price">$299.99</span>
+                    </div>
+                    <p class="description">Fits on any Emoto with the included adapter. Comes pre-bled and ready to install. Premium quality brakes built with precision and modern design.</p>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openProductModal();">Select Options</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <details class="faq-item">
+                <summary>Do you ship products?</summary>
+                <p>We're currently operating on Oahu only. Since we're just starting out, we do in-person meetups or drop-offs instead of shipping.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What's your return policy?</summary>
+                <p>All sales are final. We do not accept returns or exchanges.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Any final sale items?</summary>
+                <p>All products are final sale and not eligible for return.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How do delivery fees work?</summary>
+                <p>Delivery fees vary depending on your location on Oahu. Contact us for a quote based on your address.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Where are products made?</summary>
+                <p>Our products are manufactured with quality materials from trusted suppliers.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>EmotoHI</h4>
+                <p>Premium emoto parts</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products">Products</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>TikTok</h4>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@emotohi" target="_blank" rel="noopener">@emotohi</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 EmotoHI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            
+            <!-- Image Gallery -->
+            <div class="modal-gallery">
+                <div class="main-image">
+                    <img id="mainImage" src="/images/back%20with%20stuff.png" alt="Product">
+                </div>
+                <div class="gallery-thumbnails">
+                    <img src="/images/back%20with%20stuff.png" alt="Image 1" class="thumbnail active" onclick="changeMainImage('/images/back%20with%20stuff.png', this)">
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="modal-details">
+                <h2>Surron Ultra Bee Breaks</h2>
+                <p class="modal-description">Premium quality brakes built with precision and modern design. Fits on any Emoto with the included adapter. Comes pre-bled and ready to install.</p>
+                
+                <!-- Product Options -->
+                <div class="product-options">
+                    <label class="options-label">Select Option:</label>
+                    <div class="options-list">
+                        <div class="option-item" onclick="selectOption(this, 299.99, '/images/front.png', ['/images/front.png'])">
+                            <div class="option-image">
+                                <img src="/images/front.png" alt="Front Brake Assembly">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Front Brake Assembly</p>
+                                <p class="option-price">$299.99</p>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 299.99, '/images/plain%20back.png', ['/images/plain%20back.png', '/images/Ultra%20Breaks.jpg', '/images/Ultra%20Breaks.png', '/images/Ultra%20Breaks2.png', '/images/Ultra%20Breaks1.png'])">
+                            <div class="option-image">
+                                <img src="/images/plain%20back.png" alt="Rear Brake Assembly">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Rear Brake Assembly</p>
+                                <p class="option-price">$299.99</p>
+                            </div>
+                        </div>
+                        <div class="option-item selected" onclick="selectOption(this, 350, '/images/back%20with%20stuff.png', ['/images/back%20with%20stuff.png'])">
+                            <div class="option-image">
+                                <img src="/images/Ultra%20Breaks1.png" alt="Rear + Adapter + Disc">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Rear Brake + Adapter + Brake Disc</p>
+                                <p class="option-price">$350</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Display -->
+                <div class="price-section">
+                    <p class="modal-price" id="selectedPrice">$350.00</p>
+                </div>
+                
+                <!-- Quantity Selector -->
+                <div class="quantity-selector">
+                    <label for="quantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQuantity()">−</button>
+                        <input type="number" id="quantity" value="1" min="1" readonly>
+                        <button onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-modal" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Cart</h3>
+            <button class="cart-close" onclick="closeCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+    <div id="cartOverlay" class="cart-overlay" onclick="closeCart()"></div>
+
+    <!-- TOS Modal -->
+    <div id="tosOverlay" class="tos-overlay">
+        <div class="tos-modal" role="dialog" aria-modal="true" aria-labelledby="tosTitle">
+            <h3 id="tosTitle">Terms of Service</h3>
+            <p>By using this site, you agree to the terms below.</p>
+            <ul>
+                <li>All sales are final. No refunds or exchanges.</li>
+                <li>Products are sold as-is and installed at your own risk.</li>
+                <li>EmotoHI is not responsible for damage, injury, or misuse.</li>
+                <li>Local pickup/meetup only unless otherwise arranged.</li>
+            </ul>
+            <details class="tos-more">
+                <summary>See more</summary>
+                <div class="tos-more-content">
+                    <p>All sales are final. We do not offer refunds, returns, or exchanges for any reason, including fitment issues, change of mind, or installation problems.</p>
+                    <p>Products are provided "as-is" and "as-available" without warranties of any kind, express or implied, to the maximum extent permitted by law. You are responsible for verifying fitment and compatibility before purchase.</p>
+                    <p>Installation, setup, and use are your responsibility. Improper installation or use may result in damage, injury, or death. You assume all risks associated with purchase, installation, and use.</p>
+                    <p>To the maximum extent permitted by law, EmotoHI is not liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits, revenue, data, or use arising from your purchase or use of the products.</p>
+                    <p>If any warranty or liability cannot be excluded, it is limited to the minimum extent required by law.</p>
+                    <p>Local meetup or pickup only unless otherwise agreed in writing. Delivery windows are estimates and may change.</p>
+                    <p>Prices, availability, and descriptions may change at any time. Errors may be corrected, and orders may be canceled or limited in quantity.</p>
+                    <p>By continuing, you confirm you are at least 18 years old or have permission from a parent or guardian.</p>
+                    <p>EmotoHI (TM) is a trademark of EmotoHI. All other trademarks belong to their respective owners.</p>
+                </div>
+            </details>
+            <div class="tos-actions">
+                <button class="tos-btn" onclick="declineTos()">Disagree</button>
+                <button class="tos-btn primary" onclick="acceptTos()">I Agree</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuantity = 1;
+        let currentPrice = 350;
+        let currentImages = ['/images/back%20with%20stuff.png'];
+        let cart = [];
+        let previousTotal = currentPrice * currentQuantity;
+        const CART_STORAGE_KEY = 'emotohi_cart';
+
+        function saveCart() {
+            try {
+                sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+            } catch (error) {
+                console.warn('Unable to save cart:', error);
+            }
+        }
+
+        function loadCart() {
+            try {
+                const raw = sessionStorage.getItem(CART_STORAGE_KEY);
+                if (!raw) return;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed)) {
+                    cart = parsed;
+                }
+            } catch (error) {
+                console.warn('Unable to load cart:', error);
+            }
+            updateCartDisplay();
+        }
+
+        // Theme Management
+        function toggleThemeDropdown() {
+            const dropdown = document.getElementById('themeDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function setTheme(theme) {
+            localStorage.setItem('theme', theme);
+            applyTheme(theme);
+            toggleThemeDropdown();
+            updateThemeOptions();
+        }
+
+        function applyTheme(theme) {
+            let isDark = false;
+
+            if (theme === 'system') {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else if (theme === 'dark') {
+                isDark = true;
+            }
+
+            document.body.classList.toggle('dark-theme', isDark);
+            updateLogo(isDark);
+        }
+
+        function updateLogo(isDark) {
+            const logoImage = document.querySelector('.logo-image');
+            if (!logoImage) return;
+
+            logoImage.src = isDark ? '/images/brand%20white.png' : '/images/brand.png';
+        }
+
+        function updateThemeOptions() {
+            const currentTheme = localStorage.getItem('theme') || 'system';
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.theme === currentTheme) {
+                    option.classList.add('active');
+                }
+            });
+
+            const themeIcon = document.getElementById('themeIcon');
+            if (themeIcon) {
+                const iconMap = {
+                    system: "<svg viewBox='0 0 24 24' aria-hidden='true'><rect x='3' y='4' width='18' height='12' rx='2'></rect><path d='M8 20h8'></path></svg>",
+                    light: "<svg viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='4'></circle><path d='M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'></path></svg>",
+                    dark: "<svg viewBox='0 0 24 24' aria-hidden='true'><path d='M21 14.5A9 9 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z'></path></svg>"
+                };
+                themeIcon.innerHTML = iconMap[currentTheme];
+            }
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            applyTheme(savedTheme);
+            updateThemeOptions();
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.theme-toggle') && !e.target.closest('.theme-switcher')) {
+                const dropdown = document.getElementById('themeDropdown');
+                if (dropdown) dropdown.style.display = 'none';
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            if (savedTheme === 'system') {
+                applyTheme('system');
+            }
+        });
+
+        // Load theme on page load
+        loadTheme();
+
+        const revealItems = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
+
+        revealItems.forEach(item => revealObserver.observe(item));
+
+        function setupMotionBand() {
+            const band = document.querySelector('.motion-band');
+            const track = document.querySelector('.motion-track');
+            const baseGroup = track ? track.querySelector('.motion-group') : null;
+
+            if (!band || !track || !baseGroup) return;
+
+            track.querySelectorAll('.motion-group.clone').forEach(group => group.remove());
+
+            const groupWidth = baseGroup.getBoundingClientRect().width;
+            const bandWidth = band.getBoundingClientRect().width;
+
+            if (groupWidth === 0 || bandWidth === 0) return;
+
+            const needed = Math.ceil((bandWidth * 2) / groupWidth) + 1;
+
+            for (let i = 0; i < needed; i++) {
+                const clone = baseGroup.cloneNode(true);
+                clone.classList.add('clone');
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+            }
+
+            track.style.setProperty('--motion-shift', `${groupWidth}px`);
+        }
+
+        let motionResizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(motionResizeTimer);
+            motionResizeTimer = setTimeout(setupMotionBand, 150);
+        });
+
+        setupMotionBand();
+
+        function openProductModal() {
+            document.getElementById('productModal').style.display = 'flex';
+            document.body.classList.add('modal-open');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+
+        function changeMainImage(src, element) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumbnail').forEach(img => img.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function increaseQuantity() {
+            currentQuantity++;
+            document.getElementById('quantity').value = currentQuantity;
+            updateTotalPrice();
+        }
+
+        function decreaseQuantity() {
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                document.getElementById('quantity').value = currentQuantity;
+                updateTotalPrice();
+            }
+        }
+
+        function updateTotalPrice() {
+            const totalPrice = currentPrice * currentQuantity;
+            const priceEl = document.getElementById('selectedPrice');
+            const direction = totalPrice > previousTotal ? 'up' : totalPrice < previousTotal ? 'down' : null;
+
+            priceEl.textContent = '$' + totalPrice.toFixed(2);
+
+            if (direction) {
+                priceEl.classList.remove('price-up', 'price-down');
+                void priceEl.offsetWidth;
+                priceEl.classList.add(direction === 'up' ? 'price-up' : 'price-down');
+                setTimeout(() => {
+                    priceEl.classList.remove('price-up', 'price-down');
+                }, 300);
+            }
+
+            previousTotal = totalPrice;
+        }
+
+        function addToCart() {
+            const selectedOption = document.querySelector('.option-item.selected .option-name');
+            const productName = selectedOption ? selectedOption.textContent : 'Surron Ultra Bee Breaks';
+            
+            const item = {
+                id: Date.now(),
+                name: productName,
+                price: currentPrice,
+                quantity: currentQuantity,
+                total: currentPrice * currentQuantity
+            };
+            
+            cart.push(item);
+            updateCartDisplay();
+            closeProductModal();
+            currentQuantity = 1;
+            document.getElementById('quantity').value = 1;
+        }
+
+        function openCart() {
+            document.getElementById('cartSidebar').classList.add('open');
+            document.getElementById('cartOverlay').classList.add('open');
+        }
+
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('cartOverlay').classList.remove('open');
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+                cartTotalElement.textContent = '$0.00';
+                saveCart();
+                return;
+            }
+            
+            let total = 0;
+            cartItemsContainer.innerHTML = cart.map(item => {
+                total += item.total;
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <p class="cart-item-name">${item.name}</p>
+                            <p class="cart-item-details">Qty: ${item.quantity} × $${item.price.toFixed(2)}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <p class="cart-item-total">$${item.total.toFixed(2)}</p>
+                            <button class="cart-item-remove" onclick="removeFromCart(${item.id})">×</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            cartTotalElement.textContent = '$' + total.toFixed(2);
+            saveCart();
+        }
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCartDisplay();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            saveCart();
+            window.location.href = '/checkout';
+        }
+
+        function showTos() {
+            document.getElementById('tosOverlay').classList.add('open');
+            document.body.classList.add('tos-open');
+        }
+
+        function acceptTos() {
+            localStorage.setItem('tosAccepted', 'true');
+            document.getElementById('tosOverlay').classList.remove('open');
+            document.body.classList.remove('tos-open');
+        }
+
+        function declineTos() {
+            window.location.href = 'about:blank';
+            window.close();
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            if (localStorage.getItem('tosAccepted') !== 'true') {
+                showTos();
+            }
+        });
+
+        function selectOption(element, price, mainImage, images) {
+            document.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            currentPrice = price;
+            currentImages = images;
+            updateTotalPrice();
+            
+            // Update main image
+            document.getElementById('mainImage').src = mainImage;
+            
+            // Update thumbnail gallery
+            const thumbnailsContainer = document.querySelector('.gallery-thumbnails');
+            thumbnailsContainer.innerHTML = images.map((img, index) => `
+                <img src="${img}" alt="Image ${index + 1}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage('${img}', this)">
+            `).join('');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('productModal');
+            if (event.target === modal) {
+                closeProductModal();
+            }
+        }
+    </script>
+</body>
+</html>

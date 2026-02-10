@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - EmotoHI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/images/top%20icon.png" type="image/png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="logo" href="/">
+                <img src="/images/2nd%20brand.png" alt="EmotoHI" class="logo-text-image">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/products" class="active">Products</a></li>
+                <li><a href="/contact">Sign In</a></li>
+                <li class="nav-search-item">
+                    <form class="site-search" action="/products" method="get">
+                        <button type="submit" aria-label="Search">
+                            <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 16 16">
+                                <path d="M7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm7 2-3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                        <input id="productSearchInput" class="site-search-input" name="q" placeholder="Search" type="text" autocomplete="off">
+                        <button class="site-search-reset" type="reset" aria-label="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </li>
+                <div class="theme-switcher">
+                    <button class="theme-toggle" onclick="toggleThemeDropdown()" aria-label="Theme" data-tooltip="Theme">
+                        <span class="theme-icon" id="themeIcon"></span>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <button class="theme-option" data-theme="system" data-tooltip="System" aria-label="System" onclick="setTheme('system')">
+                            <span class="theme-option-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+                                    <path d="M8 20h8"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="theme-option" data-theme="light" data-tooltip="Light" aria-label="Light" onclick="setTheme('light')">
+                            <span class="theme-option-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="theme-option" data-theme="dark" data-tooltip="Dark" aria-label="Dark" onclick="setTheme('dark')">
+                            <span class="theme-option-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M21 14.5A9 9 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z"></path>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <button class="cart-icon" onclick="openCart()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                </button>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Banner Section -->
+    <section class="products-banner">
+        <img src="/images/super%20banner.jpg" alt="EmotoHI Banner" class="products-banner-image">
+        <div class="products-banner-overlay">
+            <h1>Premium Parts & Accessories</h1>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="featured products-page">
+        <div class="products-header">
+            <h2>Products</h2>
+            <p>Browse the lineup. Click any product or "Select Options" to view details.</p>
+            <div class="category-filters">
+                <button class="category-btn active" onclick="filterCategory('all')">All</button>
+                <button class="category-btn" onclick="filterCategory('brakes')">Brakes</button>
+                <button class="category-btn" onclick="filterCategory('wraps')">Wraps</button>
+                <button class="category-btn" onclick="filterCategory('accessories')">Lights</button>
+            </div>
+            <div class="no-results" id="noResultsMessage">No results found. Try a different search.</div>
+        </div>
+        <div class="products-grid">
+            <!-- Surron Ultra Bee Breaks -->
+            <div class="product-card" data-category="brakes" onclick="openProductModal()" style="cursor: pointer;">
+                <div class="sale-badge">SALE</div>
+                <div class="product-image">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>Surron Ultra Bee Breaks</h3>
+                    <div class="product-price-section">
+                        <span class="original-price">$350.00</span>
+                        <span class="sale-price">$299.99</span>
+                    </div>
+                    <p class="description">Premium quality brakes with precision design.</p>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openProductModal();">Select Options</button>
+                </div>
+            </div>
+
+            <!-- Surron Brake Pads -->
+            <div class="product-card" data-category="brakes" onclick="openModal('padsModal')" style="cursor: pointer;">
+                <div class="product-image">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>Surron Brake Pads</h3>
+                    <div class="product-price-section">
+                        <span class="price-plain">$20</span>
+                    </div>
+                    <p class="description"></p>
+                    <div class="option-chips">
+                        <span class="option-chip">Ultra Bee $30</span>
+                        <span class="option-chip">LBX $20</span>
+                    </div>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('padsModal');">Select Options</button>
+                </div>
+            </div>
+
+            <!-- Rotor -->
+            <div class="product-card" data-category="brakes" onclick="openModal('rotorModal')" style="cursor: pointer;">
+                <div class="product-image">
+                    <img src="/images/rotor.png" alt="Rotor" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>Rotor</h3>
+                    <div class="product-price-section">
+                        <span class="price-plain">$20</span>
+                    </div>
+                    <p class="description">High performance rotor. Precision engineered.</p>
+                    <div class="option-chips">
+                        <span class="option-chip">160mm $20</span>
+                        <span class="option-chip">180mm $25</span>
+                        <span class="option-chip">203mm $30</span>
+                    </div>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('rotorModal');">Select Options</button>
+                </div>
+            </div>
+
+            <!-- Forged Carbon Wrap -->
+            <div class="product-card" data-category="wraps" onclick="openModal('wrapModal')" style="cursor: pointer;">
+                <div class="product-image">
+                    <img src="/images/carbon%20wrap.png" alt="Forged Carbon Wrap" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>Forged Carbon Wrap</h3>
+                    <div class="product-price-section">
+                        <span class="price-plain">$25</span>
+                    </div>
+                    <p class="description"></p>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('wrapModal');">Select Options</button>
+                </div>
+            </div>
+
+            <!-- Baja Lights (No Switch) -->
+            <div class="product-card" data-category="accessories" onclick="openModal('bajaModal')" style="cursor: pointer;">
+                <div class="product-image">
+                    <img src="/images/white%20baja.png" alt="Baja Lights" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>Baja Lights (Wires Only)</h3>
+                    <div class="product-price-section">
+                        <span class="price-plain">$20</span>
+                    </div>
+                    <p class="description"></p>
+                    <div class="option-chips">
+                        <span class="option-chip">White</span>
+                        <span class="option-chip">Orange</span>
+                    </div>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('bajaModal');">Select Options</button>
+                </div>
+            </div>
+
+            </div>
+
+            <!-- Product Modal -->
+            <div id="productModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            
+            <!-- Image Gallery -->
+            <div class="modal-gallery">
+                <div class="main-image">
+                    <img id="mainImage" class="modal-main-image" src="/images/back%20with%20stuff.png" alt="Product">
+                </div>
+                <div class="gallery-thumbnails modal-thumbnails">
+                    <img src="/images/back%20with%20stuff.png" alt="Image 1" class="thumbnail active" onclick="changeMainImage('productModal', '/images/back%20with%20stuff.png', this)">
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="modal-details">
+                <h2>Surron Ultra Bee Breaks</h2>
+                <p class="modal-description">Premium quality brakes built with precision and modern design. Fits on any Emoto with the included adapter. Comes pre-bled and ready to install.</p>
+                
+                <!-- Product Options -->
+                <div class="product-options">
+                    <label class="options-label">Select Option:</label>
+                    <div class="options-list">
+                        <div class="option-item" onclick="selectOption('productModal', this, 299.99, '/images/front.png', ['/images/front.png'])">
+                            <div class="option-image">
+                                <img src="/images/front.png" alt="Front Brake Assembly">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Front Brake Assembly</p>
+                                <p class="option-price">$299.99</p>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption('productModal', this, 299.99, '/images/plain%20back.png', ['/images/plain%20back.png', '/images/Ultra%20Breaks.jpg', '/images/Ultra%20Breaks.png', '/images/Ultra%20Breaks2.png', '/images/Ultra%20Breaks1.png'])">
+                            <div class="option-image">
+                                <img src="/images/plain%20back.png" alt="Rear Brake Assembly">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Rear Brake Assembly</p>
+                                <p class="option-price">$299.99</p>
+                            </div>
+                        </div>
+                        <div class="option-item selected" onclick="selectOption('productModal', this, 350, '/images/back%20with%20stuff.png', ['/images/back%20with%20stuff.png'])">
+                            <div class="option-image">
+                                <img src="/images/Ultra%20Breaks1.png" alt="Rear + Adapter + Disc">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Rear Brake + Adapter + Brake Disc</p>
+                                <p class="option-price">$350</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Display -->
+                <div class="price-section">
+                    <p class="modal-price" id="selectedPrice">$350.00</p>
+                </div>
+                
+                <!-- Quantity Selector -->
+                <div class="quantity-selector">
+                    <label for="quantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQuantity('productModal')">−</button>
+                        <input type="number" id="quantity" class="quantity-input" value="1" min="1" max="20" readonly>
+                        <button onclick="increaseQuantity('productModal')">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-modal" onclick="addToCartFromModal('productModal', 'Surron Ultra Bee Breaks')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Surron Brake Pads Modal -->
+    <div id="padsModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('padsModal')">&times;</button>
+
+            <div class="modal-gallery">
+                <div class="main-image">
+                    <img class="modal-main-image" src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                </div>
+                <div class="gallery-thumbnails modal-thumbnails">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="Ultra Bee Pads" class="thumbnail active" onclick="changeMainImage('padsModal', '/images/surron%20ultra%20oem%20pads.png', this)">
+                    <img src="/images/surron%20ultra%20oem%20pads1.png" alt="Ultra Bee Pads Detail" class="thumbnail" onclick="changeMainImage('padsModal', '/images/surron%20ultra%20oem%20pads1.png', this)">
+                </div>
+            </div>
+
+            <div class="modal-details">
+                <h2>Surron Brake Pads</h2>
+                <p class="modal-description">OEM pads for Ultra Bee and LBX.</p>
+
+                <div class="product-options">
+                    <label class="options-label">Select Option:</label>
+                    <div class="options-list">
+                        <div class="option-item selected" onclick="selectOption('padsModal', this, 30, '/images/surron%20ultra%20oem%20pads.png', ['/images/surron%20ultra%20oem%20pads.png', '/images/surron%20ultra%20oem%20pads1.png'])">
+                            <div class="option-image">
+                                <img src="/images/surron%20ultra%20oem%20pads.png" alt="Ultra Bee Pads">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Ultra Bee Pads</p>
+                                <p class="option-price">$30</p>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption('padsModal', this, 20, '/images/surron%20lbx%20oem%20pads.png', ['/images/surron%20lbx%20oem%20pads.png', '/images/surron%20lbx%20oem%20pads1.png'])">
+                            <div class="option-image">
+                                <img src="/images/surron%20lbx%20oem%20pads.png" alt="LBX Pads">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">LBX Pads</p>
+                                <p class="option-price">$20</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-section">
+                    <p class="modal-price">$30.00</p>
+                </div>
+
+                <div class="quantity-selector">
+                    <label for="padsQuantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQuantity('padsModal')">−</button>
+                        <input type="number" id="padsQuantity" class="quantity-input" value="1" min="1" max="20" readonly>
+                        <button onclick="increaseQuantity('padsModal')">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-modal" onclick="addToCartFromModal('padsModal', 'Surron Brake Pads')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rotor Modal -->
+    <div id="rotorModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('rotorModal')">&times;</button>
+
+            <div class="modal-gallery">
+                <div class="main-image">
+                    <img class="modal-main-image" src="/images/rotor.png" alt="Rotor">
+                </div>
+                <div class="gallery-thumbnails modal-thumbnails">
+                    <img src="/images/rotor.png" alt="Rotor" class="thumbnail active" onclick="changeMainImage('rotorModal', '/images/rotor.png', this)">
+                </div>
+            </div>
+
+            <div class="modal-details">
+                <h2>Rotor</h2>
+                <p class="modal-description">High performance rotor. Precision engineered.</p>
+
+                <div class="product-options">
+                    <label class="options-label">Select Option:</label>
+                    <div class="options-list">
+                        <div class="option-item selected" onclick="selectOption('rotorModal', this, 20, '/images/rotor.png', ['/images/rotor.png'])">
+                            <div class="option-image">
+                                <img src="/images/rotor.png" alt="Rotor">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">160mm</p>
+                                <p class="option-price">$20</p>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption('rotorModal', this, 25, '/images/rotor.png', ['/images/rotor.png'])">
+                            <div class="option-image">
+                                <img src="/images/rotor.png" alt="Rotor">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">180mm</p>
+                                <p class="option-price">$25</p>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption('rotorModal', this, 30, '/images/rotor.png', ['/images/rotor.png'])">
+                            <div class="option-image">
+                                <img src="/images/rotor.png" alt="Rotor">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">203mm</p>
+                                <p class="option-price">$30</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-section">
+                    <p class="modal-price">$20.00</p>
+                </div>
+
+                <div class="quantity-selector">
+                    <label for="rotorQuantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQuantity('rotorModal')">−</button>
+                        <input type="number" id="rotorQuantity" class="quantity-input" value="1" min="1" max="20" readonly>
+                        <button onclick="increaseQuantity('rotorModal')">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-modal" onclick="addToCartFromModal('rotorModal', 'Rotor')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carbon Wrap Modal -->
+    <div id="wrapModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('wrapModal')">&times;</button>
+
+            <div class="modal-gallery">
+                <div class="main-image">
+                    <img class="modal-main-image" src="/images/carbon%20wrap.png" alt="Forged Carbon Wrap">
+                </div>
+                <div class="gallery-thumbnails modal-thumbnails">
+                    <img src="/images/carbon%20wrap.png" alt="Carbon Wrap" class="thumbnail active" onclick="changeMainImage('wrapModal', '/images/carbon%20wrap.png', this)">
+                    <img src="/images/carbon%20wrap1.png" alt="Carbon Wrap 1" class="thumbnail" onclick="changeMainImage('wrapModal', '/images/carbon%20wrap1.png', this)">
+                    <img src="/images/carbon%20wrap2.png" alt="Carbon Wrap 2" class="thumbnail" onclick="changeMainImage('wrapModal', '/images/carbon%20wrap2.png', this)">
+                    <img src="/images/carbon%20wrap3.png" alt="Carbon Wrap 3" class="thumbnail" onclick="changeMainImage('wrapModal', '/images/carbon%20wrap3.png', this)">
+                </div>
+            </div>
+
+            <div class="modal-details">
+                <h2>Forged Carbon Wrap</h2>
+                <p class="modal-description">Forged carbon look vinyl (PVC) with air-release adhesive for easy install. Size: 1.49 ft x 5 ft. Great for accents and small panels.</p>
+
+                <div class="product-options">
+                    <label class="options-label">Select Option:</label>
+                    <div class="options-list">
+                        <div class="option-item selected" onclick="selectOption('wrapModal', this, 25, '/images/carbon%20wrap.png', ['/images/carbon%20wrap.png', '/images/carbon%20wrap1.png', '/images/carbon%20wrap2.png', '/images/carbon%20wrap3.png', '/images/carbon%20wrap4.png'])">
+                            <div class="option-image">
+                                <img src="/images/carbon%20wrap.png" alt="Carbon Wrap">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Forged Carbon Wrap</p>
+                                <p class="option-price">$25</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-section">
+                    <p class="modal-price">$25.00</p>
+                </div>
+
+                <div class="quantity-selector">
+                    <label for="wrapQuantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQuantity('wrapModal')">−</button>
+                        <input type="number" id="wrapQuantity" class="quantity-input" value="1" min="1" max="20" readonly>
+                        <button onclick="increaseQuantity('wrapModal')">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-modal" onclick="addToCartFromModal('wrapModal', 'Forged Carbon Wrap')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Baja Lights Modal -->
+    <div id="bajaModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('bajaModal')">&times;</button>
+
+            <div class="modal-gallery">
+                <div class="main-image">
+                    <img class="modal-main-image" src="/images/white%20baja.png" alt="Baja Lights">
+                </div>
+                <div class="gallery-thumbnails modal-thumbnails">
+                    <img src="/images/white%20baja.png" alt="Baja Lights White" class="thumbnail active" onclick="changeMainImage('bajaModal', '/images/white%20baja.png', this)">
+                    <img src="/images/orange%20%20baja.png" alt="Baja Lights Orange" class="thumbnail" onclick="changeMainImage('bajaModal', '/images/orange%20%20baja.png', this)">
+                </div>
+            </div>
+
+            <div class="modal-details">
+                <h2>Baja Lights (Wires Only)</h2>
+                <p class="modal-description">3-inch pod lights with Osram LEDs (1070 lm), IP68 sealed housing, and 10-30V input. 60-degree amber flood beam for low-visibility rides. No switch, just wire ends.</p>
+
+                <div class="product-options">
+                    <label class="options-label">Select Option:</label>
+                    <div class="options-list">
+                        <div class="option-item selected" onclick="selectOption('bajaModal', this, 20, '/images/white%20baja.png', ['/images/white%20baja.png', '/images/orange%20%20baja.png'])">
+                            <div class="option-image">
+                                <img src="/images/white%20baja.png" alt="Baja Lights White">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">White</p>
+                                <p class="option-price">$20</p>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption('bajaModal', this, 25, '/images/orange%20%20baja.png', ['/images/orange%20%20baja.png', '/images/white%20baja.png'])">
+                            <div class="option-image">
+                                <img src="/images/orange%20%20baja.png" alt="Baja Lights Orange">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Orange</p>
+                                <p class="option-price">$25</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-section">
+                    <p class="modal-price">$20.00</p>
+                </div>
+
+                <div class="quantity-selector">
+                    <label for="bajaQuantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQuantity('bajaModal')">−</button>
+                        <input type="number" id="bajaQuantity" class="quantity-input" value="1" min="1" max="20" readonly>
+                        <button onclick="increaseQuantity('bajaModal')">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-modal" onclick="addToCartFromModal('bajaModal', 'Baja Lights')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Cart</h3>
+            <button class="cart-close" onclick="closeCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+    <div id="cartOverlay" class="cart-overlay" onclick="closeCart()"></div>
+
+    <div id="globalLoader" class="global-loader active" aria-hidden="true">
+        <div class="loader">
+            <svg id="pegtopone" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                <defs>
+                    <filter id="shine">
+                        <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+                    </filter>
+                    <mask id="mask">
+                        <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="white"></path>
+                    </mask>
+                    <radialGradient id="gradient-1" cx="50" cy="66" fx="50" fy="66" r="30" gradientTransform="translate(0 35) scale(1 0.5)" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="black" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="black" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-2" cx="55" cy="20" fx="55" fy="20" r="30" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="white" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="white" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="white" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-3" cx="85" cy="50" fx="85" fy="50" xlink:href="#gradient-2"></radialGradient>
+                    <radialGradient id="gradient-4" cx="50" cy="58" fx="50" fy="58" r="60" gradientTransform="translate(0 47) scale(1 0.2)" xlink:href="#gradient-3"></radialGradient>
+                    <linearGradient id="gradient-5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.2"></stop>
+                        <stop offset="40%" stop-color="black" stop-opacity="0"></stop>
+                    </linearGradient>
+                </defs>
+                <g>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="currentColor"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-1)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="none" stroke="white" opacity="0.3" stroke-width="3" filter="url(#shine)" mask="url(#mask)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-2)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-3)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-4)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
+                </g>
+            </svg>
+            <svg id="pegtoptwo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                <defs>
+                    <filter id="shine">
+                        <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+                    </filter>
+                    <mask id="mask">
+                        <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="white"></path>
+                    </mask>
+                    <radialGradient id="gradient-1" cx="50" cy="66" fx="50" fy="66" r="30" gradientTransform="translate(0 35) scale(1 0.5)" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="black" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="black" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-2" cx="55" cy="20" fx="55" fy="20" r="30" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="white" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="white" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="white" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-3" cx="85" cy="50" fx="85" fy="50" xlink:href="#gradient-2"></radialGradient>
+                    <radialGradient id="gradient-4" cx="50" cy="58" fx="50" fy="58" r="60" gradientTransform="translate(0 47) scale(1 0.2)" xlink:href="#gradient-3"></radialGradient>
+                    <linearGradient id="gradient-5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.2"></stop>
+                        <stop offset="40%" stop-color="black" stop-opacity="0"></stop>
+                    </linearGradient>
+                </defs>
+                <g>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="currentColor"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-1)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="none" stroke="white" opacity="0.3" stroke-width="3" filter="url(#shine)" mask="url(#mask)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-2)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-3)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-4)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
+                </g>
+            </svg>
+            <svg id="pegtopthree" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                <defs>
+                    <filter id="shine">
+                        <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+                    </filter>
+                    <mask id="mask">
+                        <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="white"></path>
+                    </mask>
+                    <radialGradient id="gradient-1" cx="50" cy="66" fx="50" fy="66" r="30" gradientTransform="translate(0 35) scale(1 0.5)" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="black" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="black" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-2" cx="55" cy="20" fx="55" fy="20" r="30" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="white" stop-opacity="0.3"></stop>
+                        <stop offset="50%" stop-color="white" stop-opacity="0.1"></stop>
+                        <stop offset="100%" stop-color="white" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <radialGradient id="gradient-3" cx="85" cy="50" fx="85" fy="50" xlink:href="#gradient-2"></radialGradient>
+                    <radialGradient id="gradient-4" cx="50" cy="58" fx="50" fy="58" r="60" gradientTransform="translate(0 47) scale(1 0.2)" xlink:href="#gradient-3"></radialGradient>
+                    <linearGradient id="gradient-5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="black" stop-opacity="0.2"></stop>
+                        <stop offset="40%" stop-color="black" stop-opacity="0"></stop>
+                    </linearGradient>
+                </defs>
+                <g>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="currentColor"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-1)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="none" stroke="white" opacity="0.3" stroke-width="3" filter="url(#shine)" mask="url(#mask)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-2)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-3)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-4)"></path>
+                    <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Crypto Checkout Modal -->
+    <div id="cryptoModal" class="product-modal">
+        <div class="modal-content crypto-modal-content">
+            <button class="modal-close" onclick="closeCryptoModal()">&times;</button>
+            <div class="modal-details crypto-details">
+                <div class="crypto-header">
+                    <h2>Crypto Payment</h2>
+                    <div class="crypto-total">
+                        <span class="crypto-total-label">Total</span>
+                        <span id="cryptoUsdTotal" class="crypto-total-amount">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="crypto-section">
+                    <label class="crypto-label">Select cryptocurrency</label>
+                    <div class="crypto-coins">
+                        <button class="crypto-coin" data-coin="btc" onclick="selectCryptoCoin('btc')">
+                            <span class="coin-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false">
+                                    <path d="M13.2 3.2h2.1v2.1c1.7.3 3 1.4 3 3.2 0 1.5-.9 2.6-2.3 3 1.7.4 2.8 1.6 2.8 3.4 0 2.1-1.4 3.5-3.6 3.9v2.2h-2.1v-2.1h-1.9v2.1H9.1v-2.1H6.9V6.2h2.2V3.2h2.1v2.1h1.9V3.2ZM9.6 7.2v3.6h3.3c1.2 0 2-.7 2-1.8 0-1.2-.8-1.8-2.1-1.8H9.6Zm0 6.3v3.9h3.8c1.4 0 2.3-.7 2.3-2 0-1.3-.9-1.9-2.3-1.9H9.6Z" />
+                                </svg>
+                            </span>
+                            <span class="coin-label">Bitcoin</span>
+                        </button>
+                        <button class="crypto-coin" data-coin="eth" onclick="selectCryptoCoin('eth')">
+                            <span class="coin-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false">
+                                    <path d="M12 2L6.2 12l5.8-2.6 5.8 2.6L12 2Zm0 12.2L6.2 11.6 12 22l5.8-10.4-5.8 2.6Z" />
+                                </svg>
+                            </span>
+                            <span class="coin-label">Ethereum</span>
+                        </button>
+                        <button class="crypto-coin" data-coin="ltc" onclick="selectCryptoCoin('ltc')">
+                            <span class="coin-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false">
+                                    <path d="M13.6 3.2h3l-2.3 6.3 2.2-.6-.8 2.3-2.2.6-2.6 7h8.1l-1 2.6H7.9l2.3-6.4-2 .6.8-2.2 2-.6 2.6-7Z" />
+                                </svg>
+                            </span>
+                            <span class="coin-label">Litecoin</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="crypto-section">
+                    <label class="crypto-label">Payment details</label>
+                    <div class="crypto-payment-info">
+                        <div class="crypto-field">
+                            <span class="crypto-field-label">Send to</span>
+                            <div class="crypto-field-value" id="cryptoAddress">Select a coin</div>
+                        </div>
+                        <div class="crypto-field">
+                            <span class="crypto-field-label">Amount</span>
+                            <div class="crypto-field-value crypto-amount-value" id="cryptoAmount">---</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cryptoProgressContainer" class="crypto-progress-container" style="display:none;">
+                    <div class="crypto-progress-info">
+                        <div class="crypto-progress-header">
+                            <span class="crypto-progress-label">Checking payment</span>
+                            <span id="cryptoProgressText" class="crypto-progress-percent">0%</span>
+                        </div>
+                        <div class="crypto-progress-bar">
+                            <span id="cryptoProgressFill" class="crypto-progress-fill"></span>
+                        </div>
+                        <div id="cryptoReceived" class="crypto-progress-details">Received 0 / 0</div>
+                    </div>
+                </div>
+
+                <div id="cryptoStatus" class="crypto-status"></div>
+                <button id="cryptoPaidBtn" class="crypto-submit-btn" onclick="checkCryptoPayment()">I have paid</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOS Modal -->
+    <div id="tosOverlay" class="tos-overlay">
+        <div class="tos-modal" role="dialog" aria-modal="true" aria-labelledby="tosTitle">
+            <h3 id="tosTitle">Terms of Service</h3>
+            <p>By using this site, you agree to the terms below.</p>
+            <ul>
+                <li>All sales are final. No refunds or exchanges.</li>
+                <li>Products are sold as-is and installed at your own risk.</li>
+                <li>EmotoHI is not responsible for damage, injury, or misuse.</li>
+                <li>Local pickup/meetup only unless otherwise arranged.</li>
+            </ul>
+            <details class="tos-more">
+                <summary>See more</summary>
+                <div class="tos-more-content">
+                    <p>All sales are final. We do not offer refunds, returns, or exchanges for any reason, including fitment issues, change of mind, or installation problems.</p>
+                    <p>Products are provided "as-is" and "as-available" without warranties of any kind, express or implied, to the maximum extent permitted by law. You are responsible for verifying fitment and compatibility before purchase.</p>
+                    <p>Installation, setup, and use are your responsibility. Improper installation or use may result in damage, injury, or death. You assume all risks associated with purchase, installation, and use.</p>
+                    <p>To the maximum extent permitted by law, EmotoHI is not liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits, revenue, data, or use arising from your purchase or use of the products.</p>
+                    <p>If any warranty or liability cannot be excluded, it is limited to the minimum extent required by law.</p>
+                    <p>Local meetup or pickup only unless otherwise agreed in writing. Delivery windows are estimates and may change.</p>
+                    <p>Prices, availability, and descriptions may change at any time. Errors may be corrected, and orders may be canceled or limited in quantity.</p>
+                    <p>By continuing, you confirm you are at least 18 years old or have permission from a parent or guardian.</p>
+                    <p>EmotoHI (TM) is a trademark of EmotoHI. All other trademarks belong to their respective owners.</p>
+                </div>
+            </details>
+            <div class="tos-actions">
+                <button class="tos-btn" onclick="declineTos()">Disagree</button>
+                <button class="tos-btn primary" onclick="acceptTos()">I Agree</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        const modalState = {};
+        let currentOrder = null;
+        let currentCoin = 'btc';
+        let cryptoPollTimer = null;
+        let globalLoaderTimer = null;
+        const CART_STORAGE_KEY = 'emotohi_cart';
+        const EMAIL_STORAGE_KEY = 'emotohi_checkout_email';
+        const RECEIPT_STORAGE_KEY = 'emotohi_receipt_id';
+
+        function showGlobalLoader(autoHideMs) {
+            const overlay = document.getElementById('globalLoader');
+            if (!overlay) return;
+            overlay.classList.add('active');
+            if (globalLoaderTimer) {
+                clearTimeout(globalLoaderTimer);
+                globalLoaderTimer = null;
+            }
+            if (autoHideMs) {
+                globalLoaderTimer = setTimeout(() => {
+                    hideGlobalLoader();
+                }, autoHideMs);
+            }
+        }
+
+        function hideGlobalLoader() {
+            const overlay = document.getElementById('globalLoader');
+            if (!overlay) return;
+            overlay.classList.remove('active');
+        }
+
+        function saveCart() {
+            try {
+                sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+            } catch (error) {
+                console.warn('Unable to save cart:', error);
+            }
+        }
+
+        function loadCart() {
+            try {
+                const raw = sessionStorage.getItem(CART_STORAGE_KEY);
+                if (!raw) return;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed)) {
+                    cart = parsed;
+                }
+            } catch (error) {
+                console.warn('Unable to load cart:', error);
+            }
+            updateCartDisplay();
+        }
+
+        function getClientInfo() {
+            return {
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                platform: navigator.platform,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown'
+            };
+        }
+
+        function getReceiptId() {
+            let receiptId = sessionStorage.getItem(RECEIPT_STORAGE_KEY);
+            if (!receiptId) {
+                const stamp = Date.now().toString(36).toUpperCase();
+                const rand = Math.random().toString(36).slice(2, 8).toUpperCase();
+                receiptId = `EMO-${stamp}-${rand}`;
+                sessionStorage.setItem(RECEIPT_STORAGE_KEY, receiptId);
+            }
+            return receiptId;
+        }
+
+        function sendCheckoutWebhook(eventType) {
+            const total = cart.reduce((sum, item) => sum + (Number(item.total) || 0), 0);
+            const email = sessionStorage.getItem(EMAIL_STORAGE_KEY) || '';
+            const payload = {
+                event: eventType,
+                receiptId: getReceiptId(),
+                email,
+                items: cart,
+                total,
+                client: getClientInfo()
+            };
+
+            fetch('/api/checkout/webhook', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+                keepalive: true
+            }).catch(() => {});
+        }
+
+        // Theme Management
+        function toggleThemeDropdown() {
+            const dropdown = document.getElementById('themeDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function setTheme(theme) {
+            localStorage.setItem('theme', theme);
+            applyTheme(theme);
+            toggleThemeDropdown();
+            updateThemeOptions();
+        }
+
+        function applyTheme(theme) {
+            let isDark = false;
+
+            if (theme === 'system') {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else if (theme === 'dark') {
+                isDark = true;
+            }
+
+            document.body.classList.toggle('dark-theme', isDark);
+            updateLogo(isDark);
+        }
+
+        function updateLogo(isDark) {
+            const logoImage = document.querySelector('.logo-image');
+            if (!logoImage) return;
+
+            logoImage.src = isDark ? '/images/brand%20white.png' : '/images/brand.png';
+        }
+
+        function updateThemeOptions() {
+            const currentTheme = localStorage.getItem('theme') || 'system';
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.theme === currentTheme) {
+                    option.classList.add('active');
+                }
+            });
+
+            const themeIcon = document.getElementById('themeIcon');
+            if (themeIcon) {
+                const iconMap = {
+                    system: "<svg viewBox='0 0 24 24' aria-hidden='true'><rect x='3' y='4' width='18' height='12' rx='2'></rect><path d='M8 20h8'></path></svg>",
+                    light: "<svg viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='4'></circle><path d='M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'></path></svg>",
+                    dark: "<svg viewBox='0 0 24 24' aria-hidden='true'><path d='M21 14.5A9 9 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z'></path></svg>"
+                };
+                themeIcon.innerHTML = iconMap[currentTheme];
+            }
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            applyTheme(savedTheme);
+            updateThemeOptions();
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.theme-toggle') && !e.target.closest('.theme-switcher')) {
+                const dropdown = document.getElementById('themeDropdown');
+                if (dropdown) dropdown.style.display = 'none';
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            if (savedTheme === 'system') {
+                applyTheme('system');
+            }
+        });
+
+        // Load theme on page load
+        loadTheme();
+
+        initModalState('productModal', 350, ['/images/back%20with%20stuff.png']);
+        initModalState('padsModal', 30, ['/images/surron%20ultra%20oem%20pads.png', '/images/surron%20ultra%20oem%20pads1.png']);
+        initModalState('rotorModal', 20, ['/images/rotor.png']);
+        initModalState('wrapModal', 25, ['/images/carbon%20wrap.png', '/images/carbon%20wrap1.png', '/images/carbon%20wrap2.png', '/images/carbon%20wrap3.png', '/images/carbon%20wrap4.png']);
+        initModalState('bajaModal', 20, ['/images/white%20baja.png', '/images/orange%20%20baja.png']);
+
+        function initModalState(modalId, basePrice, images) {
+            modalState[modalId] = {
+                quantity: 1,
+                price: basePrice,
+                images: images,
+                previousTotal: basePrice
+            };
+        }
+
+        function getModal(modalId) {
+            return document.getElementById(modalId);
+        }
+
+        function openModal(modalId) {
+            const modal = getModal(modalId);
+            if (!modal) return;
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+            updateTotalPrice(modalId);
+            requestAnimationFrame(() => {
+                modal.classList.add('open');
+            });
+        }
+
+        function closeModal(modalId) {
+            const modal = getModal(modalId);
+            if (!modal) return;
+            modal.classList.remove('open');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            }, 250);
+        }
+
+        function openProductModal() {
+            openModal('productModal');
+        }
+
+        function closeProductModal() {
+            closeModal('productModal');
+        }
+
+        function changeMainImage(modalId, src, element) {
+            const modal = getModal(modalId);
+            if (!modal) return;
+            const mainImage = modal.querySelector('.modal-main-image');
+            if (mainImage) mainImage.src = src;
+            modal.querySelectorAll('.thumbnail').forEach(img => img.classList.remove('active'));
+            if (element) element.classList.add('active');
+        }
+
+        const MAX_QUANTITY = 20;
+
+        function increaseQuantity(modalId) {
+            const modal = getModal(modalId);
+            const state = modalState[modalId];
+            if (!modal || !state) return;
+            if (state.quantity < MAX_QUANTITY) {
+                state.quantity++;
+            }
+            const qtyInput = modal.querySelector('.quantity-input');
+            if (qtyInput) qtyInput.value = state.quantity;
+            updateTotalPrice(modalId);
+        }
+
+        function decreaseQuantity(modalId) {
+            const modal = getModal(modalId);
+            const state = modalState[modalId];
+            if (!modal || !state) return;
+            if (state.quantity > 1) {
+                state.quantity--;
+                const qtyInput = modal.querySelector('.quantity-input');
+                if (qtyInput) qtyInput.value = state.quantity;
+                updateTotalPrice(modalId);
+            }
+        }
+
+        function updateTotalPrice(modalId) {
+            const modal = getModal(modalId);
+            const state = modalState[modalId];
+            if (!modal || !state) return;
+
+            const totalPrice = state.price * state.quantity;
+            const priceEl = modal.querySelector('.modal-price');
+            const direction = totalPrice > state.previousTotal ? 'up' : totalPrice < state.previousTotal ? 'down' : null;
+
+            if (priceEl) {
+                priceEl.textContent = '$' + totalPrice.toFixed(2);
+
+                if (direction) {
+                    priceEl.classList.remove('price-up', 'price-down');
+                    void priceEl.offsetWidth;
+                    priceEl.classList.add(direction === 'up' ? 'price-up' : 'price-down');
+                    setTimeout(() => {
+                        priceEl.classList.remove('price-up', 'price-down');
+                    }, 300);
+                }
+            }
+
+            state.previousTotal = totalPrice;
+        }
+
+        function selectOption(modalId, element, price, mainImage, images) {
+            const modal = getModal(modalId);
+            const state = modalState[modalId];
+            if (!modal || !state) return;
+
+            modal.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            state.price = price;
+            state.images = images;
+            updateTotalPrice(modalId);
+
+            const mainImageEl = modal.querySelector('.modal-main-image');
+            if (mainImageEl) mainImageEl.src = mainImage;
+
+            const thumbnailsContainer = modal.querySelector('.modal-thumbnails');
+            if (thumbnailsContainer) {
+                thumbnailsContainer.innerHTML = images.map((img, index) => `
+                    <img src="${img}" alt="Image ${index + 1}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage('${modalId}', '${img}', this)">
+                `).join('');
+            }
+        }
+
+        function addToCartFromModal(modalId, fallbackName) {
+            const modal = getModal(modalId);
+            const state = modalState[modalId];
+            if (!modal || !state) return;
+
+            const selectedOption = modal.querySelector('.option-item.selected .option-name');
+            const productName = selectedOption ? selectedOption.textContent : fallbackName;
+
+            const item = {
+                id: Date.now(),
+                name: productName,
+                price: state.price,
+                quantity: state.quantity,
+                total: state.price * state.quantity
+            };
+
+            cart.push(item);
+            updateCartDisplay();
+            closeModal(modalId);
+            state.quantity = 1;
+            const qtyInput = modal.querySelector('.quantity-input');
+            if (qtyInput) qtyInput.value = 1;
+        }
+
+        function openCart() {
+            document.getElementById('cartSidebar').classList.add('open');
+            document.getElementById('cartOverlay').classList.add('open');
+        }
+
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('cartOverlay').classList.remove('open');
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+                cartTotalElement.textContent = '$0.00';
+                saveCart();
+                return;
+            }
+            
+            let total = 0;
+            cartItemsContainer.innerHTML = cart.map(item => {
+                total += item.total;
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <p class="cart-item-name">${item.name}</p>
+                            <p class="cart-item-details">Qty: ${item.quantity} × $${item.price.toFixed(2)}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <p class="cart-item-total">$${item.total.toFixed(2)}</p>
+                            <button class="cart-item-remove" onclick="removeFromCart(${item.id})">×</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            cartTotalElement.textContent = '$' + total.toFixed(2);
+            saveCart();
+        }
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCartDisplay();
+        }
+
+        async function fetchJsonSafe(url, options) {
+            const response = await fetch(url, options);
+            const text = await response.text();
+            let data = null;
+            if (text) {
+                try {
+                    data = JSON.parse(text);
+                } catch (error) {
+                    data = null;
+                }
+            }
+            return { response, data, text };
+        }
+
+        async function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            saveCart();
+            showGlobalLoader();
+            setTimeout(() => {
+                window.location.href = '/checkout';
+            }, 150);
+        }
+
+        function openCryptoModal() {
+            const modal = document.getElementById('cryptoModal');
+            if (!modal || !currentOrder) return;
+
+            document.getElementById('cryptoUsdTotal').textContent = '$' + currentOrder.usdTotal.toFixed(2);
+
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+            requestAnimationFrame(() => {
+                modal.classList.add('open');
+            });
+        }
+
+        function closeCryptoModal() {
+            const modal = document.getElementById('cryptoModal');
+            if (!modal) return;
+            modal.classList.remove('open');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            }, 250);
+
+            if (cryptoPollTimer) {
+                clearInterval(cryptoPollTimer);
+                cryptoPollTimer = null;
+            }
+        }
+
+        function selectCryptoCoin(coin) {
+            if (!currentOrder || !currentOrder.coins || !currentOrder.coins[coin]) return;
+            currentCoin = coin;
+
+            document.querySelectorAll('.crypto-coin').forEach(button => {
+                button.classList.toggle('active', button.dataset.coin === coin);
+            });
+
+            const data = currentOrder.coins[coin];
+            document.getElementById('cryptoAddress').textContent = data.address;
+            document.getElementById('cryptoAmount').textContent = data.amount.toFixed(data.displayDecimals) + ' ' + coin.toUpperCase();
+            document.getElementById('cryptoStatus').textContent = '';
+            document.getElementById('cryptoStatus').classList.remove('success', 'error');
+            
+            const progressContainer = document.getElementById('cryptoProgressContainer');
+            if (progressContainer) progressContainer.style.display = 'none';
+            
+            const paidBtn = document.getElementById('cryptoPaidBtn');
+            if (paidBtn) {
+                paidBtn.textContent = 'I have paid';
+                paidBtn.disabled = false;
+                paidBtn.classList.remove('loading');
+            }
+
+            if (cryptoPollTimer) {
+                clearInterval(cryptoPollTimer);
+                cryptoPollTimer = null;
+            }
+        }
+
+        function updateCryptoProgress(received, required) {
+            const fill = document.getElementById('cryptoProgressFill');
+            const text = document.getElementById('cryptoProgressText');
+            const meta = document.getElementById('cryptoReceived');
+            if (!fill || !text || !meta) return;
+
+            const percent = required > 0 ? Math.min(100, (received / required) * 100) : 0;
+            fill.style.width = percent.toFixed(2) + '%';
+            text.textContent = Math.round(percent) + '%';
+            meta.textContent = `Received ${received} / ${required}`;
+        }
+
+        async function checkCryptoPayment() {
+            if (!currentOrder) return;
+            
+            const statusEl = document.getElementById('cryptoStatus');
+            const paidBtn = document.getElementById('cryptoPaidBtn');
+            const progressContainer = document.getElementById('cryptoProgressContainer');
+            const progressFill = document.getElementById('cryptoProgressFill');
+            let statusData = null;
+            
+            progressContainer.style.display = 'flex';
+            paidBtn.classList.add('loading');
+            paidBtn.textContent = 'Checking payment...';
+            paidBtn.disabled = true;
+            statusEl.textContent = '';
+            statusEl.classList.remove('success', 'error');
+            showGlobalLoader();
+            
+            if (progressFill) progressFill.classList.add('loading');
+
+            try {
+                const { response, data, text } = await fetchJsonSafe(`/api/crypto/order/${currentOrder.orderId}/${currentCoin}/status`);
+                if (!response.ok) {
+                    const htmlHint = text && text.trim().startsWith('<!DOCTYPE')
+                        ? 'Server returned HTML. Is the server running with the /api routes?'
+                        : '';
+                    throw new Error(data?.error || `Unable to check payment. ${htmlHint}`.trim());
+                }
+
+                if (!data) {
+                    throw new Error('Server did not return JSON.');
+                }
+
+                statusData = data;
+                const received = Number.parseFloat(statusData.received) || 0;
+                const required = Number.parseFloat(statusData.required) || 0;
+                updateCryptoProgress(received, required);
+
+                if (statusData.status === 'paid') {
+                    updateCryptoProgress(required, required);
+                    statusEl.textContent = '✓ Payment confirmed! Your order has been received.';
+                    statusEl.classList.add('success');
+                    paidBtn.style.display = 'none';
+                    if (cryptoPollTimer) {
+                        clearInterval(cryptoPollTimer);
+                        cryptoPollTimer = null;
+                    }
+                } else {
+                    statusEl.textContent = `Waiting for payment... ${statusData.received} / ${statusData.required}`;
+                    if (!cryptoPollTimer) {
+                        cryptoPollTimer = setInterval(checkCryptoPayment, 15000);
+                    }
+                }
+            } catch (error) {
+                statusEl.textContent = 'Unable to verify payment. Please try again.';
+                statusEl.classList.add('error');
+                paidBtn.textContent = 'Check again';
+                paidBtn.disabled = false;
+                paidBtn.classList.remove('loading');
+            } finally {
+                hideGlobalLoader();
+                if (progressFill) progressFill.classList.remove('loading');
+                if (statusData && statusData.status !== 'paid') {
+                    paidBtn.textContent = 'Check again';
+                    paidBtn.disabled = false;
+                    paidBtn.classList.remove('loading');
+                }
+            }
+        }
+
+        function showTos() {
+            document.getElementById('tosOverlay').classList.add('open');
+            document.body.classList.add('tos-open');
+        }
+
+        function acceptTos() {
+            localStorage.setItem('tosAccepted', 'true');
+            document.getElementById('tosOverlay').classList.remove('open');
+            document.body.classList.remove('tos-open');
+        }
+
+        function declineTos() {
+            window.location.href = 'about:blank';
+            window.close();
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            if (localStorage.getItem('tosAccepted') !== 'true') {
+                showTos();
+            }
+            showGlobalLoader(450);
+
+            const searchInput = document.getElementById('productSearchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', applyFilters);
+                searchInput.addEventListener('change', applyFilters);
+                searchInput.addEventListener('input', () => {
+                    const searchShell = searchInput.closest('.site-search');
+                    if (!searchShell) return;
+                    searchShell.classList.add('is-typing');
+                    clearTimeout(searchShell._typingTimer);
+                    searchShell._typingTimer = setTimeout(() => {
+                        searchShell.classList.remove('is-typing');
+                    }, 260);
+                });
+            }
+            const searchForm = document.querySelector('.site-search');
+            if (searchForm) {
+                searchForm.addEventListener('reset', () => {
+                    setTimeout(applyFilters, 0);
+                });
+            }
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get('q');
+            if (searchInput && query) {
+                searchInput.value = query;
+            }
+            applyFilters();
+        });
+
+        let activeCategory = 'all';
+
+        function applyFilters() {
+            const query = (document.getElementById('productSearchInput')?.value || '').trim().toLowerCase();
+            const products = document.querySelectorAll('.product-card');
+            let visibleCount = 0;
+
+            products.forEach(product => {
+                const matchesCategory = activeCategory === 'all' || product.dataset.category === activeCategory;
+                const title = product.querySelector('h3')?.textContent || '';
+                const description = product.querySelector('.description')?.textContent || '';
+                const text = `${title} ${description}`.toLowerCase();
+                const matchesQuery = !query || text.includes(query);
+                const isVisible = matchesCategory && matchesQuery;
+                product.style.display = isVisible ? 'block' : 'none';
+                if (isVisible) {
+                    visibleCount += 1;
+                }
+            });
+
+            const noResults = document.getElementById('noResultsMessage');
+            if (noResults) {
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+        }
+
+        function filterCategory(category) {
+            const products = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.category-btn');
+
+            showGlobalLoader(300);
+
+            activeCategory = category;
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            applyFilters();
+        }
+
+        window.onclick = function(event) {
+            document.querySelectorAll('.product-modal').forEach(modal => {
+                if (event.target === modal) {
+                    if (modal.id === 'cryptoModal') {
+                        closeCryptoModal();
+                    } else {
+                        closeModal(modal.id);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

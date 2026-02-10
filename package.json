@@ -1,0 +1,17 @@
+{
+  "name": "emotohl",
+  "version": "1.0.0",
+  "description": "EmotoHI - Premium Ultrabe Breaks E-commerce Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["ecommerce", "ultrabe", "hawaii", "products"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9"
+  }
+}
