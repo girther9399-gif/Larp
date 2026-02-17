@@ -6,6 +6,89 @@
     box-sizing: border-box;
 }
 
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5);
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(155, 155, 155, 0.7);
+}
+
+/* Promotional Banner */
+.promo-banner {
+    background: linear-gradient(90deg, rgba(40, 40, 40, 0.95), rgba(50, 50, 50, 0.95));
+    color: #e0e0e0;
+    padding: 8px 20px;
+    text-align: center;
+    position: relative;
+    font-weight: 400;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.promo-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: slideIn 20s linear infinite;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.promo-text {
+    font-size: 0.85rem;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
+
+.promo-text strong {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 500;
+    margin: 0 1px;
+    color: #ffffff;
+}
+
+.promo-timer {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    font-style: italic;
+    margin-left: 20px;
+}
+
+/* Adjust navbar position when banner is visible */
+.navbar {
+    margin-top: 0;
+    transition: margin-top 0.3s ease;
+}
+
+body.promo-closed .navbar {
+    margin-top: 0;
+}
+
 /* Sold Out Styles */
 .option-item.sold-out {
     position: relative;

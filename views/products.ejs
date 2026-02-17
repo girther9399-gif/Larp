@@ -13,6 +13,14 @@
 </head>
 
 <body>
+    <!-- Promotional Banner -->
+    <div class="promo-banner">
+        <div class="promo-content">
+            <span class="promo-text">Use code <strong>EMOTOHI10</strong> for 10% off</span>
+            <span class="promo-timer">Limited time offer</span>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -1148,6 +1156,24 @@
 
             // Load theme on page load
             loadTheme();
+
+            // Promotional Banner Functions
+            function closePromoBanner() {
+                const banner = document.querySelector('.promo-banner');
+                if (banner) {
+                    banner.style.display = 'none';
+                    document.body.classList.add('promo-closed');
+                    // Store that user closed the banner
+                    localStorage.setItem('promoBannerClosed', 'true');
+                }
+            }
+
+            // Check if banner was previously closed
+            if (localStorage.getItem('promoBannerClosed') === 'true') {
+                document.body.classList.add('promo-closed');
+                const banner = document.querySelector('.promo-banner');
+                if (banner) banner.style.display = 'none';
+            }
 
             initModalState('productModal', 350, ['/images/back%20with%20stuff.png']);
             initModalState('padsModal', 30, ['/images/surron%20ultra%20oem%20pads.png', '/images/surron%20ultra%20oem%20pads1.png']);
