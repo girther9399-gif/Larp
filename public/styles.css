@@ -6,6 +6,45 @@
     box-sizing: border-box;
 }
 
+/* Sold Out Styles */
+.option-item.sold-out {
+    position: relative;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.option-item.sold-out .option-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.sold-out-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 1;
+}
+
+.option-item.sold-out:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.option-item.sold-out .option-info {
+    opacity: 0.7;
+}
+
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;

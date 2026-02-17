@@ -107,17 +107,18 @@
                 <div class="product-options">
                     <label class="options-label">Select Option:</label>
                     <div class="options-list">
-                        <div class="option-item selected"
+                        <div class="option-item sold-out"
                             onclick="selectOption('motocutzModal', this, 45, '/images/black%20plate.png', ['/images/black%20plate.png'])">
                             <div class="option-image">
                                 <img src="/images/black%20plate.png" alt="Black">
+                                <div class="sold-out-overlay">SOLD OUT</div>
                             </div>
                             <div class="option-info">
                                 <p class="option-name">MOTOCUTZ FRONT NUMBER PLATE BLACK</p>
                                 <p class="option-price">$45.00</p>
                             </div>
                         </div>
-                        <div class="option-item"
+                        <div class="option-item selected"
                             onclick="selectOption('motocutzModal', this, 45, '/images/grey%20plate.png', ['/images/grey%20plate.png'])">
                             <div class="option-image">
                                 <img src="/images/grey%20plate.png" alt="Grey">
@@ -974,6 +975,11 @@
         <script>
             let cart = [];
             const modalState = {};
+            
+            // Track sold out items
+            const soldOutItems = {
+                'MOTOCUTZ FRONT NUMBER PLATE BLACK': true
+            };
             let currentOrder = null;
             let currentCoin = 'btc';
             let cryptoPollTimer = null;
@@ -1257,6 +1263,12 @@
                 const state = modalState[modalId];
                 if (!modal || !state) return;
 
+                // Check if the clicked option is sold out
+                const optionName = element.querySelector('.option-name')?.textContent;
+                if (optionName && soldOutItems[optionName]) {
+                    return; // Don't allow selection of sold out items
+                }
+
                 modal.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
                 element.classList.add('selected');
                 state.price = price;
@@ -1281,6 +1293,12 @@
 
                 const selectedOption = modal.querySelector('.option-item.selected .option-name');
                 const productName = selectedOption ? selectedOption.textContent : fallbackName;
+
+                // Check if the selected item is sold out
+                if (soldOutItems[productName]) {
+                    alert('This item is currently sold out and cannot be added to cart.');
+                    return;
+                }
 
                 const item = {
                     id: Date.now(),
