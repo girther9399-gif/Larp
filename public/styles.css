@@ -65,6 +65,7 @@ body {
     line-height: 1.5;
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 body.modal-open {
@@ -286,6 +287,28 @@ body.dark-theme .theme-option:hover {
     stroke-linejoin: round;
 }
 
+.cart-icon {
+    position: relative;
+    /* other styles remain */
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff0000;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--nav-bg);
+}
+
 .cart-icon:hover {
     background: var(--text-color);
     color: var(--bg-color);
@@ -355,9 +378,11 @@ body.dark-theme .cart-icon svg {
     0% {
         transform: scale(1.05) translateX(0) translateY(0);
     }
+
     50% {
         transform: scale(1.06) translateX(-3px) translateY(-3px);
     }
+
     100% {
         transform: scale(1.05) translateX(0) translateY(0);
     }
@@ -376,7 +401,7 @@ body.dark-theme .cart-icon svg {
     text-align: center;
     color: #ffffff;
     z-index: 2;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
 }
 
 .hero-overlay h1 {
@@ -386,15 +411,18 @@ body.dark-theme .cart-icon svg {
     margin-bottom: 1.25rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
     animation: fadeInUp 0.8s ease-out, heroPulse 3s ease-in-out infinite;
 }
 
 @keyframes heroPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
         opacity: 1;
     }
+
     50% {
         transform: scale(1.02);
         opacity: 0.95;
@@ -407,7 +435,7 @@ body.dark-theme .cart-icon svg {
     max-width: 650px;
     font-weight: 400;
     letter-spacing: 0.02em;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
     animation: fadeInUp 1s ease-out 0.2s backwards, heroPulse 3s ease-in-out infinite;
 }
 
@@ -416,6 +444,7 @@ body.dark-theme .cart-icon svg {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -440,9 +469,12 @@ body.dark-theme .cart-icon svg {
 }
 
 @keyframes buttonGlow {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 4px 15px rgba(0, 102, 255, 0.4);
     }
+
     50% {
         box-shadow: 0 4px 20px rgba(0, 102, 255, 0.6);
     }
@@ -493,12 +525,12 @@ body.dark-theme .cart-icon svg {
 /* Motion Band */
 .motion-band {
     padding: 1.25rem 0;
-    background: linear-gradient(120deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02));
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
     overflow: hidden;
 }
 
 body.dark-theme .motion-band {
-    background: linear-gradient(120deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
 }
 
 .motion-track {
@@ -523,6 +555,7 @@ body.dark-theme .motion-band {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(calc(-1 * var(--motion-shift)));
     }
@@ -536,7 +569,7 @@ body.dark-theme .motion-band {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 999px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
     white-space: nowrap;
     flex: 0 0 auto;
 }
@@ -609,7 +642,7 @@ body.dark-theme .motion-band {
     position: absolute;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
     border: 1px solid var(--card-border);
     background: var(--card-bg);
     animation: floatSoft 6s ease-in-out infinite;
@@ -645,9 +678,12 @@ body.dark-theme .motion-band {
 }
 
 @keyframes floatSoft {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px);
     }
+
     50% {
         transform: translateY(-10px);
     }
@@ -680,6 +716,7 @@ body.dark-theme .motion-band {
 }
 
 @media (max-width: 600px) {
+
     .scroll-gallery,
     .showcase,
     .featured {
@@ -742,7 +779,7 @@ body.dark-theme .motion-band {
     min-height: 320px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -773,6 +810,7 @@ body.dark-theme .motion-band {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     .motion-track,
     .showcase-card,
     .hero-banner-image,
@@ -878,7 +916,7 @@ body.dark-theme .motion-band {
 /* Products Grid */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
     max-width: 1200px;
@@ -1525,6 +1563,7 @@ body.dark-theme .signin-card {
 
 /* Responsive */
 @media (max-width: 768px) {
+
     /* Hide theme toggle on mobile */
     .theme-switcher,
     .theme-dropdown {
@@ -1538,19 +1577,23 @@ body.dark-theme .signin-card {
 
     .nav-container {
         padding: 0 0.75rem;
-        gap: 0.5rem;
+        gap: 0.2rem;
         flex-direction: row;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         align-items: center;
+        justify-content: space-between;
     }
 
     .logo {
         font-size: 1rem;
         flex-shrink: 0;
+        margin-right: auto;
     }
 
     .logo-text-image {
-        height: 20px;
+        height: 85px;
+        margin-top: -5px;
+        margin-left: -10px;
     }
 
     .logo-image {
@@ -1559,10 +1602,11 @@ body.dark-theme .signin-card {
     }
 
     .nav-links {
-        gap: 0.4rem 0.6rem;
-        flex-wrap: wrap;
+        gap: 0.8rem;
+        flex-wrap: nowrap;
         align-items: center;
         font-size: 0.8rem;
+        margin-left: 0;
     }
 
     .nav-links a {
@@ -1798,6 +1842,7 @@ body.dark-theme .signin-card {
 }
 
 @media (max-width: 480px) {
+
     /* Navigation */
     .navbar {
         padding: 0.4rem 0;
@@ -2386,6 +2431,7 @@ body.dark-theme .signin-card {
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -2438,18 +2484,22 @@ body.dark-theme .signin-card {
         transform: scale(0.5) translateY(-200px);
         opacity: 0;
     }
+
     25% {
         transform: scale(0.75) translateY(-100px);
         opacity: 1;
     }
+
     50% {
         transform: scale(1) translateY(0px);
         opacity: 1;
     }
+
     75% {
         transform: scale(0.5) translateY(50px);
         opacity: 1;
     }
+
     100% {
         transform: scale(0) translateY(100px);
         opacity: 0;
@@ -2461,18 +2511,22 @@ body.dark-theme .signin-card {
         transform: scale(0.5) rotateZ(-10deg) translateY(-200px) translateX(-100px);
         opacity: 0;
     }
+
     25% {
         transform: scale(1) rotateZ(-5deg) translateY(-100px) translateX(-50px);
         opacity: 1;
     }
+
     50% {
         transform: scale(1) rotateZ(0deg) translateY(0px) translateX(-25px);
         opacity: 1;
     }
+
     75% {
         transform: scale(0.5) rotateZ(5deg) translateY(50px) translateX(0px);
         opacity: 1;
     }
+
     100% {
         transform: scale(0) rotateZ(10deg) translateY(100px) translateX(25px);
         opacity: 0;
@@ -2484,18 +2538,22 @@ body.dark-theme .signin-card {
         transform: scale(0.5) rotateZ(10deg) translateY(-200px) translateX(100px);
         opacity: 0;
     }
+
     25% {
         transform: scale(1) rotateZ(5deg) translateY(-100px) translateX(50px);
         opacity: 1;
     }
+
     50% {
         transform: scale(1) rotateZ(0deg) translateY(0px) translateX(25px);
         opacity: 1;
     }
+
     75% {
         transform: scale(0.5) rotateZ(-5deg) translateY(50px) translateX(0px);
         opacity: 1;
     }
+
     100% {
         transform: scale(0) rotateZ(-10deg) translateY(100px) translateX(-25px);
         opacity: 0;
@@ -2979,6 +3037,7 @@ body.dark-theme .payment-card {
     0% {
         background-position: 200% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -3023,9 +3082,12 @@ body.dark-theme .payment-card {
 }
 
 @keyframes successPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.02);
     }
@@ -3091,9 +3153,12 @@ body.dark-theme .payment-card {
 }
 
 @keyframes buttonPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
@@ -3192,6 +3257,7 @@ body:not(.dark-theme) .crypto-status.error {
     0% {
         background-position: 0% 50%;
     }
+
     100% {
         background-position: 200% 50%;
     }
@@ -3409,6 +3475,7 @@ body:not(.dark-theme) .crypto-status.error {
     visibility: hidden;
     transition: all 0.3s ease;
 }
+
 .site-search {
     --search-width: 320px;
     --search-height: 44px;
@@ -3426,10 +3493,12 @@ body:not(.dark-theme) .crypto-status.error {
     border-radius: 2px;
     transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
+
 .site-search:focus-within {
     box-shadow: 0 0 0 3px var(--focus-ring);
     transform: translateY(-1px);
 }
+
 .site-search button {
     border: none;
     background: none;
@@ -3439,6 +3508,7 @@ body:not(.dark-theme) .crypto-status.error {
     justify-content: center;
     cursor: pointer;
 }
+
 .site-search-input {
     flex: 1;
     height: 100%;
@@ -3448,22 +3518,27 @@ body:not(.dark-theme) .crypto-status.error {
     font-size: 0.95rem;
     letter-spacing: 0.02em;
 }
+
 .site-search-input:focus {
     outline: none;
 }
+
 .site-search-reset {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease;
 }
-.site-search-input:not(:placeholder-shown) ~ .site-search-reset {
+
+.site-search-input:not(:placeholder-shown)~.site-search-reset {
     opacity: 1;
     visibility: visible;
 }
+
 .site-search svg {
     width: 18px;
     height: 18px;
 }
+
 @media (max-width: 768px) {
     .site-search {
         --search-width: 120px;
