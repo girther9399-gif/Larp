@@ -31,7 +31,8 @@
     color: #e0e0e0;
     padding: 8px 20px;
     text-align: center;
-    position: relative;
+    position: sticky;
+    top: 0;
     font-weight: 400;
     font-size: 0.85rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
