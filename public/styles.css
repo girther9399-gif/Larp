@@ -4006,15 +4006,156 @@ body:not(.dark-theme) .crypto-status.error {
 }
 
 .come-back-message span {
-    display: block;
-    animation: pulse 1.5s ease-in-out infinite;
+display: block;
+animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
-    0%, 100% {
+0%, 100% {
+transform: scale(1);
+}
+50% {
+transform: scale(1.05);
+}
+}
+
+/* Modern Promo Code Notifications */
+.promo-notification {
+position: absolute;
+top: 100%;
+left: 50%;
+transform: translateX(-50%) translateY(-8px);
+padding: 12px 20px;
+border-radius: 8px;
+font-size: 0.875rem;
+font-weight: 500;
+opacity: 0;
+visibility: hidden;
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+pointer-events: none;
+z-index: 10;
+white-space: nowrap;
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+}
+
+.promo-notification.show {
+opacity: 1;
+visibility: visible;
+transform: translateX(-50%) translateY(0);
+}
+
+.promo-notification.success {
+background: rgba(16, 185, 129, 0.95);
+color: white;
+border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.promo-notification.error {
+background: rgba(239, 68, 68, 0.95);
+color: white;
+border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.promo-notification.neutral {
+background: rgba(107, 114, 128, 0.95);
+color: white;
+border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+/* Subtle input feedback */
+.promo-row.validating input {
+border-color: rgba(59, 130, 246, 0.5);
+box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.1);
+}
+
+.promo-row.success input {
+border-color: rgba(16, 185, 129, 0.3);
+box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.1);
+}
+
+.promo-row.error input {
+border-color: rgba(239, 68, 68, 0.3);
+box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.1);
+}
+
+.promo-row .promo-apply {
+transition: all 0.2s ease;
+}
+
+.promo-row .promo-apply:hover {
+transform: translateY(-1px);
+}
+
+.promo-row .promo-apply:active {
+transform: translateY(0);
+}
+
+/* Modern Promo Code Input Animations */
+.promo-row input.success-pulse {
+    animation: successPulse 0.8s ease-out;
+    border: 2px solid #10b981 !important;
+    box-shadow: 0px 0px 0px 7px rgb(16, 185, 129, 20%) !important;
+}
+
+.promo-row input.error-pulse {
+    animation: errorPulse 0.8s ease-out;
+    border: 2px solid #ef4444 !important;
+    box-shadow: 0px 0px 0px 7px rgb(239, 68, 68, 20%) !important;
+}
+
+@keyframes successPulse {
+    0% {
+        border: 2px solid #10b981 !important;
+        box-shadow: 0px 0px 0px 7px rgb(16, 185, 129, 20%) !important;
         transform: scale(1);
     }
+    25% {
+        border: 2px solid #10b981 !important;
+        box-shadow: 0px 0px 0px 8px rgb(16, 185, 129, 25%) !important;
+        transform: scale(1.02);
+    }
     50% {
-        transform: scale(1.05);
+        border: 2px solid #10b981 !important;
+        box-shadow: 0px 0px 0px 10px rgb(16, 185, 129, 35%) !important;
+        transform: scale(1.03);
+    }
+    75% {
+        border: 2px solid #10b981 !important;
+        box-shadow: 0px 0px 0px 8px rgb(16, 185, 129, 25%) !important;
+        transform: scale(1.02);
+    }
+    100% {
+        border: revert !important;
+        box-shadow: revert !important;
+        transform: scale(1);
+    }
+}
+
+@keyframes errorPulse {
+    0% {
+        border: 2px solid #ef4444 !important;
+        box-shadow: 0px 0px 0px 7px rgb(239, 68, 68, 20%) !important;
+        transform: scale(1);
+    }
+    25% {
+        border: 2px solid #ef4444 !important;
+        box-shadow: 0px 0px 0px 8px rgb(239, 68, 68, 25%) !important;
+        transform: scale(1.02);
+    }
+    50% {
+        border: 2px solid #ef4444 !important;
+        box-shadow: 0px 0px 0px 10px rgb(239, 68, 68, 35%) !important;
+        transform: scale(1.03);
+    }
+    75% {
+        border: 2px solid #ef4444 !important;
+        box-shadow: 0px 0px 0px 8px rgb(239, 68, 68, 25%) !important;
+        transform: scale(1.02);
+    }
+    100% {
+        border: revert !important;
+        box-shadow: revert !important;
+        transform: scale(1);
     }
 }

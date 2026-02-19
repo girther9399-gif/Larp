@@ -193,7 +193,6 @@
                         <input type="text" id="promoCode" name="promoCode" placeholder="Enter code">
                         <button type="button" id="promoApplyBtn" class="promo-apply">Apply</button>
                     </div>
-                    <p id="promoStatus" class="promo-status"></p>
                 </div>
                 <div id="summaryItems" class="summary-items"></div>
                 <div id="summaryEmpty" class="summary-empty">Your cart is empty. <a href="/products">Browse products</a>.</div>
@@ -598,25 +597,52 @@
 
         function applyPromoCode() {
             const input = document.getElementById('promoCode');
-            const status = document.getElementById('promoStatus');
-            if (!input || !status) return;
+            const applyBtn = document.getElementById('promoApplyBtn');
+            
+            if (!input || !applyBtn) return;
+
+            // Remove any existing animation classes
+            input.classList.remove('success-pulse', 'error-pulse');
 
             const raw = input.value.trim().toUpperCase();
             if (!raw) {
                 sessionStorage.removeItem(PROMO_CODE_KEY);
-                status.textContent = 'Promo cleared.';
                 renderSummary();
                 return;
             }
 
-            if (PROMO_CODES[raw]) {
-                sessionStorage.setItem(PROMO_CODE_KEY, raw);
-                status.textContent = `Promo ${raw} applied.`;
-            } else {
-                sessionStorage.removeItem(PROMO_CODE_KEY);
-                status.textContent = 'Invalid promo code.';
-            }
-            renderSummary();
+            // Add loading state
+            applyBtn.textContent = '...';
+            applyBtn.disabled = true;
+
+            setTimeout(() => {
+                if (PROMO_CODES[raw]) {
+                    // Success case - green pulse animation
+                    sessionStorage.setItem(PROMO_CODE_KEY, raw);
+                    input.classList.add('success-pulse');
+                    applyBtn.textContent = '✓';
+                    applyBtn.disabled = false;
+                    
+                    // Remove animation class after 0.8 seconds
+                    setTimeout(() => {
+                        input.classList.remove('success-pulse');
+                        applyBtn.textContent = 'Apply';
+                    }, 800);
+                } else {
+                    // Error case - red pulse animation
+                    sessionStorage.removeItem(PROMO_CODE_KEY);
+                    input.classList.add('error-pulse');
+                    applyBtn.textContent = '✗';
+                    applyBtn.disabled = false;
+                    
+                    // Remove animation class after 0.8 seconds
+                    setTimeout(() => {
+                        input.classList.remove('error-pulse');
+                        applyBtn.textContent = 'Apply';
+                    }, 800);
+                }
+                renderSummary();
+            }, 400);
         }
 
         function getAddressPayload() {
