@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products - EmotoHI</title>
+    <title>EmotoHI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1700,6 +1700,71 @@
             
             // Also check hash when it changes (for browser back/forward)
             window.addEventListener('hashchange', checkHashAndOpenModal);
+
+            // Tab visibility and come back title
+            let comeBackTimeout;
+            let isTabVisible = true;
+            let originalTitle = "EmotoHI";
+            let flashInterval;
+            let isFlashing = false;
+
+            function startFlashing() {
+                if (isFlashing) return;
+                isFlashing = true;
+                let showComeBack = true;
+                
+                flashInterval = setInterval(() => {
+                    document.title = showComeBack ? "Hey come back!" : originalTitle;
+                    showComeBack = !showComeBack;
+                }, 500); // Flash every 500ms
+            }
+
+            function stopFlashing() {
+                if (!isFlashing) return;
+                isFlashing = false;
+                if (flashInterval) {
+                    clearInterval(flashInterval);
+                    flashInterval = null;
+                }
+                document.title = originalTitle;
+            }
+
+            // Handle page visibility changes
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    // User left the tab
+                    isTabVisible = false;
+                    // Start flashing instantly
+                    startFlashing();
+                } else {
+                    // User returned to the tab
+                    isTabVisible = true;
+                    // Clear any pending title change
+                    if (comeBackTimeout) {
+                        clearTimeout(comeBackTimeout);
+                    }
+                    // Stop flashing immediately when they come back
+                    stopFlashing();
+                }
+            });
+
+            // Handle window focus/blur as backup
+            window.addEventListener('blur', function() {
+                if (isTabVisible) {
+                    isTabVisible = false;
+                    startFlashing();
+                }
+            });
+
+            window.addEventListener('focus', function() {
+                if (!isTabVisible) {
+                    isTabVisible = true;
+                    if (comeBackTimeout) {
+                        clearTimeout(comeBackTimeout);
+                    }
+                    stopFlashing();
+                }
+            });
         </script>
 </body>
 
