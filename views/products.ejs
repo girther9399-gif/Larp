@@ -182,7 +182,7 @@
         </div>
         <div class="products-grid">
             <!-- Surron Ultra Bee Breaks -->
-            <div class="product-card" data-category="brakes" onclick="openProductModal()" style="cursor: pointer;">
+            <div id="ultra-breaks" class="product-card" data-category="brakes" onclick="openProductModal()" style="cursor: pointer;">
                 <div class="sale-badge">SALE</div>
                 <div class="product-image">
                     <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks"
@@ -201,7 +201,7 @@
             </div>
 
             <!-- Surron Brake Pads -->
-            <div class="product-card" data-category="brakes" onclick="openModal('padsModal')" style="cursor: pointer;">
+            <div id="brake-pads" class="product-card" data-category="brakes" onclick="openModal('padsModal')" style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads"
                         style="width: 100%; height: 100%; object-fit: cover;">
@@ -222,7 +222,7 @@
             </div>
 
             <!-- Rotor -->
-            <div class="product-card" data-category="brakes" onclick="openModal('rotorModal')" style="cursor: pointer;">
+            <div id="rotor" class="product-card" data-category="brakes" onclick="openModal('rotorModal')" style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/rotor.png" alt="Rotor" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -260,7 +260,7 @@
             </div>
 
             <!-- Baja Lights (No Switch) -->
-            <div class="product-card" data-category="accessories" onclick="openModal('bajaModal')"
+            <div id="baja-lights" class="product-card" data-category="accessories" onclick="openModal('bajaModal')"
                 style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/white%20baja.png" alt="Baja Lights"
@@ -945,7 +945,7 @@
                     <li>All sales are final. No refunds or exchanges.</li>
                     <li>Products are sold as-is and installed at your own risk.</li>
                     <li>EmotoHI is not responsible for damage, injury, or misuse.</li>
-                    <li>Local pickup/meetup only unless otherwise arranged.</li>
+                    <li>We ship anywhere in the USA. Shipping costs calculated at checkout.</li>
                 </ul>
                 <details class="tos-more">
                     <summary>See more</summary>
@@ -963,8 +963,7 @@
                             arising from your purchase or use of the products.</p>
                         <p>If any warranty or liability cannot be excluded, it is limited to the minimum extent required
                             by law.</p>
-                        <p>Local meetup or pickup only unless otherwise agreed in writing. Delivery windows are
-                            estimates and may change.</p>
+                        <p>We ship anywhere in the United States. Shipping costs are calculated based on distance and delivery times may vary.</p>
                         <p>Prices, availability, and descriptions may change at any time. Errors may be corrected, and
                             orders may be canceled or limited in quantity.</p>
                         <p>By continuing, you confirm you are at least 18 years old or have permission from a parent or
@@ -1665,6 +1664,42 @@
                     }
                 });
             }
+
+            // Check URL hash and auto-open modal
+            function checkHashAndOpenModal() {
+                const hash = window.location.hash.substring(1); // Remove the #
+                if (!hash) return;
+
+                // Map hash to modal function
+                const modalMap = {
+                    'ultra-breaks': () => openProductModal(),
+                    'brake-pads': () => openModal('padsModal'),
+                    'rotor': () => openModal('rotorModal'),
+                    'baja-lights': () => openModal('bajaModal'),
+                    'carbon-wrap': () => openModal('wrapModal'),
+                    'motocutz': () => openModal('motocutzModal')
+                };
+
+                // Scroll to the product first
+                const targetElement = document.getElementById(hash);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Wait a moment for scroll to complete, then open modal
+                    setTimeout(() => {
+                        const modalFunction = modalMap[hash];
+                        if (modalFunction) {
+                            modalFunction();
+                        }
+                    }, 800);
+                }
+            }
+
+            // Check hash on page load
+            window.addEventListener('load', checkHashAndOpenModal);
+            
+            // Also check hash when it changes (for browser back/forward)
+            window.addEventListener('hashchange', checkHashAndOpenModal);
         </script>
 </body>
 

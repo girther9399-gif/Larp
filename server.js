@@ -241,9 +241,12 @@ function haversineMiles(lat1, lon1, lat2, lon2) {
 }
 
 function getShippingTier(distanceMiles) {
-    if (distanceMiles <= 10) return 3;
     if (distanceMiles <= 25) return 6;
-    return 9;
+    if (distanceMiles <= 100) return 12;
+    if (distanceMiles <= 500) return 18;
+    if (distanceMiles <= 1500) return 25;
+    if (distanceMiles <= 3000) return 35;
+    return 45;
 }
 
 // Routes
@@ -478,9 +481,18 @@ app.post('/api/shipping/quote', async (req, res) => {
             return res.status(400).json({ error: 'Missing address fields.' });
         }
 
+        // Validate USA address
+        const normalizedCountry = String(country).trim().toLowerCase();
         const normalizedZip = String(zip).trim();
-        if (normalizedZip !== '96706' && normalizedZip !== '96707') {
-            return res.status(400).json({ error: 'Delivery is only available for ZIP codes 96706 and 96707 right now.' });
+        
+        if (normalizedCountry !== 'united states' && normalizedCountry !== 'usa' && normalizedCountry !== 'us') {
+            return res.status(400).json({ error: 'We currently only ship within the United States.' });
+        }
+
+        // Basic ZIP code validation (5 digits or 5+4 format)
+        const zipPattern = /^\d{5}(-\d{4})?$/;
+        if (!zipPattern.test(normalizedZip)) {
+            return res.status(400).json({ error: 'Invalid USA ZIP code format.' });
         }
 
         const query = `${address1} ${address2 || ''}, ${city}, ${state} ${zip}, ${country}`.trim();
@@ -490,13 +502,13 @@ app.post('/api/shipping/quote', async (req, res) => {
         });
 
         const first = Array.isArray(data) ? data[0] : null;
-        if (!first?.lat || !first?.lon) {
-            return res.status(404).json({ error: 'Unable to locate address.' });
+        if (!first || !first.lat || !first.lon) {
+            return res.status(400).json({ error: 'Unable to geocode address.' });
         }
 
         const lat = Number(first.lat);
         const lon = Number(first.lon);
-        if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+        if (isNaN(lat) || isNaN(lon)) {
             return res.status(400).json({ error: 'Invalid coordinates.' });
         }
 

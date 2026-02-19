@@ -197,8 +197,8 @@
             </div>
         </div>
         <div class="showcase-copy">
-            <h2>Built for hard riding</h2>
-            <p>Clean lines, precise feel, and real stopping power.</p>
+            <h2>Parts that perform</h2>
+            <p>Built for riders who demand more.</p>
             <div class="showcase-actions">
                 <a href="/products" class="cta-button alt">Shop the lineup</a>
                 <a href="/products" class="ghost-link">See all parts</a>
@@ -213,34 +213,34 @@
             <span class="scroll-hint">Drag</span>
         </div>
         <div class="scroll-cards">
-            <div class="scroll-card">
+            <a href="/products#ultra-breaks" class="scroll-card">
                 <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
                 <div class="scroll-meta">
                     <span>Ultra Breaks</span>
                     <strong>$299.99</strong>
                 </div>
-            </div>
-            <div class="scroll-card">
+            </a>
+            <a href="/products#rotor" class="scroll-card">
                 <img src="/images/rotor.png" alt="Rotor">
                 <div class="scroll-meta">
                     <span>Rotor</span>
                     <strong>$20</strong>
                 </div>
-            </div>
-            <div class="scroll-card">
+            </a>
+            <a href="/products#baja-lights" class="scroll-card">
                 <img src="/images/white%20baja.png" alt="Baja Lights">
                 <div class="scroll-meta">
                     <span>Baja Lights</span>
                     <strong>$20</strong>
                 </div>
-            </div>
-            <div class="scroll-card">
+            </a>
+            <a href="/products#brake-pads" class="scroll-card">
                 <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
                 <div class="scroll-meta">
                     <span>OEM Pads</span>
                     <strong>$20+</strong>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -248,7 +248,7 @@
     <section class="featured reveal">
         <h2>Surron Ultra Bee Breaks</h2>
         <div class="products-grid">
-            <div class="product-card" onclick="openProductModal()" style="cursor: pointer;">
+            <a href="/products#ultra-breaks" class="product-card">
                 <div class="sale-badge">SALE</div>
                 <div class="product-image">
                     <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks"
@@ -262,10 +262,9 @@
                     </div>
                     <p class="description">Fits on any Emoto with the included adapter. Comes pre-bled and ready to
                         install. Premium quality brakes built with precision and modern design.</p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); openProductModal();">Select
-                        Options</button>
+                    <button class="add-to-cart">View Details</button>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -275,8 +274,7 @@
         <div class="faq-container">
             <details class="faq-item">
                 <summary>Do you ship products?</summary>
-                <p>We're currently operating on Oahu only. Since we're just starting out, we do in-person meetups or
-                    drop-offs instead of shipping.</p>
+                <p>Yes! We now ship anywhere in the United States. Shipping costs vary based on distance from Hawaii.</p>
             </details>
             <details class="faq-item">
                 <summary>What's your return policy?</summary>
@@ -288,8 +286,7 @@
             </details>
             <details class="faq-item">
                 <summary>How do delivery fees work?</summary>
-                <p>Delivery fees vary depending on your location on Oahu. Contact us for a quote based on your address.
-                </p>
+                <p>Shipping costs vary based on your distance from Hawaii. We calculate shipping using your address during checkout.</p>
             </details>
             <details class="faq-item">
                 <summary>Where are products made?</summary>
@@ -404,6 +401,176 @@
         </div>
     </div>
 
+    <!-- Surron Brake Pads Modal -->
+    <div id="padsModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('padsModal')">&times;</button>
+
+            <div class="modal-gallery">
+                <div class="main-image">
+                    <img class="modal-main-image" src="/images/surron%20ultra%20oem%20pads.png" alt="Surron Brake Pads">
+                </div>
+                <div class="modal-thumbnails">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads" class="thumbnail active"
+                        onclick="changeMainImage('/images/surron%20ultra%20oem%20pads.png', this)">
+                    <img src="/images/surron%20ultra%20oem%20pads1.png" alt="OEM Brake Pads" class="thumbnail"
+                        onclick="changeMainImage('/images/surron%20ultra%20oem%20pads1.png', this)">
+                </div>
+            </div>
+
+            <div class="modal-details">
+                <h2>Surron Brake Pads</h2>
+
+                <div class="product-options">
+                    <label class="options-label">Select Option:</label>
+                    <div class="options-list">
+                        <div class="option-item"
+                            onclick="selectOption('padsModal', this, 20, '/images/surron%20ultra%20oem%20pads.png', ['/images/surron%20ultra%20oem%20pads.png', '/images/surron%20ultra%20oem%20pads1.png'])">
+                            <div class="option-image">
+                                <img src="/images/surron%20ultra%20oem%20pads.png" alt="Ultra Bee OEM Pads">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Ultra Bee OEM Pads</p>
+                                <p class="option-price">$30.00</p>
+                            </div>
+                        </div>
+                        <div class="option-item selected"
+                            onclick="selectOption('padsModal', this, 20, '/images/surron%20ultra%20oem%20pads.png', ['/images/surron%20ultra%20oem%20pads.png'])">
+                            <div class="option-image">
+                                <img src="/images/surron%20ultra%20oem%20pads.png" alt="LBX OEM Pads">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">LBX OEM Pads</p>
+                                <p class="option-price">$20.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-section">
+                    <p class="modal-price">$20.00</p>
+                </div>
+
+                <div class="quantity-selector">
+                    <label for="padsQuantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQuantity('padsModal')">−</button>
+                        <input type="number" id="padsQuantity" class="quantity-input" value="1" min="1" max="20"
+                            readonly>
+                        <button onclick="increaseQuantity('padsModal')">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-modal"
+                    onclick="addToCartFromModal('padsModal', 'Surron Brake Pads')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rotor Modal -->
+    <div id="rotorModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('rotorModal')">&times;</button>
+
+            <div class="modal-gallery">
+                <div class="main-image">
+                    <img class="modal-main-image" src="/images/rotor.png" alt="Rotor">
+                </div>
+                <div class="modal-thumbnails">
+                    <img src="/images/rotor.png" alt="Rotor" class="thumbnail active"
+                        onclick="changeMainImage('/images/rotor.png', this)">
+                </div>
+            </div>
+
+            <div class="modal-details">
+                <h2>Rotor</h2>
+
+                <div class="price-section">
+                    <p class="modal-price">$20.00</p>
+                </div>
+
+                <div class="quantity-selector">
+                    <label for="rotorQuantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQuantity('rotorModal')">−</button>
+                        <input type="number" id="rotorQuantity" class="quantity-input" value="1" min="1" max="20"
+                            readonly>
+                        <button onclick="increaseQuantity('rotorModal')">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-modal"
+                    onclick="addToCartFromModal('rotorModal', 'Rotor')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Baja Lights Modal -->
+    <div id="bajaModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('bajaModal')">&times;</button>
+
+            <div class="modal-gallery">
+                <div class="main-image">
+                    <img class="modal-main-image" src="/images/white%20baja.png" alt="Baja Lights">
+                </div>
+                <div class="modal-thumbnails">
+                    <img src="/images/white%20baja.png" alt="White Baja Lights" class="thumbnail active"
+                        onclick="changeMainImage('/images/white%20baja.png', this)">
+                    <img src="/images/orange%20%20baja.png" alt="Orange Baja Lights" class="thumbnail"
+                        onclick="changeMainImage('/images/orange%20%20baja.png', this)">
+                </div>
+            </div>
+
+            <div class="modal-details">
+                <h2>Baja Lights</h2>
+
+                <div class="product-options">
+                    <label class="options-label">Select Option:</label>
+                    <div class="options-list">
+                        <div class="option-item selected"
+                            onclick="selectOption('bajaModal', this, 20, '/images/white%20baja.png', ['/images/white%20baja.png'])">
+                            <div class="option-image">
+                                <img src="/images/white%20baja.png" alt="White Baja Lights">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">White Baja Lights</p>
+                                <p class="option-price">$20.00</p>
+                            </div>
+                        </div>
+                        <div class="option-item"
+                            onclick="selectOption('bajaModal', this, 20, '/images/orange%20%20baja.png', ['/images/orange%20%20baja.png'])">
+                            <div class="option-image">
+                                <img src="/images/orange%20%20baja.png" alt="Orange Baja Lights">
+                            </div>
+                            <div class="option-info">
+                                <p class="option-name">Orange Baja Lights</p>
+                                <p class="option-price">$20.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-section">
+                    <p class="modal-price">$20.00</p>
+                </div>
+
+                <div class="quantity-selector">
+                    <label for="bajaQuantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQuantity('bajaModal')">−</button>
+                        <input type="number" id="bajaQuantity" class="quantity-input" value="1" min="1" max="20"
+                            readonly>
+                        <button onclick="increaseQuantity('bajaModal')">+</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-modal"
+                    onclick="addToCartFromModal('bajaModal', 'Baja Lights')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Cart Sidebar -->
     <div id="cartSidebar" class="cart-sidebar">
         <div class="cart-header">
@@ -432,7 +599,7 @@
                 <li>All sales are final. No refunds or exchanges.</li>
                 <li>Products are sold as-is and installed at your own risk.</li>
                 <li>EmotoHI is not responsible for damage, injury, or misuse.</li>
-                <li>Local pickup/meetup only unless otherwise arranged.</li>
+                <li>We ship anywhere in the USA. Shipping costs calculated at checkout.</li>
             </ul>
             <details class="tos-more">
                 <summary>See more</summary>
@@ -450,8 +617,7 @@
                         arising from your purchase or use of the products.</p>
                     <p>If any warranty or liability cannot be excluded, it is limited to the minimum extent required by
                         law.</p>
-                    <p>Local meetup or pickup only unless otherwise agreed in writing. Delivery windows are estimates
-                        and may change.</p>
+                    <p>We ship anywhere in the United States. Shipping costs are calculated based on distance and delivery times may vary.</p>
                     <p>Prices, availability, and descriptions may change at any time. Errors may be corrected, and
                         orders may be canceled or limited in quantity.</p>
                     <p>By continuing, you confirm you are at least 18 years old or have permission from a parent or
@@ -817,11 +983,168 @@
         }
 
         window.onclick = function (event) {
-            const modal = document.getElementById('productModal');
-            if (event.target === modal) {
-                closeProductModal();
+            // Handle all modals
+            const modals = ['productModal', 'padsModal', 'rotorModal', 'bajaModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (event.target === modal) {
+                    if (modalId === 'productModal') {
+                        closeProductModal();
+                    } else {
+                        closeModal(modalId);
+                    }
+                }
+            });
+        }
+
+        // ESC key to close modals
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = ['productModal', 'padsModal', 'rotorModal', 'bajaModal'];
+                modals.forEach(modalId => {
+                    const modal = document.getElementById(modalId);
+                    if (modal && modal.style.display === 'flex') {
+                        if (modalId === 'productModal') {
+                            closeProductModal();
+                        } else {
+                            closeModal(modalId);
+                        }
+                    }
+                });
+            }
+        });
+
+        // Additional Modal Management Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+
+        function getModal(modalId) {
+            return document.getElementById(modalId);
+        }
+
+        // Modal State Management
+        const modalState = {};
+
+        function initModalState(modalId, price, images) {
+            modalState[modalId] = {
+                price: price,
+                quantity: 1,
+                images: images
+            };
+        }
+
+        // Quantity Controls for modals
+        function increaseQuantity(modalId) {
+            const modal = getModal(modalId);
+            const state = modalState[modalId];
+            if (!modal || !state) return;
+
+            state.quantity = Math.min(state.quantity + 1, 20);
+            const qtyInput = modal.querySelector('.quantity-input');
+            if (qtyInput) qtyInput.value = state.quantity;
+            updateTotalPrice(modalId);
+        }
+
+        function decreaseQuantity(modalId) {
+            const modal = getModal(modalId);
+            const state = modalState[modalId];
+            if (!modal || !state) return;
+
+            state.quantity = Math.max(state.quantity - 1, 1);
+            const qtyInput = modal.querySelector('.quantity-input');
+            if (qtyInput) qtyInput.value = state.quantity;
+            updateTotalPrice(modalId);
+        }
+
+        function updateTotalPrice(modalId) {
+            if (modalId) {
+                const modal = getModal(modalId);
+                const state = modalState[modalId];
+                if (!modal || !state) return;
+
+                const totalPrice = state.price * state.quantity;
+                const priceEl = modal.querySelector('.modal-price');
+                if (priceEl) {
+                    priceEl.textContent = '$' + totalPrice.toFixed(2);
+                }
             }
         }
+
+        // Option Selection for modals
+        function selectOption(modalId, element, price, mainImage, images) {
+            if (modalId) {
+                const modal = getModal(modalId);
+                const state = modalState[modalId];
+                if (!modal || !state) return;
+
+                modal.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
+                element.classList.add('selected');
+                state.price = price;
+                state.images = images;
+                updateTotalPrice(modalId);
+
+                const mainImageEl = modal.querySelector('.modal-main-image');
+                if (mainImageEl) mainImageEl.src = mainImage;
+
+                const thumbnailsContainer = modal.querySelector('.modal-thumbnails');
+                if (thumbnailsContainer) {
+                    thumbnailsContainer.innerHTML = images.map((img, index) => `
+                        <img src="${img}" alt="Image ${index + 1}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage('${modalId}', '${img}', this)">
+                    `).join('');
+                }
+            }
+        }
+
+        // Main Image Change for modals
+        function changeMainImage(modalId, src, element) {
+            if (modalId) {
+                const modal = getModal(modalId);
+                if (!modal) return;
+
+                const mainImageEl = modal.querySelector('.modal-main-image');
+                if (mainImageEl) mainImageEl.src = src;
+
+                modal.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+                if (element) element.classList.add('active');
+            }
+        }
+
+        // Add to Cart from Modal
+        function addToCartFromModal(modalId, fallbackName) {
+            const modal = getModal(modalId);
+            const state = modalState[modalId];
+            if (!modal || !state) return;
+
+            const selectedOption = modal.querySelector('.option-item.selected .option-name');
+            const productName = selectedOption ? selectedOption.textContent : fallbackName;
+
+            const item = {
+                id: Date.now(),
+                name: productName,
+                price: state.price,
+                quantity: state.quantity,
+                total: state.price * state.quantity
+            };
+
+            cart.push(item);
+            updateCartDisplay();
+            closeModal(modalId);
+            state.quantity = 1;
+            const qtyInput = modal.querySelector('.quantity-input');
+            if (qtyInput) qtyInput.value = 1;
+        }
+
+        // Initialize modal states
+        initModalState('padsModal', 20, ['/images/surron%20ultra%20oem%20pads.png']);
+        initModalState('rotorModal', 20, ['/images/rotor.png']);
+        initModalState('bajaModal', 20, ['/images/white%20baja.png']);
     </script>
 </body>
 

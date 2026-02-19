@@ -81,7 +81,7 @@
                         <li>Press <strong>Save details</strong>.</li>
                         <li>Choose a payment method.</li>
                     </ol>
-                    <p class="payment-text">Right now we only deliver for ZIP codes 96706 and 96707. For all other areas, you will need to wait until we start shipping.</p>
+                    <p class="payment-text">We now ship anywhere in the USA! Enter your address below to get a shipping quote.</p>
                 </div>
                 <div class="payment-card checkout-email">
                     <div class="payment-card-header">
@@ -166,7 +166,7 @@
                         <h3>Cash</h3>
                         <span class="payment-badge">In-person only</span>
                     </div>
-                    <p class="payment-text">Local meetup or pickup only. We will confirm details after your order.</p>
+                    <p class="payment-text">Cash payment available for local orders. We will contact you to arrange pickup or delivery.</p>
                     <button id="cashStartBtn" class="payment-cta">Request cash meetup</button>
                     <p id="cashStatus" class="payment-text" style="display:none;">Request sent. We will contact you to confirm the meetup.</p>
                 </div>
@@ -176,7 +176,7 @@
                         <h3>Gift cards</h3>
                         <span class="payment-badge">In-person only</span>
                     </div>
-                    <p class="payment-text">Gift cards are accepted in person at meetup or pickup.</p>
+                    <p class="payment-text">Gift cards are accepted for local orders. We will contact you to arrange pickup or delivery.</p>
                     <button id="giftStartBtn" class="payment-cta">Request gift card meetup</button>
                     <p id="giftStatus" class="payment-text" style="display:none;">Request sent. We will contact you to confirm the meetup.</p>
                 </div>
@@ -673,7 +673,7 @@
             const addressDraft = getAddressPayload();
             const canSave = isValidEmail(email) && isAddressValid(addressDraft);
             const zip = (address?.zip || '').trim();
-            const canDeliver = zip === '96706' || zip === '96707';
+            const canDeliver = true; // We now ship anywhere in the USA
             const ready = hasCart && isValidEmail(email) && address && isAddressValid(address);
             if (cryptoBtn) {
                 cryptoBtn.disabled = !ready || !canDeliver;
@@ -836,11 +836,7 @@
                 alert('Please save your address details before paying.');
                 return;
             }
-            const zip = (address.zip || '').trim();
-            if (zip !== '96706' && zip !== '96707') {
-                alert('Delivery is only available for ZIP codes 96706 and 96707 right now. For all other areas, please wait until we start shipping.');
-                return;
-            }
+            // ZIP code validation removed - we now ship anywhere in the USA
 
             try {
                 showGlobalLoader();
@@ -1188,15 +1184,7 @@
                 status.style.display = 'block';
                 status.textContent = 'Calculating shipping...';
             }
-            const zip = (address?.zip || '').trim();
-            if (zip !== '96706' && zip !== '96707') {
-                setStoredShipping(null);
-                renderSummary();
-                if (status) {
-                    status.textContent = 'Delivery is only available for ZIP codes 96706 and 96707. For all other areas, please wait until we start shipping.';
-                }
-                return !requireEligible;
-            }
+            // ZIP code validation removed - we now ship anywhere in the USA
             try {
                 const { response, data } = await fetchJsonSafe('/api/shipping/quote', {
                     method: 'POST',
