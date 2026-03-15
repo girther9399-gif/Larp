@@ -384,6 +384,127 @@ body.dark-theme .theme-option:hover {
     opacity: 0.7;
 }
 
+/* Hamburger button - hidden on desktop */
+.nav-menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+.nav-menu-btn:hover {
+    background: var(--section-bg);
+}
+.nav-menu-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Mobile search icon - hidden on desktop */
+.nav-mobile-search {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: var(--text-color);
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+.nav-mobile-search:hover {
+    background: var(--section-bg);
+}
+.nav-mobile-search svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--nav-bg);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    overflow-y: auto;
+}
+.mobile-menu-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.mobile-menu-close {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: background 0.2s ease;
+}
+.mobile-menu-close:hover {
+    background: var(--section-bg);
+}
+.mobile-menu-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.mobile-menu-links li {
+    border-bottom: 1px solid var(--nav-border);
+}
+.mobile-menu-links a {
+    display: block;
+    padding: 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-color);
+    transition: opacity 0.2s ease;
+}
+.mobile-menu-links a:hover {
+    opacity: 0.7;
+}
+.mobile-menu-search {
+    margin-top: 2rem;
+}
+.mobile-menu-search .site-search {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    --search-width: 100%;
+    height: 48px;
+}
+.mobile-menu-search .site-search-input {
+    font-size: 1rem;
+}
+
 @media (max-width: 900px) {
     .logo-text-image {
         height: 44px;
@@ -1700,30 +1821,34 @@ body.dark-theme .signin-card {
         display: none !important;
     }
 
-    /* Navigation */
+    /* Navigation - mobile layout: hamburger | logo | search | cart */
     .navbar {
-        padding: 0.5rem 0;
+        padding: 0.6rem 0;
     }
 
     .nav-container {
         padding: 0 0.75rem;
-        gap: 0.2rem;
-        flex-direction: row;
+        gap: 0.5rem;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: space-between;
     }
 
+    .nav-menu-btn {
+        display: flex;
+        order: 0;
+    }
+
     .logo {
-        font-size: 1rem;
-        flex-shrink: 0;
-        margin-right: auto;
-        min-width: 0;
+        order: 1;
+        margin-right: 0;
+        margin-left: 0;
     }
 
     .logo-text-image {
-        height: clamp(28px, 8vw, 36px);
-        max-height: 36px;
+        height: 44px;
+        min-height: 44px;
+        max-height: 44px;
     }
 
     .logo-image {
@@ -1732,33 +1857,25 @@ body.dark-theme .signin-card {
     }
 
     .nav-links {
-        gap: 0.8rem;
-        flex-wrap: nowrap;
-        align-items: center;
-        font-size: 0.8rem;
-        margin-left: 0;
+        display: none;
     }
 
-    .nav-links a {
-        font-size: 0.75rem;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        font-weight: 700;
+    .nav-mobile-search {
+        display: flex;
+        order: 2;
+        margin-left: auto;
     }
 
-    .nav-links li a {
-        padding: 0.2rem 0;
+    .nav-container .cart-icon {
+        order: 3;
+        width: 44px;
+        height: 44px;
+        border-width: 2px;
     }
 
-    .cart-icon {
-        width: 30px;
-        height: 30px;
-        border-width: 1.5px;
-    }
-
-    .cart-icon svg {
-        width: 16px;
-        height: 16px;
+    .nav-container .cart-icon svg {
+        width: 22px;
+        height: 22px;
     }
 
     /* Hero & Banners */
@@ -1984,8 +2101,9 @@ body.dark-theme .signin-card {
     }
 
     .logo-text-image {
-        height: clamp(24px, 6vw, 32px);
-        max-height: 32px;
+        height: 40px;
+        min-height: 40px;
+        max-height: 40px;
     }
 
     .nav-links {
