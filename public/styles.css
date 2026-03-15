@@ -330,6 +330,8 @@ body.dark-theme .theme-option:hover {
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    gap: 1rem;
+    min-width: 0;
 }
 
 .logo {
@@ -340,6 +342,9 @@ body.dark-theme .theme-option:hover {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    flex-shrink: 0;
+    min-width: 0;
+    min-height: 28px;
 }
 
 .logo-image {
@@ -349,13 +354,11 @@ body.dark-theme .theme-option:hover {
 }
 
 .logo-text-image {
-    height: 32px;
+    height: clamp(28px, 5vw, 48px);
     width: auto;
+    max-height: 48px;
     object-fit: contain;
-    transform: scale(5.15);
-    transform-origin: left center;
-    margin-left: -300px;
-    margin-top: 20px;
+    display: block;
 }
 
 .nav-links {
@@ -379,10 +382,8 @@ body.dark-theme .theme-option:hover {
 
 @media (max-width: 900px) {
     .logo-text-image {
-        transform: none;
-        margin-left: 0;
-        margin-top: 0;
-        height: 28px;
+        height: clamp(28px, 6vw, 40px);
+        max-height: 40px;
     }
 }
 
@@ -1711,12 +1712,12 @@ body.dark-theme .signin-card {
         font-size: 1rem;
         flex-shrink: 0;
         margin-right: auto;
+        min-width: 0;
     }
 
     .logo-text-image {
-        height: 85px;
-        margin-top: -5px;
-        margin-left: -10px;
+        height: clamp(28px, 8vw, 36px);
+        max-height: 36px;
     }
 
     .logo-image {
@@ -1977,7 +1978,8 @@ body.dark-theme .signin-card {
     }
 
     .logo-text-image {
-        height: 16px;
+        height: clamp(24px, 6vw, 32px);
+        max-height: 32px;
     }
 
     .nav-links {
