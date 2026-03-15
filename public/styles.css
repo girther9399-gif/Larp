@@ -175,10 +175,10 @@ body.dark-theme {
     --button-bg: #e0e0e0;
     --button-text: #121212;
     --button-hover: #0066ff;
-    --footer-bg: #000000;
-    --footer-text: #ffffff;
-    --footer-link: #cccccc;
-    --footer-border: #000000;
+    --footer-bg: #1a1a1a;
+    --footer-text: #e0e0e0;
+    --footer-link: #b5b5b5;
+    --footer-border: #333333;
 }
 
 body {
@@ -341,10 +341,12 @@ body.dark-theme .theme-option:hover {
     letter-spacing: -0.5px;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0;
     flex-shrink: 0;
     min-width: 0;
-    min-height: 28px;
+    padding: 0.25em;
+    margin: -0.25em;
+    border-radius: 4px;
 }
 
 .logo-image {
@@ -353,9 +355,11 @@ body.dark-theme .theme-option:hover {
     object-fit: contain;
 }
 
+/* Logo stays full size: fixed height, small hitbox so it doesn't get squeezed */
 .logo-text-image {
-    height: clamp(28px, 5vw, 48px);
+    height: 48px;
     width: auto;
+    min-height: 48px;
     max-height: 48px;
     object-fit: contain;
     display: block;
@@ -382,8 +386,9 @@ body.dark-theme .theme-option:hover {
 
 @media (max-width: 900px) {
     .logo-text-image {
-        height: clamp(28px, 6vw, 40px);
-        max-height: 40px;
+        height: 44px;
+        min-height: 44px;
+        max-height: 44px;
     }
 }
 
@@ -1646,7 +1651,7 @@ body.dark-theme .signin-card {
     color: var(--footer-text);
     padding: 3rem 2rem 1rem;
     margin-top: 3rem;
-    border-top: 2px solid #0066ff;
+    border-top: 2px solid var(--button-hover);
 }
 
 .footer-content {
@@ -1674,7 +1679,7 @@ body.dark-theme .signin-card {
 }
 
 .footer-section a:hover {
-    color: #0066ff;
+    color: var(--button-hover);
 }
 
 .footer-bottom {
@@ -1682,7 +1687,8 @@ body.dark-theme .signin-card {
     padding-top: 2rem;
     border-top: 1px solid var(--footer-border);
     font-size: 0.9rem;
-    color: var(--muted-text-strong);
+    color: var(--footer-text);
+    opacity: 0.9;
 }
 
 /* Responsive */
