@@ -357,10 +357,10 @@ body.dark-theme .theme-option:hover {
 
 /* Logo stays full size: fixed height, small hitbox so it doesn't get squeezed */
 .logo-text-image {
-    height: 48px;
+    height: 60px;
     width: auto;
-    min-height: 48px;
-    max-height: 48px;
+    min-height: 60px;
+    max-height: 60px;
     object-fit: contain;
     display: block;
 }
@@ -507,9 +507,9 @@ body.dark-theme .theme-option:hover {
 
 @media (max-width: 900px) {
     .logo-text-image {
-        height: 44px;
-        min-height: 44px;
-        max-height: 44px;
+        height: 56px;
+        min-height: 56px;
+        max-height: 56px;
     }
 }
 
@@ -1846,9 +1846,9 @@ body.dark-theme .signin-card {
     }
 
     .logo-text-image {
-        height: 44px;
-        min-height: 44px;
-        max-height: 44px;
+        height: 52px;
+        min-height: 52px;
+        max-height: 52px;
     }
 
     .logo-image {
@@ -2101,9 +2101,9 @@ body.dark-theme .signin-card {
     }
 
     .logo-text-image {
-        height: 40px;
-        min-height: 40px;
-        max-height: 40px;
+        height: 48px;
+        min-height: 48px;
+        max-height: 48px;
     }
 
     .nav-links {
