@@ -115,11 +115,10 @@
                 <div class="product-options">
                     <label class="options-label">Select Option:</label>
                     <div class="options-list">
-                        <div class="option-item sold-out"
+                        <div class="option-item"
                             onclick="selectOption('motocutzModal', this, 45, '/images/black%20plate.png', ['/images/black%20plate.png'])">
                             <div class="option-image">
                                 <img src="/images/black%20plate.png" alt="Black">
-                                <div class="sold-out-overlay">SOLD OUT</div>
                             </div>
                             <div class="option-info">
                                 <p class="option-name">MOTOCUTZ FRONT NUMBER PLATE BLACK</p>
@@ -984,9 +983,7 @@
             const modalState = {};
             
             // Track sold out items
-            const soldOutItems = {
-                'MOTOCUTZ FRONT NUMBER PLATE BLACK': true
-            };
+            const soldOutItems = {};
             let currentOrder = null;
             let currentCoin = 'btc';
             let cryptoPollTimer = null;
