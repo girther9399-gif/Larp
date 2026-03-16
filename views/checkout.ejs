@@ -1233,11 +1233,15 @@
                     }
                     const address = getAddressPayload();
                     if (!isAddressValid(address)) {
-                        alert('Please complete all required address fields.');
+                        alert('Please complete all required address fields (email, name, phone, address, city, state, ZIP, country).');
                         return;
                     }
                     saveAddress(address);
-                    await calculateShipping(address);
+                    try {
+                        await calculateShipping(address);
+                    } catch (e) {
+                        setStoredShipping(null);
+                    }
                     const totals = getTotals(getStoredCart());
                     sendCheckoutWebhook('checkout_saved', {
                         email,
@@ -1249,7 +1253,10 @@
                         paymentMethod: 'Saved details'
                     });
                     const status = document.getElementById('checkoutSaveStatus');
-                    if (status) status.style.display = 'block';
+                    if (status) {
+                        status.style.display = 'block';
+                        status.textContent = 'Details saved. You can proceed to payment.';
+                    }
                     updatePayButtons();
                     renderSummary();
                 });
