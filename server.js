@@ -1,6 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const https = require('https');
 const path = require('path');
+const { sendOrderConfirmation, sendCheckoutReceived } = require('./lib/email');
 const app = express();
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || 'https://discordapp.com/api/webhooks/1470551132450586705/_i4HvWyfBcIcDkIzAMhmENtkdN2oIS_sDyfYfHCW9ZvTZwv6II8R-Ca62htgIAH5ayVA';
 
@@ -468,6 +470,35 @@ app.post('/api/checkout/webhook', async (req, res) => {
             content: contentParts.join(' ').trim() || undefined,
             embeds: [embed]
         });
+
+        // Automatic emails (no-op if SMTP not configured)
+        const customerEmail = (email && typeof email === 'string') ? email.trim() : '';
+        if (customerEmail) {
+            if (event === 'payment_confirmed') {
+                await sendOrderConfirmation(customerEmail, {
+                    receiptId: receiptId || 'EMO-UNKNOWN',
+                    items: safeItems,
+                    total,
+                    address,
+                    paymentMethod: paymentMethod || 'Payment',
+                    shipping,
+                    discountUsd
+                });
+            } else if (event === 'checkout_saved') {
+                await sendCheckoutReceived(customerEmail, {
+                    receiptId: receiptId || 'EMO-UNKNOWN',
+                    event,
+                    message: 'We received your shipping and contact details. When you\'re ready, choose a payment method to complete your order. For questions, contact support@emotohi.com.'
+                });
+            } else if (event === 'cash_checkout' || event === 'giftcard_checkout') {
+                await sendCheckoutReceived(customerEmail, {
+                    receiptId: receiptId || 'EMO-UNKNOWN',
+                    event,
+                    message: 'We received your meetup request. We will contact you to arrange pickup or delivery. For questions, contact support@emotohi.com.'
+                });
+            }
+        }
+
         res.json({ ok: true });
     } catch (error) {
         res.status(500).json({ error: 'Unable to send webhook.' });
