@@ -2356,7 +2356,8 @@ body.dark-theme .signin-card {
     position: relative;
     max-height: 90vh;
     min-height: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.06);
     border: 1px solid var(--card-border);
     font-family: 'Space Grotesk', 'Inter', sans-serif;
