@@ -2355,9 +2355,7 @@ body.dark-theme .signin-card {
     padding: 0;
     position: relative;
     max-height: 90vh;
-    min-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.06);
     border: 1px solid var(--card-border);
     font-family: 'Space Grotesk', 'Inter', sans-serif;
@@ -2415,7 +2413,6 @@ body.dark-theme .signin-card {
     gap: 1rem;
     padding: 1.5rem 1.5rem 1.5rem 2rem;
     min-width: 0;
-    min-height: 0;
 }
 
 .main-image {
@@ -2470,16 +2467,8 @@ body.dark-theme .signin-card {
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
-    padding: 2rem 2rem 2.5rem 1.5rem;
+    padding: 2rem 2rem 2rem 1.5rem;
     overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 0;
-    -webkit-overflow-scrolling: touch;
-}
-
-.modal-details .add-to-cart-modal {
-    flex-shrink: 0;
-    margin-top: 0.25rem;
 }
 
 .modal-details h2 {
@@ -3746,9 +3735,6 @@ body:not(.dark-theme) .crypto-status.error {
         grid-template-columns: 1fr;
         padding: 0;
         gap: 0;
-        max-height: 90vh;
-        overflow-y: auto;
-        overflow-x: hidden;
     }
 
     .modal-gallery {
@@ -3762,7 +3748,6 @@ body:not(.dark-theme) .crypto-status.error {
 
     .modal-details {
         padding: 1.25rem 1.25rem 1.5rem;
-        overflow-y: visible;
     }
 
     .modal-details h2 {

@@ -171,14 +171,14 @@
                         </div>
                         <div class="form-group">
                             <label for="checkoutCountry">Country</label>
-                            <input type="text" id="checkoutCountry" name="checkoutCountry" placeholder="United States" value="United States" required>
+                            <input type="text" id="checkoutCountry" name="checkoutCountry" placeholder="Country" required>
                         </div>
                         <div class="form-group checkout-span">
                             <label for="checkoutNotes">Delivery notes</label>
                             <input type="text" id="checkoutNotes" name="checkoutNotes" placeholder="Optional notes">
                         </div>
                     </div>
-                    <button type="button" id="checkoutSaveBtn" class="payment-cta" onclick="typeof window.runCheckoutSave === 'function' && window.runCheckoutSave()">Save details</button>
+                    <button type="button" id="checkoutSaveBtn" class="payment-cta">Save details</button>
                     <p id="checkoutSaveStatus" class="payment-text" style="display:none;">Details saved. You can proceed to payment.</p>
                     <p id="checkoutSaveHint" class="payment-text">Add your details, then press save to continue.</p>
                     <p id="shippingStatus" class="payment-text" style="display:none;"></p>
@@ -751,63 +751,6 @@
             return !!(address.name && address.phone && address.address1 && address.city && address.state && address.zip && address.country);
         }
 
-        function getMissingAddressFields(address) {
-            const missing = [];
-            if (!address.name || !address.name.trim()) missing.push('Full name');
-            if (!address.phone || !address.phone.trim()) missing.push('Phone');
-            if (!address.address1 || !address.address1.trim()) missing.push('Address line 1');
-            if (!address.city || !address.city.trim()) missing.push('City');
-            if (!address.state || !address.state.trim()) missing.push('State');
-            if (!address.zip || !address.zip.trim()) missing.push('ZIP');
-            if (!address.country || !address.country.trim()) missing.push('Country');
-            return missing;
-        }
-
-        async function runCheckoutSave() {
-            const email = (document.getElementById('checkoutEmail') && document.getElementById('checkoutEmail').value || '').trim();
-            if (!email) {
-                alert('Please enter your email.');
-                const el = document.getElementById('checkoutEmail');
-                if (el) el.focus();
-                return;
-            }
-            if (!isValidEmail(email)) {
-                alert('Please enter a valid email address.');
-                const el = document.getElementById('checkoutEmail');
-                if (el) el.focus();
-                return;
-            }
-            const address = getAddressPayload();
-            const missing = getMissingAddressFields(address);
-            if (missing.length > 0) {
-                alert('Please fill in: ' + missing.join(', '));
-                return;
-            }
-            saveAddress(address);
-            try {
-                await calculateShipping(address);
-            } catch (e) {
-                setStoredShipping(null);
-            }
-            const totals = getTotals(getStoredCart());
-            sendCheckoutWebhook('checkout_saved', {
-                email,
-                address,
-                items: getStoredCart(),
-                total: totals.total,
-                discountUsd: totals.discount,
-                shipping: totals.shipping,
-                paymentMethod: 'Saved details'
-            });
-            const status = document.getElementById('checkoutSaveStatus');
-            if (status) {
-                status.style.display = 'block';
-                status.textContent = 'Details saved. You can proceed to payment.';
-            }
-            updatePayButtons();
-            renderSummary();
-        }
-
         function loadAddress() {
             try {
                 const raw = sessionStorage.getItem(ADDRESS_STORAGE_KEY);
@@ -1279,10 +1222,37 @@
                         input.addEventListener('input', updatePayButtons);
                     }
                 });
-            window.runCheckoutSave = runCheckoutSave;
             const saveBtn = document.getElementById('checkoutSaveBtn');
             if (saveBtn) {
-                saveBtn.addEventListener('click', function() { runCheckoutSave(); });
+                saveBtn.addEventListener('click', async () => {
+                    const email = (document.getElementById('checkoutEmail')?.value || '').trim();
+                    if (!isValidEmail(email)) {
+                        alert('Please enter a valid email before saving.');
+                        document.getElementById('checkoutEmail')?.focus();
+                        return;
+                    }
+                    const address = getAddressPayload();
+                    if (!isAddressValid(address)) {
+                        alert('Please complete all required address fields.');
+                        return;
+                    }
+                    saveAddress(address);
+                    await calculateShipping(address);
+                    const totals = getTotals(getStoredCart());
+                    sendCheckoutWebhook('checkout_saved', {
+                        email,
+                        address,
+                        items: getStoredCart(),
+                        total: totals.total,
+                        discountUsd: totals.discount,
+                        shipping: totals.shipping,
+                        paymentMethod: 'Saved details'
+                    });
+                    const status = document.getElementById('checkoutSaveStatus');
+                    if (status) status.style.display = 'block';
+                    updatePayButtons();
+                    renderSummary();
+                });
             }
             const cashBtn = document.getElementById('cashStartBtn');
             if (cashBtn) {
