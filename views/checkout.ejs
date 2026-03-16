@@ -950,7 +950,6 @@
                 const savedEmail = sessionStorage.getItem(EMAIL_STORAGE_KEY) || '';
                 emailInput.value = savedEmail;
             }
-            const savedAddress = loadAddress();
             if (savedAddress) {
                 document.getElementById('checkoutName').value = savedAddress.name || '';
                 document.getElementById('checkoutPhone').value = savedAddress.phone || '';
