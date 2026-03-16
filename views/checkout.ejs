@@ -187,6 +187,29 @@
 
                 <div class="payment-card">
                     <div class="payment-card-header">
+                        <h3>PayPal</h3>
+                        <span class="payment-badge">Friends & Family</span>
+                    </div>
+                    <p class="payment-text">Pay with PayPal. Use <strong>Friends & Family</strong> only. The button below opens our PayPal and shows the exact amount to send.</p>
+                    <div id="paypalInstructions" class="paypal-instructions" style="display:none;">
+                        <p class="paypal-steps-title">What to do:</p>
+                        <ol class="paypal-steps">
+                            <li>Click the button below to open our PayPal.</li>
+                            <li>Choose <strong>Send to friends and family</strong> (not Goods &amp; Services).</li>
+                            <li>In the <strong>note</strong> or <strong>What’s this for?</strong> field, paste exactly:</li>
+                        </ol>
+                        <div class="paypal-note-box">
+                            <code id="paypalNoteText"></code>
+                            <button type="button" class="paypal-copy" onclick="copyPayPalNote()" aria-label="Copy note">Copy</button>
+                        </div>
+                        <p class="paypal-steps-footer">Then send the amount shown on the button.</p>
+                    </div>
+                    <p id="paypalSaveHint" class="payment-text">Save your email and shipping details above first, then the PayPal amount and note will appear here.</p>
+                    <a id="paypalPayBtn" href="#" class="payment-cta primary paypal-cta" style="display:none;" target="_blank" rel="noopener">Pay $0.00 with PayPal</a>
+                </div>
+
+                <div class="payment-card">
+                    <div class="payment-card-header">
                         <h3>Crypto</h3>
                         <span class="payment-badge">Instant</span>
                     </div>
@@ -236,6 +259,10 @@
                 <div id="summaryShippingRow" class="summary-shipping" style="display:none;">
                     <span>Shipping</span>
                     <strong id="summaryShipping">$0.00</strong>
+                </div>
+                <div id="summaryNonOahuRow" class="summary-shipping" style="display:none;">
+                    <span>Non-Oahu fee</span>
+                    <strong id="summaryNonOahu">$7.00</strong>
                 </div>
                 <div class="summary-total">
                     <span>Total</span>
@@ -448,6 +475,9 @@
             EMOTOHI10: { type: 'percent', value: 10 },
             EMO20: { type: 'flat', value: 20 }
         };
+        const PAYPAL_USERNAME = 'imtoud';
+        const NON_OAHU_FEE = 7;
+        const OAHU_ZIPS = ['96701','96706','96707','96709','96712','96717','96730','96731','96734','96744','96759','96762','96782','96786','96789','96791','96792','96795','96797','96801','96802','96803','96804','96805','96806','96807','96808','96809','96810','96811','96812','96813','96814','96815','96816','96817','96818','96819','96820','96821','96822','96823','96824','96825','96826','96828','96830','96836','96837','96838','96839','96840','96841','96843','96844','96846','96847','96848','96849','96850','96853','96854','96857','96858','96859','96860','96861','96863'];
 
         function showGlobalLoader(autoHideMs) {
             const overlay = document.getElementById('globalLoader');
@@ -627,13 +657,22 @@
             sessionStorage.setItem(SHIPPING_STORAGE_KEY, JSON.stringify(shipping));
         }
 
-        function getTotals(items) {
+        function isOahuZip(zip) {
+            if (!zip || typeof zip !== 'string') return false;
+            const normalized = zip.trim().replace(/\s+/g, '');
+            const five = normalized.length >= 5 ? normalized.slice(0, 5) : normalized;
+            return OAHU_ZIPS.indexOf(five) !== -1;
+        }
+
+        function getTotals(items, zipForFee) {
             const subtotal = items.reduce((sum, item) => sum + (Number(item.total) || 0), 0);
             const discount = getPromoDiscount(subtotal);
             const shipping = getStoredShipping();
             const shippingAmount = Number(shipping?.amount) || 0;
-            const total = Math.max(0, subtotal - discount + shippingAmount);
-            return { subtotal, discount, total, shippingAmount, shipping };
+            const zip = zipForFee != null ? zipForFee : (loadAddress() && loadAddress().zip ? loadAddress().zip : '');
+            const nonOahuFee = (!zip || !isOahuZip(zip)) ? NON_OAHU_FEE : 0;
+            const total = Math.max(0, subtotal - discount + shippingAmount + nonOahuFee);
+            return { subtotal, discount, total, shippingAmount, shipping, nonOahuFee };
         }
 
         function applyPromoCode() {
@@ -728,6 +767,19 @@
             return [line1 + line2, cityLine, country].filter(Boolean).join(', ');
         }
 
+        function copyPayPalNote() {
+            const el = document.getElementById('paypalNoteText');
+            if (!el || !el.textContent) return;
+            navigator.clipboard.writeText(el.textContent).then(() => {
+                const btn = document.querySelector('.paypal-copy');
+                if (btn) {
+                    const orig = btn.textContent;
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => { btn.textContent = orig; }, 2000);
+                }
+            }).catch(() => {});
+        }
+
         function updatePayButtons() {
             const cryptoBtn = document.getElementById('cryptoStartBtn');
             const cashBtn = document.getElementById('cashStartBtn');
@@ -807,6 +859,8 @@
                 if (giftBtn) giftBtn.disabled = true;
                 if (discountRow) discountRow.style.display = 'none';
                 if (shippingRow) shippingRow.style.display = 'none';
+                const noRow = document.getElementById('summaryNonOahuRow');
+                if (noRow) noRow.style.display = 'none';
                 return;
             }
 
@@ -826,7 +880,7 @@
             }).join('');
 
             emptyState.style.display = 'none';
-            const { discount, total: grandTotal, shippingAmount } = getTotals(items);
+            const { discount, total: grandTotal, shippingAmount, nonOahuFee } = getTotals(items);
             totalEl.textContent = '$' + grandTotal.toFixed(2);
             headerTotal.textContent = '$' + grandTotal.toFixed(2);
             if (discountRow && discountValue) {
@@ -843,6 +897,43 @@
                     shippingValue.textContent = '$' + shippingAmount.toFixed(2);
                 } else {
                     shippingRow.style.display = 'none';
+                }
+            }
+            const nonOahuRow = document.getElementById('summaryNonOahuRow');
+            const nonOahuValue = document.getElementById('summaryNonOahu');
+            if (nonOahuRow && nonOahuValue) {
+                if (nonOahuFee > 0) {
+                    nonOahuRow.style.display = 'flex';
+                    nonOahuValue.textContent = '$' + nonOahuFee.toFixed(2);
+                } else {
+                    nonOahuRow.style.display = 'none';
+                }
+            }
+            const savedAddress = loadAddress();
+            const paypalInstructions = document.getElementById('paypalInstructions');
+            const paypalSaveHint = document.getElementById('paypalSaveHint');
+            const paypalPayBtn = document.getElementById('paypalPayBtn');
+            const paypalNoteEl = document.getElementById('paypalNoteText');
+            const emailOk = isValidEmail((document.getElementById('checkoutEmail')?.value || '').trim());
+            const addressOk = savedAddress && isAddressValid(savedAddress);
+            if (paypalInstructions && paypalSaveHint && paypalPayBtn && paypalNoteEl) {
+                if (addressOk && emailOk && items.length > 0) {
+                    paypalSaveHint.style.display = 'none';
+                    paypalInstructions.style.display = 'block';
+                    const noteLines = items.map(item => {
+                        const q = Number(item.quantity) || 1;
+                        const name = (item.name || 'Item').trim();
+                        return name + ' x' + q;
+                    });
+                    const noteText = noteLines.join(', ');
+                    paypalNoteEl.textContent = noteText;
+                    paypalPayBtn.style.display = 'inline-block';
+                    paypalPayBtn.textContent = 'Pay $' + grandTotal.toFixed(2) + ' with PayPal';
+                    paypalPayBtn.href = 'https://www.paypal.com/paypalme/' + PAYPAL_USERNAME + '/' + grandTotal.toFixed(2);
+                } else {
+                    paypalInstructions.style.display = 'none';
+                    paypalSaveHint.style.display = 'block';
+                    paypalPayBtn.style.display = 'none';
                 }
             }
             if (promoInput) {
@@ -1153,6 +1244,7 @@
                     const status = document.getElementById('checkoutSaveStatus');
                     if (status) status.style.display = 'block';
                     updatePayButtons();
+                    renderSummary();
                 });
             }
             const cashBtn = document.getElementById('cashStartBtn');
