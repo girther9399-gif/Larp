@@ -1295,6 +1295,8 @@ body.dark-theme .motion-band {
     display: flex;
     flex-direction: column;
     min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .product-card h3 {
@@ -1384,6 +1386,7 @@ body.dark-theme .motion-band {
 
 .product-card-content .add-to-cart {
     margin-top: auto;
+    flex-shrink: 0;
 }
 
 /* FAQ Section */
@@ -2886,13 +2889,15 @@ body.dark-theme .global-loader {
 /* Checkout Page */
 .checkout-hero {
     padding: 4rem 0 3rem;
-    background: radial-gradient(circle at top, rgba(0, 102, 255, 0.12), transparent 55%),
+    background: var(--bg-color);
+    background-image: radial-gradient(circle at top, rgba(0, 102, 255, 0.12), transparent 55%),
         linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
     border-bottom: 1px solid var(--card-border);
 }
 
 body.dark-theme .checkout-hero {
-    background: radial-gradient(circle at top, rgba(0, 102, 255, 0.2), transparent 55%),
+    background: var(--bg-color);
+    background-image: radial-gradient(circle at top, rgba(0, 102, 255, 0.2), transparent 55%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
 }
 
@@ -2945,6 +2950,7 @@ body.dark-theme .checkout-hero {
 
 .checkout-content {
     padding: 3rem 0 5rem;
+    background: var(--bg-color);
 }
 
 .checkout-container {
@@ -3028,6 +3034,10 @@ body.dark-theme .payment-card {
 .payment-badge.muted {
     background: rgba(0, 0, 0, 0.08);
     color: var(--muted-text);
+}
+
+body.dark-theme .payment-badge.muted {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .payment-text {
@@ -3280,7 +3290,7 @@ a.payment-cta.paypal-cta {
 }
 
 .summary-empty a {
-    color: #0066ff;
+    color: var(--button-hover);
     font-weight: 600;
 }
 

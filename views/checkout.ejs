@@ -11,6 +11,13 @@
     <link rel="icon" href="/images/top%20icon.png" type="image/png">
 </head>
 <body>
+    <script>
+        (function() {
+            var theme = localStorage.getItem('theme') || 'system';
+            var isDark = theme === 'dark' || (theme === 'system' && typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDark) document.body.classList.add('dark-theme');
+        })();
+    </script>
     <nav class="navbar">
         <div class="nav-container">
             <button class="nav-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()">
