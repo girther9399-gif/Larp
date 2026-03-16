@@ -2349,13 +2349,14 @@ body.dark-theme .signin-card {
     border-radius: 20px;
     max-width: 1000px;
     width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
     padding: 0;
     position: relative;
-    max-height: 90vh;
-    overflow: hidden;
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.06);
     border: 1px solid var(--card-border);
     font-family: 'Space Grotesk', 'Inter', sans-serif;
