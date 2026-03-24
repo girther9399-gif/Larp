@@ -11,20 +11,8 @@
     <link rel="icon" href="/images/top%20icon.png" type="image/png">
 </head>
 <body>
-    <script>
-        (function() {
-            var theme = localStorage.getItem('theme') || 'system';
-            var isDark = theme === 'dark' || (theme === 'system' && typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches);
-            if (isDark) document.body.classList.add('dark-theme');
-        })();
-    </script>
     <nav class="navbar">
         <div class="nav-container">
-            <button class="nav-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12h18M3 6h18M3 18h18"></path>
-                </svg>
-            </button>
             <a class="logo" href="/">
                 <img src="/images/2nd%20brand.png" alt="EmotoHI" class="logo-text-image">
             </a>
@@ -32,6 +20,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/products">Products</a></li>
                 <li><a href="/checkout" class="active">Checkout</a></li>
+                <li><a href="/contact">Sign In</a></li>
                 <div class="theme-switcher">
                     <button class="theme-toggle" onclick="toggleThemeDropdown()" aria-label="Theme" data-tooltip="Theme">
                         <span class="theme-icon" id="themeIcon"></span>
@@ -63,37 +52,8 @@
                     </div>
                 </div>
             </ul>
-            <a href="/products" class="nav-mobile-search" aria-label="Search products">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                </svg>
-            </a>
         </div>
     </nav>
-
-    <!-- Mobile menu overlay -->
-    <div id="mobileMenu" class="mobile-menu-overlay" aria-hidden="true">
-        <div class="mobile-menu-header">
-            <span style="font-weight: 700; font-size: 1.1rem;">Menu</span>
-            <button type="button" class="mobile-menu-close" aria-label="Close menu" onclick="toggleMobileMenu()">&times;</button>
-        </div>
-        <ul class="mobile-menu-links">
-            <li><a href="/" onclick="toggleMobileMenu()">Home</a></li>
-            <li><a href="/products" onclick="toggleMobileMenu()">Products</a></li>
-            <li><a href="/checkout" onclick="toggleMobileMenu()">Checkout</a></li>
-        </ul>
-        <div class="mobile-menu-search">
-            <form class="site-search" action="/products" method="get" onclick="event.stopPropagation()">
-                <button type="submit" aria-label="Search">
-                    <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                        <path d="M7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm7 2-3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-                <input class="site-search-input" name="q" placeholder="Search products…" type="text" autocomplete="off">
-            </form>
-        </div>
-    </div>
 
     <section class="checkout-hero">
         <div class="checkout-hero-inner">
@@ -194,29 +154,6 @@
 
                 <div class="payment-card">
                     <div class="payment-card-header">
-                        <h3>PayPal</h3>
-                        <span class="payment-badge">Friends & Family</span>
-                    </div>
-                    <p class="payment-text">Pay with PayPal. Use <strong>Friends & Family</strong> only. The button below opens our PayPal and shows the exact amount to send.</p>
-                    <div id="paypalInstructions" class="paypal-instructions" style="display:none;">
-                        <p class="paypal-steps-title">What to do:</p>
-                        <ol class="paypal-steps">
-                            <li>Click the button below to open our PayPal.</li>
-                            <li>Choose <strong>Send to friends and family</strong> (not Goods &amp; Services).</li>
-                            <li>In the <strong>note</strong> or <strong>What’s this for?</strong> field, paste exactly:</li>
-                        </ol>
-                        <div class="paypal-note-box">
-                            <code id="paypalNoteText"></code>
-                            <button type="button" class="paypal-copy" onclick="copyPayPalNote()" aria-label="Copy note">Copy</button>
-                        </div>
-                        <p class="paypal-steps-footer">Then send the amount shown on the button.</p>
-                    </div>
-                    <p id="paypalSaveHint" class="payment-text">Save your email and shipping details above first, then the PayPal amount and note will appear here.</p>
-                    <a id="paypalPayBtn" href="#" class="payment-cta primary paypal-cta" style="display:none;" target="_blank" rel="noopener">Pay $0.00 with PayPal</a>
-                </div>
-
-                <div class="payment-card">
-                    <div class="payment-card-header">
                         <h3>Crypto</h3>
                         <span class="payment-badge">Instant</span>
                     </div>
@@ -266,10 +203,6 @@
                 <div id="summaryShippingRow" class="summary-shipping" style="display:none;">
                     <span>Shipping</span>
                     <strong id="summaryShipping">$0.00</strong>
-                </div>
-                <div id="summaryNonOahuRow" class="summary-shipping" style="display:none;">
-                    <span>Non-Oahu fee</span>
-                    <strong id="summaryNonOahu">$7.00</strong>
                 </div>
                 <div class="summary-total">
                     <span>Total</span>
@@ -482,9 +415,6 @@
             EMOTOHI10: { type: 'percent', value: 10 },
             EMO20: { type: 'flat', value: 20 }
         };
-        const PAYPAL_USERNAME = 'imtoud';
-        const NON_OAHU_FEE = 7;
-        const OAHU_ZIPS = ['96701','96706','96707','96709','96712','96717','96730','96731','96734','96744','96759','96762','96782','96786','96789','96791','96792','96795','96797','96801','96802','96803','96804','96805','96806','96807','96808','96809','96810','96811','96812','96813','96814','96815','96816','96817','96818','96819','96820','96821','96822','96823','96824','96825','96826','96828','96830','96836','96837','96838','96839','96840','96841','96843','96844','96846','96847','96848','96849','96850','96853','96854','96857','96858','96859','96860','96861','96863'];
 
         function showGlobalLoader(autoHideMs) {
             const overlay = document.getElementById('globalLoader');
@@ -505,14 +435,6 @@
             const overlay = document.getElementById('globalLoader');
             if (!overlay) return;
             overlay.classList.remove('active');
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            if (!menu) return;
-            const isOpen = menu.classList.toggle('is-open');
-            menu.setAttribute('aria-hidden', !isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
         }
 
         function toggleThemeDropdown() {
@@ -664,22 +586,13 @@
             sessionStorage.setItem(SHIPPING_STORAGE_KEY, JSON.stringify(shipping));
         }
 
-        function isOahuZip(zip) {
-            if (!zip || typeof zip !== 'string') return false;
-            const normalized = zip.trim().replace(/\s+/g, '');
-            const five = normalized.length >= 5 ? normalized.slice(0, 5) : normalized;
-            return OAHU_ZIPS.indexOf(five) !== -1;
-        }
-
-        function getTotals(items, zipForFee) {
+        function getTotals(items) {
             const subtotal = items.reduce((sum, item) => sum + (Number(item.total) || 0), 0);
             const discount = getPromoDiscount(subtotal);
             const shipping = getStoredShipping();
             const shippingAmount = Number(shipping?.amount) || 0;
-            const zip = zipForFee != null ? zipForFee : (loadAddress() && loadAddress().zip ? loadAddress().zip : '');
-            const nonOahuFee = (!zip || !isOahuZip(zip)) ? NON_OAHU_FEE : 0;
-            const total = Math.max(0, subtotal - discount + shippingAmount + nonOahuFee);
-            return { subtotal, discount, total, shippingAmount, shipping, nonOahuFee };
+            const total = Math.max(0, subtotal - discount + shippingAmount);
+            return { subtotal, discount, total, shippingAmount, shipping };
         }
 
         function applyPromoCode() {
@@ -774,19 +687,6 @@
             return [line1 + line2, cityLine, country].filter(Boolean).join(', ');
         }
 
-        function copyPayPalNote() {
-            const el = document.getElementById('paypalNoteText');
-            if (!el || !el.textContent) return;
-            navigator.clipboard.writeText(el.textContent).then(() => {
-                const btn = document.querySelector('.paypal-copy');
-                if (btn) {
-                    const orig = btn.textContent;
-                    btn.textContent = 'Copied!';
-                    setTimeout(() => { btn.textContent = orig; }, 2000);
-                }
-            }).catch(() => {});
-        }
-
         function updatePayButtons() {
             const cryptoBtn = document.getElementById('cryptoStartBtn');
             const cashBtn = document.getElementById('cashStartBtn');
@@ -866,8 +766,6 @@
                 if (giftBtn) giftBtn.disabled = true;
                 if (discountRow) discountRow.style.display = 'none';
                 if (shippingRow) shippingRow.style.display = 'none';
-                const noRow = document.getElementById('summaryNonOahuRow');
-                if (noRow) noRow.style.display = 'none';
                 return;
             }
 
@@ -887,7 +785,7 @@
             }).join('');
 
             emptyState.style.display = 'none';
-            const { discount, total: grandTotal, shippingAmount, nonOahuFee } = getTotals(items);
+            const { discount, total: grandTotal, shippingAmount } = getTotals(items);
             totalEl.textContent = '$' + grandTotal.toFixed(2);
             headerTotal.textContent = '$' + grandTotal.toFixed(2);
             if (discountRow && discountValue) {
@@ -906,43 +804,6 @@
                     shippingRow.style.display = 'none';
                 }
             }
-            const nonOahuRow = document.getElementById('summaryNonOahuRow');
-            const nonOahuValue = document.getElementById('summaryNonOahu');
-            if (nonOahuRow && nonOahuValue) {
-                if (nonOahuFee > 0) {
-                    nonOahuRow.style.display = 'flex';
-                    nonOahuValue.textContent = '$' + nonOahuFee.toFixed(2);
-                } else {
-                    nonOahuRow.style.display = 'none';
-                }
-            }
-            const savedAddress = loadAddress();
-            const paypalInstructions = document.getElementById('paypalInstructions');
-            const paypalSaveHint = document.getElementById('paypalSaveHint');
-            const paypalPayBtn = document.getElementById('paypalPayBtn');
-            const paypalNoteEl = document.getElementById('paypalNoteText');
-            const emailOk = isValidEmail((document.getElementById('checkoutEmail')?.value || '').trim());
-            const addressOk = savedAddress && isAddressValid(savedAddress);
-            if (paypalInstructions && paypalSaveHint && paypalPayBtn && paypalNoteEl) {
-                if (addressOk && emailOk && items.length > 0) {
-                    paypalSaveHint.style.display = 'none';
-                    paypalInstructions.style.display = 'block';
-                    const noteLines = items.map(item => {
-                        const q = Number(item.quantity) || 1;
-                        const name = (item.name || 'Item').trim();
-                        return name + ' x' + q;
-                    });
-                    const noteText = noteLines.join(', ');
-                    paypalNoteEl.textContent = noteText;
-                    paypalPayBtn.style.display = 'inline-block';
-                    paypalPayBtn.textContent = 'Pay $' + grandTotal.toFixed(2) + ' with PayPal';
-                    paypalPayBtn.href = 'https://www.paypal.com/paypalme/' + PAYPAL_USERNAME + '/' + grandTotal.toFixed(2);
-                } else {
-                    paypalInstructions.style.display = 'none';
-                    paypalSaveHint.style.display = 'block';
-                    paypalPayBtn.style.display = 'none';
-                }
-            }
             if (promoInput) {
                 promoInput.value = getPromoCode();
             }
@@ -950,6 +811,7 @@
                 const savedEmail = sessionStorage.getItem(EMAIL_STORAGE_KEY) || '';
                 emailInput.value = savedEmail;
             }
+            const savedAddress = loadAddress();
             if (savedAddress) {
                 document.getElementById('checkoutName').value = savedAddress.name || '';
                 document.getElementById('checkoutPhone').value = savedAddress.phone || '';
@@ -1250,7 +1112,6 @@
                     const status = document.getElementById('checkoutSaveStatus');
                     if (status) status.style.display = 'block';
                     updatePayButtons();
-                    renderSummary();
                 });
             }
             const cashBtn = document.getElementById('cashStartBtn');
