@@ -2328,11 +2328,12 @@ body.dark-theme .signin-card {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 2rem;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    overflow-y: auto;
 }
 
 .product-modal.open {
@@ -4863,6 +4864,8 @@ body.dark-theme .products-page .option-chip {
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
     overflow-y: auto;
     overflow-x: hidden;
+    max-height: calc(100vh - 4rem);
+    margin: auto 0;
 }
 
 .product-modal .modal-content::before {
@@ -5029,6 +5032,14 @@ body.dark-theme .product-modal .option-item.selected {
 }
 
 @media (max-width: 768px) {
+    .product-modal {
+        padding: 0.9rem;
+    }
+
+    .product-modal .modal-content {
+        max-height: calc(100vh - 1.8rem);
+    }
+
     .product-modal .modal-gallery {
         border-right: none;
         border-bottom: 1px solid var(--card-border);
