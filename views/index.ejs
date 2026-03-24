@@ -12,7 +12,7 @@
     <link rel="icon" href="/images/top%20icon.png" type="image/png">
 </head>
 
-<body class="home-page">
+<body>
     <!-- Come Back Message -->
     <div id="comeBackMessage" class="come-back-message">
         <span>Hey come back!</span>
@@ -29,17 +29,13 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <button class="nav-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12h18M3 6h18M3 18h18"></path>
-                </svg>
-            </button>
             <a class="logo" href="/">
                 <img src="/images/2nd%20brand.png" alt="EmotoHI" class="logo-text-image">
             </a>
             <ul class="nav-links">
                 <li><a href="/" class="active">Home</a></li>
                 <li><a href="/products">Products</a></li>
+                <li><a href="/contact">Sign In</a></li>
                 <li class="nav-search-item">
                     <form class="site-search" action="/products" method="get">
                         <button type="submit" aria-label="Search">
@@ -94,45 +90,17 @@
                         </button>
                     </div>
                 </div>
+                <button class="cart-icon" onclick="openCart()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
             </ul>
-            <a href="/products" class="nav-mobile-search" aria-label="Search products">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                </svg>
-            </a>
-            <button class="cart-icon" onclick="openCart()">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
-                <span class="cart-count">0</span>
-            </button>
         </div>
     </nav>
-
-    <!-- Mobile menu overlay -->
-    <div id="mobileMenu" class="mobile-menu-overlay" aria-hidden="true">
-        <div class="mobile-menu-header">
-            <span style="font-weight: 700; font-size: 1.1rem;">Menu</span>
-            <button type="button" class="mobile-menu-close" aria-label="Close menu" onclick="toggleMobileMenu()">&times;</button>
-        </div>
-        <ul class="mobile-menu-links">
-            <li><a href="/" onclick="toggleMobileMenu()">Home</a></li>
-            <li><a href="/products" onclick="toggleMobileMenu()">Products</a></li>
-        </ul>
-        <div class="mobile-menu-search">
-            <form class="site-search" action="/products" method="get" onclick="event.stopPropagation()">
-                <button type="submit" aria-label="Search">
-                    <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                        <path d="M7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm7 2-3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-                <input class="site-search-input" name="q" placeholder="Search products…" type="text" autocomplete="off">
-            </form>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -146,41 +114,144 @@
         </div>
     </section>
 
-    <section class="home-categories reveal">
-        <div class="home-section-head">
-            <h2>Shop by Category</h2>
-            <a href="/products" class="ghost-link">View all products</a>
+    <!-- Motion Band -->
+    <section class="motion-band reveal">
+        <div class="motion-track">
+            <div class="motion-group">
+                <div class="motion-item">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                    <span>Ultra Breaks</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/rotor.png" alt="Rotor">
+                    <span>Rotor</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/white%20baja.png" alt="Baja Lights">
+                    <span>Baja Lights</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                    <span>OEM Pads</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                    <span>Ultra Breaks</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/rotor.png" alt="Rotor">
+                    <span>Rotor</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/white%20baja.png" alt="Baja Lights">
+                    <span>Baja Lights</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                    <span>OEM Pads</span>
+                </div>
+            </div>
+            <div class="motion-group" aria-hidden="true">
+                <div class="motion-item">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                    <span>Ultra Breaks</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/rotor.png" alt="Rotor">
+                    <span>Rotor</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/white%20baja.png" alt="Baja Lights">
+                    <span>Baja Lights</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                    <span>OEM Pads</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                    <span>Ultra Breaks</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/rotor.png" alt="Rotor">
+                    <span>Rotor</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/white%20baja.png" alt="Baja Lights">
+                    <span>Baja Lights</span>
+                </div>
+                <div class="motion-item">
+                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                    <span>OEM Pads</span>
+                </div>
+            </div>
         </div>
-        <div class="home-category-grid">
-            <a href="/products#ultra-breaks" class="home-category-card">
-                <img src="/images/Ultra%20Breaks.jpg" alt="Brake Systems">
-                <div class="home-category-copy">
-                    <h3>Brake Systems</h3>
-                    <p>Complete assemblies and performance setups.</p>
+    </section>
+
+    <!-- Visual Showcase -->
+    <section class="showcase reveal">
+        <div class="showcase-media">
+            <div class="showcase-card large">
+                <img src="/images/Ultra%20Breaks.jpg" alt="Ultra Bee Brakes">
+            </div>
+            <div class="showcase-card small top">
+                <img src="/images/orange%20%20baja.png" alt="Baja Lights">
+            </div>
+            <div class="showcase-card small bottom">
+                <img src="/images/carbon%20wrap.png" alt="Forged Carbon Wrap">
+            </div>
+        </div>
+        <div class="showcase-copy">
+            <h2>Parts that perform</h2>
+            <p>Built for riders who demand more.</p>
+            <div class="showcase-actions">
+                <a href="/products" class="cta-button alt">Shop the lineup</a>
+                <a href="/products" class="ghost-link">See all parts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll Gallery -->
+    <section class="scroll-gallery reveal">
+        <div class="scroll-head" style="display: none;">
+            <h2>Pick your setup</h2>
+            <span class="scroll-hint">Drag</span>
+        </div>
+        <div class="scroll-cards">
+            <a href="/products#ultra-breaks" class="scroll-card">
+                <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks">
+                <div class="scroll-meta">
+                    <span>Ultra Breaks</span>
+                    <strong>$299.99</strong>
                 </div>
             </a>
-            <a href="/products#baja-lights" class="home-category-card">
-                <img src="/images/white%20baja.png" alt="Lighting">
-                <div class="home-category-copy">
-                    <h3>Lighting</h3>
-                    <p>Baja and pod options for visibility and style.</p>
+            <a href="/products#rotor" class="scroll-card">
+                <img src="/images/rotor.png" alt="Rotor">
+                <div class="scroll-meta">
+                    <span>Rotor</span>
+                    <strong>$20</strong>
                 </div>
             </a>
-            <a href="/products#brake-pads" class="home-category-card">
-                <img src="/images/surron%20ultra%20oem%20pads.png" alt="Pads and Essentials">
-                <div class="home-category-copy">
-                    <h3>Pads & Essentials</h3>
-                    <p>Daily wear parts that keep your setup sharp.</p>
+            <a href="/products#baja-lights" class="scroll-card">
+                <img src="/images/white%20baja.png" alt="Baja Lights">
+                <div class="scroll-meta">
+                    <span>Baja Lights</span>
+                    <strong>$20</strong>
+                </div>
+            </a>
+            <a href="/products#brake-pads" class="scroll-card">
+                <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads">
+                <div class="scroll-meta">
+                    <span>OEM Pads</span>
+                    <strong>$20+</strong>
                 </div>
             </a>
         </div>
     </section>
 
     <!-- Featured Products -->
-    <section class="featured reveal home-featured">
-        <div class="home-section-head">
-            <h2>Best Sellers</h2>
-        </div>
+    <section class="featured reveal">
+        <h2>Surron Ultra Bee Breaks</h2>
         <div class="products-grid">
             <a href="/products#ultra-breaks" class="product-card">
                 <div class="sale-badge">SALE</div>
@@ -196,34 +267,6 @@
                     </div>
                     <p class="description">Fits on any Emoto with the included adapter. Comes pre-bled and ready to
                         install. Premium quality brakes built with precision and modern design.</p>
-                    <button class="add-to-cart">View Details</button>
-                </div>
-            </a>
-            <a href="/products#baja-lights" class="product-card">
-                <div class="product-image">
-                    <img src="/images/white%20baja.png" alt="Baja Lights"
-                        style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="product-card-content">
-                    <h3>Baja Lights</h3>
-                    <div class="product-price-section">
-                        <span class="price-plain">$20.00</span>
-                    </div>
-                    <p class="description">Compact lighting upgrades made for a clean front-end look.</p>
-                    <button class="add-to-cart">View Details</button>
-                </div>
-            </a>
-            <a href="/products#brake-pads" class="product-card">
-                <div class="product-image">
-                    <img src="/images/surron%20ultra%20oem%20pads.png" alt="Surron Brake Pads"
-                        style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="product-card-content">
-                    <h3>Surron Brake Pads</h3>
-                    <div class="product-price-section">
-                        <span class="price-plain">$20.00+</span>
-                    </div>
-                    <p class="description">OEM-style pad options for LBX and Ultra Bee setups.</p>
                     <button class="add-to-cart">View Details</button>
                 </div>
             </a>
@@ -623,14 +666,6 @@
                 console.warn('Unable to load cart:', error);
             }
             updateCartDisplay();
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            if (!menu) return;
-            const isOpen = menu.classList.toggle('is-open');
-            menu.setAttribute('aria-hidden', !isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
         }
 
         // Theme Management
