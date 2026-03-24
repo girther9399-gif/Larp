@@ -4861,7 +4861,8 @@ body.dark-theme .products-page .option-chip {
     border-radius: 14px;
     border: 1px solid var(--card-border);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .product-modal .modal-content::before {
