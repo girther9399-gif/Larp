@@ -2511,6 +2511,7 @@ body.dark-theme .signin-card {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
@@ -4851,6 +4852,193 @@ body.dark-theme .products-page .option-chip {
 
     .products-header-premium {
         border-radius: 16px;
+        padding: 1rem;
+    }
+}
+
+/* ===== Modal card refinement (keep product grid unchanged) ===== */
+.product-modal .modal-content {
+    border-radius: 14px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+}
+
+.product-modal .modal-content::before {
+    display: none;
+}
+
+.product-modal .modal-gallery {
+    padding: 1rem 1rem 1rem 1.2rem;
+    background: var(--section-bg-alt);
+    border-right: 1px solid var(--card-border);
+}
+
+.product-modal .main-image {
+    border-radius: 10px;
+    height: 330px;
+    border: 1px solid var(--card-border);
+    box-shadow: none;
+    background: var(--card-bg);
+}
+
+.product-modal .gallery-thumbnails,
+.product-modal .modal-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.45rem;
+}
+
+.product-modal .thumbnail {
+    height: 60px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+}
+
+.product-modal .thumbnail:hover,
+.product-modal .thumbnail.active {
+    border-color: var(--button-hover);
+    box-shadow: none;
+    transform: none;
+}
+
+.product-modal .modal-details {
+    padding: 1.2rem 1.2rem 1.25rem 1rem;
+    gap: 0.9rem;
+    background: var(--card-bg);
+}
+
+.product-modal .modal-details h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.product-modal .modal-description {
+    font-size: 0.9rem;
+    max-height: none;
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    -webkit-box-orient: initial;
+    overflow: visible;
+}
+
+.product-modal .options-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.product-modal .options-list {
+    gap: 0.55rem;
+}
+
+.product-modal .option-item {
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 0.55rem 0.7rem;
+    box-shadow: none;
+    background: var(--card-bg);
+    transform: none;
+}
+
+.product-modal .option-item::after {
+    display: none;
+}
+
+.product-modal .option-item:hover {
+    border-color: var(--button-hover);
+    background: var(--section-bg);
+    transform: none;
+    box-shadow: none;
+}
+
+.product-modal .option-item.selected {
+    border-color: var(--button-hover);
+    background: rgba(0, 102, 255, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(0, 102, 255, 0.15);
+}
+
+body.dark-theme .product-modal .option-item.selected {
+    background: rgba(0, 102, 255, 0.18);
+}
+
+.product-modal .option-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 7px;
+}
+
+.product-modal .option-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: none;
+}
+
+.product-modal .option-price {
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.product-modal .price-section {
+    padding: 0;
+}
+
+.product-modal .modal-price {
+    font-size: 1.45rem;
+    border-radius: 10px;
+    padding: 0.55rem 0.85rem;
+    box-shadow: none;
+}
+
+.product-modal .quantity-selector {
+    border-radius: 10px;
+    padding: 0.9rem;
+    gap: 0.55rem;
+}
+
+.product-modal .quantity-controls button {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+}
+
+.product-modal .quantity-controls input,
+.product-modal .quantity-input,
+.product-modal #quantity {
+    width: 64px;
+    border-radius: 8px;
+}
+
+.product-modal .add-to-cart-modal {
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 0.95rem;
+    box-shadow: none;
+    background: linear-gradient(135deg, #0a57d4, #0b46aa);
+}
+
+.product-modal .add-to-cart-modal:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .product-modal .modal-gallery {
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        padding: 0.95rem;
+    }
+
+    .product-modal .main-image {
+        height: 270px;
+    }
+
+    .product-modal .modal-details {
         padding: 1rem;
     }
 }
