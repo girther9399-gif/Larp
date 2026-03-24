@@ -5042,3 +5042,78 @@ body.dark-theme .product-modal .option-item.selected {
         padding: 1rem;
     }
 }
+
+/* ===== Card hover pastel gradient accents only ===== */
+.products-page,
+.home-collections {
+    --hover-baby-blue: #bfe7ff;
+    --hover-pink: #ffb7dc;
+    --hover-light-pink: #ffd9ef;
+    --hover-soft-orange: #ffe8c6;
+}
+
+.products-page .product-card {
+    position: relative;
+}
+
+.products-page .product-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 18px;
+    background: linear-gradient(
+        125deg,
+        var(--hover-baby-blue),
+        var(--hover-light-pink),
+        var(--hover-pink),
+        var(--hover-soft-orange)
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+    z-index: 0;
+}
+
+.products-page .product-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.products-page .product-card:hover {
+    border-color: transparent;
+}
+
+.products-page .product-card:hover::before {
+    opacity: 1;
+}
+
+.home-collections .collection-card {
+    position: relative;
+}
+
+.home-collections .collection-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(
+        125deg,
+        var(--hover-baby-blue),
+        var(--hover-light-pink),
+        var(--hover-pink),
+        var(--hover-soft-orange)
+    );
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+    z-index: 2;
+}
+
+.home-collections .collection-card:hover::before {
+    opacity: 1;
+}
