@@ -271,7 +271,7 @@ app.get('/videos', (req, res) => {
 });
 
 app.get('/contact', (req, res) => {
-    res.render('contact');
+    res.redirect(301, '/');
 });
 
 app.post('/api/crypto/create-order', async (req, res) => {

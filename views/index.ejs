@@ -144,7 +144,7 @@
                 <p>Quality upgrades for braking, lighting, and style - made to fit clean and ride hard.</p>
                 <div class="hero-cta-row">
                     <a href="/products" class="cta-button" data-magnetic="0.28">Shop All Products</a>
-                    <a href="/products#ultra-breaks" class="ghost-link" data-magnetic="0.2">Top Seller</a>
+                    <a href="/products#ultra-brakes" class="ghost-link" data-magnetic="0.2">Top Seller</a>
                 </div>
             </div>
         </div>
@@ -224,23 +224,24 @@
 
     <!-- Featured Products -->
     <section class="featured reveal">
-        <h2>Surron Ultra Bee Breaks</h2>
+        <h2>Surron Ultra Bee Brakes</h2>
         <div class="products-grid">
-            <a href="/products#ultra-breaks" class="product-card motion-card">
+            <a href="/products#ultra-brakes" class="product-card motion-card">
                 <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="sale-badge">SALE</div>
                 <div class="product-image">
-                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks"
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Brakes"
                         style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="product-card-content">
-                    <h3>Surron Ultra Bee Breaks</h3>
+                    <h3>Surron Ultra Bee Brakes</h3>
                     <div class="product-price-section">
                         <span class="original-price">$350.00</span>
                         <span class="sale-price">$299.99</span>
                     </div>
                     <p class="description">Fits on any Emoto with the included adapter. Comes pre-bled and ready to
                         install. Premium quality brakes built with precision and modern design.</p>
+                    <p class="payment-notice payment-notice-compact" role="note">Checkout: PayPal (F&amp;F), BTC/ETH/LTC, or local meetup—no cards on site.</p>
                     <button class="add-to-cart">View Details</button>
                 </div>
             </a>
@@ -258,10 +259,6 @@
             <details class="faq-item">
                 <summary>What's your return policy?</summary>
                 <p>All sales are final. We do not accept returns or exchanges.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Any final sale items?</summary>
-                <p>All products are final sale and not eligible for return.</p>
             </details>
             <details class="faq-item">
                 <summary>How do delivery fees work?</summary>
@@ -286,7 +283,6 @@
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/products">Products</a></li>
-                    <li><a href="/contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -319,7 +315,7 @@
 
             <!-- Product Details -->
             <div class="modal-details">
-                <h2>Surron Ultra Bee Breaks</h2>
+                <h2>Surron Ultra Bee Brakes</h2>
                 <p class="modal-description">Premium quality brakes built with precision and modern design. Fits on any
                     Emoto with the included adapter. Comes pre-bled and ready to install.</p>
 
@@ -564,6 +560,7 @@
                 <span>Total:</span>
                 <span id="cartTotal" class="motion-ticker-mount">$0.00</span>
             </div>
+            <p class="cart-payment-notice" role="note">PayPal (F&amp;F), crypto (BTC/ETH/LTC), or local meetup at checkout—no cards on site.</p>
             <button type="button" class="checkout-btn" data-magnetic="0.24" onclick="checkout()">Checkout</button>
         </div>
     </div>
@@ -583,8 +580,7 @@
             <details class="tos-more">
                 <summary>See more</summary>
                 <div class="tos-more-content">
-                    <p>All sales are final. We do not offer refunds, returns, or exchanges for any reason, including
-                        fitment issues, change of mind, or installation problems.</p>
+                    <p>As stated above, we don't make exceptions for fitment, change of mind, or installation issues.</p>
                     <p>Products are provided "as-is" and "as-available" without warranties of any kind, express or
                         implied, to the maximum extent permitted by law. You are responsible for verifying fitment and
                         compatibility before purchase.</p>
@@ -848,7 +844,7 @@
 
         function addToCart() {
             const selectedOption = document.querySelector('.option-item.selected .option-name');
-            const productName = selectedOption ? selectedOption.textContent : 'Surron Ultra Bee Breaks';
+            const productName = selectedOption ? selectedOption.textContent : 'Surron Ultra Bee Brakes';
 
             const item = {
                 id: Date.now(),
@@ -950,6 +946,15 @@
             if (localStorage.getItem('tosAccepted') !== 'true') {
                 showTos();
             }
+            document.querySelectorAll('.product-modal .add-to-cart-modal').forEach(function (btn) {
+                if (btn.closest('#cryptoModal')) return;
+                if (btn.previousElementSibling && btn.previousElementSibling.classList.contains('modal-payment-notice')) return;
+                var p = document.createElement('p');
+                p.className = 'modal-payment-notice';
+                p.setAttribute('role', 'note');
+                p.textContent = 'PayPal (F&F), crypto (BTC/ETH/LTC), or local options at checkout—no cards on site.';
+                btn.parentNode.insertBefore(p, btn);
+            });
         });
 
         function selectOption(element, price, mainImage, images) {

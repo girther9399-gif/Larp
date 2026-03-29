@@ -220,19 +220,20 @@
                 <button type="button" class="category-btn" data-category="hardware" onclick="filterCategory('hardware', this)">Hardware</button>
                 <button type="button" class="category-btn" data-category="gear" onclick="filterCategory('gear', this)">All gear</button>
             </div>
-            <div class="no-results" id="noResultsMessage">No results found. Try a different search.</div>
+            <p class="payment-notice" role="note">No card payments on this site. Checkout is PayPal (Friends &amp; Family), cryptocurrency (BTC, ETH, LTC), or local cash/gift meetup—choose at checkout.</p>
+            <div class="no-results" id="noResultsMessage" style="display: none;">No results found. Try a different search.</div>
         </div>
         <div class="products-grid">
-            <!-- Surron Ultra Bee Breaks -->
-            <div id="ultra-breaks" class="product-card motion-card" data-category="brakes" onclick="openProductModal()" style="cursor: pointer;">
+            <!-- Surron Ultra Bee Brakes -->
+            <div id="ultra-brakes" class="product-card motion-card" data-category="brakes" onclick="openProductModal()" style="cursor: pointer;">
                 <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="sale-badge">SALE</div>
                 <div class="product-image">
-                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks"
+                    <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Brakes"
                         style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="product-card-content">
-                    <h3>Surron Ultra Bee Breaks</h3>
+                    <h3>Surron Ultra Bee Brakes</h3>
                     <div class="product-price-section">
                         <span class="original-price">$350.00</span>
                         <span class="sale-price">$299.99</span>
@@ -419,7 +420,7 @@
 
                 <!-- Product Details -->
                 <div class="modal-details">
-                    <h2>Surron Ultra Bee Breaks</h2>
+                    <h2>Surron Ultra Bee Brakes</h2>
                     <p class="modal-description">Premium quality brakes built with precision and modern design. Fits on
                         any Emoto with the included adapter. Comes pre-bled and ready to install.</p>
 
@@ -477,7 +478,7 @@
                     </div>
 
                     <button class="add-to-cart-modal"
-                        onclick="addToCartFromModal('productModal', 'Surron Ultra Bee Breaks')">Add to Cart</button>
+                        onclick="addToCartFromModal('productModal', 'Surron Ultra Bee Brakes')">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -926,6 +927,7 @@
                     <span>Total:</span>
                     <span id="cartTotal" class="motion-ticker-mount">$0.00</span>
                 </div>
+                <p class="cart-payment-notice" role="note">PayPal (F&amp;F), crypto (BTC/ETH/LTC), or local meetup at checkout—no cards on site.</p>
                 <button type="button" class="checkout-btn" data-magnetic="0.24" onclick="checkout()">Checkout</button>
             </div>
         </div>
@@ -1201,8 +1203,7 @@
                 <details class="tos-more">
                     <summary>See more</summary>
                     <div class="tos-more-content">
-                        <p>All sales are final. We do not offer refunds, returns, or exchanges for any reason, including
-                            fitment issues, change of mind, or installation problems.</p>
+                        <p>As stated above, we don't make exceptions for fitment, change of mind, or installation issues.</p>
                         <p>Products are provided "as-is" and "as-available" without warranties of any kind, express or
                             implied, to the maximum extent permitted by law. You are responsible for verifying fitment
                             and compatibility before purchase.</p>
@@ -1883,6 +1884,16 @@
                     });
                 }
                 applyFilters();
+
+                document.querySelectorAll('.product-modal .add-to-cart-modal').forEach(function (btn) {
+                    if (btn.closest('#cryptoModal')) return;
+                    if (btn.previousElementSibling && btn.previousElementSibling.classList.contains('modal-payment-notice')) return;
+                    var p = document.createElement('p');
+                    p.className = 'modal-payment-notice';
+                    p.setAttribute('role', 'note');
+                    p.textContent = 'PayPal (F&F), crypto (BTC/ETH/LTC), or local options at checkout—no cards on site.';
+                    btn.parentNode.insertBefore(p, btn);
+                });
             });
 
             function productMatchesCategory(productCat, filterCat) {
@@ -1945,12 +1956,16 @@
 
             // Check URL hash and auto-open modal
             function checkHashAndOpenModal() {
-                const hash = window.location.hash.substring(1); // Remove the #
+                let hash = window.location.hash.substring(1);
                 if (!hash) return;
+                if (hash === 'ultra-breaks') {
+                    history.replaceState(null, '', window.location.pathname + window.location.search + '#ultra-brakes');
+                    hash = 'ultra-brakes';
+                }
 
                 // Map hash to modal function
                 const modalMap = {
-                    'ultra-breaks': () => openProductModal(),
+                    'ultra-brakes': () => openProductModal(),
                     'brake-pads': () => openModal('padsModal'),
                     'rotor': () => openModal('rotorModal'),
                     'baja-lights': () => openModal('bajaModal'),

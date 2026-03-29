@@ -1,7 +1,7 @@
 {
   "name": "emotohl",
   "version": "1.0.0",
-  "description": "EmotoHI - Premium Ultrabe Breaks E-commerce Website",
+  "description": "EmotoHI - Premium emoto brakes and parts",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

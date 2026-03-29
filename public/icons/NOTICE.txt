@@ -1,0 +1,2 @@
+Brand SVGs in brands/ are from Simple Icons (MIT): https://github.com/simple-icons/simple-icons
+UI stroke icons in checkout are Lucide (ISC), inlined in views/checkout.ejs: https://lucide.dev
