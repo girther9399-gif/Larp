@@ -1,7 +1,7 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const express = require('express');
 const https = require('https');
-const path = require('path');
 const app = express();
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || 'https://discordapp.com/api/webhooks/1470551132450586705/_i4HvWyfBcIcDkIzAMhmENtkdN2oIS_sDyfYfHCW9ZvTZwv6II8R-Ca62htgIAH5ayVA';
 
@@ -401,8 +401,8 @@ function paypalApiHostname() {
 }
 
 async function paypalAccessToken() {
-    const clientId = process.env.PAYPAL_CLIENT_ID;
-    const secret = process.env.PAYPAL_CLIENT_SECRET;
+    const clientId = String(process.env.PAYPAL_CLIENT_ID || '').trim();
+    const secret = String(process.env.PAYPAL_CLIENT_SECRET || '').trim();
     if (!clientId || !secret) {
         const err = new Error('PayPal is not configured.');
         err.code = 'PAYPAL_NOT_CONFIGURED';
