@@ -220,7 +220,6 @@
                 <button type="button" class="category-btn" data-category="hardware" onclick="filterCategory('hardware', this)">Hardware</button>
                 <button type="button" class="category-btn" data-category="gear" onclick="filterCategory('gear', this)">All gear</button>
             </div>
-            <p class="payment-notice" role="note">No card payments on this site. Checkout is PayPal (Friends &amp; Family), cryptocurrency (BTC, ETH, LTC), or local cash/gift meetup—choose at checkout.</p>
             <div class="no-results" id="noResultsMessage" style="display: none;">No results found. Try a different search.</div>
         </div>
         <div class="products-grid">
@@ -927,7 +926,6 @@
                     <span>Total:</span>
                     <span id="cartTotal" class="motion-ticker-mount">$0.00</span>
                 </div>
-                <p class="cart-payment-notice" role="note">PayPal (F&amp;F), crypto (BTC/ETH/LTC), or local meetup at checkout—no cards on site.</p>
                 <button type="button" class="checkout-btn" data-magnetic="0.24" onclick="checkout()">Checkout</button>
             </div>
         </div>
@@ -1586,7 +1584,10 @@
                 }
 
                 const mainImgEl = modal.querySelector('.modal-main-image');
-                const imageSrc = (mainImgEl && mainImgEl.src) ? mainImgEl.src : ((state.images && state.images[0]) || '');
+                let imageSrc = (mainImgEl && mainImgEl.getAttribute('src')) ? mainImgEl.getAttribute('src').trim() : '';
+                if (!imageSrc && state.images && state.images.length) {
+                    imageSrc = state.images[0];
+                }
                 const item = {
                     id: Date.now(),
                     productName: fallbackName,
@@ -1889,16 +1890,6 @@
                     });
                 }
                 applyFilters();
-
-                document.querySelectorAll('.product-modal .add-to-cart-modal').forEach(function (btn) {
-                    if (btn.closest('#cryptoModal')) return;
-                    if (btn.previousElementSibling && btn.previousElementSibling.classList.contains('modal-payment-notice')) return;
-                    var p = document.createElement('p');
-                    p.className = 'modal-payment-notice';
-                    p.setAttribute('role', 'note');
-                    p.textContent = 'PayPal (F&F), crypto (BTC/ETH/LTC), or local options at checkout—no cards on site.';
-                    btn.parentNode.insertBefore(p, btn);
-                });
             });
 
             function productMatchesCategory(productCat, filterCat) {

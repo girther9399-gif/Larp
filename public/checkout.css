@@ -1,15 +1,19 @@
-/* EmotoHI checkout — standalone dark premium layout */
+/* EmotoHI checkout — light default, dark via body.checkout-page.dark-theme */
 body.checkout-page {
-    --chk-bg: #0d0d0d;
-    --chk-surface: #141414;
-    --chk-elevated: #1a1a1a;
-    --chk-border: rgba(255, 255, 255, 0.09);
-    --chk-border-strong: rgba(255, 255, 255, 0.14);
-    --chk-text: #f5f5f5;
-    --chk-muted: #949494;
-    --chk-accent: #3d8bfd;
-    --chk-accent-dim: rgba(61, 139, 253, 0.22);
-    --chk-success: #34c759;
+    --chk-bg: #f4f5f7;
+    --chk-surface: #ffffff;
+    --chk-elevated: #eef0f4;
+    --chk-border: rgba(0, 0, 0, 0.08);
+    --chk-border-strong: rgba(0, 0, 0, 0.14);
+    --chk-text: #121212;
+    --chk-muted: #5f6368;
+    --chk-accent: #0066ff;
+    --chk-accent-dim: rgba(0, 102, 255, 0.14);
+    --chk-success: #067a41;
+    --chk-warn: #b45309;
+    --chk-hover-row: rgba(0, 0, 0, 0.045);
+    --chk-modal-scrim: rgba(0, 0, 0, 0.45);
+    --chk-loader-scrim: rgba(255, 255, 255, 0.9);
     --chk-radius: 14px;
     --chk-radius-sm: 10px;
     --chk-font: "Inter", system-ui, sans-serif;
@@ -20,25 +24,74 @@ body.checkout-page {
     min-height: 100vh;
 }
 
+body.checkout-page.dark-theme {
+    --chk-bg: #0d0d0d;
+    --chk-surface: #141414;
+    --chk-elevated: #1a1a1a;
+    --chk-border: rgba(255, 255, 255, 0.09);
+    --chk-border-strong: rgba(255, 255, 255, 0.14);
+    --chk-text: #f5f5f5;
+    --chk-muted: #949494;
+    --chk-accent: #3d8bfd;
+    --chk-accent-dim: rgba(61, 139, 253, 0.22);
+    --chk-success: #34c759;
+    --chk-warn: #ffb84d;
+    --chk-hover-row: rgba(255, 255, 255, 0.05);
+    --chk-modal-scrim: rgba(0, 0, 0, 0.75);
+    --chk-loader-scrim: rgba(13, 13, 13, 0.88);
+}
+
 body.checkout-page .navbar,
 body.checkout-page nav.checkout-nav-minimal {
-    background: rgba(13, 13, 13, 0.92);
+    background: rgba(244, 245, 247, 0.92);
     border-bottom: 1px solid var(--chk-border);
     backdrop-filter: blur(12px);
+}
+
+body.checkout-page.dark-theme .navbar,
+body.checkout-page.dark-theme nav.checkout-nav-minimal {
+    background: rgba(13, 13, 13, 0.92);
 }
 
 body.checkout-page .checkout-nav-inner {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+body.checkout-page .checkout-nav-spacer {
+    min-width: 0;
+}
+
+body.checkout-page .checkout-nav-actions {
+    justify-self: end;
     display: flex;
     align-items: center;
-    justify-content: center;
+}
+
+body.checkout-page .checkout-nav-actions .theme-switcher {
+    position: relative;
+    z-index: 50;
 }
 
 body.checkout-page .checkout-nav-inner .logo {
     display: flex;
     align-items: center;
+    justify-self: center;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+body.checkout-page .checkout-nav-inner .checkout-nav-spacer {
+    grid-column: 1;
+}
+
+body.checkout-page .checkout-nav-inner .checkout-nav-actions {
+    grid-column: 3;
 }
 
 body.checkout-page .checkout-nav-inner .logo-text-image {
@@ -487,7 +540,8 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
 }
 
 .chk-field input::placeholder {
-    color: #5c5c5c;
+    color: var(--chk-muted);
+    opacity: 0.75;
 }
 
 .chk-field input:focus {
@@ -501,7 +555,7 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
     width: 100%;
     padding: 1rem 1.25rem;
     background: var(--chk-text);
-    color: #0d0d0d;
+    color: var(--chk-bg);
     border: none;
     border-radius: var(--chk-radius-sm);
     font-weight: 700;
@@ -614,7 +668,7 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
 }
 
 .pay-method-head:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--chk-hover-row);
 }
 
 .pay-method-head .left {
@@ -677,7 +731,7 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
 .badge.instant {
     background: var(--chk-accent-dim);
     border-color: var(--chk-accent);
-    color: #b8d9ff;
+    color: var(--chk-accent);
 }
 
 .badge.subtle {
@@ -832,7 +886,7 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
     gap: 0.5rem;
     width: 100%;
     padding: 0.95rem 1rem;
-    background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+    background: var(--chk-elevated);
     color: var(--chk-text);
     border: 1px solid var(--chk-border-strong);
     border-radius: var(--chk-radius-sm);
@@ -883,7 +937,7 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
 }
 
 .pay-hint.warn {
-    color: #ffb84d;
+    color: var(--chk-warn);
 }
 
 .pay-status-inline {
@@ -891,22 +945,6 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
     font-size: 0.84rem;
     line-height: 1.45;
     color: var(--chk-success);
-}
-
-/* Card coming soon */
-.pay-method-card.coming-soon {
-    opacity: 0.65;
-}
-
-.pay-method-card.coming-soon .pay-method-head {
-    cursor: default;
-}
-
-.pay-waitlist-note {
-    font-size: 0.8rem;
-    color: var(--chk-muted);
-    padding: 0 1.15rem 1rem;
-    margin: 0;
 }
 
 /* Success screen */
@@ -1024,7 +1062,7 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
 
 /* Crypto modal v2 */
 body.checkout-page #cryptoModal.product-modal {
-    background: rgba(0, 0, 0, 0.75);
+    background: var(--chk-modal-scrim);
     backdrop-filter: blur(8px);
     z-index: 100002;
 }
@@ -1035,8 +1073,12 @@ body.checkout-page #cryptoModal .crypto-modal-content-v2 {
     border-radius: var(--chk-radius);
     max-width: 440px;
     width: calc(100% - 2rem);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
     color: var(--chk-text);
+}
+
+body.checkout-page.dark-theme #cryptoModal .crypto-modal-content-v2 {
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
 }
 
 body.checkout-page #cryptoModal .modal-close {
@@ -1198,7 +1240,7 @@ body.checkout-page #cryptoModal .crypto-submit-btn {
     margin-top: 1rem;
     padding: 0.9rem;
     background: var(--chk-text);
-    color: #0d0d0d;
+    color: var(--chk-bg);
     border: none;
     border-radius: var(--chk-radius-sm);
     font-weight: 700;
@@ -1215,5 +1257,5 @@ body.checkout-page #cryptoModal .crypto-submit-btn:disabled {
 
 /* Global loader on checkout */
 body.checkout-page .global-loader {
-    background: rgba(13, 13, 13, 0.88);
+    background: var(--chk-loader-scrim);
 }

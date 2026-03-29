@@ -3827,30 +3827,6 @@ body:not(.dark-theme) .crypto-status.error {
     margin-bottom: 1rem;
 }
 
-.payment-notice,
-.cart-payment-notice,
-.modal-payment-notice {
-    font-size: 0.85rem;
-    line-height: 1.45;
-    color: var(--muted-text);
-    margin: 0 0 0.85rem;
-}
-
-.payment-notice-compact {
-    margin-top: 0.35rem;
-    margin-bottom: 0.65rem;
-    font-size: 0.8rem;
-}
-
-.products-header-premium .payment-notice {
-    margin-top: 1rem;
-    max-width: 40rem;
-}
-
-.modal-payment-notice {
-    margin-top: 0.5rem;
-}
-
 .checkout-btn {
     width: 100%;
     padding: 1rem;

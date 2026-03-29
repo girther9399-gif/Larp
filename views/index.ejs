@@ -241,7 +241,6 @@
                     </div>
                     <p class="description">Fits on any Emoto with the included adapter. Comes pre-bled and ready to
                         install. Premium quality brakes built with precision and modern design.</p>
-                    <p class="payment-notice payment-notice-compact" role="note">Checkout: PayPal (F&amp;F), BTC/ETH/LTC, or local meetup—no cards on site.</p>
                     <button class="add-to-cart">View Details</button>
                 </div>
             </a>
@@ -560,7 +559,6 @@
                 <span>Total:</span>
                 <span id="cartTotal" class="motion-ticker-mount">$0.00</span>
             </div>
-            <p class="cart-payment-notice" role="note">PayPal (F&amp;F), crypto (BTC/ETH/LTC), or local meetup at checkout—no cards on site.</p>
             <button type="button" class="checkout-btn" data-magnetic="0.24" onclick="checkout()">Checkout</button>
         </div>
     </div>
@@ -848,7 +846,7 @@
             const titleEl = document.querySelector('#productModal .modal-details h2');
             const productTitle = titleEl ? titleEl.textContent.trim() : 'Surron Ultra Bee Brakes';
             const mainImg = document.getElementById('mainImage');
-            const imageSrc = (mainImg && mainImg.src) ? mainImg.src : '';
+            const imageSrc = (mainImg && mainImg.getAttribute('src')) ? mainImg.getAttribute('src').trim() : '';
 
             const item = {
                 id: Date.now(),
@@ -953,15 +951,6 @@
             if (localStorage.getItem('tosAccepted') !== 'true') {
                 showTos();
             }
-            document.querySelectorAll('.product-modal .add-to-cart-modal').forEach(function (btn) {
-                if (btn.closest('#cryptoModal')) return;
-                if (btn.previousElementSibling && btn.previousElementSibling.classList.contains('modal-payment-notice')) return;
-                var p = document.createElement('p');
-                p.className = 'modal-payment-notice';
-                p.setAttribute('role', 'note');
-                p.textContent = 'PayPal (F&F), crypto (BTC/ETH/LTC), or local options at checkout—no cards on site.';
-                btn.parentNode.insertBefore(p, btn);
-            });
         });
 
         function selectOption(element, price, mainImage, images) {
