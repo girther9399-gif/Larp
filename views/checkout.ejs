@@ -222,7 +222,7 @@
                                     <span class="icon-wrap"><img src="/icons/brands/paypal.svg" width="22" height="22" alt=""></span>
                                     <span class="titles">
                                         <h3>PayPal</h3>
-                                        <p>PayPal.me (real PayPal) or optional card checkout</p>
+                                        <p>Pay with PayPal.me</p>
                                     </span>
                                 </span>
                                 <span class="pay-method-badges">
@@ -231,8 +231,7 @@
                                 </span>
                             </button>
                             <div class="pay-method-body" id="payBodyPaypal" hidden>
-                                <p class="pay-copy"><strong>Recommended — PayPal.me:</strong> Opens <strong>paypal.com</strong> in a <strong>new tab</strong> with your <strong>exact total</strong> (real PayPal, not sandbox). Describe what you bought in the PayPal note; we match you to <strong>the email above</strong>.</p>
-                                <p class="pay-copy"><strong>Optional — card / PayPal login checkout:</strong> Uses our PayPal button and returns you here. While our API is in <strong>Sandbox</strong>, that flow is <strong>test only</strong>. For real card payments on PayPal, use PayPal.me until Live API keys are enabled.</p>
+                                <p class="pay-copy">Opens PayPal in a <strong>new tab</strong> with your order total. Add what you ordered in the PayPal note so we can match your payment to <strong>the email above</strong>.</p>
                                 <p id="paypalSaveHint" class="pay-hint">Save your email and shipping details first.</p>
                                 <button type="button" id="paypalPayBtn" class="btn-paypal-pro" style="display:none;" aria-label="Open PayPal.me with your total in a new tab">
                                     <span class="btn-paypal-shine" aria-hidden="true"></span>
@@ -241,7 +240,6 @@
                                         <span class="btn-paypal-label">Pay <span id="paypalCtaAmount">$0.00</span> via PayPal.me ↗</span>
                                     </span>
                                 </button>
-                                <button type="button" id="paypalHostedBtn" class="btn-paypal-hosted-secondary" style="display:none;" aria-label="Pay with PayPal hosted checkout">Pay <span id="paypalHostedAmount">$0.00</span> — PayPal checkout (API)</button>
                             </div>
                         </div>
 
@@ -419,27 +417,6 @@
                     <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
                 </g>
             </svg>
-        </div>
-    </div>
-
-    <div id="paypalPortal" class="paypal-portal" hidden aria-hidden="true">
-        <div class="paypal-portal__noise" aria-hidden="true"></div>
-        <div class="paypal-portal__aurora" aria-hidden="true"></div>
-        <div class="paypal-portal__grid" aria-hidden="true"></div>
-        <button type="button" class="paypal-portal__scrim" aria-label="Close PayPal checkout" onclick="closePayPalPortal()"></button>
-        <div class="paypal-portal__frame" role="dialog" aria-modal="true" aria-labelledby="paypalPortalTitle">
-            <button type="button" class="paypal-portal__close" onclick="closePayPalPortal()" aria-label="Close">&times;</button>
-            <div class="paypal-portal__chrome">
-                <span class="paypal-portal__kicker">EmotoHI</span>
-                <h2 id="paypalPortalTitle" class="paypal-portal__title">Pay with PayPal</h2>
-                <p class="paypal-portal__lead">We’ll send you to PayPal’s secure page (same window). After you pay, you’ll land back here with a confirmation.</p>
-            </div>
-            <div id="paypalPortalLoader" class="paypal-portal__loader">
-                <span class="paypal-portal__loader-orbit" aria-hidden="true"></span>
-                <span class="paypal-portal__loader-core" aria-hidden="true"></span>
-                <span id="paypalPortalLoaderLabel" class="paypal-portal__loader-label">Preparing checkout…</span>
-            </div>
-            <p id="paypalPortalError" class="paypal-portal__error" hidden role="alert"></p>
         </div>
     </div>
 
@@ -902,40 +879,6 @@
             return [line1 + line2, cityLine, country].filter(Boolean).join(', ');
         }
 
-        let paypalPortalKeyHandler = null;
-
-        const PAYPAL_CONFIG_ERR =
-            'PayPal is not configured on this server. Set Client_ID and Secret_key_1 (or PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET) in your host environment, then redeploy. Check /api/paypal/status on this site.';
-
-        function closePayPalPortal() {
-            const portal = document.getElementById('paypalPortal');
-            if (!portal) return;
-            portal.classList.remove('is-open');
-            document.body.classList.remove('paypal-portal-open');
-            if (paypalPortalKeyHandler) {
-                document.removeEventListener('keydown', paypalPortalKeyHandler);
-                paypalPortalKeyHandler = null;
-            }
-            window.setTimeout(() => {
-                if (!portal.classList.contains('is-open')) {
-                    portal.hidden = true;
-                    portal.setAttribute('aria-hidden', 'true');
-                }
-            }, 480);
-            const errEl = document.getElementById('paypalPortalError');
-            if (errEl) {
-                errEl.textContent = '';
-                errEl.hidden = true;
-            }
-            const loader = document.getElementById('paypalPortalLoader');
-            if (loader) loader.hidden = false;
-            const hostedBtn = document.getElementById('paypalHostedBtn');
-            if (hostedBtn) {
-                hostedBtn.classList.remove('is-launching');
-                hostedBtn.disabled = false;
-            }
-        }
-
         function openPayPalMe() {
             const items = getStoredCart();
             if (!items.length) {
@@ -956,122 +899,6 @@
             const url =
                 'https://www.paypal.com/paypalme/' + PAYPAL_ME_USERNAME + '/' + grandTotal.toFixed(2);
             window.open(url, '_blank', 'noopener,noreferrer');
-        }
-
-        function openPayPalPortal() {
-            const btn = document.getElementById('paypalHostedBtn');
-            const portal = document.getElementById('paypalPortal');
-            if (!portal || !btn) return;
-
-            btn.classList.add('is-launching');
-            btn.disabled = true;
-
-            portal.hidden = false;
-            portal.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('paypal-portal-open');
-
-            const portalErr = document.getElementById('paypalPortalError');
-            if (portalErr) {
-                portalErr.textContent = '';
-                portalErr.hidden = true;
-            }
-
-            const loader = document.getElementById('paypalPortalLoader');
-            if (loader) loader.hidden = false;
-            const loaderLabel = document.getElementById('paypalPortalLoaderLabel');
-            if (loaderLabel) loaderLabel.textContent = 'Preparing secure PayPal checkout…';
-
-            requestAnimationFrame(function () {
-                requestAnimationFrame(function () {
-                    portal.classList.add('is-open');
-                });
-            });
-
-            if (!paypalPortalKeyHandler) {
-                paypalPortalKeyHandler = function (e) {
-                    if (e.key === 'Escape') closePayPalPortal();
-                };
-                document.addEventListener('keydown', paypalPortalKeyHandler);
-            }
-
-            const email = (document.getElementById('checkoutEmail')?.value || '').trim();
-            const address = loadAddress();
-
-            fetch('/api/paypal/create-order', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    items: getStoredCart(),
-                    promoCode: getPromoCode(),
-                    address,
-                    email,
-                    receiptId: getReceiptId()
-                })
-            })
-                .then(function (res) {
-                    return res.json().then(function (data) {
-                        return { res: res, data: data };
-                    });
-                })
-                .then(function (out) {
-                    const errBox = document.getElementById('paypalPortalError');
-                    if (out.res.ok && out.data.approveUrl) {
-                        if (loaderLabel) loaderLabel.textContent = 'Taking you to PayPal…';
-                        window.location.assign(out.data.approveUrl);
-                        return;
-                    }
-                    if (loader) loader.hidden = true;
-                    btn.classList.remove('is-launching');
-                    btn.disabled = false;
-                    if (out.res.status === 503) {
-                        if (errBox) {
-                            errBox.textContent = PAYPAL_CONFIG_ERR;
-                            errBox.hidden = false;
-                        }
-                    } else if (errBox) {
-                        errBox.textContent = (out.data && out.data.error) || 'Could not start PayPal checkout.';
-                        errBox.hidden = false;
-                    }
-                })
-                .catch(function () {
-                    if (loader) loader.hidden = true;
-                    btn.classList.remove('is-launching');
-                    btn.disabled = false;
-                    const errBox = document.getElementById('paypalPortalError');
-                    if (errBox) {
-                        errBox.textContent = 'Network error — could not reach the server. Try again or pick another payment method.';
-                        errBox.hidden = false;
-                    }
-                });
-        }
-
-        function handlePayPalReturnQuery() {
-            const p = new URLSearchParams(window.location.search);
-            const flash = document.getElementById('shippingStatus');
-            if (p.get('paypal') === 'success') {
-                const snap = getStoredCart().slice();
-                const rid = getReceiptId();
-                showCheckoutSuccess({
-                    title: 'Payment received',
-                    lead: 'PayPal confirmed your payment. We will email shipping details shortly.',
-                    itemsHtml: '<p style="margin:0 0 0.5rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--chk-muted);">Order ' + escapeHtml(rid) + '</p>' + buildSuccessOrderLinesHtml(snap),
-                    nextHtml: '<p><strong>Next:</strong> Watch your inbox for tracking. Questions? <a href="mailto:support@emotohi.com" style="color:var(--chk-accent);">support@emotohi.com</a></p>'
-                });
-                clearCartStorage();
-                window.history.replaceState({}, '', '/checkout');
-                return;
-            }
-            if (p.get('paypal') === 'cancel' && flash) {
-                flash.style.display = 'block';
-                flash.textContent = 'PayPal checkout was cancelled — nothing was charged.';
-                window.history.replaceState({}, '', '/checkout');
-                return;
-            }
-            if (p.get('paypal') === 'err' && flash) {
-                flash.style.display = 'block';
-                flash.textContent = 'PayPal did not finish. Try again or choose another payment method.';
-                window.history.replaceState({}, '', '/checkout');
-            }
         }
 
         function updatePayButtons() {
@@ -1292,25 +1119,17 @@
             const savedAddress = loadAddress();
             const paypalSaveHint = document.getElementById('paypalSaveHint');
             const paypalPayBtn = document.getElementById('paypalPayBtn');
-            const paypalHostedBtn = document.getElementById('paypalHostedBtn');
             const emailOk = isValidEmail((document.getElementById('checkoutEmail')?.value || '').trim());
             const addressOk = savedAddress && isAddressValid(savedAddress);
             if (paypalSaveHint && paypalPayBtn) {
                 if (addressOk && emailOk && items.length > 0) {
                     paypalSaveHint.style.display = 'none';
                     paypalPayBtn.style.display = 'flex';
-                    const amtStr = '$' + grandTotal.toFixed(2);
                     const paypalAmtEl = document.getElementById('paypalCtaAmount');
-                    if (paypalAmtEl) paypalAmtEl.textContent = amtStr;
-                    if (paypalHostedBtn) {
-                        paypalHostedBtn.style.display = 'flex';
-                        const hAmt = document.getElementById('paypalHostedAmount');
-                        if (hAmt) hAmt.textContent = amtStr;
-                    }
+                    if (paypalAmtEl) paypalAmtEl.textContent = '$' + grandTotal.toFixed(2);
                 } else {
                     paypalSaveHint.style.display = 'block';
                     paypalPayBtn.style.display = 'none';
-                    if (paypalHostedBtn) paypalHostedBtn.style.display = 'none';
                 }
             }
             if (promoInput) {
@@ -1579,7 +1398,6 @@
 
         window.addEventListener('DOMContentLoaded', function() {
             loadTheme();
-            handlePayPalReturnQuery();
             renderSummary();
             initPaymentMethodCards();
             const items = getStoredCart();
@@ -1603,10 +1421,6 @@
             const paypalPayBtn = document.getElementById('paypalPayBtn');
             if (paypalPayBtn) {
                 paypalPayBtn.addEventListener('click', openPayPalMe);
-            }
-            const paypalHostedBtn = document.getElementById('paypalHostedBtn');
-            if (paypalHostedBtn) {
-                paypalHostedBtn.addEventListener('click', openPayPalPortal);
             }
             ['checkoutName', 'checkoutPhone', 'checkoutAddress1', 'checkoutAddress2', 'checkoutCity', 'checkoutState', 'checkoutZip', 'checkoutCountry', 'checkoutNotes']
                 .forEach((id) => {
