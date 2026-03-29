@@ -204,17 +204,20 @@
     <section class="featured products-page">
         <div class="products-header products-header-premium">
             <h2>Shop the Collection</h2>
-            <p>Built for riders who want better braking, better visibility, and better style.</p>
+            <p>Built for riders who want better braking, lighting, plates, wraps, and everyday gear.</p>
             <div class="products-mini-stats">
                 <span>Top seller: Ultra Brakes</span>
-                <span>Multiple fitment options</span>
+                <span>Brakes, lights, plates &amp; more</span>
                 <span>Fast checkout</span>
             </div>
-            <div class="category-filters">
-                <button class="category-btn active" onclick="filterCategory('all')">All</button>
-                <button class="category-btn" onclick="filterCategory('brakes')">Brakes</button>
-                <button class="category-btn" onclick="filterCategory('wraps')">Wraps</button>
-                <button class="category-btn" onclick="filterCategory('accessories')">Lights</button>
+            <div class="category-filters" role="group" aria-label="Filter by category">
+                <button type="button" class="category-btn active" data-category="all" onclick="filterCategory('all', this)">All</button>
+                <button type="button" class="category-btn" data-category="brakes" onclick="filterCategory('brakes', this)">Brakes</button>
+                <button type="button" class="category-btn" data-category="wraps" onclick="filterCategory('wraps', this)">Wraps</button>
+                <button type="button" class="category-btn" data-category="lights" onclick="filterCategory('lights', this)">Lights</button>
+                <button type="button" class="category-btn" data-category="plates" onclick="filterCategory('plates', this)">Plates</button>
+                <button type="button" class="category-btn" data-category="apparel" onclick="filterCategory('apparel', this)">Apparel</button>
+                <button type="button" class="category-btn" data-category="gear" onclick="filterCategory('gear', this)">All gear</button>
             </div>
             <div class="no-results" id="noResultsMessage">No results found. Try a different search.</div>
         </div>
@@ -281,7 +284,7 @@
             </div>
 
             <!-- Forged Carbon Wrap -->
-            <div class="product-card" data-category="wraps" onclick="openModal('wrapModal')" style="cursor: pointer;">
+            <div id="carbon-wrap" class="product-card" data-category="wraps" onclick="openModal('wrapModal')" style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/carbon%20wrap.png" alt="Forged Carbon Wrap"
                         style="width: 100%; height: 100%; object-fit: cover;">
@@ -298,7 +301,7 @@
             </div>
 
             <!-- Baja Lights (No Switch) -->
-            <div id="baja-lights" class="product-card" data-category="accessories" onclick="openModal('bajaModal')"
+            <div id="baja-lights" class="product-card" data-category="lights" onclick="openModal('bajaModal')"
                 style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/white%20baja.png" alt="Baja Lights"
@@ -320,7 +323,7 @@
             </div>
 
             <!-- MOTOCUTZ FRONT NUMBER PLATE -->
-            <div class="product-card" data-category="accessories" onclick="openModal('motocutzModal')"
+            <div id="motocutz" class="product-card" data-category="plates" onclick="openModal('motocutzModal')"
                 style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/black%20plate.png" alt="MOTOCUTZ FRONT NUMBER PLATE"
@@ -341,7 +344,7 @@
             </div>
 
             <!-- EmotoHI Shirt -->
-            <div id="emotohi-shirt" class="product-card" data-category="accessories"
+            <div id="emotohi-shirt" class="product-card" data-category="apparel"
                 onclick="openModal('shirtModal')" style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/front%20shirt.png" alt="EmotoHI Shirt"
@@ -1733,6 +1736,8 @@
                 window.close();
             }
 
+            let activeCategory = 'all';
+
             window.addEventListener('DOMContentLoaded', function () {
                 loadCart();
                 if (localStorage.getItem('tosAccepted') !== 'true') {
@@ -1765,10 +1770,28 @@
                 if (searchInput && query) {
                     searchInput.value = query;
                 }
+                const categoryParam = (params.get('category') || '').toLowerCase();
+                const validCategories = ['all', 'brakes', 'wraps', 'lights', 'plates', 'apparel', 'gear', 'accessories'];
+                if (categoryParam && validCategories.includes(categoryParam)) {
+                    if (categoryParam === 'accessories') {
+                        activeCategory = 'gear';
+                    } else {
+                        activeCategory = categoryParam;
+                    }
+                    document.querySelectorAll('.category-btn').forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.category === activeCategory);
+                    });
+                }
                 applyFilters();
             });
 
-            let activeCategory = 'all';
+            function productMatchesCategory(productCat, filterCat) {
+                if (filterCat === 'all') return true;
+                if (filterCat === 'gear') {
+                    return ['lights', 'plates', 'apparel'].includes(productCat);
+                }
+                return productCat === filterCat;
+            }
 
             function applyFilters() {
                 const query = (document.getElementById('productSearchInput')?.value || '').trim().toLowerCase();
@@ -1776,7 +1799,8 @@
                 let visibleCount = 0;
 
                 products.forEach(product => {
-                    const matchesCategory = activeCategory === 'all' || product.dataset.category === activeCategory;
+                    const cat = product.dataset.category || '';
+                    const matchesCategory = productMatchesCategory(cat, activeCategory);
                     const title = product.querySelector('h3')?.textContent || '';
                     const description = product.querySelector('.description')?.textContent || '';
                     const text = `${title} ${description}`.toLowerCase();
@@ -1794,17 +1818,15 @@
                 }
             }
 
-            function filterCategory(category) {
-                const products = document.querySelectorAll('.product-card');
-                const buttons = document.querySelectorAll('.category-btn');
-
+            function filterCategory(category, buttonEl) {
                 showGlobalLoader(300);
 
                 activeCategory = category;
 
-                // Update active button
+                const buttons = document.querySelectorAll('.category-btn');
                 buttons.forEach(btn => btn.classList.remove('active'));
-                event.target.classList.add('active');
+                const target = buttonEl || document.querySelector(`.category-btn[data-category="${category}"]`);
+                if (target) target.classList.add('active');
 
                 applyFilters();
             }
