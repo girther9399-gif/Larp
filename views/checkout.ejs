@@ -222,7 +222,7 @@
                                     <span class="icon-wrap"><img src="/icons/brands/paypal.svg" width="22" height="22" alt=""></span>
                                     <span class="titles">
                                         <h3>PayPal</h3>
-                                        <p>Hosted checkout or PayPal.me with your total</p>
+                                        <p>PayPal.me (real PayPal) or optional card checkout</p>
                                     </span>
                                 </span>
                                 <span class="pay-method-badges">
@@ -231,17 +231,17 @@
                                 </span>
                             </button>
                             <div class="pay-method-body" id="payBodyPaypal" hidden>
-                                <p class="pay-copy"><strong>Hosted checkout:</strong> Pay on PayPal in this window, then you’re sent back here with a confirmation. Uses your saved email and shipping for the order total.</p>
-                                <p class="pay-copy"><strong>PayPal.me:</strong> Opens a new tab with your <strong>cart total</strong> already filled. Put what you ordered in the PayPal note so we can match payment to <strong>the email above</strong>.</p>
+                                <p class="pay-copy"><strong>Recommended — PayPal.me:</strong> Opens <strong>paypal.com</strong> in a <strong>new tab</strong> with your <strong>exact total</strong> (real PayPal, not sandbox). Describe what you bought in the PayPal note; we match you to <strong>the email above</strong>.</p>
+                                <p class="pay-copy"><strong>Optional — card / PayPal login checkout:</strong> Uses our PayPal button and returns you here. While our API is in <strong>Sandbox</strong>, that flow is <strong>test only</strong>. For real card payments on PayPal, use PayPal.me until Live API keys are enabled.</p>
                                 <p id="paypalSaveHint" class="pay-hint">Save your email and shipping details first.</p>
-                                <button type="button" id="paypalPayBtn" class="btn-paypal-pro" style="display:none;" aria-label="Pay with PayPal hosted checkout">
+                                <button type="button" id="paypalPayBtn" class="btn-paypal-pro" style="display:none;" aria-label="Open PayPal.me with your total in a new tab">
                                     <span class="btn-paypal-shine" aria-hidden="true"></span>
                                     <span class="btn-paypal-pro-inner">
                                         <img src="/icons/brands/paypal-white.svg" width="20" height="20" alt="">
-                                        <span class="btn-paypal-label">Checkout <span id="paypalCtaAmount">$0.00</span> on PayPal</span>
+                                        <span class="btn-paypal-label">Pay <span id="paypalCtaAmount">$0.00</span> via PayPal.me ↗</span>
                                     </span>
                                 </button>
-                                <a id="paypalMeLink" class="paypal-me-link" href="#" target="_blank" rel="noopener noreferrer" style="display:none;" aria-label="Open PayPal.me with order total">Pay <span id="paypalMeAmount">$0.00</span> via PayPal.me <span class="paypal-me-external" aria-hidden="true">↗</span></a>
+                                <button type="button" id="paypalHostedBtn" class="btn-paypal-hosted-secondary" style="display:none;" aria-label="Pay with PayPal hosted checkout">Pay <span id="paypalHostedAmount">$0.00</span> — PayPal checkout (API)</button>
                             </div>
                         </div>
 
@@ -929,15 +929,37 @@
             }
             const loader = document.getElementById('paypalPortalLoader');
             if (loader) loader.hidden = false;
-            const payBtn = document.getElementById('paypalPayBtn');
-            if (payBtn) {
-                payBtn.classList.remove('is-launching');
-                payBtn.disabled = false;
+            const hostedBtn = document.getElementById('paypalHostedBtn');
+            if (hostedBtn) {
+                hostedBtn.classList.remove('is-launching');
+                hostedBtn.disabled = false;
             }
         }
 
+        function openPayPalMe() {
+            const items = getStoredCart();
+            if (!items.length) {
+                alert('Your cart is empty.');
+                return;
+            }
+            const email = (document.getElementById('checkoutEmail')?.value || '').trim();
+            if (!isValidEmail(email)) {
+                alert('Please enter a valid email before paying.');
+                return;
+            }
+            const address = loadAddress();
+            if (!address || !isAddressValid(address)) {
+                alert('Please save your shipping details first.');
+                return;
+            }
+            const { total: grandTotal } = getTotals(items, address.zip);
+            const url =
+                'https://www.paypal.com/paypalme/' + PAYPAL_ME_USERNAME + '/' + grandTotal.toFixed(2);
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+
         function openPayPalPortal() {
-            const btn = document.getElementById('paypalPayBtn');
+            const btn = document.getElementById('paypalHostedBtn');
             const portal = document.getElementById('paypalPortal');
             if (!portal || !btn) return;
 
@@ -1270,30 +1292,25 @@
             const savedAddress = loadAddress();
             const paypalSaveHint = document.getElementById('paypalSaveHint');
             const paypalPayBtn = document.getElementById('paypalPayBtn');
-            const paypalMeLink = document.getElementById('paypalMeLink');
+            const paypalHostedBtn = document.getElementById('paypalHostedBtn');
             const emailOk = isValidEmail((document.getElementById('checkoutEmail')?.value || '').trim());
             const addressOk = savedAddress && isAddressValid(savedAddress);
             if (paypalSaveHint && paypalPayBtn) {
                 if (addressOk && emailOk && items.length > 0) {
                     paypalSaveHint.style.display = 'none';
                     paypalPayBtn.style.display = 'flex';
-                    const paypalAmtEl = document.getElementById('paypalCtaAmount');
                     const amtStr = '$' + grandTotal.toFixed(2);
+                    const paypalAmtEl = document.getElementById('paypalCtaAmount');
                     if (paypalAmtEl) paypalAmtEl.textContent = amtStr;
-                    if (paypalMeLink) {
-                        paypalMeLink.href =
-                            'https://www.paypal.com/paypalme/' + PAYPAL_ME_USERNAME + '/' + grandTotal.toFixed(2);
-                        paypalMeLink.style.display = 'inline-flex';
-                        const meAmt = document.getElementById('paypalMeAmount');
-                        if (meAmt) meAmt.textContent = amtStr;
+                    if (paypalHostedBtn) {
+                        paypalHostedBtn.style.display = 'flex';
+                        const hAmt = document.getElementById('paypalHostedAmount');
+                        if (hAmt) hAmt.textContent = amtStr;
                     }
                 } else {
                     paypalSaveHint.style.display = 'block';
                     paypalPayBtn.style.display = 'none';
-                    if (paypalMeLink) {
-                        paypalMeLink.style.display = 'none';
-                        paypalMeLink.setAttribute('href', '#');
-                    }
+                    if (paypalHostedBtn) paypalHostedBtn.style.display = 'none';
                 }
             }
             if (promoInput) {
@@ -1585,7 +1602,11 @@
             }
             const paypalPayBtn = document.getElementById('paypalPayBtn');
             if (paypalPayBtn) {
-                paypalPayBtn.addEventListener('click', openPayPalPortal);
+                paypalPayBtn.addEventListener('click', openPayPalMe);
+            }
+            const paypalHostedBtn = document.getElementById('paypalHostedBtn');
+            if (paypalHostedBtn) {
+                paypalHostedBtn.addEventListener('click', openPayPalPortal);
             }
             ['checkoutName', 'checkoutPhone', 'checkoutAddress1', 'checkoutAddress2', 'checkoutCity', 'checkoutState', 'checkoutZip', 'checkoutCountry', 'checkoutNotes']
                 .forEach((id) => {
