@@ -459,6 +459,17 @@ function paypalApiJson(method, pathOnly, accessToken, jsonBody) {
     });
 }
 
+/** Base URL for PayPal return/cancel (set PUBLIC_SITE_URL in production, e.g. https://www.emotohi.com) */
+function publicSiteBase(req) {
+    const fromEnv = process.env.PUBLIC_SITE_URL || process.env.BASE_URL;
+    if (fromEnv) {
+        return String(fromEnv).replace(/\/$/, '');
+    }
+    const proto = req.get('x-forwarded-proto') || req.protocol || 'http';
+    const host = req.get('host') || 'localhost:3000';
+    return `${proto}://${host}`;
+}
+
 // Routes
 app.get('/', (req, res) => {
     res.render('index');
@@ -469,9 +480,7 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/checkout', (req, res) => {
-    res.render('checkout', {
-        paypalClientId: process.env.PAYPAL_CLIENT_ID || ''
-    });
+    res.render('checkout');
 });
 
 app.get('/gallery', (req, res) => {
@@ -733,6 +742,7 @@ app.post('/api/paypal/create-order', async (req, res) => {
         }
 
         const customId = String(receiptId || 'EMO').replace(/\s+/g, ' ').slice(0, 127);
+        const base = publicSiteBase(req);
         const orderPayload = {
             intent: 'CAPTURE',
             purchase_units: [
@@ -750,7 +760,9 @@ app.post('/api/paypal/create-order', async (req, res) => {
                 brand_name: 'EmotoHI',
                 landing_page: 'NO_PREFERENCE',
                 user_action: 'PAY_NOW',
-                shipping_preference: 'NO_SHIPPING'
+                shipping_preference: 'NO_SHIPPING',
+                return_url: `${base}/paypal/return`,
+                cancel_url: `${base}/paypal/cancel`
             }
         };
 
@@ -758,7 +770,13 @@ app.post('/api/paypal/create-order', async (req, res) => {
         if (!created.id) {
             return res.status(502).json({ error: 'PayPal did not return an order id.' });
         }
-        res.json({ orderID: created.id });
+        const links = Array.isArray(created.links) ? created.links : [];
+        const approve = links.find((l) => l && l.rel === 'approve' && l.href);
+        const approveUrl = approve ? approve.href : null;
+        if (!approveUrl) {
+            return res.status(502).json({ error: 'PayPal did not return an approval URL.' });
+        }
+        res.json({ orderID: created.id, approveUrl });
     } catch (error) {
         console.error('[paypal] create-order', error.message);
         res.status(500).json({ error: error.message || 'Unable to create PayPal order.' });
@@ -787,6 +805,77 @@ app.post('/api/paypal/capture-order', async (req, res) => {
         console.error('[paypal] capture-order', error.message);
         res.status(500).json({ error: error.message || 'Capture failed.' });
     }
+});
+
+app.get('/paypal/return', async (req, res) => {
+    try {
+        const token = req.query.token;
+        if (!token || typeof token !== 'string') {
+            return res.redirect('/checkout?paypal=err&reason=missing_token');
+        }
+        let accessToken;
+        try {
+            accessToken = await paypalAccessToken();
+        } catch (e) {
+            return res.redirect('/checkout?paypal=err&reason=config');
+        }
+
+        let captured;
+        try {
+            captured = await paypalApiJson(
+                'POST',
+                `/v2/checkout/orders/${encodeURIComponent(token)}/capture`,
+                accessToken,
+                {}
+            );
+        } catch (err) {
+            try {
+                const order = await paypalApiJson('GET', `/v2/checkout/orders/${encodeURIComponent(token)}`, accessToken);
+                if (order.status === 'COMPLETED') {
+                    return res.redirect('/checkout?paypal=success');
+                }
+            } catch (e) {
+                /* fall through */
+            }
+            console.error('[paypal] return capture', err.message);
+            return res.redirect('/checkout?paypal=err&reason=capture');
+        }
+
+        if (captured.status !== 'COMPLETED') {
+            return res.redirect('/checkout?paypal=err&reason=status');
+        }
+
+        const pu = captured.purchase_units && captured.purchase_units[0];
+        const cap = pu && pu.payments && pu.payments.captures && pu.payments.captures[0];
+        const val = cap && cap.amount && cap.amount.value;
+        const email = captured.payer && captured.payer.email_address;
+        const customId = pu && pu.custom_id;
+
+        await postDiscordWebhook({
+            content: '@everyone URGENT',
+            embeds: [
+                {
+                    title: 'PayPal paid',
+                    color: 0x22c55e,
+                    fields: [
+                        { name: 'Total', value: val ? `$${val} USD` : 'n/a', inline: true },
+                        { name: 'Payer', value: (email || 'n/a').slice(0, 1024), inline: true },
+                        { name: 'Receipt / custom', value: (customId || token).slice(0, 1024), inline: true }
+                    ],
+                    footer: { text: `PayPal capture ${captured.id || ''}`.trim() }
+                }
+            ]
+        }).catch(() => {});
+
+        return res.redirect('/checkout?paypal=success');
+    } catch (error) {
+        console.error('[paypal] return', error);
+        return res.redirect('/checkout?paypal=err');
+    }
+});
+
+app.get('/paypal/cancel', (req, res) => {
+    res.redirect('/checkout?paypal=cancel');
 });
 
 app.get('/api/crypto/order/:orderId/:coin/status', async (req, res) => {
