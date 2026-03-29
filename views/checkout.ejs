@@ -3,402 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmotoHI</title>
+    <title>Checkout — EmotoHI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/checkout.css">
     <link rel="icon" href="/images/top%20icon.png" type="image/png">
 </head>
-<body>
-    <script>
-        (function() {
-            var theme = localStorage.getItem('theme') || 'system';
-            var isDark = theme === 'dark' || (theme === 'system' && typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches);
-            if (isDark) document.body.classList.add('dark-theme');
-        })();
-    </script>
-    <nav class="navbar">
-        <div class="nav-container">
-            <button class="nav-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12h18M3 6h18M3 18h18"></path>
-                </svg>
-            </button>
-            <a class="logo" href="/">
+<body class="checkout-page">
+    <nav class="navbar checkout-nav-minimal" aria-label="Checkout">
+        <div class="checkout-nav-inner">
+            <a class="logo" href="/products">
                 <img src="/images/2nd%20brand.png" alt="EmotoHI" class="logo-text-image">
-            </a>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/checkout" class="active">Checkout</a></li>
-                <div class="theme-switcher">
-                    <button class="theme-toggle" onclick="toggleThemeDropdown()" aria-label="Theme" data-tooltip="Theme">
-                        <span class="theme-icon" id="themeIcon"></span>
-                    </button>
-                    <div class="theme-dropdown" id="themeDropdown">
-                        <button class="theme-option" data-theme="system" data-tooltip="System" aria-label="System" onclick="setTheme('system')">
-                            <span class="theme-option-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <rect x="3" y="4" width="18" height="12" rx="2"></rect>
-                                    <path d="M8 20h8"></path>
-                                </svg>
-                            </span>
-                        </button>
-                        <button class="theme-option" data-theme="light" data-tooltip="Light" aria-label="Light" onclick="setTheme('light')">
-                            <span class="theme-option-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <circle cx="12" cy="12" r="4"></circle>
-                                    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-                                </svg>
-                            </span>
-                        </button>
-                        <button class="theme-option" data-theme="dark" data-tooltip="Dark" aria-label="Dark" onclick="setTheme('dark')">
-                            <span class="theme-option-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M21 14.5A9 9 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z"></path>
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </ul>
-            <a href="/products" class="nav-mobile-search" aria-label="Search products">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                </svg>
             </a>
         </div>
     </nav>
 
-    <!-- Mobile menu overlay -->
-    <div id="mobileMenu" class="mobile-menu-overlay" aria-hidden="true">
-        <div class="mobile-menu-header">
-            <span style="font-weight: 700; font-size: 1.1rem;">Menu</span>
-            <button type="button" class="mobile-menu-close" aria-label="Close menu" onclick="toggleMobileMenu()">&times;</button>
-        </div>
-        <ul class="mobile-menu-links">
-            <li><a href="/" onclick="toggleMobileMenu()">Home</a></li>
-            <li><a href="/products" onclick="toggleMobileMenu()">Products</a></li>
-            <li><a href="/checkout" onclick="toggleMobileMenu()">Checkout</a></li>
-        </ul>
-        <div class="mobile-menu-search">
-            <form class="site-search" action="/products" method="get" onclick="event.stopPropagation()">
-                <button type="submit" aria-label="Search">
-                    <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                        <path d="M7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm7 2-3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-                <input class="site-search-input" name="q" placeholder="Search products…" type="text" autocomplete="off">
-            </form>
-        </div>
-    </div>
-
-    <section class="checkout-hero checkout-hero-v2">
-        <div class="checkout-hero-inner">
-            <div class="checkout-hero-top">
-                <div class="checkout-hero-copy">
-                    <p class="checkout-kicker">Secure checkout</p>
-                    <h1>Complete your order</h1>
-                    <p class="checkout-subtitle">Save your email and shipping details, then choose PayPal or cryptocurrency. We ship anywhere in the USA.</p>
-                </div>
-                <div class="checkout-total checkout-total-pill">
-                    <span>Order total</span>
-                    <strong id="checkoutTotal" class="motion-ticker-mount">$0.00</strong>
-                </div>
+    <div id="checkoutFlow">
+        <header class="checkout-hero-pro">
+            <div class="checkout-hero-pro-inner">
+                <p class="checkout-kicker-pro">EmotoHI · Hawaii</p>
+                <h1>You're almost there</h1>
+                <p class="checkout-lead">Confirm your details, then choose how you want to pay. We ship across the USA from Hawaii.</p>
+                <nav class="checkout-progress-pro" id="checkoutProgressNav" aria-label="Checkout steps">
+                    <div class="step is-active" data-step="1">
+                        <span class="step-num" aria-hidden="true">1</span>
+                        <span>Details</span>
+                    </div>
+                    <span class="step-arrow" aria-hidden="true">→</span>
+                    <div class="track" aria-hidden="true"><span class="track-fill" id="checkoutProgressFill"></span></div>
+                    <span class="step-arrow" aria-hidden="true">→</span>
+                    <div class="step" data-step="2">
+                        <span class="step-num" aria-hidden="true">2</span>
+                        <span>Payment</span>
+                    </div>
+                </nav>
             </div>
-            <div class="checkout-methods-strip" role="group" aria-label="Accepted payment methods">
-                <div class="checkout-method-pill">
-                    <span class="checkout-method-pill-icon checkout-method-pill-icon--paypal" aria-hidden="true">
-                        <img src="/icons/brands/paypal.svg" width="24" height="24" alt="" decoding="async">
-                    </span>
-                    <span>PayPal</span>
-                </div>
-                <div class="checkout-method-pill">
-                    <span class="checkout-method-pill-icon" aria-hidden="true">
-                        <img src="/icons/brands/bitcoin.svg" width="24" height="24" alt="" decoding="async">
-                    </span>
-                    <span>Bitcoin</span>
-                </div>
-                <div class="checkout-method-pill">
-                    <span class="checkout-method-pill-icon" aria-hidden="true">
-                        <img src="/icons/brands/ethereum.svg" width="24" height="24" alt="" decoding="async">
-                    </span>
-                    <span>Ethereum</span>
-                </div>
-                <div class="checkout-method-pill">
-                    <span class="checkout-method-pill-icon" aria-hidden="true">
-                        <img src="/icons/brands/litecoin.svg" width="24" height="24" alt="" decoding="async">
-                    </span>
-                    <span>Litecoin</span>
-                </div>
-                <div class="checkout-method-pill checkout-method-pill--muted">
-                    <span class="checkout-method-pill-icon" aria-hidden="true">
-                        <svg class="checkout-lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-                    </span>
-                    <span>Encrypted · USA shipping</span>
-                </div>
-            </div>
-            <nav class="checkout-progress" aria-label="Checkout steps">
-                <div class="checkout-progress-step is-active">
-                    <span class="checkout-progress-num" aria-hidden="true">1</span>
-                    <span class="checkout-progress-label">Your details</span>
-                </div>
-                <div class="checkout-progress-track" aria-hidden="true">
-                    <span class="checkout-progress-track-fill"></span>
-                </div>
-                <div class="checkout-progress-step">
-                    <span class="checkout-progress-num" aria-hidden="true">2</span>
-                    <span class="checkout-progress-label">Payment</span>
-                </div>
-            </nav>
-        </div>
-    </section>
+        </header>
 
-    <section class="checkout-content checkout-content-v2">
-        <div class="checkout-container">
-            <aside class="checkout-summary checkout-summary-card">
-                <div class="summary-header">
-                    <h3>Order summary</h3>
-                    <a class="summary-link" href="/products">Edit cart</a>
+        <div class="checkout-shell">
+            <aside class="checkout-col-summary checkout-summary-pro" aria-labelledby="orderSummaryHeading">
+                <div class="summary-head">
+                    <h2 id="orderSummaryHeading">Order summary</h2>
+                    <a href="/products">Edit cart</a>
                 </div>
-                <div class="promo-box">
+                <div class="promo-block">
                     <label for="promoCode">Promo code</label>
                     <div class="promo-row">
-                        <input type="text" id="promoCode" name="promoCode" placeholder="Enter code">
+                        <input type="text" id="promoCode" name="promoCode" placeholder="Code" autocomplete="off">
                         <button type="button" id="promoApplyBtn" class="promo-apply">Apply</button>
                     </div>
                 </div>
-                <div id="summaryItems" class="summary-items"></div>
-                <div id="summaryEmpty" class="summary-empty">Your cart is empty. <a href="/products">Browse products</a>.</div>
-                <div class="summary-breakdown">
-                    <div id="summarySubtotalRow" class="summary-line" style="display:none;">
+                <div id="summaryItems" class="summary-items-pro"></div>
+                <div id="summaryEmpty" class="summary-empty-pro">Your cart is empty. <a href="/products">Browse products</a>.</div>
+                <div class="summary-breakdown-pro">
+                    <div id="summarySubtotalRow" class="summary-line-pro" style="display:none;">
                         <span>Subtotal</span>
                         <strong id="summarySubtotal">$0.00</strong>
                     </div>
-                    <div id="summaryDiscountRow" class="summary-line summary-line-discount" style="display:none;">
+                    <div id="summaryDiscountRow" class="summary-line-pro discount" style="display:none;">
                         <span>Discount</span>
                         <strong id="summaryDiscount">-$0.00</strong>
                     </div>
-                    <div id="summaryShippingRow" class="summary-line" style="display:none;">
-                        <span>Shipping</span>
+                    <div id="summaryShippingRow" class="summary-line-pro" style="display:none;">
+                        <span>Shipping estimate</span>
                         <strong id="summaryShipping">$0.00</strong>
                     </div>
-                    <div id="summaryNonOahuRow" class="summary-line" style="display:none;">
-                        <span>Non-Oahu fee</span>
+                    <div id="summaryNonOahuRow" class="summary-line-pro" style="display:none;">
+                        <span class="label-with-tip">
+                            Non-Oahu surcharge
+                            <button type="button" class="summary-tip-btn" id="nonOahuTipBtn" aria-label="About Non-Oahu surcharge" title="Applies to addresses outside Oahu, Hawaii—including other islands and the US mainland. Covers extra freight from our Honolulu base.">?</button>
+                        </span>
                         <strong id="summaryNonOahu">$7.00</strong>
                     </div>
                 </div>
-                <div class="summary-total">
+                <div class="summary-total-pro">
                     <span>Total</span>
                     <strong id="summaryTotal" class="motion-ticker-mount">$0.00</strong>
                 </div>
             </aside>
 
-            <div class="checkout-options checkout-options-v2">
-                <div class="payment-card checkout-email checkout-card-panel">
-                    <div class="payment-card-header checkout-card-header-with-icon">
-                        <span class="checkout-card-icon" aria-hidden="true">
-                            <svg class="checkout-lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        </span>
-                        <div>
-                            <h3>Contact email</h3>
-                            <span class="payment-badge">Required</span>
+            <div class="checkout-col-main">
+                <section class="checkout-details-pro" aria-labelledby="detailsHeading">
+                    <h2 id="detailsHeading">Contact &amp; shipping</h2>
+                    <p class="sub">Required for every payment method. We’ll email your receipt and tracking here.</p>
+                    <div class="checkout-form-grid">
+                        <div class="chk-field full">
+                            <label for="checkoutEmail">Email <span class="req">*</span></label>
+                            <input type="email" id="checkoutEmail" name="checkoutEmail" placeholder="you@email.com" required autocomplete="email">
                         </div>
-                    </div>
-                    <p class="payment-text">Receipts and payment updates go here.</p>
-                    <div class="form-group">
-                        <label for="checkoutEmail">Email</label>
-                        <input type="email" id="checkoutEmail" name="checkoutEmail" placeholder="you@email.com" required>
-                    </div>
-                </div>
-                <div class="payment-card checkout-address checkout-card-panel">
-                    <div class="payment-card-header checkout-card-header-with-icon">
-                        <span class="checkout-card-icon" aria-hidden="true">
-                            <svg class="checkout-lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-                        </span>
-                        <div>
-                            <h3>Shipping details</h3>
-                            <span class="payment-badge">Required</span>
+                        <div class="chk-field">
+                            <label for="checkoutName">Full name <span class="req">*</span></label>
+                            <input type="text" id="checkoutName" name="checkoutName" placeholder="Full name" required autocomplete="name">
                         </div>
-                    </div>
-                    <p class="payment-text">Delivery or meetup address — required before PayPal or crypto.</p>
-                    <div class="checkout-grid">
-                        <div class="form-group">
-                            <label for="checkoutName">Full name</label>
-                            <input type="text" id="checkoutName" name="checkoutName" placeholder="Full name" required>
+                        <div class="chk-field">
+                            <label for="checkoutPhone">Phone <span class="req">*</span></label>
+                            <input type="tel" id="checkoutPhone" name="checkoutPhone" placeholder="(555) 555-5555" required autocomplete="tel">
                         </div>
-                        <div class="form-group">
-                            <label for="checkoutPhone">Phone</label>
-                            <input type="tel" id="checkoutPhone" name="checkoutPhone" placeholder="(555) 555-5555" required>
+                        <div class="chk-field full">
+                            <label for="checkoutAddress1">Address line 1 <span class="req">*</span></label>
+                            <input type="text" id="checkoutAddress1" name="checkoutAddress1" placeholder="Street address" required autocomplete="address-line1">
                         </div>
-                        <div class="form-group checkout-span">
-                            <label for="checkoutAddress1">Address line 1</label>
-                            <input type="text" id="checkoutAddress1" name="checkoutAddress1" placeholder="Street address" required>
-                        </div>
-                        <div class="form-group checkout-span">
+                        <div class="chk-field full">
                             <label for="checkoutAddress2">Address line 2</label>
-                            <input type="text" id="checkoutAddress2" name="checkoutAddress2" placeholder="Apartment, suite, etc (optional)">
+                            <input type="text" id="checkoutAddress2" name="checkoutAddress2" placeholder="Apt, suite (optional)" autocomplete="address-line2">
                         </div>
-                        <div class="form-group">
-                            <label for="checkoutCity">City</label>
-                            <input type="text" id="checkoutCity" name="checkoutCity" placeholder="City" required>
+                        <div class="chk-field">
+                            <label for="checkoutCity">City <span class="req">*</span></label>
+                            <input type="text" id="checkoutCity" name="checkoutCity" placeholder="City" required autocomplete="address-level2">
                         </div>
-                        <div class="form-group">
-                            <label for="checkoutState">State</label>
-                            <input type="text" id="checkoutState" name="checkoutState" placeholder="State" required>
+                        <div class="chk-field">
+                            <label for="checkoutState">State <span class="req">*</span></label>
+                            <input type="text" id="checkoutState" name="checkoutState" placeholder="State" required autocomplete="address-level1">
                         </div>
-                        <div class="form-group">
-                            <label for="checkoutZip">ZIP</label>
-                            <input type="text" id="checkoutZip" name="checkoutZip" placeholder="ZIP" required>
+                        <div class="chk-field">
+                            <label for="checkoutZip">ZIP <span class="req">*</span></label>
+                            <input type="text" id="checkoutZip" name="checkoutZip" placeholder="ZIP" required autocomplete="postal-code">
                         </div>
-                        <div class="form-group">
-                            <label for="checkoutCountry">Country</label>
-                            <input type="text" id="checkoutCountry" name="checkoutCountry" placeholder="Country" required>
+                        <div class="chk-field">
+                            <label for="checkoutCountry">Country <span class="req">*</span></label>
+                            <input type="text" id="checkoutCountry" name="checkoutCountry" placeholder="Country" required autocomplete="country-name">
                         </div>
-                        <div class="form-group checkout-span">
+                        <div class="chk-field full">
                             <label for="checkoutNotes">Delivery notes</label>
-                            <input type="text" id="checkoutNotes" name="checkoutNotes" placeholder="Optional notes">
+                            <input type="text" id="checkoutNotes" name="checkoutNotes" placeholder="Optional instructions">
                         </div>
                     </div>
-                    <button type="button" id="checkoutSaveBtn" class="payment-cta payment-cta-save">Save details</button>
-                    <p id="checkoutSaveStatus" class="payment-text" style="display:none;">Details saved. You can proceed to payment.</p>
-                    <p id="checkoutSaveHint" class="payment-text">Add your details, then press save to continue.</p>
-                    <p id="shippingStatus" class="payment-text" style="display:none;"></p>
-                </div>
-                <div class="payment-card payment-card-paypal checkout-card-panel checkout-card-paypal">
-                    <div class="paypal-card-top">
-                        <div class="paypal-brand-block" aria-hidden="true">
-                            <img class="paypal-brand-img" src="/icons/brands/paypal.svg" width="104" height="28" alt="" decoding="async">
-                        </div>
-                        <div class="paypal-card-headlines">
-                            <h3>Pay with PayPal</h3>
-                            <span class="payment-badge">Friends &amp; Family only</span>
-                        </div>
+                    <button type="button" id="checkoutSaveBtn" class="btn-continue-save">Save &amp; continue</button>
+                    <p id="checkoutSaveStatus" class="chk-form-hint" style="display:none;">Saved. Choose a payment method below.</p>
+                    <p id="checkoutSaveHint" class="chk-form-hint">Fill in all required fields, then save to unlock payment.</p>
+                    <p id="shippingStatus" class="chk-ship-status" style="display:none;"></p>
+                </section>
+
+                <div class="checkout-trust-pro" role="group" aria-label="Trust">
+                    <div class="trust-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <span><strong>Secure checkout</strong> · HTTPS</span>
                     </div>
-                    <p class="payment-text payment-text-tight">Use <strong>Send to friends and family</strong> — not Goods &amp; Services.</p>
-                    <div id="paypalInstructions" class="paypal-flow" style="display:none;">
-                        <div class="paypal-flow-step">
-                            <span class="paypal-flow-icon" aria-hidden="true">1</span>
-                            <p>Open PayPal using the button below.</p>
-                        </div>
-                        <div class="paypal-flow-step">
-                            <span class="paypal-flow-icon" aria-hidden="true">2</span>
-                            <p>Choose <strong>Friends &amp; family</strong> when you send.</p>
-                        </div>
-                        <div class="paypal-flow-step">
-                            <span class="paypal-flow-icon" aria-hidden="true">3</span>
-                            <p>Copy the order note, paste it in PayPal, then send the total.</p>
-                        </div>
-                        <div class="paypal-note-box">
-                            <code id="paypalNoteText"></code>
-                            <button type="button" class="paypal-copy" onclick="copyPayPalNote()" aria-label="Copy note">Copy</button>
-                        </div>
+                    <div class="trust-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                        <span><strong>Order tracked</strong> · tied to your email</span>
                     </div>
-                    <p id="paypalSaveHint" class="payment-text payment-hint">Save your email and shipping details above to unlock PayPal.</p>
-                    <a id="paypalPayBtn" href="#" class="payment-cta paypal-cta-branded paypal-cta paypal-cta-large" style="display:none;" target="_blank" rel="noopener">
-                        <span class="paypal-cta-inner">
-                            <img class="paypal-cta-mark" src="/icons/brands/paypal-white.svg" width="22" height="22" alt="" decoding="async">
-                            <span>Pay <span id="paypalCtaAmount">$0.00</span> with PayPal</span>
-                        </span>
-                    </a>
+                    <div class="trust-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span><strong>Support</strong> · <a href="mailto:support@emotohi.com" style="color:inherit;">support@emotohi.com</a></span>
+                    </div>
                 </div>
 
-                <div class="payment-card payment-card-crypto checkout-card-panel checkout-card-crypto">
-                    <div class="payment-card-header checkout-card-header-with-icon">
-                        <span class="checkout-card-icon checkout-card-icon-crypto" aria-hidden="true">
-                            <svg class="checkout-lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
-                        </span>
-                        <div>
-                            <h3>Cryptocurrency</h3>
-                            <span class="payment-badge">BTC · ETH · LTC</span>
-                        </div>
-                    </div>
-                    <p class="payment-text payment-text-tight">Pick a coin in the next step. We detect your payment automatically.</p>
-                    <div class="checkout-crypto-icons checkout-crypto-icons-large" aria-hidden="true">
-                        <span class="checkout-crypto-icon checkout-crypto-icon-lg" title="Bitcoin">
-                            <img src="/icons/brands/bitcoin.svg" width="30" height="30" alt="" decoding="async">
-                        </span>
-                        <span class="checkout-crypto-icon checkout-crypto-icon-lg" title="Ethereum">
-                            <img src="/icons/brands/ethereum.svg" width="30" height="30" alt="" decoding="async">
-                        </span>
-                        <span class="checkout-crypto-icon checkout-crypto-icon-lg" title="Litecoin">
-                            <img src="/icons/brands/litecoin.svg" width="30" height="30" alt="" decoding="async">
-                        </span>
-                    </div>
-                    <button id="cryptoStartBtn" type="button" class="payment-cta primary payment-cta-crypto payment-cta-crypto-visual" onclick="startCryptoCheckout()">
-                        <span class="crypto-btn-icons" aria-hidden="true">
-                            <img src="/icons/brands/bitcoin.svg" width="20" height="20" alt="" decoding="async">
-                            <img src="/icons/brands/ethereum.svg" width="20" height="20" alt="" decoding="async">
-                            <img src="/icons/brands/litecoin.svg" width="20" height="20" alt="" decoding="async">
-                        </span>
-                        Continue with cryptocurrency
-                    </button>
-                </div>
+                <section class="checkout-payments-pro" aria-labelledby="payHeading">
+                    <h2 id="payHeading">Payment method</h2>
+                    <div class="pay-methods-stack" role="radiogroup" aria-label="Choose payment">
 
-                <details class="payment-card checkout-alt-payments checkout-card-panel">
-                    <summary class="checkout-alt-payments-summary">
-                        <span class="checkout-alt-summary-inner">
-                            <span class="checkout-card-icon checkout-card-icon-sm" aria-hidden="true">
-                                <svg class="checkout-lucide-icon checkout-lucide-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
-                            </span>
-                            In-person: cash or gift card
-                        </span>
-                    </summary>
-                    <div class="checkout-alt-payments-body">
-                        <div class="checkout-alt-block">
-                            <div class="payment-card-header checkout-alt-header">
-                                <h4>Cash</h4>
-                                <span class="payment-badge">Local</span>
+                        <div class="pay-method-card is-recommended" data-method="crypto" id="payCardCrypto">
+                            <button type="button" class="pay-method-head" aria-expanded="false" aria-controls="payBodyCrypto" id="payHeadCrypto">
+                                <span class="left">
+                                    <span class="icon-wrap"><img src="/icons/brands/bitcoin.svg" width="22" height="22" alt=""></span>
+                                    <span class="titles">
+                                        <h3>Cryptocurrency</h3>
+                                        <p>BTC · ETH · LTC · automatic confirmation</p>
+                                    </span>
+                                </span>
+                                <span class="pay-method-badges">
+                                    <span class="badge instant">Instant</span>
+                                    <span class="pay-method-chevron" aria-hidden="true"></span>
+                                </span>
+                            </button>
+                            <div class="pay-method-body" id="payBodyCrypto" hidden>
+                                <p class="pay-copy">Pay from any wallet. We detect your transfer on-chain—no manual order IDs to chase.</p>
+                                <p class="pay-copy" style="margin-top:-0.5rem;"><strong>After payment:</strong> confirmation is automatic. We’ll email shipping details within 24 hours.</p>
+                                <button id="cryptoStartBtn" type="button" class="btn-crypto-pro" onclick="startCryptoCheckout()">
+                                    <img src="/icons/brands/bitcoin.svg" width="18" height="18" alt="">
+                                    <img src="/icons/brands/ethereum.svg" width="18" height="18" alt="">
+                                    <img src="/icons/brands/litecoin.svg" width="18" height="18" alt="">
+                                    Continue with crypto
+                                </button>
+                                <p id="cryptoPayHint" class="pay-hint warn">Save your details above to enable crypto checkout.</p>
                             </div>
-                            <p class="payment-text payment-text-tight">Local pickup or delivery — we coordinate after you request.</p>
-                            <button id="cashStartBtn" type="button" class="payment-cta">Request cash meetup</button>
-                            <p id="cashStatus" class="payment-text" style="display:none;">Request sent. We will contact you to confirm the meetup.</p>
                         </div>
-                        <div class="checkout-alt-block">
-                            <div class="payment-card-header checkout-alt-header">
-                                <h4>Gift card</h4>
-                                <span class="payment-badge">Local</span>
+
+                        <div class="pay-method-card" data-method="paypal" id="payCardPaypal">
+                            <button type="button" class="pay-method-head" aria-expanded="false" aria-controls="payBodyPaypal" id="payHeadPaypal">
+                                <span class="left">
+                                    <span class="icon-wrap"><img src="/icons/brands/paypal.svg" width="22" height="22" alt=""></span>
+                                    <span class="titles">
+                                        <h3>PayPal</h3>
+                                        <p>Small Hawaii shop — Friends &amp; Family keeps fees down</p>
+                                    </span>
+                                </span>
+                                <span class="pay-method-badges">
+                                    <span class="badge subtle">Trusted</span>
+                                    <span class="pay-method-chevron" aria-hidden="true"></span>
+                                </span>
+                            </button>
+                            <div class="pay-method-body" id="payBodyPaypal" hidden>
+                                <p class="pay-copy">We’re an independent rider brand, not a big marketplace. PayPal asks you to send as <strong>Friends &amp; Family</strong> so we’re not hit with seller fees that would force price hikes. Your order is tied to the <strong>email you enter above</strong>—we track everything there and send updates the same way any store would.</p>
+                                <p class="pay-copy">When you pay, choose <strong>Friends &amp; family</strong> (not Goods &amp; Services). Copy the order note into your PayPal message so we can match your payment.</p>
+                                <div id="paypalInstructions" class="paypal-flow-pro" style="display:none;">
+                                    <div class="step"><span class="step-num">1</span><span>Open PayPal with the button below.</span></div>
+                                    <div class="step"><span class="step-num">2</span><span>Select <strong>Friends &amp; family</strong> for the transfer.</span></div>
+                                    <div class="step"><span class="step-num">3</span><span>Paste the note, send the total, and keep an eye on your inbox.</span></div>
+                                    <div class="paypal-note-pro">
+                                        <code id="paypalNoteText"></code>
+                                        <button type="button" class="paypal-copy-pro" onclick="copyPayPalNote()">Copy</button>
+                                    </div>
+                                </div>
+                                <p id="paypalSaveHint" class="pay-hint">Save your email and shipping details first.</p>
+                                <a id="paypalPayBtn" href="#" class="btn-paypal-pro" style="display:none;" target="_blank" rel="noopener">
+                                    <img src="/icons/brands/paypal-white.svg" width="20" height="20" alt="">
+                                    Pay <span id="paypalCtaAmount">$0.00</span> with PayPal
+                                </a>
                             </div>
-                            <p class="payment-text payment-text-tight">Gift cards accepted for local orders.</p>
-                            <button id="giftStartBtn" type="button" class="payment-cta">Request gift card meetup</button>
-                            <p id="giftStatus" class="payment-text" style="display:none;">Request sent. We will contact you to confirm the meetup.</p>
+                        </div>
+
+                        <div class="pay-method-card" data-method="cash" id="payCardCash">
+                            <button type="button" class="pay-method-head" aria-expanded="false" aria-controls="payBodyCash" id="payHeadCash">
+                                <span class="left">
+                                    <span class="icon-wrap">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle></svg>
+                                    </span>
+                                    <span class="titles">
+                                        <h3>Cash meetup</h3>
+                                        <p>Local pickup or delivery — Hawaii</p>
+                                    </span>
+                                </span>
+                                <span class="pay-method-badges">
+                                    <span class="badge subtle">Local</span>
+                                    <span class="pay-method-chevron" aria-hidden="true"></span>
+                                </span>
+                            </button>
+                            <div class="pay-method-body" id="payBodyCash" hidden>
+                                <p class="pay-copy">We’ll reach out to confirm time and place after you submit.</p>
+                                <button id="cashStartBtn" type="button" class="btn-local-pro">Request cash meetup</button>
+                                <p id="cashStatus" class="pay-status-inline" style="display:none;"></p>
+                            </div>
+                        </div>
+
+                        <div class="pay-method-card" data-method="gift" id="payCardGift">
+                            <button type="button" class="pay-method-head" aria-expanded="false" aria-controls="payBodyGift" id="payHeadGift">
+                                <span class="left">
+                                    <span class="icon-wrap">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+                                    </span>
+                                    <span class="titles">
+                                        <h3>Gift card</h3>
+                                        <p>Local orders — we coordinate redemption</p>
+                                    </span>
+                                </span>
+                                <span class="pay-method-badges">
+                                    <span class="badge subtle">Local</span>
+                                    <span class="pay-method-chevron" aria-hidden="true"></span>
+                                </span>
+                            </button>
+                            <div class="pay-method-body" id="payBodyGift" hidden>
+                                <p class="pay-copy">Gift cards accepted for local meetups. We’ll confirm details by email.</p>
+                                <button id="giftStartBtn" type="button" class="btn-local-pro">Request gift card meetup</button>
+                                <p id="giftStatus" class="pay-status-inline" style="display:none;"></p>
+                            </div>
+                        </div>
+
+                        <div class="pay-method-card coming-soon" data-method="card">
+                            <div class="pay-method-head" style="cursor:default;">
+                                <span class="left">
+                                    <span class="icon-wrap">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                                    </span>
+                                    <span class="titles">
+                                        <h3>Debit / credit card</h3>
+                                        <p>On-site card checkout</p>
+                                    </span>
+                                </span>
+                                <span class="badge subtle">Soon</span>
+                            </div>
+                            <p class="pay-waitlist-note">Coming soon — for now use crypto or PayPal. Want card pay? Email <a href="mailto:support@emotohi.com" style="color:var(--chk-accent);">support@emotohi.com</a> and we’ll notify you.</p>
                         </div>
                     </div>
-                </details>
+                </section>
             </div>
         </div>
+    </div>
 
-        <div class="checkout-trust" role="contentinfo">
-            <div class="checkout-trust-inner">
-                <div class="checkout-trust-item">
-                    <span class="checkout-trust-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    </span>
-                    <div>
-                        <strong>Secure checkout</strong>
-                        <span>Encrypted connection · your data stays private</span>
-                    </div>
-                </div>
-                <div class="checkout-trust-item">
-                    <span class="checkout-trust-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="m22 6-10 7L2 6"></path></svg>
-                    </span>
-                    <div>
-                        <strong>Need help?</strong>
-                        <span><a href="mailto:support@emotohi.com">support@emotohi.com</a></span>
-                    </div>
-                </div>
-                <div class="checkout-trust-item">
-                    <span class="checkout-trust-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="M22 4 12 14.01l-3-3"></path></svg>
-                    </span>
-                    <div>
-                        <strong>Final sale</strong>
-                        <span>All sales final · questions before you pay? Email us.</span>
-                    </div>
-                </div>
+    <section id="checkoutSuccess" class="checkout-success-pro" hidden>
+        <div class="checkout-success-card">
+            <div class="checkout-success-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11"></polyline></svg>
+            </div>
+            <h2 id="checkoutSuccessTitle">Thank you</h2>
+            <p class="lead" id="checkoutSuccessLead"></p>
+            <div id="checkoutSuccessItems" class="checkout-success-items"></div>
+            <div class="checkout-success-next" id="checkoutSuccessNext"></div>
+            <div class="success-actions">
+                <a href="/products" class="primary">Continue shopping</a>
+                <a href="mailto:support@emotohi.com" class="ghost">Email support</a>
             </div>
         </div>
     </section>
@@ -514,33 +410,33 @@
     </div>
 
     <div id="cryptoModal" class="product-modal">
-        <div class="modal-content crypto-modal-content">
-            <button class="modal-close" onclick="closeCryptoModal()">&times;</button>
-            <div class="modal-details crypto-details">
-                <div class="crypto-header">
-                    <h2>Crypto Payment</h2>
-                    <div class="crypto-total">
-                        <span class="crypto-total-label">Total</span>
+        <div class="modal-content crypto-modal-content crypto-modal-content-v2">
+            <button type="button" class="modal-close" onclick="closeCryptoModal()" aria-label="Close">&times;</button>
+            <div class="modal-details crypto-details crypto-details-v2">
+                <div class="crypto-header crypto-header-v2">
+                    <h2>Pay with crypto</h2>
+                    <div class="crypto-total crypto-total-v2">
+                        <span class="crypto-total-label">Order total</span>
                         <span id="cryptoUsdTotal" class="crypto-total-amount">$0.00</span>
                     </div>
                 </div>
 
                 <div class="crypto-section">
-                    <label class="crypto-label">Select cryptocurrency</label>
+                    <label class="crypto-label">Select coin</label>
                     <div class="crypto-coins">
-                        <button class="crypto-coin" data-coin="btc" onclick="selectCryptoCoin('btc')">
+                        <button type="button" class="crypto-coin" data-coin="btc" onclick="selectCryptoCoin('btc')">
                             <span class="coin-icon" aria-hidden="true">
                                 <img src="/icons/brands/bitcoin.svg" width="22" height="22" alt="" decoding="async">
                             </span>
                             <span class="coin-label">Bitcoin</span>
                         </button>
-                        <button class="crypto-coin" data-coin="eth" onclick="selectCryptoCoin('eth')">
+                        <button type="button" class="crypto-coin" data-coin="eth" onclick="selectCryptoCoin('eth')">
                             <span class="coin-icon" aria-hidden="true">
                                 <img src="/icons/brands/ethereum.svg" width="22" height="22" alt="" decoding="async">
                             </span>
                             <span class="coin-label">Ethereum</span>
                         </button>
-                        <button class="crypto-coin" data-coin="ltc" onclick="selectCryptoCoin('ltc')">
+                        <button type="button" class="crypto-coin" data-coin="ltc" onclick="selectCryptoCoin('ltc')">
                             <span class="coin-icon" aria-hidden="true">
                                 <img src="/icons/brands/litecoin.svg" width="22" height="22" alt="" decoding="async">
                             </span>
@@ -550,13 +446,13 @@
                 </div>
 
                 <div class="crypto-section">
-                    <label class="crypto-label">Payment details</label>
+                    <label class="crypto-label">Send exactly</label>
                     <div class="crypto-payment-info">
                         <div class="crypto-field">
-                            <span class="crypto-field-label">Send to</span>
+                            <span class="crypto-field-label">Wallet address</span>
                             <div class="crypto-field-value" id="cryptoAddress">Select a coin</div>
                         </div>
-                        <div class="crypto-field">
+                        <div class="crypto-field" style="margin-top:0.75rem;">
                             <span class="crypto-field-label">Amount</span>
                             <div class="crypto-field-value crypto-amount-value" id="cryptoAmount">---</div>
                         </div>
@@ -566,7 +462,7 @@
                 <div id="cryptoProgressContainer" class="crypto-progress-container" style="display:none;">
                     <div class="crypto-progress-info">
                         <div class="crypto-progress-header">
-                            <span class="crypto-progress-label">Checking payment</span>
+                            <span class="crypto-progress-label">Network status</span>
                             <span id="cryptoProgressText" class="crypto-progress-percent">0%</span>
                         </div>
                         <div class="crypto-progress-bar">
@@ -577,8 +473,8 @@
                 </div>
 
                 <div id="cryptoStatus" class="crypto-status"></div>
-                <div id="cryptoPaidMessage" class="crypto-paid-message" style="display:none;">Payment received. It will be reviewed and we will follow up with shipping details. support@emotohi.com will email you further details, or you can email us for help.</div>
-                <button id="cryptoPaidBtn" class="crypto-submit-btn" onclick="checkCryptoPayment()">I have paid</button>
+                <div id="cryptoPaidMessage" class="crypto-paid-message" style="display:none;"></div>
+                <button type="button" id="cryptoPaidBtn" class="crypto-submit-btn" onclick="checkCryptoPayment()">I’ve sent payment</button>
             </div>
         </div>
     </div>
@@ -625,77 +521,93 @@
             overlay.classList.remove('active');
         }
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            if (!menu) return;
-            const isOpen = menu.classList.toggle('is-open');
-            menu.setAttribute('aria-hidden', !isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        }
-
-        function toggleThemeDropdown() {
-            const dropdown = document.getElementById('themeDropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function setTheme(theme) {
-            localStorage.setItem('theme', theme);
-            applyTheme(theme);
-            toggleThemeDropdown();
-            updateThemeOptions();
-        }
-
-        function applyTheme(theme) {
-            let isDark = false;
-
-            if (theme === 'system') {
-                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            } else if (theme === 'dark') {
-                isDark = true;
+        function setCheckoutProgressStep(step) {
+            const nav = document.getElementById('checkoutProgressNav');
+            if (nav) {
+                nav.querySelectorAll('.step[data-step]').forEach((el) => {
+                    const n = Number(el.dataset.step);
+                    el.classList.toggle('is-active', n === step);
+                    el.classList.toggle('is-done', n < step);
+                });
+                nav.style.setProperty('--chk-progress', step >= 2 ? '100%' : '38%');
             }
-
-            document.body.classList.toggle('dark-theme', isDark);
         }
 
-        function updateThemeOptions() {
-            const currentTheme = localStorage.getItem('theme') || 'system';
-            document.querySelectorAll('.theme-option').forEach(option => {
-                option.classList.remove('active');
-                if (option.dataset.theme === currentTheme) {
-                    option.classList.add('active');
+        let selectedPaymentMethod = null;
+
+        function escapeHtml(s) {
+            return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+        }
+
+        function escapeAttr(s) {
+            return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+        }
+
+        function buildSuccessOrderLinesHtml(items) {
+            if (!items || !items.length) {
+                return '<p style="margin:0;color:var(--chk-muted);font-size:0.9rem;">Your order is on file.</p>';
+            }
+            return '<ul style="margin:0;padding-left:1.15rem;font-size:0.88rem;line-height:1.5;">' + items.map((item) => {
+                const total = Number(item.total) || (Number(item.price) * Number(item.quantity));
+                const line = item.productName
+                    ? (item.productName + (item.variant && item.variant !== item.productName ? ' — ' + item.variant : ''))
+                    : (item.name || 'Item');
+                return '<li style="margin-bottom:0.4rem;">' + escapeHtml(line) + ' · Qty ' + item.quantity + ' · $' + total.toFixed(2) + '</li>';
+            }).join('') + '</ul>';
+        }
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.pay-method-card').forEach((card) => {
+                const m = card.dataset.method;
+                if (!m || card.classList.contains('coming-soon')) return;
+                const open = Boolean(method) && m === method;
+                card.classList.toggle('is-selected', open);
+                const head = card.querySelector('.pay-method-head');
+                const body = card.querySelector('.pay-method-body');
+                if (body) {
+                    body.hidden = !open;
+                }
+                if (head && head.tagName === 'BUTTON') {
+                    head.setAttribute('aria-expanded', open ? 'true' : 'false');
                 }
             });
-
-            const themeIcon = document.getElementById('themeIcon');
-            if (themeIcon) {
-                const iconMap = {
-                    system: "<svg viewBox='0 0 24 24' aria-hidden='true'><rect x='3' y='4' width='18' height='12' rx='2'></rect><path d='M8 20h8'></path></svg>",
-                    light: "<svg viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='4'></circle><path d='M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'></path></svg>",
-                    dark: "<svg viewBox='0 0 24 24' aria-hidden='true'><path d='M21 14.5A9 9 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z'></path></svg>"
-                };
-                themeIcon.innerHTML = iconMap[currentTheme];
-            }
         }
 
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'system';
-            applyTheme(savedTheme);
-            updateThemeOptions();
+        function initPaymentMethodCards() {
+            document.querySelectorAll('.pay-method-card .pay-method-head').forEach((btn) => {
+                if (btn.tagName !== 'BUTTON') return;
+                btn.addEventListener('click', () => {
+                    const card = btn.closest('.pay-method-card');
+                    const method = card && card.dataset.method;
+                    if (!method) return;
+                    selectPaymentMethod(method);
+                });
+            });
         }
 
-        window.addEventListener('click', function(e) {
-            if (!e.target.matches('.theme-toggle') && !e.target.closest('.theme-switcher')) {
-                const dropdown = document.getElementById('themeDropdown');
-                if (dropdown) dropdown.style.display = 'none';
+        function showCheckoutSuccess(options) {
+            const flow = document.getElementById('checkoutFlow');
+            const success = document.getElementById('checkoutSuccess');
+            if (!flow || !success) return;
+            flow.hidden = true;
+            success.hidden = false;
+            document.getElementById('checkoutSuccessTitle').textContent = options.title || 'Thank you';
+            document.getElementById('checkoutSuccessLead').textContent = options.lead || '';
+            const itemsEl = document.getElementById('checkoutSuccessItems');
+            if (itemsEl && options.itemsHtml) {
+                itemsEl.innerHTML = options.itemsHtml;
             }
-        });
+            const nextEl = document.getElementById('checkoutSuccessNext');
+            if (nextEl) {
+                nextEl.innerHTML = options.nextHtml || '';
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            const savedTheme = localStorage.getItem('theme') || 'system';
-            if (savedTheme === 'system') {
-                applyTheme('system');
-            }
-        });
+        function clearCartStorage() {
+            sessionStorage.removeItem(CART_STORAGE_KEY);
+        }
 
         function getStoredCart() {
             const raw = sessionStorage.getItem(CART_STORAGE_KEY);
@@ -896,7 +808,7 @@
             const el = document.getElementById('paypalNoteText');
             if (!el || !el.textContent) return;
             navigator.clipboard.writeText(el.textContent).then(() => {
-                const btn = document.querySelector('.paypal-copy');
+                const btn = document.querySelector('.paypal-copy-pro');
                 if (btn) {
                     const orig = btn.textContent;
                     btn.textContent = 'Copied!';
@@ -909,6 +821,7 @@
             const cryptoBtn = document.getElementById('cryptoStartBtn');
             const cashBtn = document.getElementById('cashStartBtn');
             const giftBtn = document.getElementById('giftStartBtn');
+            const cryptoHint = document.getElementById('cryptoPayHint');
             const hasCart = getStoredCart().length > 0;
             const email = (document.getElementById('checkoutEmail')?.value || '').trim();
             const address = loadAddress();
@@ -916,8 +829,7 @@
             const status = document.getElementById('checkoutSaveStatus');
             const addressDraft = getAddressPayload();
             const canSave = isValidEmail(email) && isAddressValid(addressDraft);
-            const zip = (address?.zip || '').trim();
-            const canDeliver = true; // We now ship anywhere in the USA
+            const canDeliver = true;
             const ready = hasCart && isValidEmail(email) && address && isAddressValid(address);
             if (cryptoBtn) {
                 cryptoBtn.disabled = !ready || !canDeliver;
@@ -928,19 +840,28 @@
             if (giftBtn) {
                 giftBtn.disabled = !ready;
             }
+            if (cryptoHint) {
+                cryptoHint.style.display = ready ? 'none' : 'block';
+            }
             if (hint) {
+                hint.classList.remove('ok');
                 if (ready) {
                     hint.style.display = 'none';
                 } else if (canSave) {
-                    hint.textContent = 'Looks good. Press save to continue.';
+                    hint.textContent = 'Ready — tap Save & continue to unlock payment.';
                     hint.style.display = 'block';
                 } else {
-                    hint.textContent = 'Add your details, then press save to continue.';
+                    hint.textContent = 'Fill in all required fields, then save to unlock payment.';
                     hint.style.display = 'block';
                 }
             }
-            if (status && !ready) {
-                status.style.display = 'none';
+            if (status) {
+                if (ready) {
+                    status.style.display = 'block';
+                    status.classList.add('ok');
+                } else {
+                    status.style.display = 'none';
+                }
             }
         }
 
@@ -961,7 +882,6 @@
             const itemsContainer = document.getElementById('summaryItems');
             const emptyState = document.getElementById('summaryEmpty');
             const totalEl = document.getElementById('summaryTotal');
-            const headerTotal = document.getElementById('checkoutTotal');
             const cryptoBtn = document.getElementById('cryptoStartBtn');
             const emailInput = document.getElementById('checkoutEmail');
             const promoInput = document.getElementById('promoCode');
@@ -970,16 +890,16 @@
             const shippingRow = document.getElementById('summaryShippingRow');
             const shippingValue = document.getElementById('summaryShipping');
 
-            if (!itemsContainer || !totalEl || !headerTotal || !emptyState) return;
+            if (!itemsContainer || !totalEl || !emptyState) return;
 
             const subtotalRow = document.getElementById('summarySubtotalRow');
             const subtotalValue = document.getElementById('summarySubtotal');
+            const placeholderImg = '/images/top%20icon.png';
 
             if (items.length === 0) {
                 itemsContainer.innerHTML = '';
                 emptyState.style.display = 'block';
                 totalEl.textContent = '$0.00';
-                headerTotal.textContent = '$0.00';
                 if (subtotalRow) subtotalRow.style.display = 'none';
                 if (cryptoBtn) cryptoBtn.disabled = true;
                 const cashBtn = document.getElementById('cashStartBtn');
@@ -997,13 +917,20 @@
             itemsContainer.innerHTML = items.map(item => {
                 const itemTotal = Number(item.total) || (Number(item.price) * Number(item.quantity));
                 total += itemTotal;
+                const img = escapeAttr((item.image && String(item.image).trim()) ? item.image : placeholderImg);
+                const productLine = item.productName || item.name || 'Item';
+                const variantLine = item.variant && item.variant !== productLine ? item.variant : '';
+                const safeProduct = escapeHtml(productLine);
+                const safeVariant = escapeHtml(variantLine);
                 return `
-                    <div class="summary-item">
-                        <div>
-                            <p class="summary-name">${item.name}</p>
-                            <p class="summary-meta">Qty: ${item.quantity} × $${Number(item.price).toFixed(2)}</p>
+                    <div class="summary-item-pro">
+                        <div class="thumb"><img src="${img}" alt=""></div>
+                        <div class="meta">
+                            <p class="product">${safeProduct}</p>
+                            ${safeVariant ? `<p class="variant">${safeVariant}</p>` : ''}
+                            <p class="qty-line">Qty ${item.quantity} × $${Number(item.price).toFixed(2)}</p>
                         </div>
-                        <span class="summary-price">$${itemTotal.toFixed(2)}</span>
+                        <span class="price">$${itemTotal.toFixed(2)}</span>
                     </div>
                 `;
             }).join('');
@@ -1015,7 +942,6 @@
                 subtotalValue.textContent = '$' + subtotal.toFixed(2);
             }
             totalEl.textContent = '$' + grandTotal.toFixed(2);
-            headerTotal.textContent = '$' + grandTotal.toFixed(2);
             if (discountRow && discountValue) {
                 if (discount > 0) {
                     discountRow.style.display = 'flex';
@@ -1055,12 +981,12 @@
                     paypalInstructions.style.display = 'block';
                     const noteLines = items.map(item => {
                         const q = Number(item.quantity) || 1;
-                        const name = (item.name || 'Item').trim();
+                        const name = (item.variant || item.name || 'Item').trim();
                         return name + ' x' + q;
                     });
                     const noteText = noteLines.join(', ');
                     paypalNoteEl.textContent = noteText;
-                    paypalPayBtn.style.display = 'flex';
+                    paypalPayBtn.style.display = 'inline-flex';
                     const paypalAmtEl = document.getElementById('paypalCtaAmount');
                     if (paypalAmtEl) paypalAmtEl.textContent = '$' + grandTotal.toFixed(2);
                     paypalPayBtn.href = 'https://www.paypal.com/paypalme/' + PAYPAL_USERNAME + '/' + grandTotal.toFixed(2);
@@ -1087,8 +1013,6 @@
                 document.getElementById('checkoutZip').value = savedAddress.zip || '';
                 document.getElementById('checkoutCountry').value = savedAddress.country || '';
                 document.getElementById('checkoutNotes').value = savedAddress.notes || '';
-                const status = document.getElementById('checkoutSaveStatus');
-                if (status) status.style.display = 'block';
             }
             updateEmailState();
         }
@@ -1211,7 +1135,7 @@
 
             const paidBtn = document.getElementById('cryptoPaidBtn');
             if (paidBtn) {
-                paidBtn.textContent = 'I have paid';
+                paidBtn.textContent = 'I’ve sent payment';
                 paidBtn.disabled = false;
                 paidBtn.classList.remove('loading');
             }
@@ -1273,22 +1197,20 @@
 
                 if (statusData.status === 'paid') {
                     updateCryptoProgress(required, required);
-                    statusEl.textContent = 'Payment confirmed! Your order has been received.';
+                    statusEl.textContent = 'Payment confirmed.';
                     statusEl.classList.add('success');
                     paidBtn.style.display = 'none';
-                    const paidMessage = document.getElementById('cryptoPaidMessage');
-                    if (paidMessage) paidMessage.style.display = 'block';
-                    if (paidMessage) {
-                        paidMessage.textContent = `Payment received. Order ${getReceiptId()}. It will be reviewed and we will follow up with shipping details. support@emotohi.com will email you further details, or you can email us for help.`;
-                    }
+                    const snapshotItems = getStoredCart().slice();
+                    const receiptId = getReceiptId();
+                    const inbox = sessionStorage.getItem(EMAIL_STORAGE_KEY) || 'your inbox';
                     if (!sessionStorage.getItem(PAYMENT_SENT_KEY)) {
                         const email = sessionStorage.getItem(EMAIL_STORAGE_KEY) || '';
                         const address = loadAddress();
-                        const totals = getTotals(getStoredCart());
+                        const totals = getTotals(snapshotItems);
                         sendCheckoutWebhook('payment_confirmed', {
                             email,
                             address,
-                            items: getStoredCart(),
+                            items: snapshotItems,
                             total: totals.total,
                             discountUsd: totals.discount,
                             shipping: totals.shipping,
@@ -1300,6 +1222,14 @@
                         clearInterval(cryptoPollTimer);
                         cryptoPollTimer = null;
                     }
+                    showCheckoutSuccess({
+                        title: 'Payment received',
+                        lead: 'Your on-chain payment is confirmed. We’ll email shipping details within 24 hours.',
+                        itemsHtml: '<p style="margin:0 0 0.5rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--chk-muted);">Order ' + escapeHtml(receiptId) + '</p>' + buildSuccessOrderLinesHtml(snapshotItems),
+                        nextHtml: '<p><strong>Next:</strong> Watch <strong>' + escapeHtml(inbox) + '</strong> for tracking. Need help? <a href="mailto:support@emotohi.com" style="color:var(--chk-accent);">support@emotohi.com</a></p>'
+                    });
+                    clearCartStorage();
+                    closeCryptoModal();
                 } else {
                     statusEl.textContent = `Waiting for payment... ${statusData.received} / ${statusData.required}`;
                     if (!cryptoPollTimer) {
@@ -1331,8 +1261,18 @@
         };
 
         window.addEventListener('DOMContentLoaded', function() {
-            loadTheme();
             renderSummary();
+            initPaymentMethodCards();
+            const items = getStoredCart();
+            const email = (document.getElementById('checkoutEmail')?.value || '').trim();
+            const addr = loadAddress();
+            const ready = items.length > 0 && isValidEmail(email) && addr && isAddressValid(addr);
+            setCheckoutProgressStep(ready ? 2 : 1);
+            if (ready) {
+                selectPaymentMethod('crypto');
+            } else {
+                selectPaymentMethod(null);
+            }
             const emailInput = document.getElementById('checkoutEmail');
             if (emailInput) {
                 emailInput.addEventListener('input', updateEmailState);
@@ -1374,10 +1314,10 @@
                         shipping: totals.shipping,
                         paymentMethod: 'Saved details'
                     });
-                    const status = document.getElementById('checkoutSaveStatus');
-                    if (status) status.style.display = 'block';
                     updatePayButtons();
                     renderSummary();
+                    setCheckoutProgressStep(2);
+                    selectPaymentMethod('crypto');
                 });
             }
             const cashBtn = document.getElementById('cashStartBtn');
@@ -1414,13 +1354,17 @@
                         mention: '@everyone',
                         priority: 'URGENT'
                     });
-                    const status = document.getElementById('cashStatus');
-                    if (status) {
-                        status.style.display = 'block';
-                        status.textContent = meetupAddress
-                            ? `Request sent. Order ${getReceiptId()}. We will contact you to confirm the meetup at ${meetupAddress}. support@emotohi.com will email you further details, or you can email us for help.`
-                            : `Request sent. Order ${getReceiptId()}. We will contact you to confirm the meetup. support@emotohi.com will email you further details, or you can email us for help.`;
-                    }
+                    const snap = getStoredCart().slice();
+                    const rid = getReceiptId();
+                    showCheckoutSuccess({
+                        title: 'Meetup request sent',
+                        lead: meetupAddress
+                            ? `Order ${rid}. We’ll email you to confirm cash meetup near ${meetupAddress}.`
+                            : `Order ${rid}. We’ll email you to confirm your cash meetup.`,
+                        itemsHtml: '<p style="margin:0 0 0.5rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--chk-muted);">Order ' + escapeHtml(rid) + '</p>' + buildSuccessOrderLinesHtml(snap),
+                        nextHtml: '<p><strong>Next:</strong> Check your email for a reply from <strong>support@emotohi.com</strong>. Bring exact change if instructed.</p>'
+                    });
+                    clearCartStorage();
                 });
             }
             const giftBtn = document.getElementById('giftStartBtn');
@@ -1457,13 +1401,17 @@
                         mention: '@everyone',
                         priority: 'URGENT'
                     });
-                    const status = document.getElementById('giftStatus');
-                    if (status) {
-                        status.style.display = 'block';
-                        status.textContent = meetupAddress
-                            ? `Request sent. Order ${getReceiptId()}. We will contact you to confirm the meetup at ${meetupAddress}. support@emotohi.com will email you further details, or you can email us for help.`
-                            : `Request sent. Order ${getReceiptId()}. We will contact you to confirm the meetup. support@emotohi.com will email you further details, or you can email us for help.`;
-                    }
+                    const snap = getStoredCart().slice();
+                    const rid = getReceiptId();
+                    showCheckoutSuccess({
+                        title: 'Gift card request sent',
+                        lead: meetupAddress
+                            ? `Order ${rid}. We’ll coordinate gift card redemption — watch your email.`
+                            : `Order ${rid}. We’ll email you to confirm gift card meetup details.`,
+                        itemsHtml: '<p style="margin:0 0 0.5rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--chk-muted);">Order ' + escapeHtml(rid) + '</p>' + buildSuccessOrderLinesHtml(snap),
+                        nextHtml: '<p><strong>Next:</strong> Our team will reply at <strong>support@emotohi.com</strong> with steps to complete your order.</p>'
+                    });
+                    clearCartStorage();
                 });
             }
             showGlobalLoader(400);

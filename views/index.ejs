@@ -844,11 +844,18 @@
 
         function addToCart() {
             const selectedOption = document.querySelector('.option-item.selected .option-name');
-            const productName = selectedOption ? selectedOption.textContent : 'Surron Ultra Bee Brakes';
+            const variantName = selectedOption ? selectedOption.textContent : 'Surron Ultra Bee Brakes';
+            const titleEl = document.querySelector('#productModal .modal-details h2');
+            const productTitle = titleEl ? titleEl.textContent.trim() : 'Surron Ultra Bee Brakes';
+            const mainImg = document.getElementById('mainImage');
+            const imageSrc = (mainImg && mainImg.src) ? mainImg.src : '';
 
             const item = {
                 id: Date.now(),
-                name: productName,
+                productName: productTitle,
+                variant: variantName,
+                name: productTitle + ' — ' + variantName,
+                image: imageSrc,
                 price: currentPrice,
                 quantity: currentQuantity,
                 total: currentPrice * currentQuantity

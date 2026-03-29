@@ -1577,17 +1577,22 @@
                 if (!modal || !state) return;
 
                 const selectedOption = modal.querySelector('.option-item.selected .option-name');
-                const productName = selectedOption ? selectedOption.textContent : fallbackName;
+                const variantName = selectedOption ? selectedOption.textContent : fallbackName;
 
                 // Check if the selected item is sold out
-                if (soldOutItems[productName]) {
+                if (soldOutItems[variantName]) {
                     alert('This item is currently sold out and cannot be added to cart.');
                     return;
                 }
 
+                const mainImgEl = modal.querySelector('.modal-main-image');
+                const imageSrc = (mainImgEl && mainImgEl.src) ? mainImgEl.src : ((state.images && state.images[0]) || '');
                 const item = {
                     id: Date.now(),
-                    name: productName,
+                    productName: fallbackName,
+                    variant: variantName,
+                    name: fallbackName + ' — ' + variantName,
+                    image: imageSrc,
                     price: state.price,
                     quantity: state.quantity,
                     total: state.price * state.quantity
