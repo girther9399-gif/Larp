@@ -222,9 +222,9 @@
             </div>
             <div class="no-results" id="noResultsMessage">No results found. Try a different search.</div>
         </div>
-        <div class="products-grid">
+        <div class="products-grid motion-stagger-onload">
             <!-- Surron Ultra Bee Breaks -->
-            <div id="ultra-breaks" class="product-card" data-category="brakes" onclick="openProductModal()" style="cursor: pointer;">
+            <div id="ultra-breaks" class="product-card motion-spotlight" data-category="brakes" onclick="openProductModal()" style="cursor: pointer;">
                 <div class="sale-badge">SALE</div>
                 <div class="product-image">
                     <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks"
@@ -243,7 +243,7 @@
             </div>
 
             <!-- Surron Brake Pads -->
-            <div id="brake-pads" class="product-card" data-category="brakes" onclick="openModal('padsModal')" style="cursor: pointer;">
+            <div id="brake-pads" class="product-card motion-spotlight" data-category="brakes" onclick="openModal('padsModal')" style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/surron%20ultra%20oem%20pads.png" alt="OEM Brake Pads"
                         style="width: 100%; height: 100%; object-fit: cover;">
@@ -264,7 +264,7 @@
             </div>
 
             <!-- Rotor -->
-            <div id="rotor" class="product-card" data-category="brakes" onclick="openModal('rotorModal')" style="cursor: pointer;">
+            <div id="rotor" class="product-card motion-spotlight" data-category="brakes" onclick="openModal('rotorModal')" style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/rotor.png" alt="Rotor" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -285,7 +285,7 @@
             </div>
 
             <!-- Forged Carbon Wrap -->
-            <div id="carbon-wrap" class="product-card" data-category="wraps" onclick="openModal('wrapModal')" style="cursor: pointer;">
+            <div id="carbon-wrap" class="product-card motion-spotlight" data-category="wraps" onclick="openModal('wrapModal')" style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/carbon%20wrap.png" alt="Forged Carbon Wrap"
                         style="width: 100%; height: 100%; object-fit: cover;">
@@ -302,7 +302,7 @@
             </div>
 
             <!-- Baja Lights (No Switch) -->
-            <div id="baja-lights" class="product-card" data-category="lights" onclick="openModal('bajaModal')"
+            <div id="baja-lights" class="product-card motion-spotlight" data-category="lights" onclick="openModal('bajaModal')"
                 style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/white%20baja.png" alt="Baja Lights"
@@ -324,7 +324,7 @@
             </div>
 
             <!-- MOTOCUTZ FRONT NUMBER PLATE -->
-            <div id="motocutz" class="product-card" data-category="plates" onclick="openModal('motocutzModal')"
+            <div id="motocutz" class="product-card motion-spotlight" data-category="plates" onclick="openModal('motocutzModal')"
                 style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/black%20plate.png" alt="MOTOCUTZ FRONT NUMBER PLATE"
@@ -345,7 +345,7 @@
             </div>
 
             <!-- EmotoHI Shirt -->
-            <div id="emotohi-shirt" class="product-card" data-category="apparel"
+            <div id="emotohi-shirt" class="product-card motion-spotlight" data-category="apparel"
                 onclick="openModal('shirtModal')" style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/front%20shirt.png" alt="EmotoHI Shirt"
@@ -369,7 +369,7 @@
             </div>
 
             <!-- Titanium bolts -->
-            <div id="titanium-bolts" class="product-card" data-category="hardware"
+            <div id="titanium-bolts" class="product-card motion-spotlight" data-category="hardware"
                 onclick="openModal('titaniumBoltsModal')" style="cursor: pointer;">
                 <div class="product-image">
                     <img src="/images/m8x25mm.png" alt="Iridescent titanium socket-head bolts M8×25mm"
@@ -2038,6 +2038,7 @@
                 }
             });
         </script>
+    <script src="/site-motion.js" defer></script>
 </body>
 
 </html>

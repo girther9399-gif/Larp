@@ -77,7 +77,7 @@
         <h2>EmotoHI Videos</h2>
         <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem;">Watch our amazing Ultrabe Break content</p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+        <div class="motion-stagger-onload" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
             <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
                 <div class="placeholder-video" style="height: 250px; margin: 0;">Video 1</div>
                 <div style="padding: 1.5rem;">
@@ -165,5 +165,6 @@
             document.body.style.overflow = isOpen ? 'hidden' : '';
         }
     </script>
+    <script src="/site-motion.js" defer></script>
 </body>
 </html>
