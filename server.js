@@ -249,6 +249,216 @@ function getShippingTier(distanceMiles) {
     return 45;
 }
 
+const NON_OAHU_FEE_USD = 7;
+const OAHU_ZIPS_PAYPAL = new Set([
+    '96701', '96706', '96707', '96709', '96712', '96717', '96730', '96731', '96734', '96744', '96759', '96762', '96782',
+    '96786', '96789', '96791', '96792', '96795', '96797', '96801', '96802', '96803', '96804', '96805', '96806', '96807',
+    '96808', '96809', '96810', '96811', '96812', '96813', '96814', '96815', '96816', '96817', '96818', '96819', '96820',
+    '96821', '96822', '96823', '96824', '96825', '96826', '96828', '96830', '96836', '96837', '96838', '96839', '96840',
+    '96841', '96843', '96844', '96846', '96847', '96848', '96849', '96850', '96853', '96854', '96857', '96858', '96859',
+    '96860', '96861', '96863'
+]);
+const PAYPAL_PROMO_CODES = {
+    EMOTO10: { type: 'percent', value: 10 },
+    EMOTOHI10: { type: 'percent', value: 10 },
+    EMO20: { type: 'flat', value: 20 }
+};
+
+function isOahuZipPaypal(zip) {
+    if (!zip || typeof zip !== 'string') return false;
+    const normalized = zip.trim().replace(/\s+/g, '');
+    const five = normalized.length >= 5 ? normalized.slice(0, 5) : normalized;
+    return OAHU_ZIPS_PAYPAL.has(five);
+}
+
+function paypalPromoDiscount(subtotal, promoCode) {
+    const raw = String(promoCode || '').trim().toUpperCase();
+    const promo = PAYPAL_PROMO_CODES[raw];
+    if (!promo) return 0;
+    let discount = promo.type === 'percent' ? subtotal * (promo.value / 100) : promo.value;
+    return Math.min(discount, subtotal);
+}
+
+function paypalSubtotalFromItems(items) {
+    return items.reduce((sum, item) => {
+        const total = Number(item.total);
+        if (Number.isFinite(total)) return sum + total;
+        const price = Number(item.price) || 0;
+        const quantity = Number(item.quantity) || 0;
+        return sum + price * quantity;
+    }, 0);
+}
+
+async function computeShippingQuote(address) {
+    const { address1, address2, city, state, zip, country } = address || {};
+    if (!address1 || !city || !state || !zip || !country) {
+        const err = new Error('Missing address fields.');
+        err.code = 'ADDRESS';
+        throw err;
+    }
+    const normalizedCountry = String(country).trim().toLowerCase();
+    if (normalizedCountry !== 'united states' && normalizedCountry !== 'usa' && normalizedCountry !== 'us') {
+        const err = new Error('We currently only ship within the United States.');
+        err.code = 'COUNTRY';
+        throw err;
+    }
+    const normalizedZip = String(zip).trim();
+    const zipPattern = /^\d{5}(-\d{4})?$/;
+    if (!zipPattern.test(normalizedZip)) {
+        const err = new Error('Invalid USA ZIP code format.');
+        err.code = 'ZIP';
+        throw err;
+    }
+    const query = `${address1} ${address2 || ''}, ${city}, ${state} ${zip}, ${country}`.trim();
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
+    const data = await fetchJsonWithHeaders(url, {
+        'User-Agent': 'EmotoHI Checkout (shipping quote)'
+    });
+    const first = Array.isArray(data) ? data[0] : null;
+    if (!first || !first.lat || !first.lon) {
+        const err = new Error('Unable to geocode address.');
+        err.code = 'GEOCODE';
+        throw err;
+    }
+    const lat = Number(first.lat);
+    const lon = Number(first.lon);
+    if (Number.isNaN(lat) || Number.isNaN(lon)) {
+        const err = new Error('Invalid coordinates.');
+        err.code = 'GEOCODE';
+        throw err;
+    }
+    const distanceMiles = haversineMiles(SHIPPING_ORIGIN.lat, SHIPPING_ORIGIN.lon, lat, lon);
+    const amount = getShippingTier(distanceMiles);
+    return {
+        amount,
+        distanceMiles: Number(distanceMiles.toFixed(2)),
+        origin: SHIPPING_ORIGIN.label
+    };
+}
+
+async function computePaypalOrderTotals(items, promoCode, address) {
+    const subtotal = paypalSubtotalFromItems(items);
+    const discount = paypalPromoDiscount(subtotal, promoCode);
+    const ship = await computeShippingQuote(address);
+    const nonOahuFee = !isOahuZipPaypal(address.zip) ? NON_OAHU_FEE_USD : 0;
+    const total = Math.max(0, subtotal - discount + ship.amount + nonOahuFee);
+    return {
+        subtotal,
+        discount,
+        shippingAmount: ship.amount,
+        nonOahuFee,
+        total: Number(total.toFixed(2)),
+        distanceMiles: ship.distanceMiles
+    };
+}
+
+function paypalApiHostname() {
+    return process.env.PAYPAL_MODE === 'live' ? 'api-m.paypal.com' : 'api-m.sandbox.paypal.com';
+}
+
+async function paypalAccessToken() {
+    const clientId = process.env.PAYPAL_CLIENT_ID;
+    const secret = process.env.PAYPAL_CLIENT_SECRET;
+    if (!clientId || !secret) {
+        const err = new Error('PayPal is not configured.');
+        err.code = 'PAYPAL_NOT_CONFIGURED';
+        throw err;
+    }
+    const auth = Buffer.from(`${clientId}:${secret}`).toString('base64');
+    const body = 'grant_type=client_credentials';
+    return new Promise((resolve, reject) => {
+        const req = https.request(
+            {
+                hostname: paypalApiHostname(),
+                path: '/v1/oauth2/token',
+                method: 'POST',
+                headers: {
+                    Authorization: `Basic ${auth}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Length': Buffer.byteLength(body)
+                }
+            },
+            (res) => {
+                let data = '';
+                res.on('data', (chunk) => {
+                    data += chunk;
+                });
+                res.on('end', () => {
+                    try {
+                        if (res.statusCode && res.statusCode >= 400) {
+                            return reject(new Error(`PayPal auth failed (${res.statusCode}).`));
+                        }
+                        const parsed = JSON.parse(data);
+                        if (!parsed.access_token) {
+                            return reject(new Error('PayPal auth response missing token.'));
+                        }
+                        resolve(parsed.access_token);
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+            }
+        );
+        req.on('error', reject);
+        req.write(body);
+        req.end();
+    });
+}
+
+function paypalApiJson(method, pathOnly, accessToken, jsonBody) {
+    const hostname = paypalApiHostname();
+    const writeBody = method !== 'GET' && method !== 'HEAD';
+    const bodyStr = writeBody ? JSON.stringify(jsonBody !== undefined ? jsonBody : {}) : '';
+    return new Promise((resolve, reject) => {
+        const req = https.request(
+            {
+                hostname,
+                path: pathOnly,
+                method,
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    ...(writeBody
+                        ? {
+                              'Content-Type': 'application/json',
+                              'Content-Length': Buffer.byteLength(bodyStr)
+                          }
+                        : {})
+                }
+            },
+            (res) => {
+                let data = '';
+                res.on('data', (chunk) => {
+                    data += chunk;
+                });
+                res.on('end', () => {
+                    try {
+                        const parsed = data ? JSON.parse(data) : {};
+                        if (res.statusCode && res.statusCode >= 400) {
+                            const msg =
+                                parsed.message ||
+                                parsed.error_description ||
+                                parsed.name ||
+                                (typeof parsed.details === 'string' ? parsed.details : '') ||
+                                data ||
+                                `HTTP ${res.statusCode}`;
+                            const er = new Error(typeof msg === 'string' ? msg : 'PayPal API error');
+                            er.paypal = parsed;
+                            er.status = res.statusCode;
+                            return reject(er);
+                        }
+                        resolve(parsed);
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+            }
+        );
+        req.on('error', reject);
+        if (writeBody) req.write(bodyStr);
+        req.end();
+    });
+}
+
 // Routes
 app.get('/', (req, res) => {
     res.render('index');
@@ -259,7 +469,9 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/checkout', (req, res) => {
-    res.render('checkout');
+    res.render('checkout', {
+        paypalClientId: process.env.PAYPAL_CLIENT_ID || ''
+    });
 });
 
 app.get('/gallery', (req, res) => {
@@ -392,6 +604,7 @@ app.post('/api/checkout/webhook', async (req, res) => {
             checkout_saved: 'Unpaid (details saved)',
             checkout_pay: 'Payment started',
             payment_confirmed: 'Paid',
+            paypal_paid: 'Paid (PayPal)',
             cash_checkout: 'Cash (meetup request)',
             giftcard_checkout: 'Gift card (meetup request)'
         };
@@ -476,52 +689,103 @@ app.post('/api/checkout/webhook', async (req, res) => {
 
 app.post('/api/shipping/quote', async (req, res) => {
     try {
-        const { address1, address2, city, state, zip, country } = req.body || {};
-        if (!address1 || !city || !state || !zip || !country) {
-            return res.status(400).json({ error: 'Missing address fields.' });
-        }
-
-        // Validate USA address
-        const normalizedCountry = String(country).trim().toLowerCase();
-        const normalizedZip = String(zip).trim();
-        
-        if (normalizedCountry !== 'united states' && normalizedCountry !== 'usa' && normalizedCountry !== 'us') {
-            return res.status(400).json({ error: 'We currently only ship within the United States.' });
-        }
-
-        // Basic ZIP code validation (5 digits or 5+4 format)
-        const zipPattern = /^\d{5}(-\d{4})?$/;
-        if (!zipPattern.test(normalizedZip)) {
-            return res.status(400).json({ error: 'Invalid USA ZIP code format.' });
-        }
-
-        const query = `${address1} ${address2 || ''}, ${city}, ${state} ${zip}, ${country}`.trim();
-        const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
-        const data = await fetchJsonWithHeaders(url, {
-            'User-Agent': 'EmotoHI Checkout (shipping quote)'
-        });
-
-        const first = Array.isArray(data) ? data[0] : null;
-        if (!first || !first.lat || !first.lon) {
-            return res.status(400).json({ error: 'Unable to geocode address.' });
-        }
-
-        const lat = Number(first.lat);
-        const lon = Number(first.lon);
-        if (isNaN(lat) || isNaN(lon)) {
-            return res.status(400).json({ error: 'Invalid coordinates.' });
-        }
-
-        const distanceMiles = haversineMiles(SHIPPING_ORIGIN.lat, SHIPPING_ORIGIN.lon, lat, lon);
-        const amount = getShippingTier(distanceMiles);
-
-        res.json({
-            amount,
-            distanceMiles: Number(distanceMiles.toFixed(2)),
-            origin: SHIPPING_ORIGIN.label
-        });
+        const result = await computeShippingQuote(req.body || {});
+        res.json(result);
     } catch (error) {
-        res.status(500).json({ error: 'Unable to calculate shipping.' });
+        const msg = error.message || 'Unable to calculate shipping.';
+        res.status(400).json({ error: msg });
+    }
+});
+
+app.post('/api/paypal/create-order', async (req, res) => {
+    try {
+        const { items, promoCode, address, email, receiptId } = req.body || {};
+        if (!Array.isArray(items) || items.length === 0) {
+            return res.status(400).json({ error: 'Cart is empty.' });
+        }
+        const emailStr = String(email || '').trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailStr)) {
+            return res.status(400).json({ error: 'Valid email required.' });
+        }
+        if (!address || typeof address !== 'object') {
+            return res.status(400).json({ error: 'Shipping address required.' });
+        }
+
+        let totals;
+        try {
+            totals = await computePaypalOrderTotals(items, promoCode, address);
+        } catch (e) {
+            return res.status(400).json({ error: e.message || 'Unable to compute order total.' });
+        }
+
+        if (totals.total < 0.01) {
+            return res.status(400).json({ error: 'Order total is too small.' });
+        }
+
+        let accessToken;
+        try {
+            accessToken = await paypalAccessToken();
+        } catch (e) {
+            if (e.code === 'PAYPAL_NOT_CONFIGURED') {
+                return res.status(503).json({ error: 'PayPal checkout is not configured on this server.' });
+            }
+            throw e;
+        }
+
+        const customId = String(receiptId || 'EMO').replace(/\s+/g, ' ').slice(0, 127);
+        const orderPayload = {
+            intent: 'CAPTURE',
+            purchase_units: [
+                {
+                    amount: {
+                        currency_code: 'USD',
+                        value: totals.total.toFixed(2)
+                    },
+                    description: 'EmotoHI parts order',
+                    custom_id: customId,
+                    soft_descriptor: 'EMOTOHI'
+                }
+            ],
+            application_context: {
+                brand_name: 'EmotoHI',
+                landing_page: 'NO_PREFERENCE',
+                user_action: 'PAY_NOW',
+                shipping_preference: 'NO_SHIPPING'
+            }
+        };
+
+        const created = await paypalApiJson('POST', '/v2/checkout/orders', accessToken, orderPayload);
+        if (!created.id) {
+            return res.status(502).json({ error: 'PayPal did not return an order id.' });
+        }
+        res.json({ orderID: created.id });
+    } catch (error) {
+        console.error('[paypal] create-order', error.message);
+        res.status(500).json({ error: error.message || 'Unable to create PayPal order.' });
+    }
+});
+
+app.post('/api/paypal/capture-order', async (req, res) => {
+    try {
+        const { orderID } = req.body || {};
+        if (!orderID || typeof orderID !== 'string') {
+            return res.status(400).json({ error: 'Missing order ID.' });
+        }
+        const accessToken = await paypalAccessToken();
+        const captured = await paypalApiJson(
+            'POST',
+            `/v2/checkout/orders/${encodeURIComponent(orderID)}/capture`,
+            accessToken,
+            {}
+        );
+        const status = captured.status;
+        if (status !== 'COMPLETED') {
+            return res.status(400).json({ error: `Payment not completed (${status || 'unknown'}).` });
+        }
+        res.json({ ok: true, status, captureId: captured.id, payerEmail: captured.payer?.email_address });
+    } catch (error) {
+        console.error('[paypal] capture-order', error.message);
+        res.status(500).json({ error: error.message || 'Capture failed.' });
     }
 });
 
