@@ -73,12 +73,14 @@
     </div>
 
     <!-- Videos Section -->
-    <section class="featured" style="margin-top: 2rem;">
+    <section class="featured videos-page-featured" style="margin-top: 2rem;">
+        <span class="motion-morph-blob motion-morph-blob--videos" aria-hidden="true"></span>
         <h2>EmotoHI Videos</h2>
         <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem;">Watch our amazing Ultrabe Break content</p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
-            <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+        <div class="videos-grid-wrap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+            <div class="video-card motion-card motion-ink" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="placeholder-video" style="height: 250px; margin: 0;">Video 1</div>
                 <div style="padding: 1.5rem;">
                     <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Ultrabe Break Product Tour</h3>
@@ -86,7 +88,8 @@
                 </div>
             </div>
 
-            <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+            <div class="video-card motion-card motion-ink" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="placeholder-video" style="height: 250px; margin: 0;">Video 2</div>
                 <div style="padding: 1.5rem;">
                     <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Hawaii Inspired Design</h3>
@@ -94,7 +97,8 @@
                 </div>
             </div>
 
-            <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+            <div class="video-card motion-card motion-ink" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="placeholder-video" style="height: 250px; margin: 0;">Video 3</div>
                 <div style="padding: 1.5rem;">
                     <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Customer Testimonials</h3>
@@ -102,7 +106,8 @@
                 </div>
             </div>
 
-            <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+            <div class="video-card motion-card motion-ink" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="placeholder-video" style="height: 250px; margin: 0;">Video 4</div>
                 <div style="padding: 1.5rem;">
                     <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">How to Use Ultrabe Breaks</h3>
@@ -110,7 +115,8 @@
                 </div>
             </div>
 
-            <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+            <div class="video-card motion-card motion-ink" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="placeholder-video" style="height: 250px; margin: 0;">Video 5</div>
                 <div style="padding: 1.5rem;">
                     <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Behind the Scenes</h3>
@@ -118,7 +124,8 @@
                 </div>
             </div>
 
-            <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+            <div class="video-card motion-card motion-ink" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="placeholder-video" style="height: 250px; margin: 0;">Video 6</div>
                 <div style="padding: 1.5rem;">
                     <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Special Promotions</h3>
@@ -165,5 +172,6 @@
             document.body.style.overflow = isOpen ? 'hidden' : '';
         }
     </script>
+    <script src="/site-motion.js" defer></script>
 </body>
 </html>

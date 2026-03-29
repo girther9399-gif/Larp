@@ -137,20 +137,22 @@
     <!-- Hero Section -->
     <section class="hero hero-premium">
         <div class="hero-banner">
+            <span class="motion-morph-blob motion-morph-blob--hero" aria-hidden="true"></span>
             <img src="/images/banner.png" alt="EmotoHI Banner" class="hero-banner-image">
             <div class="hero-overlay">
                 <p class="hero-kicker">EmotoHI Performance Parts</p>
                 <h1>Built For Daily Riders</h1>
                 <p>Quality upgrades for braking, lighting, and style - made to fit clean and ride hard.</p>
                 <div class="hero-cta-row">
-                    <a href="/products" class="cta-button">Shop All Products</a>
-                    <a href="/products#ultra-breaks" class="ghost-link">Top Seller</a>
+                    <a href="/products" class="cta-button" data-magnetic="0.28">Shop All Products</a>
+                    <a href="/products#ultra-breaks" class="ghost-link" data-magnetic="0.2">Top Seller</a>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="trust-strip reveal">
+        <span class="motion-morph-blob motion-morph-blob--strip" aria-hidden="true"></span>
         <div class="trust-item">
             <strong>Fast shipping</strong>
             <span>USA delivery</span>
@@ -170,43 +172,49 @@
             <p class="section-kicker">Shop by category</p>
             <h2>Pick your setup</h2>
         </div>
-        <div class="home-collections-grid motion-stagger-onload">
-            <a href="/products?category=brakes" class="collection-card motion-spotlight">
+        <div class="home-collections-grid">
+            <a href="/products?category=brakes" class="collection-card motion-card motion-ink">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <img src="/images/Ultra%20Breaks.jpg" alt="Performance brakes">
                 <div class="collection-card-meta">
                     <span>Brakes</span>
                     <strong>Power + control</strong>
                 </div>
             </a>
-            <a href="/products?category=wraps" class="collection-card motion-spotlight">
+            <a href="/products?category=wraps" class="collection-card motion-card motion-ink">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <img src="/images/carbon%20wrap.png" alt="Wraps and style parts">
                 <div class="collection-card-meta">
                     <span>Wraps</span>
                     <strong>Make it yours</strong>
                 </div>
             </a>
-            <a href="/products?category=lights" class="collection-card motion-spotlight">
+            <a href="/products?category=lights" class="collection-card motion-card motion-ink">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <img src="/images/white%20baja.png" alt="Lights">
                 <div class="collection-card-meta">
                     <span>Lights</span>
                     <strong>Night-ready upgrades</strong>
                 </div>
             </a>
-            <a href="/products?category=plates" class="collection-card motion-spotlight">
+            <a href="/products?category=plates" class="collection-card motion-card motion-ink">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <img src="/images/black%20plate.png" alt="Number plates">
                 <div class="collection-card-meta">
                     <span>Plates</span>
                     <strong>Front number plates</strong>
                 </div>
             </a>
-            <a href="/products?category=apparel" class="collection-card motion-spotlight">
+            <a href="/products?category=apparel" class="collection-card motion-card motion-ink">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <img src="/images/front%20shirt.png" alt="Apparel">
                 <div class="collection-card-meta">
                     <span>Apparel</span>
                     <strong>EmotoHI gear</strong>
                 </div>
             </a>
-            <a href="/products?category=hardware" class="collection-card motion-spotlight">
+            <a href="/products?category=hardware" class="collection-card motion-card motion-ink">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <img src="/images/m8x25mm.png" alt="Titanium bolts">
                 <div class="collection-card-meta">
                     <span>Hardware</span>
@@ -219,8 +227,9 @@
     <!-- Featured Products -->
     <section class="featured reveal">
         <h2>Surron Ultra Bee Breaks</h2>
-        <div class="products-grid motion-stagger-onload">
-            <a href="/products#ultra-breaks" class="product-card">
+        <div class="products-grid">
+            <a href="/products#ultra-breaks" class="product-card motion-card motion-ink">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="sale-badge">SALE</div>
                 <div class="product-image">
                     <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Breaks"
@@ -555,9 +564,9 @@
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>
-                <span id="cartTotal">$0.00</span>
+                <span id="cartTotal" class="motion-ticker-mount">$0.00</span>
             </div>
-            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+            <button type="button" class="checkout-btn" data-magnetic="0.24" onclick="checkout()">Checkout</button>
         </div>
     </div>
     <div id="cartOverlay" class="cart-overlay" onclick="closeCart()"></div>
