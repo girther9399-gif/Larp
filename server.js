@@ -1,5 +1,30 @@
+const fs = require('fs');
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+
+const envPaths = [
+    path.join(__dirname, '.env'),
+    path.join(__dirname, '..', '.env'),
+    path.join(process.cwd(), '.env')
+];
+const envLoaded = new Set();
+for (const p of envPaths) {
+    const resolved = path.resolve(p);
+    if (envLoaded.has(resolved) || !fs.existsSync(p)) continue;
+    envLoaded.add(resolved);
+    require('dotenv').config({ path: p });
+}
+
+(function warnPaypalEnv() {
+    const id = String(process.env.PAYPAL_CLIENT_ID || '').trim();
+    const sec = String(process.env.PAYPAL_CLIENT_SECRET || '').trim();
+    if (!id || !sec) {
+        console.warn(
+            '[emotohi] PayPal REST is off: missing PAYPAL_CLIENT_ID and/or PAYPAL_CLIENT_SECRET. ' +
+                'Add them to .env next to server.js (see .env.example) or set host environment variables, then restart Node.'
+        );
+    }
+})();
+
 const express = require('express');
 const https = require('https');
 const app = express();

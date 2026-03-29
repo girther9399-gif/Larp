@@ -967,7 +967,7 @@
             if (!fb || !link) return;
             const msg =
                 reason === 'config'
-                    ? 'Standard PayPal isn’t configured on the server yet (add PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET). You can still pay via PayPal.me below.'
+                    ? 'This server doesn’t have PayPal API keys yet. On your machine: put PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET in .env next to server.js and restart Node. On production: set those variables in your host’s environment (a local .env file is not used). You can still use PayPal.me below.'
                     : 'We couldn’t start PayPal checkout. Use PayPal.me below or try another payment method.';
             if (copy) copy.textContent = msg;
             link.href = url;
