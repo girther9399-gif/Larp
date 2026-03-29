@@ -222,7 +222,7 @@
                                     <span class="icon-wrap"><img src="/icons/brands/paypal.svg" width="22" height="22" alt=""></span>
                                     <span class="titles">
                                         <h3>PayPal</h3>
-                                        <p>Secure checkout on PayPal — you return here when done</p>
+                                        <p>Hosted checkout or PayPal.me with your total</p>
                                     </span>
                                 </span>
                                 <span class="pay-method-badges">
@@ -231,15 +231,17 @@
                                 </span>
                             </button>
                             <div class="pay-method-body" id="payBodyPaypal" hidden>
-                                <p class="pay-copy">You’ll complete payment on PayPal’s site (same window). Your order is tied to the <strong>email above</strong> and the shipping address you save here.</p>
+                                <p class="pay-copy"><strong>Hosted checkout:</strong> Pay on PayPal in this window, then you’re sent back here with a confirmation. Uses your saved email and shipping for the order total.</p>
+                                <p class="pay-copy"><strong>PayPal.me:</strong> Opens a new tab with your <strong>cart total</strong> already filled. Put what you ordered in the PayPal note so we can match payment to <strong>the email above</strong>.</p>
                                 <p id="paypalSaveHint" class="pay-hint">Save your email and shipping details first.</p>
-                                <button type="button" id="paypalPayBtn" class="btn-paypal-pro" style="display:none;" aria-label="Pay with PayPal">
+                                <button type="button" id="paypalPayBtn" class="btn-paypal-pro" style="display:none;" aria-label="Pay with PayPal hosted checkout">
                                     <span class="btn-paypal-shine" aria-hidden="true"></span>
                                     <span class="btn-paypal-pro-inner">
                                         <img src="/icons/brands/paypal-white.svg" width="20" height="20" alt="">
-                                        <span class="btn-paypal-label">Pay <span id="paypalCtaAmount">$0.00</span> with PayPal</span>
+                                        <span class="btn-paypal-label">Checkout <span id="paypalCtaAmount">$0.00</span> on PayPal</span>
                                     </span>
                                 </button>
+                                <a id="paypalMeLink" class="paypal-me-link" href="#" target="_blank" rel="noopener noreferrer" style="display:none;" aria-label="Open PayPal.me with order total">Pay <span id="paypalMeAmount">$0.00</span> via PayPal.me <span class="paypal-me-external" aria-hidden="true">↗</span></a>
                             </div>
                         </div>
 
@@ -529,6 +531,7 @@
             EMO20: { type: 'flat', value: 20 }
         };
         const NON_OAHU_FEE = 7;
+        const PAYPAL_ME_USERNAME = 'imtoud';
         const OAHU_ZIPS = ['96701','96706','96707','96709','96712','96717','96730','96731','96734','96744','96759','96762','96782','96786','96789','96791','96792','96795','96797','96801','96802','96803','96804','96805','96806','96807','96808','96809','96810','96811','96812','96813','96814','96815','96816','96817','96818','96819','96820','96821','96822','96823','96824','96825','96826','96828','96830','96836','96837','96838','96839','96840','96841','96843','96844','96846','96847','96848','96849','96850','96853','96854','96857','96858','96859','96860','96861','96863'];
 
         function showGlobalLoader(autoHideMs) {
@@ -1267,6 +1270,7 @@
             const savedAddress = loadAddress();
             const paypalSaveHint = document.getElementById('paypalSaveHint');
             const paypalPayBtn = document.getElementById('paypalPayBtn');
+            const paypalMeLink = document.getElementById('paypalMeLink');
             const emailOk = isValidEmail((document.getElementById('checkoutEmail')?.value || '').trim());
             const addressOk = savedAddress && isAddressValid(savedAddress);
             if (paypalSaveHint && paypalPayBtn) {
@@ -1274,10 +1278,22 @@
                     paypalSaveHint.style.display = 'none';
                     paypalPayBtn.style.display = 'flex';
                     const paypalAmtEl = document.getElementById('paypalCtaAmount');
-                    if (paypalAmtEl) paypalAmtEl.textContent = '$' + grandTotal.toFixed(2);
+                    const amtStr = '$' + grandTotal.toFixed(2);
+                    if (paypalAmtEl) paypalAmtEl.textContent = amtStr;
+                    if (paypalMeLink) {
+                        paypalMeLink.href =
+                            'https://www.paypal.com/paypalme/' + PAYPAL_ME_USERNAME + '/' + grandTotal.toFixed(2);
+                        paypalMeLink.style.display = 'inline-flex';
+                        const meAmt = document.getElementById('paypalMeAmount');
+                        if (meAmt) meAmt.textContent = amtStr;
+                    }
                 } else {
                     paypalSaveHint.style.display = 'block';
                     paypalPayBtn.style.display = 'none';
+                    if (paypalMeLink) {
+                        paypalMeLink.style.display = 'none';
+                        paypalMeLink.setAttribute('href', '#');
+                    }
                 }
             }
             if (promoInput) {

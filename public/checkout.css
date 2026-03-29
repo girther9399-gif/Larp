@@ -894,6 +894,35 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
     }
 }
 
+.paypal-me-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--chk-radius-sm);
+    border: 1px solid var(--chk-border-strong);
+    background: var(--chk-elevated);
+    color: var(--chk-text);
+    font-weight: 700;
+    font-size: 0.86rem;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.paypal-me-link:hover {
+    border-color: #0070ba;
+    color: #0070ba;
+    background: var(--chk-surface);
+}
+
+.paypal-me-external {
+    font-size: 0.95rem;
+    opacity: 0.75;
+}
+
 /* PayPal hosted-checkout handoff modal */
 body.paypal-portal-open {
     overflow: hidden;
