@@ -95,18 +95,49 @@
         </div>
     </div>
 
-    <section class="checkout-hero">
+    <section class="checkout-hero checkout-hero-v2">
         <div class="checkout-hero-inner">
-            <span class="motion-morph-blob motion-morph-blob--checkout" aria-hidden="true"></span>
             <div class="checkout-hero-top">
                 <div class="checkout-hero-copy">
                     <p class="checkout-kicker">Secure checkout</p>
                     <h1>Complete your order</h1>
-                    <p class="checkout-subtitle">Add your details, save, then pay with PayPal or crypto. We ship anywhere in the USA.</p>
+                    <p class="checkout-subtitle">Save your email and shipping details, then choose PayPal or cryptocurrency. We ship anywhere in the USA.</p>
                 </div>
                 <div class="checkout-total checkout-total-pill">
                     <span>Order total</span>
                     <strong id="checkoutTotal" class="motion-ticker-mount">$0.00</strong>
+                </div>
+            </div>
+            <div class="checkout-methods-strip" role="group" aria-label="Accepted payment methods">
+                <div class="checkout-method-pill">
+                    <span class="checkout-method-pill-icon checkout-method-pill-icon--paypal" aria-hidden="true">
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="6" width="12" height="20" rx="2.5" fill="#003087"/><rect x="10" y="8" width="14" height="18" rx="2.5" fill="#009CDE"/></svg>
+                    </span>
+                    <span>PayPal</span>
+                </div>
+                <div class="checkout-method-pill">
+                    <span class="checkout-method-pill-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path fill="#f7931a" d="M13.2 3.2h2.1v2.1c1.7.3 3 1.4 3 3.2 0 1.5-.9 2.6-2.3 3 1.7.4 2.8 1.6 2.8 3.4 0 2.1-1.4 3.5-3.6 3.9v2.2h-2.1v-2.1h-1.9v2.1H9.1v-2.1H6.9V6.2h2.2V3.2h2.1v2.1h1.9V3.2ZM9.6 7.2v3.6h3.3c1.2 0 2-.7 2-1.8 0-1.2-.8-1.8-2.1-1.8H9.6Zm0 6.3v3.9h3.8c1.4 0 2.3-.7 2.3-2 0-1.3-.9-1.9-2.3-1.9H9.6Z"/></svg>
+                    </span>
+                    <span>Bitcoin</span>
+                </div>
+                <div class="checkout-method-pill">
+                    <span class="checkout-method-pill-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path fill="#627eea" d="M12 2L6.2 12l5.8-2.6 5.8 2.6L12 2Zm0 12.2L6.2 11.6 12 22l5.8-10.4-5.8 2.6Z"/></svg>
+                    </span>
+                    <span>Ethereum</span>
+                </div>
+                <div class="checkout-method-pill">
+                    <span class="checkout-method-pill-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path fill="#345d9d" d="M13.6 3.2h3l-2.3 6.3 2.2-.6-.8 2.3-2.2.6-2.6 7h8.1l-1 2.6H7.9l2.3-6.4-2 .6.8-2.2 2-.6 2.6-7Z"/></svg>
+                    </span>
+                    <span>Litecoin</span>
+                </div>
+                <div class="checkout-method-pill checkout-method-pill--muted">
+                    <span class="checkout-method-pill-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </span>
+                    <span>Encrypted · USA shipping</span>
                 </div>
             </div>
             <nav class="checkout-progress" aria-label="Checkout steps">
@@ -125,7 +156,7 @@
         </div>
     </section>
 
-    <section class="checkout-content">
+    <section class="checkout-content checkout-content-v2">
         <div class="checkout-container">
             <aside class="checkout-summary checkout-summary-card">
                 <div class="summary-header">
@@ -165,24 +196,34 @@
                 </div>
             </aside>
 
-            <div class="checkout-options">
-                <div class="payment-card checkout-email">
-                    <div class="payment-card-header">
-                        <h3>Contact email</h3>
-                        <span class="payment-badge">Required</span>
+            <div class="checkout-options checkout-options-v2">
+                <div class="payment-card checkout-email checkout-card-panel">
+                    <div class="payment-card-header checkout-card-header-with-icon">
+                        <span class="checkout-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="m22 6-10 7L2 6"></path></svg>
+                        </span>
+                        <div>
+                            <h3>Contact email</h3>
+                            <span class="payment-badge">Required</span>
+                        </div>
                     </div>
-                    <p class="payment-text">We use this to send payment updates and order info.</p>
+                    <p class="payment-text">Receipts and payment updates go here.</p>
                     <div class="form-group">
                         <label for="checkoutEmail">Email</label>
                         <input type="email" id="checkoutEmail" name="checkoutEmail" placeholder="you@email.com" required>
                     </div>
                 </div>
-                <div class="payment-card checkout-address">
-                    <div class="payment-card-header">
-                        <h3>Shipping details</h3>
-                        <span class="payment-badge">Required</span>
+                <div class="payment-card checkout-address checkout-card-panel">
+                    <div class="payment-card-header checkout-card-header-with-icon">
+                        <span class="checkout-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </span>
+                        <div>
+                            <h3>Shipping details</h3>
+                            <span class="payment-badge">Required</span>
+                        </div>
                     </div>
-                    <p class="payment-text">Enter your delivery or meetup address before paying.</p>
+                    <p class="payment-text">Delivery or meetup address — required before PayPal or crypto.</p>
                     <div class="checkout-grid">
                         <div class="form-group">
                             <label for="checkoutName">Full name</label>
@@ -226,24 +267,32 @@
                     <p id="checkoutSaveHint" class="payment-text">Add your details, then press save to continue.</p>
                     <p id="shippingStatus" class="payment-text" style="display:none;"></p>
                 </div>
-                <div class="payment-card payment-card-paypal">
-                    <div class="payment-card-header">
-                        <h3>PayPal</h3>
-                        <span class="payment-badge">Friends &amp; Family</span>
+                <div class="payment-card payment-card-paypal checkout-card-panel checkout-card-paypal">
+                    <div class="paypal-card-top">
+                        <div class="paypal-brand-block" aria-hidden="true">
+                            <svg class="paypal-brand-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="6" width="12" height="20" rx="2.5" fill="#003087"/><rect x="10" y="8" width="14" height="18" rx="2.5" fill="#009CDE"/></svg>
+                            <div class="paypal-brand-type">
+                                <span class="paypal-brand-pay">Pay</span><span class="paypal-brand-pal">Pal</span>
+                            </div>
+                        </div>
+                        <div class="paypal-card-headlines">
+                            <h3>Pay with PayPal</h3>
+                            <span class="payment-badge">Friends &amp; Family only</span>
+                        </div>
                     </div>
-                    <p class="payment-text payment-text-tight">Use <strong>Friends &amp; Family</strong> only (not Goods &amp; Services).</p>
+                    <p class="payment-text payment-text-tight">Use <strong>Send to friends and family</strong> — not Goods &amp; Services.</p>
                     <div id="paypalInstructions" class="paypal-flow" style="display:none;">
                         <div class="paypal-flow-step">
                             <span class="paypal-flow-icon" aria-hidden="true">1</span>
-                            <p>Open PayPal from the button below.</p>
+                            <p>Open PayPal using the button below.</p>
                         </div>
                         <div class="paypal-flow-step">
                             <span class="paypal-flow-icon" aria-hidden="true">2</span>
-                            <p>Choose <strong>Send to friends and family</strong>.</p>
+                            <p>Choose <strong>Friends &amp; family</strong> when you send.</p>
                         </div>
                         <div class="paypal-flow-step">
                             <span class="paypal-flow-icon" aria-hidden="true">3</span>
-                            <p>Paste this note, then send the amount on the button.</p>
+                            <p>Copy the order note, paste it in PayPal, then send the total.</p>
                         </div>
                         <div class="paypal-note-box">
                             <code id="paypalNoteText"></code>
@@ -251,39 +300,63 @@
                         </div>
                     </div>
                     <p id="paypalSaveHint" class="payment-text payment-hint">Save your email and shipping details above to unlock PayPal.</p>
-                    <a id="paypalPayBtn" href="#" class="payment-cta primary paypal-cta paypal-cta-large" style="display:none;" target="_blank" rel="noopener">Pay $0.00 with PayPal</a>
+                    <a id="paypalPayBtn" href="#" class="payment-cta paypal-cta-branded paypal-cta paypal-cta-large" style="display:none;" target="_blank" rel="noopener">
+                        <span class="paypal-cta-inner">
+                            <svg class="paypal-cta-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="6" width="12" height="20" rx="2.5" fill="#fff" opacity=".95"/><rect x="10" y="8" width="14" height="18" rx="2.5" fill="#fff"/></svg>
+                            <span>Pay <span id="paypalCtaAmount">$0.00</span> with PayPal</span>
+                        </span>
+                    </a>
                 </div>
 
-                <div class="payment-card payment-card-crypto">
-                    <div class="payment-card-header">
-                        <h3>Cryptocurrency</h3>
-                        <span class="payment-badge">BTC · ETH · LTC</span>
+                <div class="payment-card payment-card-crypto checkout-card-panel checkout-card-crypto">
+                    <div class="payment-card-header checkout-card-header-with-icon">
+                        <span class="checkout-card-icon checkout-card-icon-crypto" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="12" rx="10" ry="6"></ellipse><path d="M2 12h20"></path></svg>
+                        </span>
+                        <div>
+                            <h3>Cryptocurrency</h3>
+                            <span class="payment-badge">BTC · ETH · LTC</span>
+                        </div>
                     </div>
-                    <p class="payment-text payment-text-tight">Automatic confirmation after your transfer.</p>
-                    <div class="checkout-crypto-icons" aria-hidden="true">
-                        <span class="checkout-crypto-icon" title="Bitcoin">
-                            <svg viewBox="0 0 24 24" role="img" focusable="false"><path fill="currentColor" d="M13.2 3.2h2.1v2.1c1.7.3 3 1.4 3 3.2 0 1.5-.9 2.6-2.3 3 1.7.4 2.8 1.6 2.8 3.4 0 2.1-1.4 3.5-3.6 3.9v2.2h-2.1v-2.1h-1.9v2.1H9.1v-2.1H6.9V6.2h2.2V3.2h2.1v2.1h1.9V3.2ZM9.6 7.2v3.6h3.3c1.2 0 2-.7 2-1.8 0-1.2-.8-1.8-2.1-1.8H9.6Zm0 6.3v3.9h3.8c1.4 0 2.3-.7 2.3-2 0-1.3-.9-1.9-2.3-1.9H9.6Z" /></svg>
+                    <p class="payment-text payment-text-tight">Pick a coin in the next step. We detect your payment automatically.</p>
+                    <div class="checkout-crypto-icons checkout-crypto-icons-large" aria-hidden="true">
+                        <span class="checkout-crypto-icon checkout-crypto-icon-lg" title="Bitcoin">
+                            <svg viewBox="0 0 24 24" role="img" focusable="false"><path fill="#f7931a" d="M13.2 3.2h2.1v2.1c1.7.3 3 1.4 3 3.2 0 1.5-.9 2.6-2.3 3 1.7.4 2.8 1.6 2.8 3.4 0 2.1-1.4 3.5-3.6 3.9v2.2h-2.1v-2.1h-1.9v2.1H9.1v-2.1H6.9V6.2h2.2V3.2h2.1v2.1h1.9V3.2ZM9.6 7.2v3.6h3.3c1.2 0 2-.7 2-1.8 0-1.2-.8-1.8-2.1-1.8H9.6Zm0 6.3v3.9h3.8c1.4 0 2.3-.7 2.3-2 0-1.3-.9-1.9-2.3-1.9H9.6Z" /></svg>
                         </span>
-                        <span class="checkout-crypto-icon" title="Ethereum">
-                            <svg viewBox="0 0 24 24" role="img" focusable="false"><path fill="currentColor" d="M12 2L6.2 12l5.8-2.6 5.8 2.6L12 2Zm0 12.2L6.2 11.6 12 22l5.8-10.4-5.8 2.6Z" /></svg>
+                        <span class="checkout-crypto-icon checkout-crypto-icon-lg" title="Ethereum">
+                            <svg viewBox="0 0 24 24" role="img" focusable="false"><path fill="#627eea" d="M12 2L6.2 12l5.8-2.6 5.8 2.6L12 2Zm0 12.2L6.2 11.6 12 22l5.8-10.4-5.8 2.6Z" /></svg>
                         </span>
-                        <span class="checkout-crypto-icon" title="Litecoin">
-                            <svg viewBox="0 0 24 24" role="img" focusable="false"><path fill="currentColor" d="M13.6 3.2h3l-2.3 6.3 2.2-.6-.8 2.3-2.2.6-2.6 7h8.1l-1 2.6H7.9l2.3-6.4-2 .6.8-2.2 2-.6 2.6-7Z" /></svg>
+                        <span class="checkout-crypto-icon checkout-crypto-icon-lg" title="Litecoin">
+                            <svg viewBox="0 0 24 24" role="img" focusable="false"><path fill="#345d9d" d="M13.6 3.2h3l-2.3 6.3 2.2-.6-.8 2.3-2.2.6-2.6 7h8.1l-1 2.6H7.9l2.3-6.4-2 .6.8-2.2 2-.6 2.6-7Z" /></svg>
                         </span>
                     </div>
-                    <button id="cryptoStartBtn" type="button" class="payment-cta primary payment-cta-crypto" onclick="startCryptoCheckout()">Pay with crypto</button>
+                    <button id="cryptoStartBtn" type="button" class="payment-cta primary payment-cta-crypto payment-cta-crypto-visual" onclick="startCryptoCheckout()">
+                        <span class="crypto-btn-icons" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M13.2 3.2h2.1v2.1c1.7.3 3 1.4 3 3.2 0 1.5-.9 2.6-2.3 3 1.7.4 2.8 1.6 2.8 3.4 0 2.1-1.4 3.5-3.6 3.9v2.2h-2.1v-2.1h-1.9v2.1H9.1v-2.1H6.9V6.2h2.2V3.2h2.1v2.1h1.9V3.2Z"/></svg>
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2L6.2 12l5.8-2.6 5.8 2.6L12 2Z"/></svg>
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M13.6 3.2h3l-2.3 6.3 2.2-.6-.8 2.3-2.2.6-2.6 7h8.1l-1 2.6H7.9Z"/></svg>
+                        </span>
+                        Continue with cryptocurrency
+                    </button>
                 </div>
 
-                <details class="payment-card checkout-alt-payments">
-                    <summary class="checkout-alt-payments-summary">In-person: cash or gift card</summary>
+                <details class="payment-card checkout-alt-payments checkout-card-panel">
+                    <summary class="checkout-alt-payments-summary">
+                        <span class="checkout-alt-summary-inner">
+                            <span class="checkout-card-icon checkout-card-icon-sm" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            </span>
+                            In-person: cash or gift card
+                        </span>
+                    </summary>
                     <div class="checkout-alt-payments-body">
                         <div class="checkout-alt-block">
                             <div class="payment-card-header checkout-alt-header">
                                 <h4>Cash</h4>
                                 <span class="payment-badge">Local</span>
                             </div>
-                            <p class="payment-text payment-text-tight">Local pickup or delivery—we will coordinate after you request.</p>
-                            <button id="cashStartBtn" class="payment-cta">Request cash meetup</button>
+                            <p class="payment-text payment-text-tight">Local pickup or delivery — we coordinate after you request.</p>
+                            <button id="cashStartBtn" type="button" class="payment-cta">Request cash meetup</button>
                             <p id="cashStatus" class="payment-text" style="display:none;">Request sent. We will contact you to confirm the meetup.</p>
                         </div>
                         <div class="checkout-alt-block">
@@ -292,7 +365,7 @@
                                 <span class="payment-badge">Local</span>
                             </div>
                             <p class="payment-text payment-text-tight">Gift cards accepted for local orders.</p>
-                            <button id="giftStartBtn" class="payment-cta">Request gift card meetup</button>
+                            <button id="giftStartBtn" type="button" class="payment-cta">Request gift card meetup</button>
                             <p id="giftStatus" class="payment-text" style="display:none;">Request sent. We will contact you to confirm the meetup.</p>
                         </div>
                     </div>
@@ -996,8 +1069,9 @@
                     });
                     const noteText = noteLines.join(', ');
                     paypalNoteEl.textContent = noteText;
-                    paypalPayBtn.style.display = 'inline-block';
-                    paypalPayBtn.textContent = 'Pay $' + grandTotal.toFixed(2) + ' with PayPal';
+                    paypalPayBtn.style.display = 'flex';
+                    const paypalAmtEl = document.getElementById('paypalCtaAmount');
+                    if (paypalAmtEl) paypalAmtEl.textContent = '$' + grandTotal.toFixed(2);
                     paypalPayBtn.href = 'https://www.paypal.com/paypalme/' + PAYPAL_USERNAME + '/' + grandTotal.toFixed(2);
                 } else {
                     paypalInstructions.style.display = 'none';

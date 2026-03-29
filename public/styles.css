@@ -2941,6 +2941,268 @@ body.dark-theme .checkout-hero {
         linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
 }
 
+.checkout-hero-v2 {
+    padding: 2.5rem 0 1.75rem;
+    background: var(--bg-color);
+    background-image: none;
+    border-bottom: 2px solid var(--border-strong);
+}
+
+body.dark-theme .checkout-hero-v2 {
+    background-image: none;
+}
+
+.checkout-methods-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.35rem 0 0.25rem;
+}
+
+.checkout-method-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 2px solid var(--border-strong);
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.checkout-method-pill--muted {
+    color: var(--muted-text);
+    border-style: solid;
+}
+
+.checkout-method-pill-icon {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.checkout-method-pill-icon svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+.checkout-method-pill-icon--paypal svg {
+    width: 24px;
+    height: 24px;
+}
+
+.checkout-content-v2 {
+    padding-top: 2.5rem;
+}
+
+.checkout-card-panel {
+    border: 2px solid var(--border-strong);
+    border-radius: 2px;
+    box-shadow: none;
+    background: var(--card-bg);
+}
+
+.checkout-options-v2 {
+    gap: 1.25rem;
+}
+
+.checkout-card-header-with-icon {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.checkout-card-header-with-icon > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.checkout-card-header-with-icon h3 {
+    margin: 0;
+}
+
+.checkout-card-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 2px;
+    border: 2px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    background: var(--section-bg-alt);
+}
+
+.checkout-card-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.checkout-card-icon-crypto {
+    color: #627eea;
+    border-color: rgba(98, 126, 234, 0.45);
+}
+
+.checkout-card-icon-sm {
+    width: 36px;
+    height: 36px;
+}
+
+.checkout-card-icon-sm svg {
+    width: 18px;
+    height: 18px;
+}
+
+.checkout-alt-summary-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.paypal-card-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.paypal-brand-block {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 2px;
+    border: 2px solid var(--border-strong);
+    background: var(--section-bg-alt);
+}
+
+.paypal-brand-svg {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.paypal-brand-type {
+    font-size: 1.35rem;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.paypal-brand-pay {
+    color: #003087;
+}
+
+.paypal-brand-pal {
+    color: #009cde;
+}
+
+body.dark-theme .paypal-brand-pay {
+    color: #5c9dff;
+}
+
+body.dark-theme .paypal-brand-pal {
+    color: #7dd3fc;
+}
+
+.paypal-card-headlines {
+    flex: 1;
+    min-width: 200px;
+}
+
+.paypal-card-headlines h3 {
+    margin: 0 0 0.35rem;
+}
+
+.checkout-card-paypal {
+    border-color: rgba(0, 112, 186, 0.35);
+}
+
+.checkout-card-crypto {
+    border-color: rgba(98, 126, 234, 0.3);
+}
+
+.paypal-cta-branded {
+    background: #0070ba !important;
+    color: #fff !important;
+    border: 2px solid #0070ba !important;
+    box-shadow: 0 10px 24px rgba(0, 112, 186, 0.35) !important;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    justify-content: center;
+    align-items: center;
+}
+
+.paypal-cta-branded:hover:not(:disabled) {
+    background: #005ea6 !important;
+    border-color: #005ea6 !important;
+    box-shadow: 0 12px 28px rgba(0, 94, 166, 0.4) !important;
+}
+
+.paypal-cta-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.paypal-cta-mark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.checkout-crypto-icons-large {
+    gap: 0.85rem;
+    margin: 0.35rem 0 1rem;
+}
+
+.checkout-crypto-icon-lg {
+    width: 52px;
+    height: 52px;
+    border-radius: 2px;
+}
+
+.checkout-crypto-icon-lg svg {
+    width: 28px;
+    height: 28px;
+}
+
+.payment-cta-crypto-visual {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.crypto-btn-icons {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    opacity: 0.95;
+}
+
+.payment-cta-crypto-visual .crypto-btn-icons svg {
+    opacity: 0.9;
+}
+
 .checkout-hero-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -3494,19 +3756,19 @@ body.dark-theme .checkout-trust-icon {
 
 .checkout-summary {
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
+    border: 2px solid var(--border-strong);
+    border-radius: 2px;
     padding: 1.75rem;
     display: grid;
     gap: 1.35rem;
     height: fit-content;
     position: sticky;
     top: 110px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: none;
 }
 
 .checkout-summary-card {
-    border-width: 1px;
+    border-width: 2px;
 }
 
 body.dark-theme .checkout-summary {
