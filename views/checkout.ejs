@@ -243,10 +243,13 @@
                                     </div>
                                 </div>
                                 <p id="paypalSaveHint" class="pay-hint">Save your email and shipping details first.</p>
-                                <a id="paypalPayBtn" href="#" class="btn-paypal-pro" style="display:none;" target="_blank" rel="noopener">
-                                    <img src="/icons/brands/paypal-white.svg" width="20" height="20" alt="">
-                                    Pay <span id="paypalCtaAmount">$0.00</span> with PayPal
-                                </a>
+                                <button type="button" id="paypalPayBtn" class="btn-paypal-pro" style="display:none;" aria-label="Pay with PayPal in a new tab">
+                                    <span class="btn-paypal-shine" aria-hidden="true"></span>
+                                    <span class="btn-paypal-pro-inner">
+                                        <img src="/icons/brands/paypal-white.svg" width="20" height="20" alt="">
+                                        <span class="btn-paypal-label">Pay <span id="paypalCtaAmount">$0.00</span> with PayPal</span>
+                                    </span>
+                                </button>
                             </div>
                         </div>
 
@@ -424,6 +427,24 @@
                     <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
                 </g>
             </svg>
+        </div>
+    </div>
+
+    <div id="paypalLaunchOverlay" class="paypal-launch-overlay" hidden aria-hidden="true">
+        <div class="paypal-launch-scrim" aria-hidden="true"></div>
+        <div class="paypal-launch-panel" role="status" aria-live="polite">
+            <div class="paypal-launch-visual">
+                <span class="paypal-launch-orb" aria-hidden="true"></span>
+                <span class="paypal-launch-ring paypal-launch-ring--a" aria-hidden="true"></span>
+                <span class="paypal-launch-ring paypal-launch-ring--b" aria-hidden="true"></span>
+                <span class="paypal-launch-ring paypal-launch-ring--c" aria-hidden="true"></span>
+                <img src="/icons/brands/paypal-white.svg" width="44" height="44" alt="" class="paypal-launch-mark" decoding="async">
+            </div>
+            <p class="paypal-launch-title">Connecting to PayPal</p>
+            <p class="paypal-launch-sub">Secure handoff — we’ll open PayPal in a new tab.</p>
+            <div class="paypal-launch-track" aria-hidden="true">
+                <span class="paypal-launch-track-fill"></span>
+            </div>
         </div>
     </div>
 
@@ -899,6 +920,64 @@
             }).catch(() => {});
         }
 
+        let paypalLaunchActive = false;
+
+        function launchPayPalCheckout() {
+            const btn = document.getElementById('paypalPayBtn');
+            const overlay = document.getElementById('paypalLaunchOverlay');
+            if (!btn || !overlay || paypalLaunchActive) return;
+            const url = (btn.dataset.paypalUrl || '').trim();
+            if (!url) return;
+
+            paypalLaunchActive = true;
+            btn.classList.add('is-launching');
+            btn.disabled = true;
+            overlay.hidden = false;
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('paypal-launch-open');
+
+            const trackFill = overlay.querySelector('.paypal-launch-track-fill');
+            if (trackFill) {
+                trackFill.style.animation = 'none';
+                trackFill.style.width = '0';
+                void trackFill.offsetWidth;
+            }
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    overlay.classList.add('is-visible');
+                    if (trackFill) {
+                        trackFill.style.animation = '';
+                        trackFill.style.width = '';
+                    }
+                });
+            });
+
+            const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const MIN_MS = reduceMotion ? 220 : 1050;
+            window.setTimeout(() => {
+                const w = window.open(url, '_blank', 'noopener,noreferrer');
+                if (!w) {
+                    window.location.href = url;
+                }
+
+                overlay.classList.remove('is-visible');
+                btn.classList.remove('is-launching');
+                btn.disabled = false;
+                paypalLaunchActive = false;
+
+                window.setTimeout(() => {
+                    overlay.hidden = true;
+                    overlay.setAttribute('aria-hidden', 'true');
+                    document.body.classList.remove('paypal-launch-open');
+                    if (trackFill) {
+                        trackFill.style.animation = 'none';
+                        trackFill.style.width = '0';
+                    }
+                }, 400);
+            }, MIN_MS);
+        }
+
         function updatePayButtons() {
             const cryptoBtn = document.getElementById('cryptoStartBtn');
             const cashBtn = document.getElementById('cashStartBtn');
@@ -1132,14 +1211,15 @@
                     });
                     const noteText = noteLines.join(', ');
                     paypalNoteEl.textContent = noteText;
-                    paypalPayBtn.style.display = 'inline-flex';
+                    paypalPayBtn.style.display = 'flex';
                     const paypalAmtEl = document.getElementById('paypalCtaAmount');
                     if (paypalAmtEl) paypalAmtEl.textContent = '$' + grandTotal.toFixed(2);
-                    paypalPayBtn.href = 'https://www.paypal.com/paypalme/' + PAYPAL_USERNAME + '/' + grandTotal.toFixed(2);
+                    paypalPayBtn.dataset.paypalUrl = 'https://www.paypal.com/paypalme/' + PAYPAL_USERNAME + '/' + grandTotal.toFixed(2);
                 } else {
                     paypalInstructions.style.display = 'none';
                     paypalSaveHint.style.display = 'block';
                     paypalPayBtn.style.display = 'none';
+                    paypalPayBtn.removeAttribute('data-paypal-url');
                 }
             }
             if (promoInput) {
@@ -1427,6 +1507,10 @@
             const promoBtn = document.getElementById('promoApplyBtn');
             if (promoBtn) {
                 promoBtn.addEventListener('click', applyPromoCode);
+            }
+            const paypalPayBtn = document.getElementById('paypalPayBtn');
+            if (paypalPayBtn) {
+                paypalPayBtn.addEventListener('click', launchPayPalCheckout);
             }
             ['checkoutName', 'checkoutPhone', 'checkoutAddress1', 'checkoutAddress2', 'checkoutCity', 'checkoutState', 'checkoutZip', 'checkoutCountry', 'checkoutNotes']
                 .forEach((id) => {
