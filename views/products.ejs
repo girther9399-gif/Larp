@@ -217,6 +217,7 @@
                 <button type="button" class="category-btn" data-category="lights" onclick="filterCategory('lights', this)">Lights</button>
                 <button type="button" class="category-btn" data-category="plates" onclick="filterCategory('plates', this)">Plates</button>
                 <button type="button" class="category-btn" data-category="apparel" onclick="filterCategory('apparel', this)">Apparel</button>
+                <button type="button" class="category-btn" data-category="hardware" onclick="filterCategory('hardware', this)">Hardware</button>
                 <button type="button" class="category-btn" data-category="gear" onclick="filterCategory('gear', this)">All gear</button>
             </div>
             <div class="no-results" id="noResultsMessage">No results found. Try a different search.</div>
@@ -363,6 +364,28 @@
                         <span class="option-chip">XL $30</span>
                     </div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); openModal('shirtModal');">Select
+                        Options</button>
+                </div>
+            </div>
+
+            <!-- Titanium bolts -->
+            <div id="titanium-bolts" class="product-card" data-category="hardware"
+                onclick="openModal('titaniumBoltsModal')" style="cursor: pointer;">
+                <div class="product-image">
+                    <img src="/images/m8x25mm.png" alt="Iridescent titanium socket-head bolts M8×25mm"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>Titanium Bolts</h3>
+                    <div class="product-price-section">
+                        <span class="price-plain">From $14.99</span>
+                    </div>
+                    <p class="description">Grade 5 (Ti-6Al-4V) rainbow anodized—sold as 4-packs.</p>
+                    <div class="option-chips">
+                        <span class="option-chip">M8×25mm 4-pack</span>
+                        <span class="option-chip">M5×20 4-pack</span>
+                    </div>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('titaniumBoltsModal');">Select
                         Options</button>
                 </div>
             </div>
@@ -809,6 +832,75 @@
 
                     <button class="add-to-cart-modal" onclick="addToCartFromModal('shirtModal', 'EmotoHI Shirt')">Add
                         to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Titanium Bolts Modal -->
+        <div id="titaniumBoltsModal" class="product-modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('titaniumBoltsModal')">&times;</button>
+
+                <div class="modal-gallery">
+                    <div class="main-image">
+                        <img class="modal-main-image" src="/images/m8x25mm.png" alt="M8×25mm titanium bolts">
+                    </div>
+                    <div class="gallery-thumbnails modal-thumbnails">
+                        <img src="/images/m8x25mm.png" alt="M8×25mm titanium bolts" class="thumbnail active"
+                            onclick="changeMainImage('titaniumBoltsModal', '/images/m8x25mm.png', this)">
+                        <img src="/images/m5x20.png" alt="M5×20 titanium bolts" class="thumbnail"
+                            onclick="changeMainImage('titaniumBoltsModal', '/images/m5x20.png', this)">
+                    </div>
+                </div>
+
+                <div class="modal-details">
+                    <h2>Titanium Bolts</h2>
+                    <p class="modal-description">Grade 5 titanium (Ti-6Al-4V) rainbow socket-head cap screws. Each price
+                        is a <strong>4-pack</strong> (four bolts)—set about <strong>25–30%</strong> above typical
+                        mid-market 4-pack pricing for this grade and anodized finish.</p>
+
+                    <div class="product-options">
+                        <label class="options-label">Select size (per 4-pack):</label>
+                        <div class="options-list">
+                            <div class="option-item selected"
+                                onclick="selectOption('titaniumBoltsModal', this, 20.99, '/images/m8x25mm.png', ['/images/m8x25mm.png', '/images/m5x20.png'])">
+                                <div class="option-image">
+                                    <img src="/images/m8x25mm.png" alt="M8×25mm titanium bolts">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">M8×25mm titanium bolts (4-pack)</p>
+                                    <p class="option-price">$20.99</p>
+                                </div>
+                            </div>
+                            <div class="option-item"
+                                onclick="selectOption('titaniumBoltsModal', this, 14.99, '/images/m5x20.png', ['/images/m5x20.png', '/images/m8x25mm.png'])">
+                                <div class="option-image">
+                                    <img src="/images/m5x20.png" alt="M5×20 titanium bolts">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">M5×20 titanium bolts (4-pack)</p>
+                                    <p class="option-price">$14.99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <p class="modal-price">$20.99</p>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="titaniumBoltsQuantity">Quantity:</label>
+                        <div class="quantity-controls">
+                            <button onclick="decreaseQuantity('titaniumBoltsModal')">−</button>
+                            <input type="number" id="titaniumBoltsQuantity" class="quantity-input" value="1" min="1"
+                                max="20" readonly>
+                            <button onclick="increaseQuantity('titaniumBoltsModal')">+</button>
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-modal"
+                        onclick="addToCartFromModal('titaniumBoltsModal', 'Titanium Bolts')">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -1339,6 +1431,7 @@
             initModalState('bajaModal', 20, ['/images/white%20baja.png', '/images/orange%20%20baja.png']);
             initModalState('motocutzModal', 45, ['/images/black%20plate.png']);
             initModalState('shirtModal', 20, ['/images/front%20shirt.png', '/images/back%20shirt.png']);
+            initModalState('titaniumBoltsModal', 20.99, ['/images/m8x25mm.png', '/images/m5x20.png']);
 
             function initModalState(modalId, basePrice, images) {
                 modalState[modalId] = {
@@ -1771,7 +1864,7 @@
                     searchInput.value = query;
                 }
                 const categoryParam = (params.get('category') || '').toLowerCase();
-                const validCategories = ['all', 'brakes', 'wraps', 'lights', 'plates', 'apparel', 'gear', 'accessories'];
+                const validCategories = ['all', 'brakes', 'wraps', 'lights', 'plates', 'apparel', 'hardware', 'gear', 'accessories'];
                 if (categoryParam && validCategories.includes(categoryParam)) {
                     if (categoryParam === 'accessories') {
                         activeCategory = 'gear';
@@ -1788,7 +1881,7 @@
             function productMatchesCategory(productCat, filterCat) {
                 if (filterCat === 'all') return true;
                 if (filterCat === 'gear') {
-                    return ['lights', 'plates', 'apparel'].includes(productCat);
+                    return ['lights', 'plates', 'apparel', 'hardware'].includes(productCat);
                 }
                 return productCat === filterCat;
             }
@@ -1856,7 +1949,8 @@
                     'baja-lights': () => openModal('bajaModal'),
                     'carbon-wrap': () => openModal('wrapModal'),
                     'motocutz': () => openModal('motocutzModal'),
-                    'emotohi-shirt': () => openModal('shirtModal')
+                    'emotohi-shirt': () => openModal('shirtModal'),
+                    'titanium-bolts': () => openModal('titaniumBoltsModal')
                 };
 
                 // Scroll to the product first
