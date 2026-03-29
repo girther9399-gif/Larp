@@ -191,18 +191,25 @@
     </div>
 
     <!-- Banner Section -->
-    <section class="products-banner">
+    <section class="products-banner products-banner-premium">
         <img src="/images/super%20banner.jpg" alt="EmotoHI Banner" class="products-banner-image">
         <div class="products-banner-overlay">
-            <h1>Premium Parts & Accessories</h1>
+            <p class="products-kicker">Performance lineup</p>
+            <h1>Parts That Hit Hard</h1>
+            <p class="products-subcopy">Filter by category, open any card, and select options fast.</p>
         </div>
     </section>
 
     <!-- Products Section -->
     <section class="featured products-page">
-        <div class="products-header">
-            <h2>Products</h2>
-            <p>Browse the lineup. Click any product or "Select Options" to view details.</p>
+        <div class="products-header products-header-premium">
+            <h2>Shop the Collection</h2>
+            <p>Built for riders who want better braking, better visibility, and better style.</p>
+            <div class="products-mini-stats">
+                <span>Top seller: Ultra Brakes</span>
+                <span>Multiple fitment options</span>
+                <span>Fast checkout</span>
+            </div>
             <div class="category-filters">
                 <button class="category-btn active" onclick="filterCategory('all')">All</button>
                 <button class="category-btn" onclick="filterCategory('brakes')">Brakes</button>
@@ -329,6 +336,30 @@
                         <span class="option-chip">Grey $45</span>
                     </div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); openModal('motocutzModal');">Select
+                        Options</button>
+                </div>
+            </div>
+
+            <!-- EmotoHI Shirt -->
+            <div id="emotohi-shirt" class="product-card" data-category="accessories"
+                onclick="openModal('shirtModal')" style="cursor: pointer;">
+                <div class="product-image">
+                    <img src="/images/front%20shirt.png" alt="EmotoHI Shirt"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>EmotoHI Shirt</h3>
+                    <div class="product-price-section">
+                        <span class="price-plain">From $20.00</span>
+                    </div>
+                    <p class="description">Front and back print tee with size options.</p>
+                    <div class="option-chips">
+                        <span class="option-chip">Small $20</span>
+                        <span class="option-chip">Medium $25</span>
+                        <span class="option-chip">Large $30</span>
+                        <span class="option-chip">XL $30</span>
+                    </div>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('shirtModal');">Select
                         Options</button>
                 </div>
             </div>
@@ -688,6 +719,93 @@
 
                     <button class="add-to-cart-modal" onclick="addToCartFromModal('bajaModal', 'Baja Lights')">Add to
                         Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EmotoHI Shirt Modal -->
+        <div id="shirtModal" class="product-modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('shirtModal')">&times;</button>
+
+                <div class="modal-gallery">
+                    <div class="main-image">
+                        <img class="modal-main-image" src="/images/front%20shirt.png" alt="EmotoHI Shirt Front">
+                    </div>
+                    <div class="gallery-thumbnails modal-thumbnails">
+                        <img src="/images/front%20shirt.png" alt="Shirt Front" class="thumbnail active"
+                            onclick="changeMainImage('shirtModal', '/images/front%20shirt.png', this)">
+                        <img src="/images/back%20shirt.png" alt="Shirt Back" class="thumbnail"
+                            onclick="changeMainImage('shirtModal', '/images/back%20shirt.png', this)">
+                    </div>
+                </div>
+
+                <div class="modal-details">
+                    <h2>EmotoHI Shirt</h2>
+                    <p class="modal-description">Choose your size. Pricing increases by size.</p>
+
+                    <div class="product-options">
+                        <label class="options-label">Select Size:</label>
+                        <div class="options-list">
+                            <div class="option-item selected"
+                                onclick="selectOption('shirtModal', this, 20, '/images/front%20shirt.png', ['/images/front%20shirt.png', '/images/back%20shirt.png'])">
+                                <div class="option-image">
+                                    <img src="/images/front%20shirt.png" alt="Small">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">Small</p>
+                                    <p class="option-price">$20</p>
+                                </div>
+                            </div>
+                            <div class="option-item"
+                                onclick="selectOption('shirtModal', this, 25, '/images/front%20shirt.png', ['/images/front%20shirt.png', '/images/back%20shirt.png'])">
+                                <div class="option-image">
+                                    <img src="/images/front%20shirt.png" alt="Medium">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">Medium</p>
+                                    <p class="option-price">$25</p>
+                                </div>
+                            </div>
+                            <div class="option-item"
+                                onclick="selectOption('shirtModal', this, 30, '/images/front%20shirt.png', ['/images/front%20shirt.png', '/images/back%20shirt.png'])">
+                                <div class="option-image">
+                                    <img src="/images/front%20shirt.png" alt="Large">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">Large</p>
+                                    <p class="option-price">$30</p>
+                                </div>
+                            </div>
+                            <div class="option-item"
+                                onclick="selectOption('shirtModal', this, 30, '/images/front%20shirt.png', ['/images/front%20shirt.png', '/images/back%20shirt.png'])">
+                                <div class="option-image">
+                                    <img src="/images/front%20shirt.png" alt="XL">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">XL</p>
+                                    <p class="option-price">$30</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <p class="modal-price">$20.00</p>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="shirtQuantity">Quantity:</label>
+                        <div class="quantity-controls">
+                            <button onclick="decreaseQuantity('shirtModal')">−</button>
+                            <input type="number" id="shirtQuantity" class="quantity-input" value="1" min="1" max="20"
+                                readonly>
+                            <button onclick="increaseQuantity('shirtModal')">+</button>
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-modal" onclick="addToCartFromModal('shirtModal', 'EmotoHI Shirt')">Add
+                        to Cart</button>
                 </div>
             </div>
         </div>
@@ -1217,6 +1335,7 @@
             initModalState('wrapModal', 25, ['/images/carbon%20wrap.png', '/images/carbon%20wrap1.png', '/images/carbon%20wrap2.png', '/images/carbon%20wrap3.png', '/images/carbon%20wrap4.png']);
             initModalState('bajaModal', 20, ['/images/white%20baja.png', '/images/orange%20%20baja.png']);
             initModalState('motocutzModal', 45, ['/images/black%20plate.png']);
+            initModalState('shirtModal', 20, ['/images/front%20shirt.png', '/images/back%20shirt.png']);
 
             function initModalState(modalId, basePrice, images) {
                 modalState[modalId] = {
@@ -1714,7 +1833,8 @@
                     'rotor': () => openModal('rotorModal'),
                     'baja-lights': () => openModal('bajaModal'),
                     'carbon-wrap': () => openModal('wrapModal'),
-                    'motocutz': () => openModal('motocutzModal')
+                    'motocutz': () => openModal('motocutzModal'),
+                    'emotohi-shirt': () => openModal('shirtModal')
                 };
 
                 // Scroll to the product first
