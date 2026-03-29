@@ -289,6 +289,41 @@ function paypalSubtotalFromItems(items) {
     }, 0);
 }
 
+const NOMINATIM_UA = 'EmotoHI Checkout (shipping quote; support@emotohi.com)';
+
+async function nominatimGeocodeFirst(query) {
+    const q = String(query || '').trim().replace(/\s+/g, ' ');
+    if (q.length < 3) return null;
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(q)}`;
+    try {
+        const data = await fetchJsonWithHeaders(url, { 'User-Agent': NOMINATIM_UA });
+        const first = Array.isArray(data) ? data[0] : null;
+        if (!first || first.lat == null || first.lon == null) return null;
+        const lat = Number(first.lat);
+        const lon = Number(first.lon);
+        if (Number.isNaN(lat) || Number.isNaN(lon)) return null;
+        return { lat, lon };
+    } catch (e) {
+        console.warn('[shipping] nominatim:', q.slice(0, 96), e.message);
+        return null;
+    }
+}
+
+/** When Nominatim cannot resolve the street, infer distance tier from ZIP/state so checkout still works. */
+function shippingDistanceFallbackMiles(state, zipStr) {
+    const stateUpper = String(state || '').trim().toUpperCase();
+    const zip5 = String(zipStr || '')
+        .trim()
+        .replace(/\D/g, '')
+        .slice(0, 5);
+    if (isOahuZipPaypal(zipStr)) return 15;
+    if (stateUpper === 'HI' || (zip5.length === 5 && zip5.startsWith('967')) || (zip5.length === 5 && zip5.startsWith('968'))) {
+        return 160;
+    }
+    if (stateUpper === 'AK') return 3200;
+    return 2800;
+}
+
 async function computeShippingQuote(address) {
     const { address1, address2, city, state, zip, country } = address || {};
     if (!address1 || !city || !state || !zip || !country) {
@@ -309,25 +344,33 @@ async function computeShippingQuote(address) {
         err.code = 'ZIP';
         throw err;
     }
-    const query = `${address1} ${address2 || ''}, ${city}, ${state} ${zip}, ${country}`.trim();
-    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
-    const data = await fetchJsonWithHeaders(url, {
-        'User-Agent': 'EmotoHI Checkout (shipping quote)'
-    });
-    const first = Array.isArray(data) ? data[0] : null;
-    if (!first || !first.lat || !first.lon) {
-        const err = new Error('Unable to geocode address.');
-        err.code = 'GEOCODE';
-        throw err;
+    const stateTrim = String(state).trim();
+    const countryTrim = String(country).trim();
+    const queries = [
+        `${address1} ${address2 || ''}, ${city}, ${stateTrim} ${normalizedZip}, ${countryTrim}`.trim(),
+        `${city}, ${stateTrim} ${normalizedZip}, United States`,
+        `${normalizedZip}, United States`,
+        `${stateTrim} ${normalizedZip}, USA`
+    ];
+    let lat;
+    let lon;
+    for (let i = 0; i < queries.length; i++) {
+        if (i > 0) {
+            await new Promise((r) => setTimeout(r, 1050));
+        }
+        const coords = await nominatimGeocodeFirst(queries[i]);
+        if (coords) {
+            lat = coords.lat;
+            lon = coords.lon;
+            break;
+        }
     }
-    const lat = Number(first.lat);
-    const lon = Number(first.lon);
-    if (Number.isNaN(lat) || Number.isNaN(lon)) {
-        const err = new Error('Invalid coordinates.');
-        err.code = 'GEOCODE';
-        throw err;
+    let distanceMiles;
+    if (lat == null || lon == null) {
+        distanceMiles = shippingDistanceFallbackMiles(stateTrim, normalizedZip);
+    } else {
+        distanceMiles = haversineMiles(SHIPPING_ORIGIN.lat, SHIPPING_ORIGIN.lon, lat, lon);
     }
-    const distanceMiles = haversineMiles(SHIPPING_ORIGIN.lat, SHIPPING_ORIGIN.lon, lat, lon);
     const amount = getShippingTier(distanceMiles);
     return {
         amount,
