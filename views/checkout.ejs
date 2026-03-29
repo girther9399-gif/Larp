@@ -222,7 +222,7 @@
                                     <span class="icon-wrap"><img src="/icons/brands/paypal.svg" width="22" height="22" alt=""></span>
                                     <span class="titles">
                                         <h3>PayPal</h3>
-                                        <p>Small Hawaii shop — Friends &amp; Family keeps fees down</p>
+                                        <p>Secure checkout on PayPal — you return here when done</p>
                                     </span>
                                 </span>
                                 <span class="pay-method-badges">
@@ -231,19 +231,9 @@
                                 </span>
                             </button>
                             <div class="pay-method-body" id="payBodyPaypal" hidden>
-                                <p class="pay-copy">We’re an independent rider brand, not a big marketplace. PayPal asks you to send as <strong>Friends &amp; Family</strong> so we’re not hit with seller fees that would force price hikes. Your order is tied to the <strong>email you enter above</strong>—we track everything there and send updates the same way any store would.</p>
-                                <p class="pay-copy">When you pay, choose <strong>Friends &amp; family</strong> (not Goods &amp; Services). Copy the order note into your PayPal message so we can match your payment.</p>
-                                <div id="paypalInstructions" class="paypal-flow-pro" style="display:none;">
-                                    <div class="step"><span class="step-num">1</span><span>Open PayPal with the button below.</span></div>
-                                    <div class="step"><span class="step-num">2</span><span>Select <strong>Friends &amp; family</strong> for the transfer.</span></div>
-                                    <div class="step"><span class="step-num">3</span><span>Paste the note, send the total, and keep an eye on your inbox.</span></div>
-                                    <div class="paypal-note-pro">
-                                        <code id="paypalNoteText"></code>
-                                        <button type="button" class="paypal-copy-pro" onclick="copyPayPalNote()">Copy</button>
-                                    </div>
-                                </div>
+                                <p class="pay-copy">You’ll complete payment on PayPal’s site (same window). Your order is tied to the <strong>email above</strong> and the shipping address you save here.</p>
                                 <p id="paypalSaveHint" class="pay-hint">Save your email and shipping details first.</p>
-                                <button type="button" id="paypalPayBtn" class="btn-paypal-pro" style="display:none;" aria-label="Pay with PayPal in a new tab">
+                                <button type="button" id="paypalPayBtn" class="btn-paypal-pro" style="display:none;" aria-label="Pay with PayPal">
                                     <span class="btn-paypal-shine" aria-hidden="true"></span>
                                     <span class="btn-paypal-pro-inner">
                                         <img src="/icons/brands/paypal-white.svg" width="20" height="20" alt="">
@@ -447,10 +437,6 @@
                 <span class="paypal-portal__loader-core" aria-hidden="true"></span>
                 <span id="paypalPortalLoaderLabel" class="paypal-portal__loader-label">Preparing checkout…</span>
             </div>
-            <div id="paypalPortalFallback" class="paypal-portal__fallback" hidden>
-                <p id="paypalPortalFallbackCopy" class="paypal-portal__fallback-copy"></p>
-                <a id="paypalPortalFallbackLink" class="paypal-portal__fallback-btn" href="#">Continue with PayPal.me</a>
-            </div>
             <p id="paypalPortalError" class="paypal-portal__error" hidden role="alert"></p>
         </div>
     </div>
@@ -542,7 +528,6 @@
             EMOTOHI10: { type: 'percent', value: 10 },
             EMO20: { type: 'flat', value: 20 }
         };
-        const PAYPAL_USERNAME = 'imtoud';
         const NON_OAHU_FEE = 7;
         const OAHU_ZIPS = ['96701','96706','96707','96709','96712','96717','96730','96731','96734','96744','96759','96762','96782','96786','96789','96791','96792','96795','96797','96801','96802','96803','96804','96805','96806','96807','96808','96809','96810','96811','96812','96813','96814','96815','96816','96817','96818','96819','96820','96821','96822','96823','96824','96825','96826','96828','96830','96836','96837','96838','96839','96840','96841','96843','96844','96846','96847','96848','96849','96850','96853','96854','96857','96858','96859','96860','96861','96863'];
 
@@ -914,20 +899,10 @@
             return [line1 + line2, cityLine, country].filter(Boolean).join(', ');
         }
 
-        function copyPayPalNote() {
-            const el = document.getElementById('paypalNoteText');
-            if (!el || !el.textContent) return;
-            navigator.clipboard.writeText(el.textContent).then(() => {
-                const btn = document.querySelector('.paypal-copy-pro');
-                if (btn) {
-                    const orig = btn.textContent;
-                    btn.textContent = 'Copied!';
-                    setTimeout(() => { btn.textContent = orig; }, 2000);
-                }
-            }).catch(() => {});
-        }
-
         let paypalPortalKeyHandler = null;
+
+        const PAYPAL_CONFIG_ERR =
+            'PayPal is not configured on this server. Set Client_ID and Secret_key_1 (or PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET) in your host environment, then redeploy. Check /api/paypal/status on this site.';
 
         function closePayPalPortal() {
             const portal = document.getElementById('paypalPortal');
@@ -944,8 +919,6 @@
                     portal.setAttribute('aria-hidden', 'true');
                 }
             }, 480);
-            const fb = document.getElementById('paypalPortalFallback');
-            if (fb) fb.hidden = true;
             const errEl = document.getElementById('paypalPortalError');
             if (errEl) {
                 errEl.textContent = '';
@@ -960,27 +933,10 @@
             }
         }
 
-        function renderPayPalFallback(url, reason) {
-            const fb = document.getElementById('paypalPortalFallback');
-            const link = document.getElementById('paypalPortalFallbackLink');
-            const copy = document.getElementById('paypalPortalFallbackCopy');
-            if (!fb || !link) return;
-            const msg =
-                reason === 'config'
-                    ? 'This server doesn’t have PayPal API keys yet. On your machine: put PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET in .env next to server.js and restart Node. On production: set those variables in your host’s environment (a local .env file is not used). You can still use PayPal.me below.'
-                    : 'We couldn’t start PayPal checkout. Use PayPal.me below or try another payment method.';
-            if (copy) copy.textContent = msg;
-            link.href = url;
-            link.target = '_self';
-            link.rel = 'noopener';
-            fb.hidden = false;
-        }
-
         function openPayPalPortal() {
             const btn = document.getElementById('paypalPayBtn');
             const portal = document.getElementById('paypalPortal');
-            const fallbackUrl = (btn && btn.dataset.paypalUrl) ? btn.dataset.paypalUrl.trim() : '';
-            if (!portal || !fallbackUrl || !btn) return;
+            if (!portal || !btn) return;
 
             btn.classList.add('is-launching');
             btn.disabled = true;
@@ -989,8 +945,6 @@
             portal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('paypal-portal-open');
 
-            const fb = document.getElementById('paypalPortalFallback');
-            if (fb) fb.hidden = true;
             const portalErr = document.getElementById('paypalPortalError');
             if (portalErr) {
                 portalErr.textContent = '';
@@ -1045,9 +999,12 @@
                     btn.classList.remove('is-launching');
                     btn.disabled = false;
                     if (out.res.status === 503) {
-                        renderPayPalFallback(fallbackUrl, 'config');
+                        if (errBox) {
+                            errBox.textContent = PAYPAL_CONFIG_ERR;
+                            errBox.hidden = false;
+                        }
                     } else if (errBox) {
-                        errBox.textContent = out.data.error || 'Could not start PayPal checkout.';
+                        errBox.textContent = (out.data && out.data.error) || 'Could not start PayPal checkout.';
                         errBox.hidden = false;
                     }
                 })
@@ -1055,7 +1012,11 @@
                     if (loader) loader.hidden = true;
                     btn.classList.remove('is-launching');
                     btn.disabled = false;
-                    renderPayPalFallback(fallbackUrl, 'error');
+                    const errBox = document.getElementById('paypalPortalError');
+                    if (errBox) {
+                        errBox.textContent = 'Network error — could not reach the server. Try again or pick another payment method.';
+                        errBox.hidden = false;
+                    }
                 });
         }
 
@@ -1304,32 +1265,19 @@
                 }
             }
             const savedAddress = loadAddress();
-            const paypalInstructions = document.getElementById('paypalInstructions');
             const paypalSaveHint = document.getElementById('paypalSaveHint');
             const paypalPayBtn = document.getElementById('paypalPayBtn');
-            const paypalNoteEl = document.getElementById('paypalNoteText');
             const emailOk = isValidEmail((document.getElementById('checkoutEmail')?.value || '').trim());
             const addressOk = savedAddress && isAddressValid(savedAddress);
-            if (paypalInstructions && paypalSaveHint && paypalPayBtn && paypalNoteEl) {
+            if (paypalSaveHint && paypalPayBtn) {
                 if (addressOk && emailOk && items.length > 0) {
                     paypalSaveHint.style.display = 'none';
-                    paypalInstructions.style.display = 'block';
-                    const noteLines = items.map(item => {
-                        const q = Number(item.quantity) || 1;
-                        const name = (item.variant || item.name || 'Item').trim();
-                        return name + ' x' + q;
-                    });
-                    const noteText = noteLines.join(', ');
-                    paypalNoteEl.textContent = noteText;
                     paypalPayBtn.style.display = 'flex';
                     const paypalAmtEl = document.getElementById('paypalCtaAmount');
                     if (paypalAmtEl) paypalAmtEl.textContent = '$' + grandTotal.toFixed(2);
-                    paypalPayBtn.dataset.paypalUrl = 'https://www.paypal.com/paypalme/' + PAYPAL_USERNAME + '/' + grandTotal.toFixed(2);
                 } else {
-                    paypalInstructions.style.display = 'none';
                     paypalSaveHint.style.display = 'block';
                     paypalPayBtn.style.display = 'none';
-                    paypalPayBtn.removeAttribute('data-paypal-url');
                 }
             }
             if (promoInput) {

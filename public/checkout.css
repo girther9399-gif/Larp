@@ -786,72 +786,6 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
     color: var(--chk-text);
 }
 
-.paypal-flow-pro {
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    margin-bottom: 1rem;
-}
-
-.paypal-flow-pro .step {
-    display: flex;
-    gap: 0.65rem;
-    align-items: flex-start;
-    font-size: 0.84rem;
-    color: var(--chk-muted);
-}
-
-.paypal-flow-pro .step-num {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--chk-elevated);
-    border: 1px solid var(--chk-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 800;
-    flex-shrink: 0;
-}
-
-.paypal-note-pro {
-    display: flex;
-    gap: 0.5rem;
-    align-items: stretch;
-    background: var(--chk-elevated);
-    border: 1px solid var(--chk-border);
-    border-radius: var(--chk-radius-sm);
-    padding: 0.65rem 0.75rem;
-    margin-bottom: 1rem;
-}
-
-.paypal-note-pro code {
-    flex: 1;
-    font-size: 0.75rem;
-    word-break: break-word;
-    color: var(--chk-text);
-    background: none;
-    padding: 0.25rem 0;
-}
-
-.paypal-copy-pro {
-    flex-shrink: 0;
-    padding: 0.4rem 0.75rem;
-    background: var(--chk-surface);
-    border: 1px solid var(--chk-border-strong);
-    border-radius: 6px;
-    color: var(--chk-text);
-    font-size: 0.72rem;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.paypal-copy-pro:hover {
-    border-color: var(--chk-accent);
-    color: var(--chk-accent);
-}
-
 .btn-paypal-pro {
     display: flex;
     align-items: center;
@@ -960,7 +894,7 @@ body.checkout-page .checkout-nav-inner .logo-text-image {
     }
 }
 
-/* PayPal in-page portal (Smart Buttons + premium shell) */
+/* PayPal hosted-checkout handoff modal */
 body.paypal-portal-open {
     overflow: hidden;
 }
@@ -1174,48 +1108,6 @@ body.checkout-page:not(.dark-theme) .paypal-portal__frame {
     color: var(--chk-muted);
 }
 
-.paypal-portal__buttons {
-    min-height: 58px;
-    animation: paypalPortalStagger 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
-}
-
-.paypal-portal__buttons:empty {
-    min-height: 0;
-}
-
-.paypal-portal__fallback {
-    margin-top: 1rem;
-    text-align: center;
-    animation: paypalPortalStagger 0.6s ease 0.1s both;
-}
-
-.paypal-portal__fallback-copy {
-    font-size: 0.84rem;
-    color: var(--chk-muted);
-    line-height: 1.5;
-    margin: 0 0 1rem;
-}
-
-.paypal-portal__fallback-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.9rem 1.5rem;
-    border-radius: var(--chk-radius-sm);
-    background: #0070ba;
-    color: #fff !important;
-    font-weight: 700;
-    font-size: 0.88rem;
-    text-decoration: none;
-    box-shadow: 0 6px 28px rgba(0, 112, 186, 0.45);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.paypal-portal__fallback-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 36px rgba(0, 112, 186, 0.5);
-}
-
 .paypal-portal__error {
     margin-top: 1rem;
     padding: 0.75rem 0.85rem;
@@ -1307,9 +1199,7 @@ body.checkout-page:not(.dark-theme) .paypal-portal__error {
         animation: none !important;
     }
 
-    .paypal-portal__chrome,
-    .paypal-portal__buttons,
-    .paypal-portal__fallback {
+    .paypal-portal__chrome {
         animation: none !important;
         opacity: 1;
         transform: none;

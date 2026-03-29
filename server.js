@@ -1,26 +1,43 @@
 const fs = require('fs');
 const path = require('path');
 
-const envPaths = [
-    path.join(__dirname, '.env'),
-    path.join(__dirname, '..', '.env'),
-    path.join(process.cwd(), '.env')
+const envChain = [
+    { file: path.join(__dirname, '.env'), override: true },
+    { file: path.join(__dirname, '..', '.env'), override: false },
+    { file: path.join(process.cwd(), '.env'), override: false }
 ];
-const envLoaded = new Set();
-for (const p of envPaths) {
-    const resolved = path.resolve(p);
-    if (envLoaded.has(resolved) || !fs.existsSync(p)) continue;
-    envLoaded.add(resolved);
-    require('dotenv').config({ path: p });
+const envSeen = new Set();
+for (const { file: envFile, override } of envChain) {
+    const resolved = path.resolve(envFile);
+    if (envSeen.has(resolved) || !fs.existsSync(envFile)) continue;
+    envSeen.add(resolved);
+    require('dotenv').config({ path: envFile, override });
+}
+
+function paypalEnvVars() {
+    const clientId = String(
+        process.env.PAYPAL_CLIENT_ID ||
+            process.env.PAYPAL_CLIENTID ||
+            process.env.Client_ID ||
+            process.env.CLIENT_ID ||
+            ''
+    ).trim();
+    const secret = String(
+        process.env.PAYPAL_CLIENT_SECRET ||
+            process.env.PAYPAL_SECRET ||
+            process.env.Secret_key_1 ||
+            process.env.SECRET_KEY_1 ||
+            ''
+    ).trim();
+    return { clientId, secret };
 }
 
 (function warnPaypalEnv() {
-    const id = String(process.env.PAYPAL_CLIENT_ID || '').trim();
-    const sec = String(process.env.PAYPAL_CLIENT_SECRET || '').trim();
-    if (!id || !sec) {
+    const { clientId, secret } = paypalEnvVars();
+    if (!clientId || !secret) {
         console.warn(
-            '[emotohi] PayPal REST is off: missing PAYPAL_CLIENT_ID and/or PAYPAL_CLIENT_SECRET. ' +
-                'Add them to .env next to server.js (see .env.example) or set host environment variables, then restart Node.'
+            '[emotohi] PayPal REST is off: missing PayPal credentials. Use PAYPAL_CLIENT_ID + PAYPAL_CLIENT_SECRET, ' +
+                'or Render-style Client_ID + Secret_key_1 (or SECRET_KEY_1). Restart Node after changing env.'
         );
     }
 })();
@@ -28,7 +45,18 @@ for (const p of envPaths) {
 const express = require('express');
 const https = require('https');
 const app = express();
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', Number(process.env.TRUST_PROXY_HOPS) || 1);
+}
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || 'https://discordapp.com/api/webhooks/1470551132450586705/_i4HvWyfBcIcDkIzAMhmENtkdN2oIS_sDyfYfHCW9ZvTZwv6II8R-Ca62htgIAH5ayVA';
+
+(function warnProductionPublicUrl() {
+    if (process.env.NODE_ENV !== 'production') return;
+    if (process.env.PUBLIC_SITE_URL || process.env.BASE_URL) return;
+    console.warn(
+        '[emotohi] Production: set PUBLIC_SITE_URL (or BASE_URL) to your public https URL (no trailing slash) so PayPal return/cancel links are correct.'
+    );
+})();
 
 // Set view engine
 app.set('view engine', 'ejs');
@@ -37,6 +65,42 @@ app.set('views', path.join(__dirname, 'views'));
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json({ limit: '1mb' }));
+
+app.get('/api/paypal/status', (req, res) => {
+    const { clientId, secret } = paypalEnvVars();
+    const ok = !!(clientId && secret);
+    const envBase = process.env.PUBLIC_SITE_URL || process.env.BASE_URL;
+    const payload = {
+        configured: ok,
+        mode: process.env.PAYPAL_MODE === 'live' ? 'live' : 'sandbox',
+        clientIdLength: clientId.length,
+        secretLength: secret.length,
+        nodeEnv: process.env.NODE_ENV || 'development',
+        publicSiteUrlSet: !!(envBase && String(envBase).trim()),
+        hint: ok
+            ? 'Keys are loaded; if checkout still fails, check Sandbox vs live (PAYPAL_MODE) and that Client ID matches Secret in the PayPal dashboard.'
+            : 'No PayPal credentials in this process. Set Client_ID + Secret_key_1 (or PAYPAL_CLIENT_ID + PAYPAL_CLIENT_SECRET) on the host / .env, restart, then check this URL again.'
+    };
+    if (process.env.NODE_ENV === 'production' && ok && !payload.publicSiteUrlSet) {
+        payload.hint +=
+            ' Production: set PUBLIC_SITE_URL to your https site so PayPal can redirect back after payment.';
+    }
+    const accept = String(req.get('accept') || '');
+    const wantHtml =
+        req.query.html === '1' ||
+        req.query.html === 'true' ||
+        req.get('sec-fetch-dest') === 'document' ||
+        (accept.includes('text/html') && !accept.includes('application/json'));
+    if (wantHtml) {
+        const body = JSON.stringify(payload, null, 2);
+        const esc = body.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        res.type('html').send(
+            `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PayPal status</title></head><body style="font-family:system-ui,sans-serif;padding:1.25rem;background:#0f0f12;color:#e8e6e3;line-height:1.5"><h1 style="font-size:1.1rem;margin:0 0 0.75rem">PayPal REST status</h1><p style="margin:0 0 0.75rem;font-size:0.85rem;opacity:0.85">JSON API: same URL without browser navigation, or add <code>?html=1</code>.</p><pre style="margin:0;padding:1rem;background:#1a1a1f;border-radius:8px;overflow:auto;font-size:0.85rem">${esc}</pre></body></html>`
+        );
+        return;
+    }
+    res.json(payload);
+});
 
 const CRYPTO_ADDRESSES = {
     btc: 'bc1qvcw6pctmmn940q3rrytt7hk6w467stsccqm54l',
@@ -426,8 +490,7 @@ function paypalApiHostname() {
 }
 
 async function paypalAccessToken() {
-    const clientId = String(process.env.PAYPAL_CLIENT_ID || '').trim();
-    const secret = String(process.env.PAYPAL_CLIENT_SECRET || '').trim();
+    const { clientId, secret } = paypalEnvVars();
     if (!clientId || !secret) {
         const err = new Error('PayPal is not configured.');
         err.code = 'PAYPAL_NOT_CONFIGURED';
