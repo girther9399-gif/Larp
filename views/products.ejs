@@ -204,7 +204,7 @@
     <section class="featured products-page">
         <div class="products-header products-header-premium">
             <h2>All products</h2>
-            <p>Full catalog: Ultra Bee brakes, Tuttio/Yozmas pre-bled brake kit, pads, rotors, forged wrap, Baja lights, plates, shirts, and titanium bolt kits (Formula, Ultra Bee, FUNN mounts, Surron throttle).</p>
+            <p>Full catalog: Ultra Bee brakes, Tuttio/Yozmas pre-bled brake kit, pads, rotors, forged wrap, Baja lights, plates, shirts, titanium bolt kits (Formula, Ultra Bee, M6/M8 clamps, Surron throttle), and FUNN handle bar clamps as their own listing.</p>
             <div class="products-mini-stats">
                 <span>Top seller: Ultra Brakes</span>
                 <span>Tuttio/Yozmas &amp; FUNN on this page</span>
@@ -410,13 +410,36 @@
                     <div class="product-price-section">
                         <span class="price-plain">From $19.99</span>
                     </div>
-                    <p class="description">Formula, Ultra Bee, titanium and FUNN handle clamps, and Surron Throttle Bolts.</p>
+                    <p class="description">Formula and Ultra Bee kits, titanium M6/M8 handle clamps, and Surron throttle bolts.</p>
                     <div class="option-chips">
                         <span class="option-chip">Formula &amp; Ultra Bee: 1 or 2 pack</span>
-                        <span class="option-chip">FUNN handle bar clamps &amp; mounts</span>
-                        <span class="option-chip">Clamps &amp; Surron: 2/4/6 bolts</span>
+                        <span class="option-chip">M6/M8 clamps &amp; Surron: 2/4/6 bolts</span>
                     </div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); openModal('titaniumBoltsModal');">Select
+                        Options</button>
+                </div>
+            </div>
+
+            <!-- FUNN Handle Bar Clamps -->
+            <div id="funn-mounts" class="product-card motion-card" data-category="hardware"
+                onclick="openModal('funnMountModal')" style="cursor: pointer;">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
+                <div class="product-image">
+                    <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>FUNN Handle Bar Clamps</h3>
+                    <div class="product-price-section">
+                        <span class="price-plain">$79.99</span>
+                    </div>
+                    <p class="description">FUNN mount/clamp hardware for clean cockpit setup.</p>
+                    <div class="option-chips">
+                        <span class="option-chip">2 bolts $79.99</span>
+                        <span class="option-chip">4 bolts $79.99</span>
+                        <span class="option-chip">6 bolts $79.99</span>
+                    </div>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('funnMountModal');">Select
                         Options</button>
                 </div>
             </div>
@@ -944,8 +967,6 @@
                             onclick="changeMainImage('titaniumBoltsModal', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', this)">
                         <img src="/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png" alt="Handle bar clamp titanum bolts (m8x20)" class="thumbnail"
                             onclick="changeMainImage('titaniumBoltsModal', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', this)">
-                        <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps" class="thumbnail"
-                            onclick="changeMainImage('titaniumBoltsModal', '/images/funn%20handle%20bar%20clamps.png', this)">
                         <img src="/images/surron%20throttle%20bolts.png" alt="Surron Throttle Bolts" class="thumbnail"
                             onclick="changeMainImage('titaniumBoltsModal', '/images/surron%20throttle%20bolts.png', this)">
                     </div>
@@ -953,7 +974,7 @@
 
                 <div class="modal-details modal-details--titanium">
                     <h2>Titanium Bolt Kits</h2>
-                    <p class="modal-description">Formula and Ultra Bee kits: <strong>1 pack</strong> or <strong>2 pack</strong> only. Titanium handle clamps, <strong>FUNN handle bar clamps</strong>, and <strong>Surron Throttle Bolts</strong>: <strong>bolts</strong> in 2, 4, or 6.</p>
+                    <p class="modal-description">Formula and Ultra Bee kits: <strong>1 pack</strong> or <strong>2 pack</strong> only. Titanium handle clamps (M6/M8) and <strong>Surron Throttle Bolts</strong>: <strong>bolts</strong> in 2, 4, or 6. FUNN clamps are a separate product on this page.</p>
 
                     <div class="titanium-picker" id="titaniumPicker">
                         <button type="button" class="titanium-product-btn titanium-product-btn--active" data-titanium-product="formula">
@@ -971,10 +992,6 @@
                         <button type="button" class="titanium-product-btn" data-titanium-product="clamp_m8">
                             <img src="/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png" alt="Handle bar clamp titanum bolts (m8x20)">
                             <span class="titanium-product-title">Handle bar clamp titanum bolts (m8x20)</span>
-                        </button>
-                        <button type="button" class="titanium-product-btn" data-titanium-product="funn_clamps">
-                            <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps">
-                            <span class="titanium-product-title">FUNN handle bar clamps</span>
                         </button>
                         <button type="button" class="titanium-product-btn" data-titanium-product="throttle">
                             <img src="/images/surron%20throttle%20bolts.png" alt="Surron Throttle Bolts">
@@ -1011,6 +1028,80 @@
 
                     <button class="add-to-cart-modal"
                         onclick="addToCartFromModal('titaniumBoltsModal', 'Titanium Bolts')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FUNN Handle Bar Clamps Modal -->
+        <div id="funnMountModal" class="product-modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('funnMountModal')">&times;</button>
+
+                <div class="modal-gallery">
+                    <div class="main-image">
+                        <img class="modal-main-image" src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps">
+                    </div>
+                    <div class="gallery-thumbnails modal-thumbnails">
+                        <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps" class="thumbnail active"
+                            onclick="changeMainImage('funnMountModal', '/images/funn%20handle%20bar%20clamps.png', this)">
+                    </div>
+                </div>
+
+                <div class="modal-details">
+                    <h2>FUNN Handle Bar Clamps</h2>
+                    <p class="modal-description">Select your bolt count for FUNN handle bar clamp hardware.</p>
+
+                    <div class="product-options">
+                        <label class="options-label">Select Option:</label>
+                        <div class="options-list">
+                            <div class="option-item selected"
+                                onclick="selectOption('funnMountModal', this, 79.99, '/images/funn%20handle%20bar%20clamps.png', ['/images/funn%20handle%20bar%20clamps.png'])">
+                                <div class="option-image">
+                                    <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps 2 bolts">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">FUNN handle bar clamps (2 bolts)</p>
+                                    <p class="option-price">$79.99</p>
+                                </div>
+                            </div>
+                            <div class="option-item"
+                                onclick="selectOption('funnMountModal', this, 79.99, '/images/funn%20handle%20bar%20clamps.png', ['/images/funn%20handle%20bar%20clamps.png'])">
+                                <div class="option-image">
+                                    <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps 4 bolts">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">FUNN handle bar clamps (4 bolts)</p>
+                                    <p class="option-price">$79.99</p>
+                                </div>
+                            </div>
+                            <div class="option-item"
+                                onclick="selectOption('funnMountModal', this, 79.99, '/images/funn%20handle%20bar%20clamps.png', ['/images/funn%20handle%20bar%20clamps.png'])">
+                                <div class="option-image">
+                                    <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps 6 bolts">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">FUNN handle bar clamps (6 bolts)</p>
+                                    <p class="option-price">$79.99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <p class="modal-price">$79.99</p>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="funnMountQuantity">Quantity:</label>
+                        <div class="quantity-controls">
+                            <button onclick="decreaseQuantity('funnMountModal')">−</button>
+                            <input type="number" id="funnMountQuantity" class="quantity-input" value="1" min="1" max="20"
+                                readonly>
+                            <button onclick="increaseQuantity('funnMountModal')">+</button>
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-modal" onclick="addToCartFromModal('funnMountModal', 'FUNN handle bar clamps')">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -1341,7 +1432,6 @@
                 ultrabee: '/images/Ultra%20bee%20titanuim%20bolt%20kit.png',
                 clamp_m6: '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png',
                 clamp_m8: '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png',
-                funn_clamps: '/images/funn%20handle%20bar%20clamps.png',
                 throttle: '/images/surron%20throttle%20bolts.png'
             };
             const TITANIUM_GALLERY = [
@@ -1349,7 +1439,6 @@
                 TITANIUM_PRODUCT_IMAGES.ultrabee,
                 TITANIUM_PRODUCT_IMAGES.clamp_m6,
                 TITANIUM_PRODUCT_IMAGES.clamp_m8,
-                TITANIUM_PRODUCT_IMAGES.funn_clamps,
                 TITANIUM_PRODUCT_IMAGES.throttle
             ];
             const TITANIUM_TITLES = {
@@ -1357,7 +1446,6 @@
                 ultrabee: 'Ultra bee titanuim bolt kit',
                 clamp_m6: 'Handle bar clamp titanum bolts (m6x20)',
                 clamp_m8: 'Handle bar clamp titanum bolts (m8x20)',
-                funn_clamps: 'FUNN handle bar clamps',
                 throttle: 'Surron Throttle Bolts'
             };
             function titaniumUsesPacks(productKey) {
@@ -1371,7 +1459,6 @@
                 ultrabee: { 1: 25.00, 2: 35.00 },
                 clamp_m6: { 2: 25.99, 4: 34.99, 6: 40.00 },
                 clamp_m8: { 2: 30.99, 4: 35.00, 6: 39.99 },
-                funn_clamps: { 2: 79.99, 4: 79.99, 6: 79.99 },
                 throttle: { 2: 19.99, 4: 25.00, 6: 29.99 }
             };
 
@@ -1669,7 +1756,8 @@
             initModalState('bajaModal', 20, ['/images/white%20baja.png', '/images/orange%20%20baja.png']);
             initModalState('motocutzModal', 45, ['/images/black%20plate.png']);
             initModalState('shirtModal', 20, ['/images/front%20shirt.png', '/images/back%20shirt.png']);
-            initModalState('titaniumBoltsModal', 35.00, ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/funn%20handle%20bar%20clamps.png', '/images/surron%20throttle%20bolts.png']);
+            initModalState('titaniumBoltsModal', 35.00, ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png']);
+            initModalState('funnMountModal', 79.99, ['/images/funn%20handle%20bar%20clamps.png']);
             modalState['titaniumBoltsModal'].titaniumVariantLabel = 'Formula titanum bolt kit (2 pack)';
             modalState['titaniumBoltsModal'].titaniumProductKey = 'formula';
             modalState['titaniumBoltsModal'].titaniumPack = 2;
@@ -2323,7 +2411,8 @@
                     'carbon-wrap': () => openModal('wrapModal'),
                     'motocutz': () => openModal('motocutzModal'),
                     'emotohi-shirt': () => openModal('shirtModal'),
-                    'titanium-bolts': () => openModal('titaniumBoltsModal')
+                    'titanium-bolts': () => openModal('titaniumBoltsModal'),
+                    'funn-mounts': () => openModal('funnMountModal')
                 };
 
                 // Scroll to the product first
