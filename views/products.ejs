@@ -386,11 +386,11 @@
                 <div class="product-card-content">
                     <h3>Titanium Bolt Kits</h3>
                     <div class="product-price-section">
-                        <span class="price-plain">From $12.99</span>
+                        <span class="price-plain">From $19.99</span>
                     </div>
                     <p class="description">Formula, Ultra Bee, handle bar clamp, and Surron Throttle Bolts kits.</p>
                     <div class="option-chips">
-                        <span class="option-chip">Formula &amp; Ultra Bee: 2/4/6 pack</span>
+                        <span class="option-chip">Formula &amp; Ultra Bee: 1 or 2 pack</span>
                         <span class="option-chip">Clamp &amp; Surron Throttle: 2/4/6 bolts</span>
                     </div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); openModal('titaniumBoltsModal');">Select
@@ -869,7 +869,7 @@
 
                 <div class="modal-details modal-details--titanium">
                     <h2>Titanium Bolt Kits</h2>
-                    <p class="modal-description">Formula and Ultra Bee kits use <strong>packs</strong> (2, 4, or 6). Handle bar lines and <strong>Surron Throttle Bolts</strong> use <strong>bolts</strong> (2, 4, or 6).</p>
+                    <p class="modal-description">Formula and Ultra Bee kits: <strong>1 pack</strong> or <strong>2 pack</strong> only. Handle bar lines and <strong>Surron Throttle Bolts</strong>: <strong>bolts</strong> in 2, 4, or 6.</p>
 
                     <div class="titanium-picker" id="titaniumPicker">
                         <button type="button" class="titanium-product-btn titanium-product-btn--active" data-titanium-product="formula">
@@ -896,20 +896,19 @@
 
                     <div class="titanium-pack-toolbar">
                         <p class="titanium-pack-label" id="titaniumQtyLabel">Pack size</p>
-                        <div class="titanium-pack-row" id="titaniumQtyRow" role="group" aria-label="Select pack size">
+                        <div class="titanium-pack-row titanium-pack-row--two" id="titaniumQtyRow" role="group" aria-label="Select pack size">
+                            <button type="button" class="titanium-pack-btn" data-titanium-pack="1">1 Pack</button>
                             <button type="button" class="titanium-pack-btn selected" data-titanium-pack="2">2 Pack</button>
-                            <button type="button" class="titanium-pack-btn" data-titanium-pack="4">4 Pack</button>
-                            <button type="button" class="titanium-pack-btn" data-titanium-pack="6">6 Pack</button>
                         </div>
                     </div>
 
                     <div class="titanium-current-selection">
                         <span id="titaniumSelectionName">Formula titanum bolt kit (2 pack)</span>
-                        <span id="titaniumSelectionPrice">$14.99</span>
+                        <span id="titaniumSelectionPrice">$35.00</span>
                     </div>
 
                     <div class="price-section">
-                        <p class="modal-price">$14.99</p>
+                        <p class="modal-price">$35.00</p>
                     </div>
 
                     <div class="quantity-selector">
@@ -1270,13 +1269,15 @@
                 clamp_m8: 'Handle bar clamp titanum bolts (m8x20)',
                 throttle: 'Surron Throttle Bolts'
             };
-            const TITANIUM_VALID_BOLTS = [2, 4, 6];
             function titaniumUsesPacks(productKey) {
                 return productKey === 'formula' || productKey === 'ultrabee';
             }
+            function getValidTitaniumCounts(productKey) {
+                return titaniumUsesPacks(productKey) ? [1, 2] : [2, 4, 6];
+            }
             const TITANIUM_PRICES = {
-                formula: { 2: 14.99, 4: 20.99, 6: 28.99 },
-                ultrabee: { 2: 14.99, 4: 22.99, 6: 30.99 },
+                formula: { 1: 25.00, 2: 35.00 },
+                ultrabee: { 1: 25.00, 2: 35.00 },
                 clamp_m6: { 2: 25.99, 4: 34.99, 6: 40.00 },
                 clamp_m8: { 2: 30.99, 4: 35.00, 6: 39.99 },
                 throttle: { 2: 19.99, 4: 25.00, 6: 29.99 }
@@ -1296,19 +1297,20 @@
                 const state = modalState['titaniumBoltsModal'];
                 if (!modal || !state) return;
                 const productKey = state.titaniumProductKey || 'formula';
-                let pack = state.titaniumPack || 2;
                 const table = TITANIUM_PRICES[productKey];
                 if (!table) return;
-                if (table[pack] == null) {
-                    pack = 2;
-                    state.titaniumPack = 2;
+                const usePacks = titaniumUsesPacks(productKey);
+                const validCounts = getValidTitaniumCounts(productKey);
+                let pack = state.titaniumPack;
+                if (pack == null || validCounts.indexOf(pack) === -1) {
+                    pack = validCounts.indexOf(2) !== -1 ? 2 : validCounts[0];
+                    state.titaniumPack = pack;
                 }
                 const price = table[pack];
                 if (price == null) return;
 
                 const mainImg = TITANIUM_PRODUCT_IMAGES[productKey];
                 const title = TITANIUM_TITLES[productKey];
-                const usePacks = titaniumUsesPacks(productKey);
                 state.price = price;
                 state.images = TITANIUM_GALLERY.slice();
                 state.titaniumProductKey = productKey;
@@ -1325,12 +1327,13 @@
                 if (qtyLabel) qtyLabel.textContent = usePacks ? 'Pack size' : 'Bolt count';
                 if (qtyRow) {
                     qtyRow.setAttribute('aria-label', usePacks ? 'Select pack size' : 'Select bolt count');
+                    qtyRow.classList.toggle('titanium-pack-row--two', validCounts.length === 2);
+                    qtyRow.innerHTML = validCounts.map((n) => {
+                        const sel = n === pack ? ' selected' : '';
+                        const label = usePacks ? `${n} Pack` : `${n} Bolts`;
+                        return `<button type="button" class="titanium-pack-btn${sel}" data-titanium-pack="${n}">${label}</button>`;
+                    }).join('');
                 }
-                modal.querySelectorAll('.titanium-pack-btn').forEach((b) => {
-                    const btnPack = parseInt(b.getAttribute('data-titanium-pack'), 10);
-                    b.classList.toggle('selected', btnPack === pack);
-                    b.textContent = usePacks ? `${btnPack} Pack` : `${btnPack} Bolts`;
-                });
 
                 const selectionName = modal.querySelector('#titaniumSelectionName');
                 const selectionPrice = modal.querySelector('#titaniumSelectionPrice');
@@ -1354,9 +1357,10 @@
             }
 
             function selectTitaniumPack(pack) {
-                if (!TITANIUM_VALID_BOLTS.includes(pack)) return;
                 const state = modalState['titaniumBoltsModal'];
                 if (!state) return;
+                const valid = getValidTitaniumCounts(state.titaniumProductKey || 'formula');
+                if (valid.indexOf(pack) === -1) return;
                 state.titaniumPack = pack;
                 renderTitaniumSelection();
             }
@@ -1572,7 +1576,7 @@
             initModalState('bajaModal', 20, ['/images/white%20baja.png', '/images/orange%20%20baja.png']);
             initModalState('motocutzModal', 45, ['/images/black%20plate.png']);
             initModalState('shirtModal', 20, ['/images/front%20shirt.png', '/images/back%20shirt.png']);
-            initModalState('titaniumBoltsModal', 14.99, ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png']);
+            initModalState('titaniumBoltsModal', 35.00, ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png']);
             modalState['titaniumBoltsModal'].titaniumVariantLabel = 'Formula titanum bolt kit (2 pack)';
             modalState['titaniumBoltsModal'].titaniumProductKey = 'formula';
             modalState['titaniumBoltsModal'].titaniumPack = 2;
