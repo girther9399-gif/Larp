@@ -386,15 +386,12 @@
                 <div class="product-card-content">
                     <h3>Titanium Bolt Kits</h3>
                     <div class="product-price-section">
-                        <span class="price-plain">From $14.99</span>
+                        <span class="price-plain">From $12.99</span>
                     </div>
                     <p class="description">Formula, Ultra Bee, handle bar clamp, and surron throttle bolt kits.</p>
                     <div class="option-chips">
-                        <span class="option-chip">Formula: 2/4/6 pack</span>
-                        <span class="option-chip">Ultra bee titanuim bolt kit</span>
-                        <span class="option-chip">Handle bar clamp (m6x20)</span>
-                        <span class="option-chip">Handle bar clamp (m8x20)</span>
-                        <span class="option-chip">surron throttle bolts</span>
+                        <span class="option-chip">2–6 pack each</span>
+                        <span class="option-chip">5 bolt lines</span>
                     </div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); openModal('titaniumBoltsModal');">Select
                         Options</button>
@@ -870,82 +867,88 @@
                     </div>
                 </div>
 
-                <div class="modal-details">
+                <div class="modal-details modal-details--titanium">
                     <h2>Titanium Bolt Kits</h2>
-                    <p class="modal-description">Pick from Formula packs, Ultra bee kit, handle bar clamp bolts, or surron throttle bolts.</p>
+                    <p class="modal-description">Choose a line, then pick a pack size from 2 through 6.</p>
 
-                    <div class="product-options">
-                        <label class="options-label">Select option:</label>
-                        <div class="options-list">
-                            <div class="option-item selected"
-                                onclick="selectOption('titaniumBoltsModal', this, 14.99, '/images/Formula%20titanum%20bolt%20kit.png', ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png'])">
-                                <div class="option-image">
-                                    <img src="/images/Formula%20titanum%20bolt%20kit.png" alt="Formula titanum bolt kit">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">Formula titanum bolt kit (2 pack)</p>
-                                    <p class="option-price">$14.99</p>
+                    <div class="titanium-picker" id="titaniumPicker">
+                        <div class="titanium-product-row titanium-product-row--active" data-titanium-row="formula">
+                            <div class="titanium-product-head">
+                                <img src="/images/Formula%20titanum%20bolt%20kit.png" alt="">
+                                <div class="titanium-product-head-text">
+                                    <p class="titanium-product-title">Formula titanum bolt kit</p>
                                 </div>
                             </div>
-                            <div class="option-item"
-                                onclick="selectOption('titaniumBoltsModal', this, 20.99, '/images/Formula%20titanum%20bolt%20kit.png', ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png'])">
-                                <div class="option-image">
-                                    <img src="/images/Formula%20titanum%20bolt%20kit.png" alt="Formula titanum bolt kit">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">Formula titanum bolt kit (4 pack)</p>
-                                    <p class="option-price">$20.99</p>
+                            <div class="titanium-pack-row" role="group" aria-label="Formula pack sizes">
+                                <button type="button" class="titanium-pack-btn selected" data-titanium-product="formula" data-titanium-pack="2"><span class="titanium-pack-n">2</span><span class="titanium-pack-price">$14.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="formula" data-titanium-pack="3"><span class="titanium-pack-n">3</span><span class="titanium-pack-price">$17.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="formula" data-titanium-pack="4"><span class="titanium-pack-n">4</span><span class="titanium-pack-price">$20.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="formula" data-titanium-pack="5"><span class="titanium-pack-n">5</span><span class="titanium-pack-price">$24.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="formula" data-titanium-pack="6"><span class="titanium-pack-n">6</span><span class="titanium-pack-price">$28.99</span></button>
+                            </div>
+                        </div>
+
+                        <div class="titanium-product-row" data-titanium-row="ultrabee">
+                            <div class="titanium-product-head">
+                                <img src="/images/Ultra%20bee%20titanuim%20bolt%20kit.png" alt="">
+                                <div class="titanium-product-head-text">
+                                    <p class="titanium-product-title">Ultra bee titanuim bolt kit</p>
                                 </div>
                             </div>
-                            <div class="option-item"
-                                onclick="selectOption('titaniumBoltsModal', this, 28.99, '/images/Formula%20titanum%20bolt%20kit.png', ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png'])">
-                                <div class="option-image">
-                                    <img src="/images/Formula%20titanum%20bolt%20kit.png" alt="Formula titanum bolt kit">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">Formula titanum bolt kit (6 pack)</p>
-                                    <p class="option-price">$28.99</p>
+                            <div class="titanium-pack-row" role="group" aria-label="Ultra Bee pack sizes">
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="ultrabee" data-titanium-pack="2"><span class="titanium-pack-n">2</span><span class="titanium-pack-price">$14.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="ultrabee" data-titanium-pack="3"><span class="titanium-pack-n">3</span><span class="titanium-pack-price">$18.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="ultrabee" data-titanium-pack="4"><span class="titanium-pack-n">4</span><span class="titanium-pack-price">$22.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="ultrabee" data-titanium-pack="5"><span class="titanium-pack-n">5</span><span class="titanium-pack-price">$26.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="ultrabee" data-titanium-pack="6"><span class="titanium-pack-n">6</span><span class="titanium-pack-price">$30.99</span></button>
+                            </div>
+                        </div>
+
+                        <div class="titanium-product-row" data-titanium-row="clamp_m6">
+                            <div class="titanium-product-head">
+                                <img src="/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png" alt="">
+                                <div class="titanium-product-head-text">
+                                    <p class="titanium-product-title">Handle bar clamp titanum bolts (m6x20)</p>
                                 </div>
                             </div>
-                            <div class="option-item"
-                                onclick="selectOption('titaniumBoltsModal', this, 24.99, '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', ['/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Formula%20titanum%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png'])">
-                                <div class="option-image">
-                                    <img src="/images/Ultra%20bee%20titanuim%20bolt%20kit.png" alt="Ultra bee titanuim bolt kit">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">Ultra bee titanuim bolt kit</p>
-                                    <p class="option-price">$24.99</p>
+                            <div class="titanium-pack-row" role="group" aria-label="M6×20 pack sizes">
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m6" data-titanium-pack="2"><span class="titanium-pack-n">2</span><span class="titanium-pack-price">$12.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m6" data-titanium-pack="3"><span class="titanium-pack-n">3</span><span class="titanium-pack-price">$14.49</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m6" data-titanium-pack="4"><span class="titanium-pack-n">4</span><span class="titanium-pack-price">$16.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m6" data-titanium-pack="5"><span class="titanium-pack-n">5</span><span class="titanium-pack-price">$19.49</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m6" data-titanium-pack="6"><span class="titanium-pack-n">6</span><span class="titanium-pack-price">$21.99</span></button>
+                            </div>
+                        </div>
+
+                        <div class="titanium-product-row" data-titanium-row="clamp_m8">
+                            <div class="titanium-product-head">
+                                <img src="/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png" alt="">
+                                <div class="titanium-product-head-text">
+                                    <p class="titanium-product-title">Handle bar clamp titanum bolts (m8x20)</p>
                                 </div>
                             </div>
-                            <div class="option-item"
-                                onclick="selectOption('titaniumBoltsModal', this, 16.99, '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', ['/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/surron%20throttle%20bolts.png'])">
-                                <div class="option-image">
-                                    <img src="/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png" alt="Handle bar clamp titanum bolts (m6x20)">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">Handle bar clamp titanum bolts (m6x20)</p>
-                                    <p class="option-price">$16.99</p>
+                            <div class="titanium-pack-row" role="group" aria-label="M8×20 pack sizes">
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m8" data-titanium-pack="2"><span class="titanium-pack-n">2</span><span class="titanium-pack-price">$14.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m8" data-titanium-pack="3"><span class="titanium-pack-n">3</span><span class="titanium-pack-price">$16.49</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m8" data-titanium-pack="4"><span class="titanium-pack-n">4</span><span class="titanium-pack-price">$18.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m8" data-titanium-pack="5"><span class="titanium-pack-n">5</span><span class="titanium-pack-price">$21.49</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="clamp_m8" data-titanium-pack="6"><span class="titanium-pack-n">6</span><span class="titanium-pack-price">$23.99</span></button>
+                            </div>
+                        </div>
+
+                        <div class="titanium-product-row" data-titanium-row="throttle">
+                            <div class="titanium-product-head">
+                                <img src="/images/surron%20throttle%20bolts.png" alt="">
+                                <div class="titanium-product-head-text">
+                                    <p class="titanium-product-title">surron throttle bolts</p>
                                 </div>
                             </div>
-                            <div class="option-item"
-                                onclick="selectOption('titaniumBoltsModal', this, 18.99, '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', ['/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/surron%20throttle%20bolts.png'])">
-                                <div class="option-image">
-                                    <img src="/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png" alt="Handle bar clamp titanum bolts (m8x20)">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">Handle bar clamp titanum bolts (m8x20)</p>
-                                    <p class="option-price">$18.99</p>
-                                </div>
-                            </div>
-                            <div class="option-item"
-                                onclick="selectOption('titaniumBoltsModal', this, 14.99, '/images/surron%20throttle%20bolts.png', ['/images/surron%20throttle%20bolts.png', '/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png'])">
-                                <div class="option-image">
-                                    <img src="/images/surron%20throttle%20bolts.png" alt="surron throttle bolts">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">surron throttle bolts</p>
-                                    <p class="option-price">$14.99</p>
-                                </div>
+                            <div class="titanium-pack-row" role="group" aria-label="Throttle bolt pack sizes">
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="throttle" data-titanium-pack="2"><span class="titanium-pack-n">2</span><span class="titanium-pack-price">$12.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="throttle" data-titanium-pack="3"><span class="titanium-pack-n">3</span><span class="titanium-pack-price">$13.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="throttle" data-titanium-pack="4"><span class="titanium-pack-n">4</span><span class="titanium-pack-price">$14.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="throttle" data-titanium-pack="5"><span class="titanium-pack-n">5</span><span class="titanium-pack-price">$16.99</span></button>
+                                <button type="button" class="titanium-pack-btn" data-titanium-product="throttle" data-titanium-pack="6"><span class="titanium-pack-n">6</span><span class="titanium-pack-price">$18.99</span></button>
                             </div>
                         </div>
                     </div>
@@ -1290,7 +1293,71 @@
         <script>
             let cart = [];
             const modalState = {};
-            
+
+            const TITANIUM_PRODUCT_IMAGES = {
+                formula: '/images/Formula%20titanum%20bolt%20kit.png',
+                ultrabee: '/images/Ultra%20bee%20titanuim%20bolt%20kit.png',
+                clamp_m6: '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png',
+                clamp_m8: '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png',
+                throttle: '/images/surron%20throttle%20bolts.png'
+            };
+            const TITANIUM_GALLERY = [
+                TITANIUM_PRODUCT_IMAGES.formula,
+                TITANIUM_PRODUCT_IMAGES.ultrabee,
+                TITANIUM_PRODUCT_IMAGES.clamp_m6,
+                TITANIUM_PRODUCT_IMAGES.clamp_m8,
+                TITANIUM_PRODUCT_IMAGES.throttle
+            ];
+            const TITANIUM_TITLES = {
+                formula: 'Formula titanum bolt kit',
+                ultrabee: 'Ultra bee titanuim bolt kit',
+                clamp_m6: 'Handle bar clamp titanum bolts (m6x20)',
+                clamp_m8: 'Handle bar clamp titanum bolts (m8x20)',
+                throttle: 'surron throttle bolts'
+            };
+            const TITANIUM_PRICES = {
+                formula: { 2: 14.99, 3: 17.99, 4: 20.99, 5: 24.99, 6: 28.99 },
+                ultrabee: { 2: 14.99, 3: 18.99, 4: 22.99, 5: 26.99, 6: 30.99 },
+                clamp_m6: { 2: 12.99, 3: 14.49, 4: 16.99, 5: 19.49, 6: 21.99 },
+                clamp_m8: { 2: 14.99, 3: 16.49, 4: 18.99, 5: 21.49, 6: 23.99 },
+                throttle: { 2: 12.99, 3: 13.99, 4: 14.99, 5: 16.99, 6: 18.99 }
+            };
+
+            function selectTitaniumPack(productKey, pack, btnEl) {
+                const modal = getModal('titaniumBoltsModal');
+                const state = modalState['titaniumBoltsModal'];
+                if (!modal || !state || !btnEl) return;
+                const table = TITANIUM_PRICES[productKey];
+                if (!table) return;
+                const price = table[pack];
+                if (price == null) return;
+
+                const mainImg = TITANIUM_PRODUCT_IMAGES[productKey];
+                const title = TITANIUM_TITLES[productKey];
+                state.price = price;
+                state.images = TITANIUM_GALLERY.slice();
+                state.titaniumVariantLabel = `${title} (${pack} pack)`;
+
+                modal.querySelectorAll('.titanium-pack-btn').forEach((b) => b.classList.remove('selected'));
+                modal.querySelectorAll('.titanium-product-row').forEach((r) => r.classList.remove('titanium-product-row--active'));
+                btnEl.classList.add('selected');
+                const row = btnEl.closest('.titanium-product-row');
+                if (row) row.classList.add('titanium-product-row--active');
+
+                const mainImageEl = modal.querySelector('.modal-main-image');
+                if (mainImageEl) mainImageEl.src = mainImg;
+
+                const thumbnailsContainer = modal.querySelector('.modal-thumbnails');
+                if (thumbnailsContainer) {
+                    thumbnailsContainer.innerHTML = TITANIUM_GALLERY.map((img) => {
+                        const active = img === mainImg ? 'active' : '';
+                        return '<img src="' + img.replace(/"/g, '&quot;') + '" alt="" class="thumbnail ' + active + '" onclick=\'changeMainImage("titaniumBoltsModal", ' + JSON.stringify(img) + ', this)\'>';
+                    }).join('');
+                }
+
+                updateTotalPrice('titaniumBoltsModal');
+            }
+
             // Track sold out items
             const soldOutItems = {};
             let currentOrder = null;
@@ -1496,6 +1563,7 @@
             initModalState('motocutzModal', 45, ['/images/black%20plate.png']);
             initModalState('shirtModal', 20, ['/images/front%20shirt.png', '/images/back%20shirt.png']);
             initModalState('titaniumBoltsModal', 14.99, ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png']);
+            modalState['titaniumBoltsModal'].titaniumVariantLabel = 'Formula titanum bolt kit (2 pack)';
 
             function initModalState(modalId, basePrice, images) {
                 modalState[modalId] = {
@@ -1505,6 +1573,20 @@
                     previousTotal: basePrice
                 };
             }
+
+            (function bindTitaniumPackClicks() {
+                const modal = document.getElementById('titaniumBoltsModal');
+                if (!modal) return;
+                modal.addEventListener('click', function (e) {
+                    const btn = e.target.closest('.titanium-pack-btn');
+                    if (!btn || !modal.contains(btn)) return;
+                    e.preventDefault();
+                    const productKey = btn.getAttribute('data-titanium-product');
+                    const pack = parseInt(btn.getAttribute('data-titanium-pack'), 10);
+                    if (!productKey || !Number.isFinite(pack)) return;
+                    selectTitaniumPack(productKey, pack, btn);
+                });
+            })();
 
             function getModal(modalId) {
                 return document.getElementById(modalId);
@@ -1632,8 +1714,13 @@
                 const state = modalState[modalId];
                 if (!modal || !state) return;
 
-                const selectedOption = modal.querySelector('.option-item.selected .option-name');
-                const variantName = selectedOption ? selectedOption.textContent : fallbackName;
+                let variantName;
+                if (modalId === 'titaniumBoltsModal' && state.titaniumVariantLabel) {
+                    variantName = state.titaniumVariantLabel;
+                } else {
+                    const selectedOption = modal.querySelector('.option-item.selected .option-name');
+                    variantName = selectedOption ? selectedOption.textContent : fallbackName;
+                }
 
                 // Check if the selected item is sold out
                 if (soldOutItems[variantName]) {
