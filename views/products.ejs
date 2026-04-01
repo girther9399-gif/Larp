@@ -1323,6 +1323,15 @@
                 throttle: { 2: 12.99, 3: 13.99, 4: 14.99, 5: 16.99, 6: 18.99 }
             };
 
+            function titaniumSrcToProductKey(src) {
+                if (!src) return null;
+                const s = String(src);
+                return Object.keys(TITANIUM_PRODUCT_IMAGES).find((k) => {
+                    const p = TITANIUM_PRODUCT_IMAGES[k];
+                    return s.indexOf(p) !== -1;
+                });
+            }
+
             function selectTitaniumPack(productKey, pack, btnEl) {
                 const modal = getModal('titaniumBoltsModal');
                 const state = modalState['titaniumBoltsModal'];
@@ -1336,6 +1345,8 @@
                 const title = TITANIUM_TITLES[productKey];
                 state.price = price;
                 state.images = TITANIUM_GALLERY.slice();
+                state.titaniumProductKey = productKey;
+                state.titaniumPack = pack;
                 state.titaniumVariantLabel = `${title} (${pack} pack)`;
 
                 modal.querySelectorAll('.titanium-pack-btn').forEach((b) => b.classList.remove('selected'));
@@ -1564,6 +1575,8 @@
             initModalState('shirtModal', 20, ['/images/front%20shirt.png', '/images/back%20shirt.png']);
             initModalState('titaniumBoltsModal', 14.99, ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png']);
             modalState['titaniumBoltsModal'].titaniumVariantLabel = 'Formula titanum bolt kit (2 pack)';
+            modalState['titaniumBoltsModal'].titaniumProductKey = 'formula';
+            modalState['titaniumBoltsModal'].titaniumPack = 2;
 
             function initModalState(modalId, basePrice, images) {
                 modalState[modalId] = {
@@ -1579,12 +1592,28 @@
                 if (!modal) return;
                 modal.addEventListener('click', function (e) {
                     const btn = e.target.closest('.titanium-pack-btn');
-                    if (!btn || !modal.contains(btn)) return;
-                    e.preventDefault();
-                    const productKey = btn.getAttribute('data-titanium-product');
-                    const pack = parseInt(btn.getAttribute('data-titanium-pack'), 10);
-                    if (!productKey || !Number.isFinite(pack)) return;
-                    selectTitaniumPack(productKey, pack, btn);
+                    if (btn && modal.contains(btn)) {
+                        e.preventDefault();
+                        const productKey = btn.getAttribute('data-titanium-product');
+                        const pack = parseInt(btn.getAttribute('data-titanium-pack'), 10);
+                        if (!productKey || !Number.isFinite(pack)) return;
+                        selectTitaniumPack(productKey, pack, btn);
+                        return;
+                    }
+                    const th = e.target.closest('.modal-thumbnails .thumbnail');
+                    if (!th || !modal.contains(th)) return;
+                    const src = th.getAttribute('src');
+                    const productKey = titaniumSrcToProductKey(src);
+                    if (!productKey) return;
+                    const state = modalState['titaniumBoltsModal'];
+                    if (!state) return;
+                    const pack = state.titaniumPack || 2;
+                    const pick = modal.querySelector(
+                        '.titanium-pack-btn[data-titanium-product="' + productKey + '"][data-titanium-pack="' + pack + '"]'
+                    );
+                    if (pick) {
+                        selectTitaniumPack(productKey, pack, pick);
+                    }
                 });
             })();
 
