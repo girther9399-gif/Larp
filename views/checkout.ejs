@@ -1662,6 +1662,39 @@
             }
         });
     </script>
+    <div id="checkoutScrollMore" class="checkout-scroll-more" aria-hidden="true">
+        <button type="button" class="checkout-scroll-more-btn" aria-label="Scroll down for more">
+            <span class="checkout-scroll-more-text">More below</span>
+            <svg class="checkout-scroll-more-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+    </div>
+    <script>
+        (function () {
+            var hint = document.getElementById('checkoutScrollMore');
+            if (!hint) return;
+            var btn = hint.querySelector('button');
+            if (!btn) return;
+            var root = document.scrollingElement || document.documentElement;
+            function update() {
+                var max = root.scrollHeight - window.innerHeight;
+                var can = max > 20;
+                var atBottom = window.scrollY >= max - 20;
+                var show = can && !atBottom;
+                hint.classList.toggle('is-visible', show);
+                hint.setAttribute('aria-hidden', show ? 'false' : 'true');
+            }
+            btn.addEventListener('click', function () {
+                root.scrollTo({ top: root.scrollHeight, behavior: 'smooth' });
+            });
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', update);
+            } else {
+                update();
+            }
+        })();
+    </script>
     <script src="/site-motion.js" defer></script>
 </body>
 </html>

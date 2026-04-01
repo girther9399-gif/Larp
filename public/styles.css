@@ -4586,6 +4586,57 @@ body.dark-theme .product-modal .option-item.selected {
     box-shadow: none;
 }
 
+/* Scroll hint (more content below) — product modals */
+.product-modal .modal-scroll-more {
+    position: absolute;
+    left: 50%;
+    bottom: 1.1rem;
+    transform: translateX(-50%) translateY(10px);
+    z-index: 1002;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.product-modal .modal-scroll-more.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.product-modal .modal-scroll-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.85rem 0.4rem;
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), var(--card-bg));
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
+body.dark-theme .product-modal .modal-scroll-more-btn {
+    background: linear-gradient(180deg, rgba(36, 36, 40, 0.98), var(--card-bg));
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.product-modal .modal-scroll-more-btn:hover {
+    border-color: rgba(0, 102, 255, 0.55);
+    color: var(--button-hover);
+}
+
+.product-modal .modal-scroll-more-icon {
+    display: block;
+    opacity: 0.85;
+}
+
 /* Titanium bolt kit picker */
 #titaniumBoltsModal .modal-details--titanium {
     max-height: min(58vh, 560px);

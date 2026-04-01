@@ -1285,3 +1285,53 @@ body.checkout-page #cryptoModal .crypto-submit-btn:disabled {
 body.checkout-page .global-loader {
     background: var(--chk-loader-scrim);
 }
+
+/* Page scroll hint — more content below */
+.checkout-scroll-more {
+    position: fixed;
+    left: 50%;
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    transform: translateX(-50%) translateY(14px);
+    z-index: 120;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.checkout-scroll-more.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.checkout-scroll-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.9rem 0.4rem;
+    border: 1px solid var(--chk-border-strong);
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--chk-surface), var(--chk-elevated));
+    color: var(--chk-text);
+    font-family: var(--chk-font);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+}
+
+body.checkout-page.dark-theme .checkout-scroll-more-btn {
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+}
+
+.checkout-scroll-more-btn:hover {
+    border-color: var(--chk-accent);
+    color: var(--chk-accent);
+}
+
+.checkout-scroll-more-icon {
+    display: block;
+    opacity: 0.9;
+}
