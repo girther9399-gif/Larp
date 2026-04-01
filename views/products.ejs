@@ -390,8 +390,8 @@
                     </div>
                     <p class="description">Formula, Ultra Bee, handle bar clamp, and surron throttle bolt kits.</p>
                     <div class="option-chips">
-                        <span class="option-chip">2, 4, or 6 bolts</span>
-                        <span class="option-chip">5 bolt lines</span>
+                        <span class="option-chip">Formula &amp; Ultra Bee: 2/4/6 pack</span>
+                        <span class="option-chip">Clamp &amp; throttle: 2/4/6 bolts</span>
                     </div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); openModal('titaniumBoltsModal');">Select
                         Options</button>
@@ -869,7 +869,7 @@
 
                 <div class="modal-details modal-details--titanium">
                     <h2>Titanium Bolt Kits</h2>
-                    <p class="modal-description">Choose a line, then pick 2, 4, or 6 bolts.</p>
+                    <p class="modal-description">Formula and Ultra Bee kits use <strong>packs</strong> (2, 4, or 6). Handle bar and throttle lines use <strong>bolts</strong> (2, 4, or 6).</p>
 
                     <div class="titanium-picker" id="titaniumPicker">
                         <button type="button" class="titanium-product-btn titanium-product-btn--active" data-titanium-product="formula">
@@ -895,16 +895,16 @@
                     </div>
 
                     <div class="titanium-pack-toolbar">
-                        <p class="titanium-pack-label">Bolt count</p>
-                        <div class="titanium-pack-row" role="group" aria-label="Select bolt count">
-                            <button type="button" class="titanium-pack-btn selected" data-titanium-pack="2">2 Bolts</button>
-                            <button type="button" class="titanium-pack-btn" data-titanium-pack="4">4 Bolts</button>
-                            <button type="button" class="titanium-pack-btn" data-titanium-pack="6">6 Bolts</button>
+                        <p class="titanium-pack-label" id="titaniumQtyLabel">Pack size</p>
+                        <div class="titanium-pack-row" id="titaniumQtyRow" role="group" aria-label="Select pack size">
+                            <button type="button" class="titanium-pack-btn selected" data-titanium-pack="2">2 Pack</button>
+                            <button type="button" class="titanium-pack-btn" data-titanium-pack="4">4 Pack</button>
+                            <button type="button" class="titanium-pack-btn" data-titanium-pack="6">6 Pack</button>
                         </div>
                     </div>
 
                     <div class="titanium-current-selection">
-                        <span id="titaniumSelectionName">Formula titanum bolt kit (2 bolts)</span>
+                        <span id="titaniumSelectionName">Formula titanum bolt kit (2 pack)</span>
                         <span id="titaniumSelectionPrice">$14.99</span>
                     </div>
 
@@ -1271,6 +1271,9 @@
                 throttle: 'surron throttle bolts'
             };
             const TITANIUM_VALID_BOLTS = [2, 4, 6];
+            function titaniumUsesPacks(productKey) {
+                return productKey === 'formula' || productKey === 'ultrabee';
+            }
             const TITANIUM_PRICES = {
                 formula: { 2: 14.99, 4: 20.99, 6: 28.99 },
                 ultrabee: { 2: 14.99, 4: 22.99, 6: 30.99 },
@@ -1305,23 +1308,35 @@
 
                 const mainImg = TITANIUM_PRODUCT_IMAGES[productKey];
                 const title = TITANIUM_TITLES[productKey];
+                const usePacks = titaniumUsesPacks(productKey);
                 state.price = price;
                 state.images = TITANIUM_GALLERY.slice();
                 state.titaniumProductKey = productKey;
                 state.titaniumPack = pack;
-                state.titaniumVariantLabel = `${title} (${pack} bolts)`;
+                state.titaniumVariantLabel = usePacks
+                    ? `${title} (${pack} pack)`
+                    : `${title} (${pack} bolts)`;
 
                 modal.querySelectorAll('.titanium-product-btn').forEach((b) => {
                     b.classList.toggle('titanium-product-btn--active', b.getAttribute('data-titanium-product') === productKey);
                 });
+                const qtyLabel = modal.querySelector('#titaniumQtyLabel');
+                const qtyRow = modal.querySelector('#titaniumQtyRow');
+                if (qtyLabel) qtyLabel.textContent = usePacks ? 'Pack size' : 'Bolt count';
+                if (qtyRow) {
+                    qtyRow.setAttribute('aria-label', usePacks ? 'Select pack size' : 'Select bolt count');
+                }
                 modal.querySelectorAll('.titanium-pack-btn').forEach((b) => {
                     const btnPack = parseInt(b.getAttribute('data-titanium-pack'), 10);
                     b.classList.toggle('selected', btnPack === pack);
+                    b.textContent = usePacks ? `${btnPack} Pack` : `${btnPack} Bolts`;
                 });
 
                 const selectionName = modal.querySelector('#titaniumSelectionName');
                 const selectionPrice = modal.querySelector('#titaniumSelectionPrice');
-                if (selectionName) selectionName.textContent = `${title} (${pack} bolts)`;
+                if (selectionName) {
+                    selectionName.textContent = usePacks ? `${title} (${pack} pack)` : `${title} (${pack} bolts)`;
+                }
                 if (selectionPrice) selectionPrice.textContent = `$${price.toFixed(2)}`;
 
                 const mainImageEl = modal.querySelector('.modal-main-image');
@@ -1558,7 +1573,7 @@
             initModalState('motocutzModal', 45, ['/images/black%20plate.png']);
             initModalState('shirtModal', 20, ['/images/front%20shirt.png', '/images/back%20shirt.png']);
             initModalState('titaniumBoltsModal', 14.99, ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png']);
-            modalState['titaniumBoltsModal'].titaniumVariantLabel = 'Formula titanum bolt kit (2 bolts)';
+            modalState['titaniumBoltsModal'].titaniumVariantLabel = 'Formula titanum bolt kit (2 pack)';
             modalState['titaniumBoltsModal'].titaniumProductKey = 'formula';
             modalState['titaniumBoltsModal'].titaniumPack = 2;
             renderTitaniumSelection();
