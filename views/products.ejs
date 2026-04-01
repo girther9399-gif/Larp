@@ -243,6 +243,24 @@
                 </div>
             </div>
 
+            <!-- Tuttio/Yozmas Pre-Bled Ultra Bee Brake Kit -->
+            <div id="tuttio-yozmas-brakes" class="product-card motion-card" data-category="brakes" onclick="openModal('tuttioYozmasModal')" style="cursor: pointer;">
+                <span class="motion-shutter-sweep" aria-hidden="true"></span>
+                <div class="product-image">
+                    <img src="/images/tuttioyozmaprebledultrabeebrakes.png" alt="Tuttio/Yozmas Pre-Bled Ultra Bee Brake Kit"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="product-card-content">
+                    <h3>Tuttio/Yozmas Pre-Bled Ultra Bee Brake Kit</h3>
+                    <div class="product-price-section">
+                        <span class="price-plain">$199.99</span>
+                    </div>
+                    <p class="description">Pre-bled hydraulic kit — ready to install.</p>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('tuttioYozmasModal');">View
+                        details</button>
+                </div>
+            </div>
+
             <!-- Surron Brake Pads -->
             <div id="brake-pads" class="product-card motion-card" data-category="brakes" onclick="openModal('padsModal')" style="cursor: pointer;">
                 <span class="motion-shutter-sweep" aria-hidden="true"></span>
@@ -622,6 +640,65 @@
 
                     <button class="add-to-cart-modal" onclick="addToCartFromModal('rotorModal', 'Rotor')">Add to
                         Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tuttio/Yozmas Pre-Bled Ultra Bee Brake Kit Modal -->
+        <div id="tuttioYozmasModal" class="product-modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('tuttioYozmasModal')">&times;</button>
+
+                <div class="modal-gallery">
+                    <div class="main-image">
+                        <img class="modal-main-image" src="/images/tuttioyozmaprebledultrabeebrakes.png" alt="Tuttio/Yozmas Pre-Bled Ultra Bee Brake Kit">
+                    </div>
+                    <div class="gallery-thumbnails modal-thumbnails">
+                        <img src="/images/tut.png" alt="Installed brake detail" class="thumbnail"
+                            onclick="changeMainImage('tuttioYozmasModal', '/images/tut.png', this)">
+                        <img src="/images/tuttio.png" alt="Bracket detail" class="thumbnail"
+                            onclick="changeMainImage('tuttioYozmasModal', '/images/tuttio.png', this)">
+                        <img src="/images/tuttioyozmaprebledultrabeebrakes.png" alt="Full kit" class="thumbnail active"
+                            onclick="changeMainImage('tuttioYozmasModal', '/images/tuttioyozmaprebledultrabeebrakes.png', this)">
+                    </div>
+                </div>
+
+                <div class="modal-details">
+                    <h2>Tuttio/Yozmas Pre-Bled Ultra Bee Brake Kit</h2>
+                    <p class="modal-description">Complete pre-bled hydraulic brake kit for Ultra Bee. Includes lever, caliper, hose, and mounting hardware.</p>
+
+                    <div class="product-options">
+                        <label class="options-label">Kit</label>
+                        <div class="options-list">
+                            <div class="option-item selected"
+                                onclick="selectOption('tuttioYozmasModal', this, 199.99, '/images/tuttioyozmaprebledultrabeebrakes.png', ['/images/tut.png', '/images/tuttio.png', '/images/tuttioyozmaprebledultrabeebrakes.png'])">
+                                <div class="option-image">
+                                    <img src="/images/tuttioyozmaprebledultrabeebrakes.png" alt="Complete kit">
+                                </div>
+                                <div class="option-info">
+                                    <p class="option-name">Complete pre-bled kit</p>
+                                    <p class="option-price">$199.99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <p class="modal-price">$199.99</p>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="tuttioYozmasQuantity">Quantity:</label>
+                        <div class="quantity-controls">
+                            <button onclick="decreaseQuantity('tuttioYozmasModal')">−</button>
+                            <input type="number" id="tuttioYozmasQuantity" class="quantity-input" value="1" min="1" max="20"
+                                readonly>
+                            <button onclick="increaseQuantity('tuttioYozmasModal')">+</button>
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-modal"
+                        onclick="addToCartFromModal('tuttioYozmasModal', 'Tuttio/Yozmas Pre-Bled Ultra Bee Brake Kit')">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -1582,6 +1659,7 @@
             initModalState('productModal', 350, ['/images/back%20with%20stuff.png']);
             initModalState('padsModal', 30, ['/images/surron%20ultra%20oem%20pads.png', '/images/surron%20ultra%20oem%20pads1.png']);
             initModalState('rotorModal', 20, ['/images/rotor.png']);
+            initModalState('tuttioYozmasModal', 199.99, ['/images/tut.png', '/images/tuttio.png', '/images/tuttioyozmaprebledultrabeebrakes.png']);
             initModalState('wrapModal', 25, ['/images/carbon%20wrap.png', '/images/carbon%20wrap1.png', '/images/carbon%20wrap2.png', '/images/carbon%20wrap3.png', '/images/carbon%20wrap4.png']);
             initModalState('bajaModal', 20, ['/images/white%20baja.png', '/images/orange%20%20baja.png']);
             initModalState('motocutzModal', 45, ['/images/black%20plate.png']);
@@ -2232,6 +2310,7 @@
                 // Map hash to modal function
                 const modalMap = {
                     'ultra-brakes': () => openProductModal(),
+                    'tuttio-yozmas-brakes': () => openModal('tuttioYozmasModal'),
                     'brake-pads': () => openModal('padsModal'),
                     'rotor': () => openModal('rotorModal'),
                     'baja-lights': () => openModal('bajaModal'),
