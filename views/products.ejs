@@ -256,6 +256,10 @@
                         <span class="price-plain">$199.99</span>
                     </div>
                     <p class="description">Pre-bled hydraulic kit — ready to install.</p>
+                    <div class="option-chips">
+                        <span class="option-chip">Tuttio / Yozmas</span>
+                        <span class="option-chip">Ultra Bee</span>
+                    </div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); openModal('tuttioYozmasModal');">View
                         details</button>
                 </div>
@@ -409,7 +413,8 @@
                     <p class="description">Formula, Ultra Bee, titanium and FUNN handle clamps, and Surron Throttle Bolts.</p>
                     <div class="option-chips">
                         <span class="option-chip">Formula &amp; Ultra Bee: 1 or 2 pack</span>
-                        <span class="option-chip">Clamps, FUNN &amp; Surron: 2/4/6 bolts</span>
+                        <span class="option-chip">FUNN handle bar clamps &amp; mounts</span>
+                        <span class="option-chip">Clamps &amp; Surron: 2/4/6 bolts</span>
                     </div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); openModal('titaniumBoltsModal');">Select
                         Options</button>
@@ -2258,7 +2263,8 @@
                     const matchesCategory = productMatchesCategory(cat, activeCategory);
                     const title = product.querySelector('h3')?.textContent || '';
                     const description = product.querySelector('.description')?.textContent || '';
-                    const text = `${title} ${description}`.toLowerCase();
+                    const chips = product.querySelector('.option-chips')?.textContent || '';
+                    const text = `${title} ${description} ${chips}`.toLowerCase();
                     const matchesQuery = !query || text.includes(query);
                     const isVisible = matchesCategory && matchesQuery;
                     product.style.display = isVisible ? 'block' : 'none';
