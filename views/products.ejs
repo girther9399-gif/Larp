@@ -388,10 +388,10 @@
                     <div class="product-price-section">
                         <span class="price-plain">From $19.99</span>
                     </div>
-                    <p class="description">Formula, Ultra Bee, handle bar clamp, and Surron Throttle Bolts kits.</p>
+                    <p class="description">Formula, Ultra Bee, titanium and FUNN handle clamps, and Surron Throttle Bolts.</p>
                     <div class="option-chips">
                         <span class="option-chip">Formula &amp; Ultra Bee: 1 or 2 pack</span>
-                        <span class="option-chip">Clamp &amp; Surron Throttle: 2/4/6 bolts</span>
+                        <span class="option-chip">Clamps, FUNN &amp; Surron: 2/4/6 bolts</span>
                     </div>
                     <button class="add-to-cart" onclick="event.stopPropagation(); openModal('titaniumBoltsModal');">Select
                         Options</button>
@@ -862,6 +862,8 @@
                             onclick="changeMainImage('titaniumBoltsModal', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', this)">
                         <img src="/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png" alt="Handle bar clamp titanum bolts (m8x20)" class="thumbnail"
                             onclick="changeMainImage('titaniumBoltsModal', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', this)">
+                        <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps" class="thumbnail"
+                            onclick="changeMainImage('titaniumBoltsModal', '/images/funn%20handle%20bar%20clamps.png', this)">
                         <img src="/images/surron%20throttle%20bolts.png" alt="Surron Throttle Bolts" class="thumbnail"
                             onclick="changeMainImage('titaniumBoltsModal', '/images/surron%20throttle%20bolts.png', this)">
                     </div>
@@ -869,7 +871,7 @@
 
                 <div class="modal-details modal-details--titanium">
                     <h2>Titanium Bolt Kits</h2>
-                    <p class="modal-description">Formula and Ultra Bee kits: <strong>1 pack</strong> or <strong>2 pack</strong> only. Handle bar lines and <strong>Surron Throttle Bolts</strong>: <strong>bolts</strong> in 2, 4, or 6.</p>
+                    <p class="modal-description">Formula and Ultra Bee kits: <strong>1 pack</strong> or <strong>2 pack</strong> only. Titanium handle clamps, <strong>FUNN handle bar clamps</strong>, and <strong>Surron Throttle Bolts</strong>: <strong>bolts</strong> in 2, 4, or 6.</p>
 
                     <div class="titanium-picker" id="titaniumPicker">
                         <button type="button" class="titanium-product-btn titanium-product-btn--active" data-titanium-product="formula">
@@ -887,6 +889,10 @@
                         <button type="button" class="titanium-product-btn" data-titanium-product="clamp_m8">
                             <img src="/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png" alt="Handle bar clamp titanum bolts (m8x20)">
                             <span class="titanium-product-title">Handle bar clamp titanum bolts (m8x20)</span>
+                        </button>
+                        <button type="button" class="titanium-product-btn" data-titanium-product="funn_clamps">
+                            <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps">
+                            <span class="titanium-product-title">FUNN handle bar clamps</span>
                         </button>
                         <button type="button" class="titanium-product-btn" data-titanium-product="throttle">
                             <img src="/images/surron%20throttle%20bolts.png" alt="Surron Throttle Bolts">
@@ -1253,6 +1259,7 @@
                 ultrabee: '/images/Ultra%20bee%20titanuim%20bolt%20kit.png',
                 clamp_m6: '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png',
                 clamp_m8: '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png',
+                funn_clamps: '/images/funn%20handle%20bar%20clamps.png',
                 throttle: '/images/surron%20throttle%20bolts.png'
             };
             const TITANIUM_GALLERY = [
@@ -1260,6 +1267,7 @@
                 TITANIUM_PRODUCT_IMAGES.ultrabee,
                 TITANIUM_PRODUCT_IMAGES.clamp_m6,
                 TITANIUM_PRODUCT_IMAGES.clamp_m8,
+                TITANIUM_PRODUCT_IMAGES.funn_clamps,
                 TITANIUM_PRODUCT_IMAGES.throttle
             ];
             const TITANIUM_TITLES = {
@@ -1267,6 +1275,7 @@
                 ultrabee: 'Ultra bee titanuim bolt kit',
                 clamp_m6: 'Handle bar clamp titanum bolts (m6x20)',
                 clamp_m8: 'Handle bar clamp titanum bolts (m8x20)',
+                funn_clamps: 'FUNN handle bar clamps',
                 throttle: 'Surron Throttle Bolts'
             };
             function titaniumUsesPacks(productKey) {
@@ -1280,6 +1289,7 @@
                 ultrabee: { 1: 25.00, 2: 35.00 },
                 clamp_m6: { 2: 25.99, 4: 34.99, 6: 40.00 },
                 clamp_m8: { 2: 30.99, 4: 35.00, 6: 39.99 },
+                funn_clamps: { 2: 79.99, 4: 79.99, 6: 79.99 },
                 throttle: { 2: 19.99, 4: 25.00, 6: 29.99 }
             };
 
@@ -1576,7 +1586,7 @@
             initModalState('bajaModal', 20, ['/images/white%20baja.png', '/images/orange%20%20baja.png']);
             initModalState('motocutzModal', 45, ['/images/black%20plate.png']);
             initModalState('shirtModal', 20, ['/images/front%20shirt.png', '/images/back%20shirt.png']);
-            initModalState('titaniumBoltsModal', 35.00, ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/surron%20throttle%20bolts.png']);
+            initModalState('titaniumBoltsModal', 35.00, ['/images/Formula%20titanum%20bolt%20kit.png', '/images/Ultra%20bee%20titanuim%20bolt%20kit.png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m6x20).png', '/images/Handle%20bar%20clamp%20titanum%20bolts%20(m8x20).png', '/images/funn%20handle%20bar%20clamps.png', '/images/surron%20throttle%20bolts.png']);
             modalState['titaniumBoltsModal'].titaniumVariantLabel = 'Formula titanum bolt kit (2 pack)';
             modalState['titaniumBoltsModal'].titaniumProductKey = 'formula';
             modalState['titaniumBoltsModal'].titaniumPack = 2;
