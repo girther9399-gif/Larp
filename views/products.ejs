@@ -420,27 +420,22 @@
                 </div>
             </div>
 
-            <!-- FUNN Handle Bar Clamps -->
+            <!-- FUNN mount -->
             <div id="funn-mounts" class="product-card motion-card" data-category="hardware"
                 onclick="openModal('funnMountModal')" style="cursor: pointer;">
                 <span class="motion-shutter-sweep" aria-hidden="true"></span>
                 <div class="product-image">
-                    <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps"
+                    <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN mount"
                         style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="product-card-content">
-                    <h3>FUNN Handle Bar Clamps</h3>
+                    <h3>FUNN mount</h3>
                     <div class="product-price-section">
                         <span class="price-plain">$79.99</span>
                     </div>
-                    <p class="description">FUNN mount/clamp hardware for clean cockpit setup.</p>
-                    <div class="option-chips">
-                        <span class="option-chip">2 bolts $79.99</span>
-                        <span class="option-chip">4 bolts $79.99</span>
-                        <span class="option-chip">6 bolts $79.99</span>
-                    </div>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('funnMountModal');">Select
-                        Options</button>
+                    <p class="description">FUNN handle bar clamps — complete mount kit.</p>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); openModal('funnMountModal');">Add to
+                        cart</button>
                 </div>
             </div>
 
@@ -1032,60 +1027,24 @@
             </div>
         </div>
 
-        <!-- FUNN Handle Bar Clamps Modal -->
+        <!-- FUNN mount Modal -->
         <div id="funnMountModal" class="product-modal">
             <div class="modal-content">
                 <button class="modal-close" onclick="closeModal('funnMountModal')">&times;</button>
 
                 <div class="modal-gallery">
                     <div class="main-image">
-                        <img class="modal-main-image" src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps">
+                        <img class="modal-main-image" src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN mount">
                     </div>
                     <div class="gallery-thumbnails modal-thumbnails">
-                        <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps" class="thumbnail active"
+                        <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN mount" class="thumbnail active"
                             onclick="changeMainImage('funnMountModal', '/images/funn%20handle%20bar%20clamps.png', this)">
                     </div>
                 </div>
 
                 <div class="modal-details">
-                    <h2>FUNN Handle Bar Clamps</h2>
-                    <p class="modal-description">Select your bolt count for FUNN handle bar clamp hardware.</p>
-
-                    <div class="product-options">
-                        <label class="options-label">Select Option:</label>
-                        <div class="options-list">
-                            <div class="option-item selected"
-                                onclick="selectOption('funnMountModal', this, 79.99, '/images/funn%20handle%20bar%20clamps.png', ['/images/funn%20handle%20bar%20clamps.png'])">
-                                <div class="option-image">
-                                    <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps 2 bolts">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">FUNN handle bar clamps (2 bolts)</p>
-                                    <p class="option-price">$79.99</p>
-                                </div>
-                            </div>
-                            <div class="option-item"
-                                onclick="selectOption('funnMountModal', this, 79.99, '/images/funn%20handle%20bar%20clamps.png', ['/images/funn%20handle%20bar%20clamps.png'])">
-                                <div class="option-image">
-                                    <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps 4 bolts">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">FUNN handle bar clamps (4 bolts)</p>
-                                    <p class="option-price">$79.99</p>
-                                </div>
-                            </div>
-                            <div class="option-item"
-                                onclick="selectOption('funnMountModal', this, 79.99, '/images/funn%20handle%20bar%20clamps.png', ['/images/funn%20handle%20bar%20clamps.png'])">
-                                <div class="option-image">
-                                    <img src="/images/funn%20handle%20bar%20clamps.png" alt="FUNN handle bar clamps 6 bolts">
-                                </div>
-                                <div class="option-info">
-                                    <p class="option-name">FUNN handle bar clamps (6 bolts)</p>
-                                    <p class="option-price">$79.99</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h2>FUNN mount</h2>
+                    <p class="modal-description">FUNN handle bar clamps — complete mount kit.</p>
 
                     <div class="price-section">
                         <p class="modal-price">$79.99</p>
@@ -1101,7 +1060,7 @@
                         </div>
                     </div>
 
-                    <button class="add-to-cart-modal" onclick="addToCartFromModal('funnMountModal', 'FUNN handle bar clamps')">Add to Cart</button>
+                    <button class="add-to-cart-modal" onclick="addToCartFromModal('funnMountModal', 'FUNN mount')">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -2010,6 +1969,8 @@
                 let variantName;
                 if (modalId === 'titaniumBoltsModal' && state.titaniumVariantLabel) {
                     variantName = state.titaniumVariantLabel;
+                } else if (modalId === 'funnMountModal') {
+                    variantName = 'FUNN handle bar clamps';
                 } else {
                     const selectedOption = modal.querySelector('.option-item.selected .option-name');
                     variantName = selectedOption ? selectedOption.textContent : fallbackName;
