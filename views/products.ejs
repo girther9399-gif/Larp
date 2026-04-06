@@ -2526,24 +2526,53 @@
                 }
             });
 
-            // Handle window focus/blur as backup
-            window.addEventListener('blur', function() {
-                if (isTabVisible) {
-                    isTabVisible = false;
-                    startFlashing();
-                }
-            });
+        // Handle window focus/blur as backup
+        window.addEventListener('blur', function() {
+            if (isTabVisible) {
+                isTabVisible = false;
+                startFlashing();
+            }
+        });
 
-            window.addEventListener('focus', function() {
-                if (!isTabVisible) {
-                    isTabVisible = true;
-                    if (comeBackTimeout) {
-                        clearTimeout(comeBackTimeout);
-                    }
-                    stopFlashing();
+        window.addEventListener('focus', function() {
+            if (!isTabVisible) {
+                isTabVisible = true;
+                if (comeBackTimeout) {
+                    clearTimeout(comeBackTimeout);
                 }
-            });
-        </script>
+                stopFlashing();
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 4rem;">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>EmotoHI</h4>
+                <p>Premium emoto parts from Hawaii</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products">Products</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
+                    <li><a href="/videos">Videos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>TikTok</h4>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@emotohi" target="_blank" rel="noopener">@emotohi</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 EmotoHI. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script src="/site-motion.js" defer></script>
 </body>
 

@@ -19,11 +19,12 @@
     </div>
 
     <!-- Promotional Banner -->
-    <div class="promo-banner">
+    <div class="promo-banner" id="promoBanner">
         <div class="promo-content">
             <span class="promo-text">Use code <strong>EMOTOHI10</strong> for 10% off</span>
             <span class="promo-timer">Limited time offer</span>
         </div>
+        <button class="promo-close" onclick="closePromoBanner()" aria-label="Close promotion">&times;</button>
     </div>
 
     <!-- Navigation -->
@@ -282,6 +283,8 @@
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/products">Products</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
+                    <li><a href="/videos">Videos</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -295,6 +298,13 @@
             <p>&copy; 2026 EmotoHI. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()" aria-label="Scroll to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6"/>
+        </svg>
+    </button>
 
     <!-- Product Modal -->
     <div id="productModal" class="product-modal">
@@ -724,19 +734,23 @@
 
         // Promotional Banner Functions
         function closePromoBanner() {
-            const banner = document.querySelector('.promo-banner');
+            const banner = document.getElementById('promoBanner');
             if (banner) {
-                banner.style.display = 'none';
+                banner.classList.add('is-hidden');
                 document.body.classList.add('promo-closed');
                 // Store that user closed banner
                 localStorage.setItem('promoBannerClosed', 'true');
+                // Actually hide after animation
+                setTimeout(() => {
+                    banner.style.display = 'none';
+                }, 300);
             }
         }
 
         // Check if banner was previously closed
         if (localStorage.getItem('promoBannerClosed') === 'true') {
             document.body.classList.add('promo-closed');
-            const banner = document.querySelector('.promo-banner');
+            const banner = document.getElementById('promoBanner');
             if (banner) banner.style.display = 'none';
         }
 
@@ -1198,6 +1212,45 @@
                 stopFlashing();
             }
         });
+
+        // Scroll to Top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function toggleScrollToTop() {
+            if (window.scrollY > 500) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', toggleScrollToTop, { passive: true });
+
+        // Initialize scroll to top button state
+        toggleScrollToTop();
+
+        // Add smooth reveal animation to elements
+        document.querySelectorAll('.product-card, .collection-card, .faq-item').forEach(el => {
+            el.classList.add('reveal');
+        });
+
+        // Parallax effect for hero banner
+        const heroBanner = document.querySelector('.hero-banner-image');
+        if (heroBanner) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                if (scrolled < window.innerHeight) {
+                    heroBanner.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            }, { passive: true });
+        }
     </script>
     <script src="/site-motion.js" defer></script>
 </body>
