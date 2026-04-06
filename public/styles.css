@@ -271,12 +271,17 @@ body.modal-open {
 
 /* Smooth reveal animation for sections */
 .reveal {
-    opacity: 0;
-    transform: translateY(40px);
+    opacity: 1;
+    transform: translateY(0);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.reveal.in-view {
+.reveal.animate {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.reveal.animate.in-view {
     opacity: 1;
     transform: translateY(0);
 }
@@ -2037,9 +2042,35 @@ body.dark-theme .signin-card {
 .footer {
     background: var(--footer-bg);
     color: var(--footer-text);
-    padding: 3rem 2rem 1rem;
-    margin-top: 3rem;
+    padding: 4rem 2rem 2rem;
+    margin-top: auto;
     border-top: 2px solid var(--button-hover);
+    min-height: 350px;
+}
+
+/* Ensure body takes full height and footer stays at bottom */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body > *:not(.footer):not(script):not(style) {
+    flex-shrink: 0;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    padding-bottom: 2rem;
 }
 
 .footer-content {
@@ -3984,9 +4015,31 @@ body:not(.dark-theme) .crypto-status.error {
     transition: all 0.3s ease;
     padding: 0;
     line-height: 1;
+    color: var(--text-color);
 }
 
 .cart-close:hover {
+    background: var(--border-strong);
+    color: var(--bg-color);
+}
+
+/* Cart item remove button */
+.cart-item-remove {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    color: var(--text-color);
+}
+
+.cart-item-remove:hover {
     background: var(--border-strong);
     color: var(--bg-color);
 }
