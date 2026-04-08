@@ -5360,3 +5360,191 @@ body.dark-theme .titanium-pack-btn.selected {
         gap: 1rem !important;
     }
 }
+
+/* ===== MOBILE FIXES: Products Page Critical ===== */
+@media (max-width: 768px) {
+    /* Products Banner - smaller */
+    .products-banner {
+        height: 180px !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .products-banner-image {
+        object-fit: cover !important;
+    }
+
+    .products-banner-overlay h1 {
+        font-size: 1.5rem !important;
+    }
+
+    /* Products Header box */
+    .products-header-premium {
+        padding: 0.75rem !important;
+        margin: 0 0.25rem 0.75rem !important;
+    }
+
+    .products-header-premium h2 {
+        font-size: 1.25rem !important;
+        margin-bottom: 0.3rem !important;
+    }
+
+    .products-header-premium p {
+        font-size: 0.78rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.6rem !important;
+    }
+
+    .products-mini-stats {
+        gap: 0.35rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .products-mini-stats span {
+        font-size: 0.6rem !important;
+        padding: 0.2rem 0.35rem !important;
+    }
+
+    /* Category buttons */
+    .category-filters {
+        gap: 0.35rem !important;
+    }
+
+    .category-btn {
+        padding: 0.35rem 0.6rem !important;
+        font-size: 0.7rem !important;
+    }
+
+    /* Product Cards - smaller images */
+    .products-page .products-grid {
+        gap: 0.6rem !important;
+        padding: 0 0.25rem !important;
+    }
+
+    .products-page .product-card {
+        border-radius: 10px !important;
+    }
+
+    .products-page .product-image,
+    .product-card .product-image {
+        height: 150px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+    }
+
+    .product-card-content {
+        padding: 0.75rem !important;
+    }
+
+    .product-card h3 {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.2rem !important;
+    }
+
+    .product-price-section {
+        margin-bottom: 0.3rem !important;
+    }
+
+    .price-plain, .sale-price {
+        font-size: 0.95rem !important;
+    }
+
+    .original-price {
+        font-size: 0.8rem !important;
+    }
+
+    .option-chips {
+        gap: 0.25rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .option-chip {
+        font-size: 0.6rem !important;
+        padding: 0.15rem 0.3rem !important;
+    }
+
+    .add-to-cart {
+        padding: 0.5rem 0.7rem !important;
+        font-size: 0.7rem !important;
+    }
+
+    /* Footer - full width */
+    .footer {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        min-width: 100vw !important;
+        padding: 1.5rem 0.5rem 1rem !important;
+        margin-top: 2rem !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    .footer-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 0.25rem 1rem !important;
+        gap: 0.8rem !important;
+    }
+
+    .footer-section h4 {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.4rem !important;
+    }
+
+    .footer-section p,
+    .footer-section a {
+        font-size: 0.75rem !important;
+    }
+
+    .footer-bottom {
+        padding-top: 1rem !important;
+        font-size: 0.7rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Products Banner - even smaller */
+    .products-banner {
+        height: 140px !important;
+    }
+
+    .products-banner-overlay h1 {
+        font-size: 1.25rem !important;
+    }
+
+    .products-banner-overlay p {
+        font-size: 0.75rem !important;
+    }
+
+    /* Products */
+    .products-page .product-image,
+    .product-card .product-image {
+        height: 130px !important;
+        min-height: 130px !important;
+        max-height: 130px !important;
+    }
+
+    .products-header-premium h2 {
+        font-size: 1.1rem !important;
+    }
+
+    .products-header-premium p {
+        font-size: 0.72rem !important;
+    }
+
+    .category-btn {
+        padding: 0.3rem 0.5rem !important;
+        font-size: 0.65rem !important;
+    }
+
+    .product-card h3 {
+        font-size: 0.8rem !important;
+    }
+
+    .price-plain, .sale-price {
+        font-size: 0.9rem !important;
+    }
+
+    .option-chip {
+        font-size: 0.55rem !important;
+    }
+}
