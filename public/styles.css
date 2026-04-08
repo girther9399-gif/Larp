@@ -2042,10 +2042,9 @@ body.dark-theme .signin-card {
 .footer {
     background: var(--footer-bg);
     color: var(--footer-text);
-    padding: 4rem 2rem 2rem;
+    padding: 3rem 2rem 1.5rem;
     margin-top: auto;
     border-top: 2px solid var(--button-hover);
-    min-height: 350px;
 }
 
 /* Page layout - footer at bottom */
