@@ -5209,3 +5209,91 @@ body.dark-theme .titanium-pack-btn.selected {
         min-height: 185px;
     }
 }
+
+/* Critical mobile fixes (home + products) */
+@media (max-width: 768px) {
+    .nav-container .logo-text-image {
+        height: 40px !important;
+        min-height: 40px !important;
+        max-height: 40px !important;
+    }
+
+    .hero-banner {
+        height: 300px !important;
+    }
+
+    .hero-premium .hero-overlay {
+        padding: 1.4rem 1rem 1rem !important;
+    }
+
+    .hero-premium .hero-overlay h1 {
+        font-size: clamp(2rem, 8vw, 2.6rem) !important;
+        max-width: 10ch !important;
+    }
+
+    .hero-premium .hero-overlay p {
+        font-size: 0.98rem !important;
+        margin-bottom: 0.85rem !important;
+    }
+
+    .hero-cta-row {
+        gap: 0.5rem !important;
+    }
+
+    .hero-cta-row .cta-button,
+    .hero-cta-row .ghost-link {
+        min-width: 0 !important;
+        flex: 1 1 0 !important;
+        font-size: 0.86rem !important;
+        padding: 0.72rem 0.6rem !important;
+    }
+
+    .products-header-premium h2 {
+        font-size: 1.55rem !important;
+    }
+
+    .products-header-premium p {
+        font-size: 0.88rem !important;
+        line-height: 1.4 !important;
+    }
+
+    .products-page .product-image {
+        height: 180px !important;
+        min-height: 180px !important;
+    }
+
+    .products-screen .footer {
+        min-height: 240px !important;
+        padding: 2.4rem 1rem 1.4rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-banner {
+        height: 260px !important;
+    }
+
+    .hero-premium .hero-overlay h1 {
+        font-size: clamp(1.7rem, 8.8vw, 2.2rem) !important;
+    }
+
+    .hero-premium .hero-overlay p {
+        font-size: 0.9rem !important;
+    }
+
+    .hero-cta-row .cta-button,
+    .hero-cta-row .ghost-link {
+        font-size: 0.8rem !important;
+        padding: 0.64rem 0.5rem !important;
+    }
+
+    .products-page .product-image {
+        height: 160px !important;
+        min-height: 160px !important;
+    }
+
+    .products-screen .footer {
+        min-height: 220px !important;
+        padding: 2rem 0.9rem 1.2rem !important;
+    }
+}
