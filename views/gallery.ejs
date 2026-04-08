@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - EmotoHI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/gallery.css">
+    <link rel="icon" href="/images/top%20icon.png" type="image/png">
 </head>
 <body>
     <!-- Navigation -->
@@ -72,70 +77,143 @@
         </div>
     </div>
 
-    <!-- Gallery Section -->
-    <section class="featured gallery-page" style="margin-top: 2rem;">
-        <h2>EmotoHI Gallery</h2>
-        <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem;">Explore our collection of premium brakes and parts</p>
-        <div class="products-grid">
-            <div class="gallery-item motion-card">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-image">Gallery Image 1</div>
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="gallery-hero-content">
+            <p class="gallery-kicker">Visual Showcase</p>
+            <h1>Gallery</h1>
+            <p class="gallery-lead">Premium parts, real results. Browse our collection of installed brakes, wraps, and upgrades.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="brakes">Brakes</button>
+        <button class="filter-btn" data-filter="wraps">Wraps</button>
+        <button class="filter-btn" data-filter="lights">Lights</button>
+        <button class="filter-btn" data-filter="hardware">Hardware</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-masonry">
+        <div class="gallery-item" data-category="brakes" onclick="openLightbox('/images/Ultra%20Breaks.jpg', 'Surron Ultra Bee Brakes')">
+            <img src="/images/Ultra%20Breaks.jpg" alt="Surron Ultra Bee Brakes" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Brakes</span>
+                <h3>Ultra Bee Brakes</h3>
             </div>
-            <div class="gallery-item motion-card">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-image">Gallery Image 2</div>
+        </div>
+        <div class="gallery-item" data-category="brakes" onclick="openLightbox('/images/front.png', 'Front Brake Assembly')">
+            <img src="/images/front.png" alt="Front Brake Assembly" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Brakes</span>
+                <h3>Front Assembly</h3>
             </div>
-            <div class="gallery-item motion-card">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-image">Gallery Image 3</div>
+        </div>
+        <div class="gallery-item" data-category="brakes" onclick="openLightbox('/images/plain%20back.png', 'Rear Brake Assembly')">
+            <img src="/images/plain%20back.png" alt="Rear Brake Assembly" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Brakes</span>
+                <h3>Rear Assembly</h3>
             </div>
-            <div class="gallery-item motion-card">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-image">Gallery Image 4</div>
+        </div>
+        <div class="gallery-item" data-category="brakes" onclick="openLightbox('/images/back%20with%20stuff.png', 'Complete Brake Kit')">
+            <img src="/images/back%20with%20stuff.png" alt="Complete Brake Kit" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Brakes</span>
+                <h3>Complete Kit</h3>
             </div>
-            <div class="gallery-item motion-card">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-image">Gallery Image 5</div>
+        </div>
+        <div class="gallery-item tall" data-category="wraps" onclick="openLightbox('/images/carbon%20wrap.png', 'Carbon Fiber Wrap')">
+            <img src="/images/carbon%20wrap.png" alt="Carbon Fiber Wrap" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Wraps</span>
+                <h3>Carbon Wrap</h3>
             </div>
-            <div class="gallery-item motion-card">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-image">Gallery Image 6</div>
+        </div>
+        <div class="gallery-item" data-category="lights" onclick="openLightbox('/images/white%20baja.png', 'White Baja Lights')">
+            <img src="/images/white%20baja.png" alt="White Baja Lights" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Lights</span>
+                <h3>White Baja</h3>
             </div>
-            <div class="gallery-item motion-card">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-image">Gallery Image 7</div>
+        </div>
+        <div class="gallery-item" data-category="lights" onclick="openLightbox('/images/orange%20%20baja.png', 'Orange Baja Lights')">
+            <img src="/images/orange%20%20baja.png" alt="Orange Baja Lights" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Lights</span>
+                <h3>Orange Baja</h3>
             </div>
-            <div class="gallery-item motion-card">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-image">Gallery Image 8</div>
+        </div>
+        <div class="gallery-item" data-category="wraps" onclick="openLightbox('/images/black%20plate.png', 'Number Plate')">
+            <img src="/images/black%20plate.png" alt="Number Plate" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Plates</span>
+                <h3>Front Plate</h3>
             </div>
-            <div class="gallery-item motion-card">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-image">Gallery Image 9</div>
+        </div>
+        <div class="gallery-item" data-category="hardware" onclick="openLightbox('/images/Formula%20titanum%20bolt%20kit.png', 'Titanium Bolt Kit')">
+            <img src="/images/Formula%20titanum%20bolt%20kit.png" alt="Titanium Bolt Kit" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Hardware</span>
+                <h3>Titanium Bolts</h3>
+            </div>
+        </div>
+        <div class="gallery-item" data-category="hardware" onclick="openLightbox('/images/funn%20handle%20bar%20clamps.png', 'Handlebar Clamps')">
+            <img src="/images/funn%20handle%20bar%20clamps.png" alt="Handlebar Clamps" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Hardware</span>
+                <h3>Handlebar Clamps</h3>
+            </div>
+        </div>
+        <div class="gallery-item" data-category="brakes" onclick="openLightbox('/images/surron%20ultra%20oem%20pads.png', 'Brake Pads')">
+            <img src="/images/surron%20ultra%20oem%20pads.png" alt="Brake Pads" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Brakes</span>
+                <h3>Brake Pads</h3>
+            </div>
+        </div>
+        <div class="gallery-item" data-category="brakes" onclick="openLightbox('/images/rotor.png', 'Brake Rotor')">
+            <img src="/images/rotor.png" alt="Brake Rotor" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-tag">Brakes</span>
+                <h3>Rotor</h3>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navigateLightbox(-1)">&#8249;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <p id="lightbox-caption"></p>
+        </div>
+        <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navigateLightbox(1)">&#8250;</button>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>EmotoHI</h4>
-                <p>Your destination for premium emoto parts</p>
+                <p>Premium emoto parts from Hawaii</p>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/products">Products</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
+                    <li><a href="/videos">Videos</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Follow Us</h4>
+                <h4>TikTok</h4>
                 <div class="social-links">
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Twitter</a>
+                    <a href="https://www.tiktok.com/@emotohi" target="_blank" rel="noopener">@emotohi</a>
                 </div>
             </div>
         </div>
@@ -143,6 +221,7 @@
             <p>&copy; 2026 EmotoHI. All rights reserved.</p>
         </div>
     </footer>
+
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
@@ -151,6 +230,96 @@
             menu.setAttribute('aria-hidden', !isOpen);
             document.body.style.overflow = isOpen ? 'hidden' : '';
         }
+
+        // Gallery Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => item.style.opacity = '1', 10);
+                    } else {
+                        item.style.opacity = '0';
+                        setTimeout(() => item.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+
+        // Lightbox
+        let currentImageIndex = 0;
+        const visibleImages = [];
+
+        function updateVisibleImages() {
+            visibleImages.length = 0;
+            galleryItems.forEach((item, index) => {
+                if (item.style.display !== 'none') {
+                    visibleImages.push({
+                        src: item.querySelector('img').src,
+                        title: item.querySelector('h3').textContent,
+                        index: index
+                    });
+                }
+            });
+        }
+
+        function openLightbox(src, title) {
+            updateVisibleImages();
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            
+            // Find current index
+            currentImageIndex = visibleImages.findIndex(img => img.src === src);
+            if (currentImageIndex === -1) currentImageIndex = 0;
+
+            img.src = src;
+            caption.textContent = title;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function navigateLightbox(direction) {
+            if (visibleImages.length === 0) return;
+            
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) currentImageIndex = visibleImages.length - 1;
+            if (currentImageIndex >= visibleImages.length) currentImageIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            const current = visibleImages[currentImageIndex];
+            
+            img.style.opacity = '0';
+            setTimeout(() => {
+                img.src = current.src;
+                caption.textContent = current.title;
+                img.style.opacity = '1';
+            }, 200);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
     </script>
     <script src="/site-motion.js" defer></script>
 </body>

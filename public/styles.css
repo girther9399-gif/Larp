@@ -39,6 +39,40 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promo-close {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #e0e0e0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 1001;
+}
+
+.promo-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.promo-banner.is-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
 }
 
 .promo-content {
@@ -194,6 +228,224 @@ body {
 
 body.modal-open {
     overflow: hidden;
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Smooth reveal animation for sections */
+.reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.animate {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.reveal.animate.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced card hover effects */
+.collection-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.collection-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+    z-index: 1;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.collection-card:hover::before {
+    opacity: 1;
+}
+
+.collection-card img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.collection-card:hover img {
+    transform: scale(1.08);
+}
+
+.collection-card-meta {
+    position: relative;
+    z-index: 2;
+}
+
+/* Product card enhanced hover */
+.product-card {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.product-card .sale-badge {
+    animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* FAQ enhanced styling */
+.faq-item {
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    background: var(--section-bg-alt);
+}
+
+.faq-item summary {
+    transition: color 0.3s ease;
+}
+
+.faq-item:hover summary {
+    color: #0066ff;
+}
+
+/* CTA Button magnetic enhancement */
+.cta-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+/* Navbar link hover effects */
+.nav-links a {
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #0066ff;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* Cart badge animation */
+.cart-count {
+    animation: cart-bounce 0.5s ease;
+}
+
+@keyframes cart-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Footer link hover */
+.footer a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.footer a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--footer-link);
+    transition: width 0.3s ease;
+}
+
+.footer a:hover::after {
+    width: 100%;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading skeleton for images */
+.img-skeleton {
+    background: linear-gradient(90deg, var(--section-bg) 25%, var(--section-bg-alt) 50%, var(--section-bg) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 a {
@@ -1790,9 +2042,35 @@ body.dark-theme .signin-card {
 .footer {
     background: var(--footer-bg);
     color: var(--footer-text);
-    padding: 3rem 2rem 1rem;
-    margin-top: 3rem;
+    padding: 4rem 2rem 2rem;
+    margin-top: auto;
     border-top: 2px solid var(--button-hover);
+    min-height: 350px;
+}
+
+/* Ensure body takes full height and footer stays at bottom */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body > *:not(.footer):not(script):not(style) {
+    flex-shrink: 0;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    padding-bottom: 2rem;
 }
 
 .footer-content {
@@ -3737,9 +4015,31 @@ body:not(.dark-theme) .crypto-status.error {
     transition: all 0.3s ease;
     padding: 0;
     line-height: 1;
+    color: var(--text-color);
 }
 
 .cart-close:hover {
+    background: var(--border-strong);
+    color: var(--bg-color);
+}
+
+/* Cart item remove button */
+.cart-item-remove {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    color: var(--text-color);
+}
+
+.cart-item-remove:hover {
     background: var(--border-strong);
     color: var(--bg-color);
 }

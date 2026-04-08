@@ -1,0 +1,459 @@
+/* Videos Hero */
+.videos-hero {
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--bg-color) 0%, var(--section-bg) 100%);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.videos-kicker {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #0066ff;
+    margin-bottom: 0.75rem;
+}
+
+.videos-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.videos-lead {
+    font-size: 1.1rem;
+    color: var(--muted-text);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Video Tabs */
+.video-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+    background: var(--bg-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.video-tab {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: transparent;
+    color: var(--muted-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 2rem;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.video-tab:hover {
+    color: var(--text-color);
+    background: var(--section-bg);
+}
+
+.video-tab.active {
+    color: white;
+    background: #0066ff;
+}
+
+/* Videos Grid */
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.video-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.video-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.video-thumbnail {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.video-card:hover .video-thumbnail img {
+    transform: scale(1.05);
+}
+
+.video-play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.video-play-btn svg {
+    width: 64px;
+    height: 64px;
+    fill: white;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.video-card:hover .video-play-btn {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.video-card:hover .video-play-btn svg {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.video-info {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-category {
+    display: inline-block;
+    width: fit-content;
+    padding: 0.25rem 0.75rem;
+    background: var(--section-bg);
+    color: #0066ff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.video-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.video-info p {
+    font-size: 0.9rem;
+    color: var(--muted-text);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.video-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--muted-text-strong);
+}
+
+.video-meta span {
+    position: relative;
+}
+
+.video-meta span:first-child::after {
+    content: '•';
+    position: absolute;
+    right: -0.65rem;
+    color: var(--muted-text-strong);
+}
+
+/* TikTok CTA */
+.tiktok-cta {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.tiktok-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.tiktok-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #00f2ea 0%, #ff0050 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    animation: pulse-tiktok 2s ease-in-out infinite;
+}
+
+.tiktok-icon svg {
+    width: 35px;
+    height: 35px;
+}
+
+@keyframes pulse-tiktok {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.tiktok-cta h2 {
+    color: white;
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.tiktok-cta p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tiktok-btn {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #00f2ea 0%, #ff0050 100%);
+    color: white;
+    font-weight: 600;
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.tiktok-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 0, 80, 0.3);
+}
+
+/* Video Modal */
+.video-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 2rem;
+}
+
+.video-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10001;
+}
+
+.video-modal-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: rotate(90deg);
+}
+
+.video-modal-content {
+    width: 100%;
+    max-width: 900px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.video-player-placeholder {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: #000;
+    overflow: hidden;
+}
+
+.video-player-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+}
+
+.video-player-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.video-play-large {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.video-play-large svg {
+    width: 50px;
+    height: 50px;
+    fill: white;
+}
+
+.video-play-large:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.video-coming-soon {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.video-modal-info {
+    padding: 1.5rem;
+}
+
+.video-modal-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.video-modal-info p {
+    font-size: 0.95rem;
+    color: var(--muted-text);
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .videos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .videos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    .videos-hero h1 {
+        font-size: 2rem;
+    }
+
+    .video-tabs {
+        padding: 1rem;
+        gap: 0.25rem;
+    }
+
+    .video-tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .video-modal {
+        padding: 1rem;
+    }
+
+    .video-modal-close {
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .tiktok-cta {
+        padding: 3rem 1.5rem;
+    }
+
+    .tiktok-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .tiktok-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .videos-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .video-thumbnail {
+        aspect-ratio: 4/3;
+    }
+}

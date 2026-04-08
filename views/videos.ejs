@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Videos - EmotoHI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/videos.css">
+    <link rel="icon" href="/images/top%20icon.png" type="image/png">
 </head>
 <body>
     <!-- Navigation -->
@@ -72,88 +77,194 @@
         </div>
     </div>
 
-    <!-- Videos Section -->
-    <section class="featured videos-page-featured" style="margin-top: 2rem;">
-        <h2>EmotoHI Videos</h2>
-        <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem;">Watch installs, tips, and product highlights</p>
-        
-        <div class="videos-grid-wrap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
-            <div class="video-card motion-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-video" style="height: 250px; margin: 0;">Video 1</div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Product tour</h3>
-                    <p style="color: #666; font-size: 0.95rem;">Discover every feature of our premium brake and parts lineup</p>
-                </div>
-            </div>
-
-            <div class="video-card motion-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-video" style="height: 250px; margin: 0;">Video 2</div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Hawaii Inspired Design</h3>
-                    <p style="color: #666; font-size: 0.95rem;">See how we bring tropical-inspired style to every build</p>
-                </div>
-            </div>
-
-            <div class="video-card motion-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-video" style="height: 250px; margin: 0;">Video 3</div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Customer Testimonials</h3>
-                    <p style="color: #666; font-size: 0.95rem;">Hear from our satisfied EmotoHI customers around the world</p>
-                </div>
-            </div>
-
-            <div class="video-card motion-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-video" style="height: 250px; margin: 0;">Video 4</div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">How to Use Your Brakes</h3>
-                    <p style="color: #666; font-size: 0.95rem;">Step-by-step guide to getting the most from your purchase</p>
-                </div>
-            </div>
-
-            <div class="video-card motion-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-video" style="height: 250px; margin: 0;">Video 5</div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Behind the Scenes</h3>
-                    <p style="color: #666; font-size: 0.95rem;">Explore our creative process and tropical workspace</p>
-                </div>
-            </div>
-
-            <div class="video-card motion-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);">
-                <span class="motion-shutter-sweep" aria-hidden="true"></span>
-                <div class="placeholder-video" style="height: 250px; margin: 0;">Video 6</div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="color: var(--dark-blue); margin-bottom: 0.5rem;">Special Promotions</h3>
-                    <p style="color: #666; font-size: 0.95rem;">Check out our latest deals and exclusive offers</p>
-                </div>
-            </div>
+    <!-- Videos Hero -->
+    <section class="videos-hero">
+        <div class="videos-hero-content">
+            <p class="videos-kicker">Watch & Learn</p>
+            <h1>Videos</h1>
+            <p class="videos-lead">Install guides, product showcases, and behind-the-scenes content from Hawaii.</p>
         </div>
     </section>
+
+    <!-- Video Categories -->
+    <div class="video-tabs">
+        <button class="video-tab active" data-tab="all">All Videos</button>
+        <button class="video-tab" data-tab="install">Install Guides</button>
+        <button class="video-tab" data-tab="product">Product Tours</button>
+        <button class="video-tab" data-tab="lifestyle">Lifestyle</button>
+    </div>
+
+    <!-- Videos Grid -->
+    <section class="videos-grid">
+        <article class="video-card" data-category="product" onclick="openVideoModal('Product Overview', 'Get to know the full EmotoHI brake lineup and what makes our parts different.', '/images/Ultra%20Breaks.jpg')">
+            <div class="video-thumbnail">
+                <img src="/images/Ultra%20Breaks.jpg" alt="Product Overview" loading="lazy">
+                <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span class="video-duration">5:32</span>
+            </div>
+            <div class="video-info">
+                <span class="video-category">Product Tour</span>
+                <h3>Complete Product Overview 2024</h3>
+                <p>Get to know the full EmotoHI brake lineup and what makes our parts different.</p>
+                <div class="video-meta">
+                    <span>12K views</span>
+                    <span>2 weeks ago</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="video-card" data-category="install" onclick="openVideoModal('Brake Install Guide', 'Step-by-step walkthrough for installing Ultra Bee brakes on your Surron.', '/images/back%20with%20stuff.png')">
+            <div class="video-thumbnail">
+                <img src="/images/back%20with%20stuff.png" alt="Brake Install Guide" loading="lazy">
+                <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span class="video-duration">12:45</span>
+            </div>
+            <div class="video-info">
+                <span class="video-category">Install Guide</span>
+                <h3>How to Install Ultra Bee Brakes</h3>
+                <p>Step-by-step walkthrough for installing Ultra Bee brakes on your Surron.</p>
+                <div class="video-meta">
+                    <span>8.5K views</span>
+                    <span>1 month ago</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="video-card" data-category="product" onclick="openVideoModal('Carbon Wrap Tutorial', 'Learn how to apply carbon fiber wraps for that premium finish.', '/images/carbon%20wrap.png')">
+            <div class="video-thumbnail">
+                <img src="/images/carbon%20wrap.png" alt="Carbon Wrap Tutorial" loading="lazy">
+                <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span class="video-duration">8:18</span>
+            </div>
+            <div class="video-info">
+                <span class="video-category">Install Guide</span>
+                <h3>Carbon Fiber Wrap Application</h3>
+                <p>Learn how to apply carbon fiber wraps for that premium finish.</p>
+                <div class="video-meta">
+                    <span>5.2K views</span>
+                    <span>3 weeks ago</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="video-card" data-category="lifestyle" onclick="openVideoModal('Hawaii Ride', 'Join us for a tropical ride through the best Hawaii has to offer.', '/images/white%20baja.png')">
+            <div class="video-thumbnail">
+                <img src="/images/white%20baja.png" alt="Hawaii Ride" loading="lazy">
+                <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span class="video-duration">15:22</span>
+            </div>
+            <div class="video-info">
+                <span class="video-category">Lifestyle</span>
+                <h3>Riding in Paradise: Hawaii Edition</h3>
+                <p>Join us for a tropical ride through the best Hawaii has to offer.</p>
+                <div class="video-meta">
+                    <span>25K views</span>
+                    <span>1 week ago</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="video-card" data-category="product" onclick="openVideoModal('Brake Pads Explained', 'Understanding the different brake pad options for your emoto.', '/images/surron%20ultra%20oem%20pads.png')">
+            <div class="video-thumbnail">
+                <img src="/images/surron%20ultra%20oem%20pads.png" alt="Brake Pads Explained" loading="lazy">
+                <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span class="video-duration">6:45</span>
+            </div>
+            <div class="video-info">
+                <span class="video-category">Product Tour</span>
+                <h3>Brake Pads: OEM vs Performance</h3>
+                <p>Understanding the different brake pad options for your emoto.</p>
+                <div class="video-meta">
+                    <span>4.1K views</span>
+                    <span>2 months ago</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="video-card" data-category="install" onclick="openVideoModal('Rotor Upgrade', 'Upgrading your rotor for better stopping power and heat dissipation.', '/images/rotor.png')">
+            <div class="video-thumbnail">
+                <img src="/images/rotor.png" alt="Rotor Upgrade" loading="lazy">
+                <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span class="video-duration">9:30</span>
+            </div>
+            <div class="video-info">
+                <span class="video-category">Install Guide</span>
+                <h3>Rotor Upgrade Installation</h3>
+                <p>Upgrading your rotor for better stopping power and heat dissipation.</p>
+                <div class="video-meta">
+                    <span>3.8K views</span>
+                    <span>3 weeks ago</span>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- TikTok CTA -->
+    <section class="tiktok-cta">
+        <div class="tiktok-content">
+            <div class="tiktok-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52V7.4a4.85 4.85 0 0 1-1.04-.71z"/>
+                </svg>
+            </div>
+            <h2>More on TikTok</h2>
+            <p>Follow @emotohi for daily content, quick tips, and behind-the-scenes from Hawaii.</p>
+            <a href="https://www.tiktok.com/@emotohi" target="_blank" rel="noopener" class="tiktok-btn">@emotohi</a>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal" onclick="closeVideoModal()">
+        <button class="video-modal-close" onclick="closeVideoModal()" aria-label="Close">&times;</button>
+        <div class="video-modal-content" onclick="event.stopPropagation()">
+            <div class="video-player-placeholder">
+                <img id="videoModalThumb" src="" alt="">
+                <div class="video-player-overlay">
+                    <div class="video-play-large">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <p class="video-coming-soon">Video Coming Soon</p>
+                </div>
+            </div>
+            <div class="video-modal-info">
+                <h3 id="videoModalTitle"></h3>
+                <p id="videoModalDesc"></p>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>EmotoHI</h4>
-                <p>Your destination for premium emoto parts</p>
+                <p>Premium emoto parts from Hawaii</p>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/products">Products</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
+                    <li><a href="/videos">Videos</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Follow Us</h4>
+                <h4>TikTok</h4>
                 <div class="social-links">
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Twitter</a>
+                    <a href="https://www.tiktok.com/@emotohi" target="_blank" rel="noopener">@emotohi</a>
                 </div>
             </div>
         </div>
@@ -161,6 +272,7 @@
             <p>&copy; 2026 EmotoHI. All rights reserved.</p>
         </div>
     </footer>
+
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
@@ -169,6 +281,60 @@
             menu.setAttribute('aria-hidden', !isOpen);
             document.body.style.overflow = isOpen ? 'hidden' : '';
         }
+
+        // Video Tabs
+        const videoTabs = document.querySelectorAll('.video-tab');
+        const videoCards = document.querySelectorAll('.video-card');
+
+        videoTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                videoTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.dataset.tab;
+                videoCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => card.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+
+        // Video Modal
+        function openVideoModal(title, description, thumbnail) {
+            const modal = document.getElementById('videoModal');
+            const thumb = document.getElementById('videoModalThumb');
+            const titleEl = document.getElementById('videoModalTitle');
+            const descEl = document.getElementById('videoModalDesc');
+
+            thumb.src = thumbnail;
+            titleEl.textContent = title;
+            descEl.textContent = description;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('videoModal');
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeVideoModal();
+            }
+        });
     </script>
     <script src="/site-motion.js" defer></script>
 </body>
