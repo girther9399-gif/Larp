@@ -5132,36 +5132,25 @@ body.dark-theme .titanium-pack-btn.selected {
     }
 }
 
-/* Mobile polish: home hero + products list sizing */
+/* Mobile touch-up: stable hero CTA + tighter products cards */
 @media (max-width: 768px) {
     .hero-premium .hero-overlay {
-        padding: 2rem 1rem 1.35rem;
+        padding: 2rem 1rem 1.4rem;
     }
 
     .hero-cta-row {
         width: 100%;
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        display: flex;
+        flex-wrap: wrap;
         gap: 0.55rem;
-        align-items: stretch;
     }
 
     .hero-cta-row .cta-button,
     .hero-cta-row .ghost-link {
-        width: 100%;
-        min-width: 0;
-        justify-content: center;
+        flex: 1 1 46%;
+        min-width: 130px;
         text-align: center;
-    }
-
-    .hero-cta-row .ghost-link {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.82rem 0.7rem;
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        border-radius: 10px;
-        background: rgba(7, 12, 25, 0.45);
-        border-bottom-width: 1px;
+        justify-content: center;
     }
 
     .products-header-premium {
@@ -5169,16 +5158,14 @@ body.dark-theme .titanium-pack-btn.selected {
     }
 
     .products-header-premium p {
-        font-size: 0.98rem;
+        font-size: 0.95rem;
         line-height: 1.45;
-        word-break: break-word;
+        overflow-wrap: anywhere;
     }
 
     .products-mini-stats span {
         font-size: 0.7rem;
-        letter-spacing: 0.06em;
         padding: 0.3rem 0.5rem;
-        max-width: 100%;
         white-space: normal;
         overflow-wrap: anywhere;
     }
@@ -5191,26 +5178,18 @@ body.dark-theme .titanium-pack-btn.selected {
 
 @media (max-width: 480px) {
     .hero-premium .hero-overlay h1 {
-        font-size: clamp(1.55rem, 9vw, 2.15rem);
+        font-size: clamp(1.7rem, 9vw, 2.25rem);
     }
 
     .hero-premium .hero-overlay p {
         font-size: 0.9rem;
-        margin-bottom: 0.9rem;
-    }
-
-    .hero-cta-row {
-        gap: 0.45rem;
+        margin-bottom: 1rem;
     }
 
     .hero-cta-row .cta-button,
     .hero-cta-row .ghost-link {
-        font-size: 0.8rem;
-        padding: 0.72rem 0.55rem;
-    }
-
-    .products-banner-premium .products-banner-overlay {
-        padding: 0 0.9rem;
+        font-size: 0.84rem;
+        padding: 0.74rem 0.6rem;
     }
 
     .products-header-premium {
@@ -5218,15 +5197,15 @@ body.dark-theme .titanium-pack-btn.selected {
     }
 
     .products-header-premium h2 {
-        font-size: 1.85rem;
+        font-size: 1.6rem;
     }
 
     .products-header-premium p {
-        font-size: 0.9rem;
+        font-size: 0.88rem;
     }
 
     .products-page .product-image {
-        height: 190px;
-        min-height: 190px;
+        height: 185px;
+        min-height: 185px;
     }
 }
